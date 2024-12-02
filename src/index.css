@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #333; /* Optional for better contrast */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 90vw; /* Adjust as needed */
+  height: 90vh; /* Adjust as needed */
+  gap: 10px; /* Optional, adjust as needed */
+}
+
+.grid-item {
+  background-color: #444; /* Adjust background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 2px solid transparent;
+}
+
+.dashed-vertical {
+  border-left: 2px dashed white;
+  height: 100%;
+  position: relative;
+  left: 33.33%;
+}
+
+.dashed-vertical:nth-child(2) {
+  left: 66.66%;
+}
+
+.dashed-horizontal {
+  border-top: 2px dashed white;
+  width: 100%;
+  position: relative;
+  top: 33.33%;
+}
+
+.dashed-horizontal:nth-child(4) {
+  top: 66.66%;
+}
