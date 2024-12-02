@@ -2,6 +2,17 @@ import React from 'react';
 import './index.css';
 
 function App() {
+  const sectionContent = [
+    'About Me',
+    'Projects',
+    'Experience',
+    'Education',
+    'Research and Patents',
+    'Extra Curricular',
+    'Certifications',
+    'Skills and Knowledge Base'
+  ];
+
   const handleClick = (section) => {
     alert(`You clicked on ${section} section`);
   };
@@ -16,16 +27,24 @@ function App() {
       <div className="line horizontal-line-1"></div>
       <div className="line horizontal-line-2"></div>
 
-      {/* Buttons for 9 sections */}
-      <div className="section section-1" onClick={() => handleClick('Section 1')}></div>
-      <div className="section section-2" onClick={() => handleClick('Section 2')}></div>
-      <div className="section section-3" onClick={() => handleClick('Section 3')}></div>
-      <div className="section section-4" onClick={() => handleClick('Section 4')}></div>
-      <div className="section section-5" onClick={() => handleClick('Section 5')}></div>
-      <div className="section section-6" onClick={() => handleClick('Section 6')}></div>
-      <div className="section section-7" onClick={() => handleClick('Section 7')}></div>
-      <div className="section section-8" onClick={() => handleClick('Section 8')}></div>
-      <div className="section section-9" onClick={() => handleClick('Section 9')}></div>
+      {/* Sections */}
+      {sectionContent.map((text, index) => (
+        <div
+          key={index}
+          className={`section section-${index + 1}`}
+          onClick={() => handleClick(`Section ${index + 1}`)}
+        >
+          {index === 4 ? (
+            <img
+              src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif" // Replace with the desired GIF URL
+              alt="Middle section GIF"
+              className="gif"
+            />
+          ) : (
+            <p>{text}</p>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
