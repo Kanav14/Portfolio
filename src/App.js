@@ -3,25 +3,14 @@ import './index.css';
 
 function App() {
   return (
-    <div className="grid-container">
+    <div>
       {/* Vertical dotted lines */}
-      <div className="vertical-line"></div>
-      <div className="vertical-line"></div>
+      <div className="dotted-line vertical-line" style={{ left: "33.33%" }}></div>
+      <div className="dotted-line vertical-line" style={{ left: "66.66%" }}></div>
 
       {/* Horizontal dotted lines */}
-      <div className="horizontal-line"></div>
-      <div className="horizontal-line"></div>
-
-      {/* Grid items */}
-      <div className="grid-item">Section 1</div>
-      <div className="grid-item">Section 2</div>
-      <div className="grid-item">Section 3</div>
-      <div className="grid-item">Section 4</div>
-      <div className="grid-item">Section 5</div>
-      <div className="grid-item">Section 6</div>
-      <div className="grid-item">Section 7</div>
-      <div className="grid-item">Section 8</div>
-      <div className="grid-item">Section 9</div>
+      <div className="dotted-line horizontal-line" style={{ top: "33.33%" }}></div>
+      <div className="dotted-line horizontal-line" style={{ top: "66.66%" }}></div>
     </div>
   );
 }
