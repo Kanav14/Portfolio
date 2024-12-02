@@ -3,22 +3,14 @@ name: Deploy Portfolio
 on:
   push:
     branches:
-<<<<<<< HEAD
-      - main  # This should be your branch name
-=======
       - main
->>>>>>> e54bce1 (updated files)
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-<<<<<<< HEAD
-      - name: Checkout code
-=======
       - name: Checkout Code
->>>>>>> e54bce1 (updated files)
         uses: actions/checkout@v3
 
       - name: Set up Node.js
