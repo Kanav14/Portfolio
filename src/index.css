@@ -5,58 +5,59 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #000; /* Set background to black */
+  background-color: #000; /* Black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .grid-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  width: 100vw;
-  height: 100vh;
-  position: relative;
 }
 
 .grid-item {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   color: white;
   font-size: 24px;
+  text-align: center;
 }
 
-/* Styling for the grid lines */
-.vertical-line,
-.horizontal-line {
-  border-style: dotted;
-  border-color: white;
-  position: absolute;
-}
-
+/* Vertical dotted lines */
 .vertical-line {
-  border-width: 0 2px 0 0; /* Only left border */
+  position: absolute;
   height: 100%;
-  top: 0;
+  width: 0;
+  border-left: 2px dotted white;
 }
 
 .vertical-line:nth-of-type(1) {
-  left: 33.33%; /* 1/3 from the left */
+  left: 33.33%;
 }
 
 .vertical-line:nth-of-type(2) {
-  left: 66.66%; /* 2/3 from the left */
+  left: 66.66%;
 }
 
+/* Horizontal dotted lines */
 .horizontal-line {
-  border-width: 2px 0 0 0; /* Only top border */
+  position: absolute;
   width: 100%;
-  left: 0;
+  height: 0;
+  border-top: 2px dotted white;
 }
 
 .horizontal-line:nth-of-type(1) {
-  top: 33.33%; /* 1/3 from the top */
+  top: 33.33%;
 }
 
 .horizontal-line:nth-of-type(2) {
-  top: 66.66%; /* 2/3 from the top */
+  top: 66.66%;
 }
