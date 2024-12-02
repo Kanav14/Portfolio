@@ -4,11 +4,11 @@ import './index.css';
 function App() {
   return (
     <div className="grid-container">
-      {/* Vertical lines */}
+      {/* Vertical dotted lines */}
       <div className="vertical-line"></div>
       <div className="vertical-line"></div>
 
-      {/* Horizontal lines */}
+      {/* Horizontal dotted lines */}
       <div className="horizontal-line"></div>
       <div className="horizontal-line"></div>
 
