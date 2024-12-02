@@ -37,4 +37,3 @@ body {
 .grid-item:nth-child(3) {
   border-right: none; /* Remove border for the last item in each row */
 }
-
