@@ -7,18 +7,29 @@ body {
   padding: 0;
   background-color: #000; /* Black background */
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Divide screen into 3 columns */
+  grid-template-rows: 1fr 1fr 1fr;   /* Divide screen into 3 rows */
   position: relative;
   overflow: hidden;
 }
 
-.dotted-line {
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  border: none; /* Reset default borders */
+}
+
+/* Vertical and horizontal dotted lines */
+.line {
   position: absolute;
+  background: transparent;
+  z-index: 1;
   border-color: white;
   border-style: dotted;
-  z-index: 1;
 }
 
 /* Vertical dotted lines */
