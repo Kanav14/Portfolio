@@ -1,27 +1,18 @@
 import React from 'react';
-import './index.css';
+import './index.css'; // Import Tailwind CSS
 
 function App() {
   return (
-    <div>
-      {/* Sections */}
-      <div className="section">Section 1</div>
-      <div className="section">Section 2</div>
-      <div className="section">Section 3</div>
-      <div className="section">Section 4</div>
-      <div className="section">Section 5</div>
-      <div className="section">Section 6</div>
-      <div className="section">Section 7</div>
-      <div className="section">Section 8</div>
-      <div className="section">Section 9</div>
+    <div className="flex justify-center items-center h-screen bg-gray-800">
+      <div className="relative w-[80vw] h-[80vh] border border-white grid grid-cols-3 grid-rows-3">
+        {/* Horizontal Lines */}
+        <div className="absolute top-1/3 left-0 w-full border-t border-dashed border-white"></div>
+        <div className="absolute top-2/3 left-0 w-full border-t border-dashed border-white"></div>
 
-      {/* Vertical dotted lines */}
-      <div className="line vertical-line" style={{ left: "33.33%" }}></div>
-      <div className="line vertical-line" style={{ left: "66.66%" }}></div>
-
-      {/* Horizontal dotted lines */}
-      <div className="line horizontal-line" style={{ top: "33.33%" }}></div>
-      <div className="line horizontal-line" style={{ top: "66.66%" }}></div>
+        {/* Vertical Lines */}
+        <div className="absolute top-0 left-1/3 h-full border-l border-dashed border-white"></div>
+        <div className="absolute top-0 left-2/3 h-full border-l border-dashed border-white"></div>
+      </div>
     </div>
   );
 }
