@@ -1,18 +1,23 @@
 import React from 'react';
-import './index.css'; // Import Tailwind CSS
+import './index.css';
 
 function App() {
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-800">
-      <div className="relative w-[80vw] h-[80vh] border border-white grid grid-cols-3 grid-rows-3">
-        {/* Horizontal Lines */}
-        <div className="absolute top-1/3 left-0 w-full border-t border-dashed border-white"></div>
-        <div className="absolute top-2/3 left-0 w-full border-t border-dashed border-white"></div>
-
-        {/* Vertical Lines */}
-        <div className="absolute top-0 left-1/3 h-full border-l border-dashed border-white"></div>
-        <div className="absolute top-0 left-2/3 h-full border-l border-dashed border-white"></div>
-      </div>
+    <div className="grid-container">
+      <div className="grid-item">Section 1</div>
+      <div className="grid-item">Section 2</div>
+      <div className="grid-item">Section 3</div>
+      <div className="grid-item">Section 4</div>
+      <div className="grid-item">Section 5</div>
+      <div className="grid-item">Section 6</div>
+      <div className="grid-item">Section 7</div>
+      <div className="grid-item">Section 8</div>
+      <div className="grid-item">Section 9</div>
+      {/* Vertical and horizontal lines */}
+      <div className="dashed-vertical"></div>
+      <div className="dashed-vertical"></div>
+      <div className="dashed-horizontal"></div>
+      <div className="dashed-horizontal"></div>
     </div>
   );
 }
