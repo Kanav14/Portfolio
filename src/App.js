@@ -1,9 +1,18 @@
 import React from 'react';
-import './index.css'; // Ensure this imports your Tailwind and custom styles
+import './index.css';
 
 function App() {
   return (
     <div className="grid-container">
+      {/* Vertical lines */}
+      <div className="vertical-line"></div>
+      <div className="vertical-line"></div>
+
+      {/* Horizontal lines */}
+      <div className="horizontal-line"></div>
+      <div className="horizontal-line"></div>
+
+      {/* Grid items */}
       <div className="grid-item">Section 1</div>
       <div className="grid-item">Section 2</div>
       <div className="grid-item">Section 3</div>
