@@ -1,22 +1,30 @@
-name: Deploy React App to GitHub Pages
+name: Deploy Portfolio
 
 on:
   push:
     branches:
+<<<<<<< HEAD
       - main  # This should be your branch name
+=======
+      - main
+>>>>>>> e54bce1 (updated files)
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
+<<<<<<< HEAD
       - name: Checkout code
+=======
+      - name: Checkout Code
+>>>>>>> e54bce1 (updated files)
         uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '16'
 
       - name: Install dependencies
         run: npm install
