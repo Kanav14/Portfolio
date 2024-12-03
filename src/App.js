@@ -22,32 +22,29 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Vertical lines with animated glow */}
-      <div className="line vertical-line-1 glow-line"></div>
-      <div className="line vertical-line-2 glow-line"></div>
-
-      {/* Horizontal lines with animated glow */}
-      <div className="line horizontal-line-1 glow-line"></div>
-      <div className="line horizontal-line-2 glow-line"></div>
-
-      {/* Sections */}
+      {/* Render sections */}
       {sections.map((section) => (
         <div
           key={section.id}
-          className={`section section-${section.id}`}
+          className="section"
           onClick={() => handleClick(section)}
         >
           {section.isGif ? (
             <img
               src="https://media.giphy.com/media/3o7abK3Auv5leH6Av6/giphy.gif"
               alt="DevOps GIF"
-              className="gif"
             />
           ) : (
             <p>{section.text}</p>
           )}
         </div>
       ))}
+
+      {/* Vertical and horizontal lines with glowing effect */}
+      <div className="vertical-line glow-line"></div>
+      <div className="vertical-line glow-line"></div>
+      <div className="horizontal-line glow-line"></div>
+      <div className="horizontal-line glow-line"></div>
     </div>
   );
 }
