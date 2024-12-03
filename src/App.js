@@ -36,14 +36,9 @@ function App() {
             onClick={() => handleClick(section)}
           >
             {section.isHighlight ? (
-              <div className="relative">
-                <p className="text-4xl font-extrabold text-gradient animate-glow-text">
-                  DevOps Engineer
-                </p>
-                <p className="text-sm text-gray-400 mt-2">
-                  Building scalable, automated solutions
-                </p>
-              </div>
+              <p className="text-2xl font-bold text-cyan-500 animate-pulse">
+                DevOps Engineer
+              </p>
             ) : (
               <p>{section.text}</p>
             )}
