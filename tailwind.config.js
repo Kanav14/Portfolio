@@ -7,18 +7,17 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'glow-bounce': 'glow-bounce 2s infinite', // Glowing and bouncing animation for lines
+        "glow-bounce": "glow-bounce 1.5s linear infinite",
       },
       keyframes: {
-        'glow-bounce': {
-          '0%': { backgroundPosition: '200% 0%' },
-          '50%': { backgroundPosition: '100% 0%' },
-          '100%': { backgroundPosition: '0% 0%' },
+        "glow-bounce": {
+          "0%": { backgroundPosition: "200% 0%" },
+          "100%": { backgroundPosition: "0% 0%" },
         },
       },
       colors: {
         glow: {
-          DEFAULT: '#0066FF', // Darker blue glow color
+          DEFAULT: "#00FFFF",
         },
       },
     },
