@@ -1,2 +1,0 @@
-.text-gradient{background:linear-gradient(90deg,#00f260,#0575e6);-webkit-background-clip:text;color:#0000;text-shadow:0 0 5px #0575e6,0 0 10px #00f260,0 0 15px #0575e6}.animate-glow-text{animation:glow-text 2s infinite alternate}@keyframes glow-text{0%{text-shadow:0 0 5px #0575e6,0 0 10px #00f260,0 0 15px #0575e6}to{text-shadow:0 0 15px #00f260,0 0 25px #0575e6,0 0 35px #00f260}}
-/*# sourceMappingURL=main.a1595ee7.css.map*/
