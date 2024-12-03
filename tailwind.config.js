@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'glow': 'glow-animation 2s linear infinite', // Line glow animation
+        'glow': 'glow-animation 2s linear infinite', // Smooth glowing animation
       },
       keyframes: {
         'glow-animation': {
@@ -16,8 +16,11 @@ module.exports = {
         },
       },
       colors: {
-        glow: {
-          DEFAULT: '#00FFFF', // Cyan glow color
+        verticalGlow: {
+          DEFAULT: '#00BBFF', // More vibrant blue for vertical lines
+        },
+        horizontalGlow: {
+          DEFAULT: '#00FFFF', // Cyan for horizontal lines
         },
       },
     },
