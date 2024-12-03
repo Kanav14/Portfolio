@@ -2,20 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Unified Glow Effect for Vertical and Horizontal Lines */
-.bg-glow-vertical, .bg-glow-horizontal {
-  background: linear-gradient(90deg, rgba(0, 119, 255, 1), rgba(0, 0, 0, 0));
+/* Custom Glow Effect for Lines */
+.bg-glow {
+  background: linear-gradient(90deg, rgba(0, 102, 255, 0.8), rgba(0, 0, 0, 0));
   background-size: 200% 100%;
-  filter: drop-shadow(0 0 15px rgba(0, 119, 255, 0.8));
-  animation: bounce-animation 1.5s infinite; /* Faster bounce effect */
-}
-
-/* Bouncing Light Keyframes */
-@keyframes bounce-animation {
-  0%, 100% {
-    background-position: 0% 50%; /* Start/Stop at one end */
-  }
-  50% {
-    background-position: 100% 50%; /* Move light to the other end */
-  }
+  filter: drop-shadow(0 0 20px rgba(0, 102, 255, 0.8));
 }
