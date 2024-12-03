@@ -20,29 +20,29 @@ function App() {
   };
 
   return (
-    <div className="relative w-full h-screen bg-black">
+    <div className="relative w-full h-screen bg-black overflow-hidden">
       {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-0.5 h-full bg-glow animate-glow-animate left-1/3"></div>
-      <div className="absolute w-0.5 h-full bg-glow animate-glow-animate left-2/3"></div>
-      <div className="absolute h-0.5 w-full bg-glow animate-glow-animate top-1/3"></div>
-      <div className="absolute h-0.5 w-full bg-glow animate-glow-animate top-2/3"></div>
+      <div className="absolute w-0.5 h-full bg-glow animate-glow left-1/3"></div>
+      <div className="absolute w-0.5 h-full bg-glow animate-glow left-2/3"></div>
+      <div className="absolute h-0.5 w-full bg-glow animate-glow top-1/3"></div>
+      <div className="absolute h-0.5 w-full bg-glow animate-glow top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
         {sections.map((section) => (
           <div
             key={section.id}
-            className="flex justify-center items-center text-white cursor-pointer hover:bg-white/10 transition-transform duration-300 transform hover:scale-105"
+            className="flex justify-center items-center text-white cursor-pointer hover:bg-white/10 transition-transform duration-300 transform hover:scale-110"
             onClick={() => handleClick(section)}
           >
             {section.isGif ? (
               <img
                 src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif"
                 alt="GIF"
-                className="max-w-full max-h-full rounded-md"
+                className="max-w-full max-h-full rounded-lg shadow-lg"
               />
             ) : (
-              <p>{section.text}</p>
+              <p className="text-lg font-bold">{section.text}</p>
             )}
           </div>
         ))}
