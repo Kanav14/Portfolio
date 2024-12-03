@@ -22,10 +22,10 @@ function App() {
   return (
     <div className="relative w-full h-screen bg-black">
       {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-0.5 h-full bg-glow-vertical left-1/3"></div>
-      <div className="absolute w-0.5 h-full bg-glow-vertical left-2/3"></div>
-      <div className="absolute h-0.5 w-full bg-glow-horizontal top-1/3"></div>
-      <div className="absolute h-0.5 w-full bg-glow-horizontal top-2/3"></div>
+      <div className="absolute w-0.5 h-full bg-glow left-1/3"></div>
+      <div className="absolute w-0.5 h-full bg-glow left-2/3"></div>
+      <div className="absolute h-0.5 w-full bg-glow top-1/3"></div>
+      <div className="absolute h-0.5 w-full bg-glow top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
