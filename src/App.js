@@ -2,19 +2,19 @@ import React from 'react';
 import './index.css';
 
 function App() {
-  const sectionContent = [
-    'About Me',
-    'Projects',
-    'Experience',
-    'Education',
-    'Research and Patents',
-    'Extra Curricular',
-    'Certifications',
-    'Skills and Knowledge Base'
+  const sections = [
+    { id: 1, text: 'About Me' },
+    { id: 2, text: 'Projects' },
+    { id: 3, text: 'Experience' },
+    { id: 4, text: 'Education' },
+    { id: 5, text: 'Research and Patents', isGif: true }, // Section 5 with GIF
+    { id: 6, text: 'Extra Curricular' },
+    { id: 7, text: 'Certifications' },
+    { id: 8, text: 'Skills and Knowledge Base' },
   ];
 
   const handleClick = (section) => {
-    alert(`You clicked on ${section} section`);
+    alert(`You clicked on ${section.text} section`);
   };
 
   return (
@@ -28,20 +28,20 @@ function App() {
       <div className="line horizontal-line-2"></div>
 
       {/* Sections */}
-      {sectionContent.map((text, index) => (
+      {sections.map((section) => (
         <div
-          key={index}
-          className={`section section-${index + 1}`}
-          onClick={() => handleClick(`Section ${index + 1}`)}
+          key={section.id}
+          className={`section section-${section.id}`}
+          onClick={() => handleClick(section)}
         >
-          {index === 4 ? (
+          {section.isGif ? (
             <img
-              src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif" // Replace with the desired GIF URL
-              alt="Middle section GIF"
+              src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif" // Replace with your desired GIF
+              alt="GIF"
               className="gif"
             />
           ) : (
-            <p>{text}</p>
+            <p>{section.text}</p>
           )}
         </div>
       ))}
