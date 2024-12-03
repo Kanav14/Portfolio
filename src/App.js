@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 
 function App() {
   const sections = [
@@ -7,7 +6,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, isGif: true }, // Section 5 with GIF and no text
+    { id: 5, isGif: true }, // GIF section
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -21,31 +20,33 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      {/* Vertical and Horizontal glowing lines */}
-      <div className="line vertical-line-1"></div>
-      <div className="line vertical-line-2"></div>
-      <div className="line horizontal-line-1"></div>
-      <div className="line horizontal-line-2"></div>
+    <div className="relative w-full h-screen bg-black">
+      {/* Vertical and Horizontal Glowing Lines */}
+      <div className="absolute w-0.5 h-full bg-glow animate-glow-animate left-1/3"></div>
+      <div className="absolute w-0.5 h-full bg-glow animate-glow-animate left-2/3"></div>
+      <div className="absolute h-0.5 w-full bg-glow animate-glow-animate top-1/3"></div>
+      <div className="absolute h-0.5 w-full bg-glow animate-glow-animate top-2/3"></div>
 
-      {/* Sections */}
-      {sections.map((section) => (
-        <div
-          key={section.id}
-          className={`section section-${section.id}`}
-          onClick={() => handleClick(section)}
-        >
-          {section.isGif ? (
-            <img
-              src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif" // Replace with your desired GIF
-              alt="GIF"
-              className="gif"
-            />
-          ) : (
-            <p>{section.text}</p>
-          )}
-        </div>
-      ))}
+      {/* Grid Sections */}
+      <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
+        {sections.map((section) => (
+          <div
+            key={section.id}
+            className="flex justify-center items-center text-white cursor-pointer hover:bg-white/10 transition-transform duration-300 transform hover:scale-105"
+            onClick={() => handleClick(section)}
+          >
+            {section.isGif ? (
+              <img
+                src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif"
+                alt="GIF"
+                className="max-w-full max-h-full rounded-md"
+              />
+            ) : (
+              <p>{section.text}</p>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
