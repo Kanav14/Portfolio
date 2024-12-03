@@ -7,20 +7,20 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'glow': 'glow-animation 2s linear infinite', // Smooth glowing animation
+        'bounce-light': 'bounce-animation 3s infinite', // Bouncing light animation
       },
       keyframes: {
-        'glow-animation': {
-          '0%': { backgroundPosition: '200% 0%' },
-          '100%': { backgroundPosition: '0% 0%' },
+        'bounce-animation': {
+          '0%, 100%': { backgroundPosition: '0% 50%' }, // Light starts/stops in the middle
+          '50%': { backgroundPosition: '100% 50%' },   // Light moves to the end
         },
       },
       colors: {
-        verticalGlow: {
-          DEFAULT: '#00BBFF', // More vibrant blue for vertical lines
+        glowVertical: {
+          DEFAULT: '#0055AA', // Darker blue for vertical lines
         },
-        horizontalGlow: {
-          DEFAULT: '#00FFFF', // Cyan for horizontal lines
+        glowHorizontal: {
+          DEFAULT: '#0055AA', // Darker cyan for horizontal lines
         },
       },
     },
