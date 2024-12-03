@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: black; /* Changed background color to black */
   font-family: 'Arial', sans-serif;
 }
 
@@ -17,7 +17,7 @@ body {
 .line {
   position: absolute;
   border-style: dotted;
-  border-color: transparent;
+  border-color: cyan; /* Changed border color for better visibility */
   border-width: 2px;
   animation: blue-glow 3s infinite linear;
 }
@@ -27,7 +27,7 @@ body {
   bottom: 0;
   left: 33.33%;
   width: 0;
-  border-left: 2px dotted white;
+  border-left: 2px dotted cyan; /* Cyan for visibility */
 }
 
 .vertical-line-2 {
@@ -35,7 +35,7 @@ body {
   bottom: 0;
   left: 66.66%;
   width: 0;
-  border-left: 2px dotted white;
+  border-left: 2px dotted cyan;
 }
 
 .horizontal-line-1 {
@@ -43,7 +43,7 @@ body {
   right: 0;
   top: 33.33%;
   height: 0;
-  border-top: 2px dotted white;
+  border-top: 2px dotted cyan;
 }
 
 .horizontal-line-2 {
@@ -51,7 +51,7 @@ body {
   right: 0;
   top: 66.66%;
   height: 0;
-  border-top: 2px dotted white;
+  border-top: 2px dotted cyan;
 }
 
 .section {
@@ -59,7 +59,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: white; /* Keep the section text visible on black */
   cursor: pointer;
   padding: 10px;
   box-sizing: border-box;
@@ -83,12 +83,12 @@ body {
 
 @keyframes blue-glow {
   0% {
-    box-shadow: 0 0 5px #00f;
+    box-shadow: 0 0 5px cyan;
   }
   50% {
-    box-shadow: 0 0 20px #00f;
+    box-shadow: 0 0 20px cyan;
   }
   100% {
-    box-shadow: 0 0 5px #00f;
+    box-shadow: 0 0 5px cyan;
   }
 }
