@@ -1,3 +1,4 @@
+// tailwind.config.js
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -6,23 +7,18 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'glow': 'glow-animation 2s infinite', // Define your glowing animation
-        'bounce': 'bounce-animation 1s infinite', // Added bounce animation for lines
+        'glow-bounce': 'glow-bounce 2s infinite', // Glowing and bouncing animation for lines
       },
       keyframes: {
-        'glow-animation': {
+        'glow-bounce': {
           '0%': { backgroundPosition: '200% 0%' },
+          '50%': { backgroundPosition: '100% 0%' },
           '100%': { backgroundPosition: '0% 0%' },
-        },
-        'bounce-animation': {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' }, // Bounce effect
         },
       },
       colors: {
         glow: {
-          DEFAULT: '#00FFFF', // Cyan glow color
-          dark: '#008080', // Darker shade for lines
+          DEFAULT: '#0066FF', // Darker blue glow color
         },
       },
     },
