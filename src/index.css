@@ -10,8 +10,8 @@ body {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .line {
@@ -19,9 +19,7 @@ body {
   border-style: dotted;
   border-color: transparent;
   border-width: 2px;
-  background: linear-gradient(90deg, transparent, #00f, transparent);
-  background-size: 200% 100%;
-  animation: glow 2s linear infinite;
+  animation: blue-glow 3s infinite linear;
 }
 
 .vertical-line-1 {
@@ -60,11 +58,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   color: white;
   cursor: pointer;
-  text-align: center;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.section:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+  transition: all 0.3s;
 }
 
 .section-5 {
@@ -77,14 +81,14 @@ body {
   border-radius: 8px;
 }
 
-@keyframes glow {
+@keyframes blue-glow {
   0% {
-    background-position: 0% 50%;
+    box-shadow: 0 0 5px #00f;
   }
   50% {
-    background-position: 100% 50%;
+    box-shadow: 0 0 20px #00f;
   }
   100% {
-    background-position: 0% 50%;
+    box-shadow: 0 0 5px #00f;
   }
 }
