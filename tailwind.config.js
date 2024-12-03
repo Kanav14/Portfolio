@@ -6,24 +6,19 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'glow': 'glow-animation 2s infinite', // Define your glowing animation
-        'glow-motion': 'glow-motion 4s linear infinite',
+        'glow-motion': 'glow-animation 2s infinite', // Subtle glow animation
       },
       keyframes: {
         'glow-animation': {
-          '0%': { backgroundPosition: '200% 0%' },
-          '100%': { backgroundPosition: '0% 0%' },
-        },
-        'glow-motion': {
-          '0%': { backgroundPosition: '0% 0%' },
-          '50%': { backgroundPosition: '100% 0%' },
-          '100%': { backgroundPosition: '0% 0%' },
+          '0%': { boxShadow: '0 0 5px #00BFFF' },
+          '50%': { boxShadow: '0 0 15px #00BFFF' },
+          '100%': { boxShadow: '0 0 5px #00BFFF' },
         },
       },
       colors: {
         glow: {
-          light: '#00FFFF', // Light cyan
-          dark: '#0099CC', // Darker cyan for contrast
+          light: '#00BFFF', // Bright blue
+          dark: '#004080', // Darker blue for contrast
         },
       },
     },
