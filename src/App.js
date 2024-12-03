@@ -6,7 +6,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, isImage: true }, // Image section instead of GIF
+    { id: 5, isHighlight: true }, // Highlighted section for "DevOps Engineer"
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -35,12 +35,15 @@ function App() {
             className="flex justify-center items-center text-white cursor-pointer hover:scale-100 hover:bg-white/10 transition-transform duration-300 overflow-hidden"
             onClick={() => handleClick(section)}
           >
-            {section.isImage ? (
-              <img
-                src="https://github.com/Kanav14/Portfolio/blob/main/7030842.jpg?raw=true" // Replace with your image URL
-                alt="Image"
-                className="max-w-full max-h-full rounded-md"
-              />
+            {section.isHighlight ? (
+              <div className="relative">
+                <p className="text-4xl font-extrabold text-gradient animate-glow-text">
+                  DevOps Engineer
+                </p>
+                <p className="text-sm text-gray-400 mt-2">
+                  Building scalable, automated solutions
+                </p>
+              </div>
             ) : (
               <p>{section.text}</p>
             )}
