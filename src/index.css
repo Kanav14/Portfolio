@@ -1,8 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: black; /* Set background color to black */
-  font-family: 'Arial', sans-serif; /* Choose a clean font */
+  background-color: black;
+  font-family: 'Arial', sans-serif;
 }
 
 .app-container {
@@ -54,11 +54,9 @@ body {
   border-top: 1px dotted white;
 }
 
-/* Style for each section */
 .section {
-  width: 30%; /* Adjust to fit three sections per row */
-  height: 30%; /* Adjust to fit three sections per column */
-  border: 2px solid transparent;
+  width: 30%;
+  height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,5 +76,5 @@ body {
 .gif {
   max-width: 100%;
   max-height: 100%;
-  border-radius: 8px; /* Rounded corners for the GIF */
+  border-radius: 8px;
 }
