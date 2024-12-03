@@ -15,8 +15,8 @@ function App() {
   ];
 
   const handleClick = (section) => {
-    if (section.id !== 5) { // Only make clickable if it's not section 5
-      alert(`You clicked on ${section.text} section`);
+    if (!section.isGif) {
+      alert(`You clicked on ${section.text}`);
     }
   };
 
@@ -39,7 +39,7 @@ function App() {
         >
           {section.isGif ? (
             <img
-              src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif" // Replace with your desired GIF
+              src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif" // Replace with your GIF link
               alt="GIF"
               className="gif"
             />
