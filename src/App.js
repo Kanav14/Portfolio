@@ -15,21 +15,13 @@ function App() {
   ];
 
   const handleClick = (section) => {
-    if (section.id !== 5) { // Only make clickable if it's not section 5
+    if (section.id !== 5) {
       alert(`You clicked on ${section.text} section`);
     }
   };
 
   return (
     <div className="app-container">
-      {/* Vertical lines */}
-      <div className="line vertical-line-1"></div>
-      <div className="line vertical-line-2"></div>
-
-      {/* Horizontal lines */}
-      <div className="line horizontal-line-1"></div>
-      <div className="line horizontal-line-2"></div>
-
       {/* Sections */}
       {sections.map((section) => (
         <div
@@ -39,7 +31,7 @@ function App() {
         >
           {section.isImage ? (
             <img
-              src="7030842.jpg" // Path to your image
+              src="/7030842.jpg" // Path to your image
               alt="DevOps"
               className="section-image"
             />
