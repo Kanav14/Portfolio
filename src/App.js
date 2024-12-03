@@ -40,7 +40,7 @@ function App() {
         </div>
       ))}
 
-      {/* Vertical and horizontal lines with glowing effect */}
+      {/* Glowing vertical and horizontal lines */}
       <div className="vertical-line glow-line"></div>
       <div className="vertical-line glow-line"></div>
       <div className="horizontal-line glow-line"></div>
