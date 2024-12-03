@@ -1,94 +1,15 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-color: black; /* Changed background color to black */
-  font-family: 'Arial', sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Glow Animation for Solid Lines */
+.bg-glow {
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.8), rgba(0, 0, 0, 0));
+  background-size: 200% 100%;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
 }
 
-.app-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.line {
-  position: absolute;
-  border-style: dotted;
-  border-color: cyan; /* Changed border color for better visibility */
-  border-width: 2px;
-  animation: blue-glow 3s infinite linear;
-}
-
-.vertical-line-1 {
-  top: 0;
-  bottom: 0;
-  left: 33.33%;
-  width: 0;
-  border-left: 2px dotted cyan; /* Cyan for visibility */
-}
-
-.vertical-line-2 {
-  top: 0;
-  bottom: 0;
-  left: 66.66%;
-  width: 0;
-  border-left: 2px dotted cyan;
-}
-
-.horizontal-line-1 {
-  left: 0;
-  right: 0;
-  top: 33.33%;
-  height: 0;
-  border-top: 2px dotted cyan;
-}
-
-.horizontal-line-2 {
-  left: 0;
-  right: 0;
-  top: 66.66%;
-  height: 0;
-  border-top: 2px dotted cyan;
-}
-
-.section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white; /* Keep the section text visible on black */
-  cursor: pointer;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.section:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: scale(1.05);
-  transition: all 0.3s;
-}
-
-.section-5 {
-  cursor: default;
-}
-
-.gif {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 8px;
-}
-
-@keyframes blue-glow {
-  0% {
-    box-shadow: 0 0 5px cyan;
-  }
-  50% {
-    box-shadow: 0 0 20px cyan;
-  }
-  100% {
-    box-shadow: 0 0 5px cyan;
-  }
+/* Ensure the grid is visually clear */
+.grid > div {
+  border: none; /* Remove default borders if any */
 }
