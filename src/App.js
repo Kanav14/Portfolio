@@ -7,10 +7,11 @@ function App() {
     { id: 2, text: 'Projects' },
     { id: 3, text: 'Experience' },
     { id: 4, text: 'Education' },
-    { id: 5, text: 'Extra Curricular', isGif: true }, // Section 5 with GIF (not clickable)
+    { id: 5, isGif: true }, // Section 5 with GIF and no text
     { id: 6, text: 'Certifications' },
     { id: 7, text: 'Skills and Knowledge Base' },
-    { id: 8, text: 'Research and Patents' }, // Research and Patents in Section 8
+    { id: 8, text: 'Extra Curricular' },
+    { id: 9, text: 'Research and Patents' },
   ];
 
   const handleClick = (section) => {
