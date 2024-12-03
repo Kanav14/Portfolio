@@ -11,41 +11,72 @@ body {
 
 .app-container {
   position: relative;
-  width: 90vw;
-  height: 90vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+  width: 80vw;
+  height: 80vh;
 }
 
-.line {
-  position: absolute;
-  border-style: dashed;
-  border-color: #00f;
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px dashed #00f;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.section p {
+  margin: 0;
+}
+
+.section img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.glow-line {
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(90deg, transparent, #00f, transparent);
+  background-size: 200% 100%;
+  animation: glow 2s linear infinite;
   opacity: 0.7;
 }
 
-.vertical-line-1, .vertical-line-2 {
-  height: 100%;
+.vertical-line {
+  position: absolute;
   width: 3px;
+  height: 100%;
+  background-color: transparent;
+  border-left: 2px dashed #00f;
+  border-right: 2px dashed #00f;
   top: 0;
-  left: 33.33%; /* Adjusts to divide the container */
+  left: 33.33%;
 }
 
-.vertical-line-2 {
-  left: 66.66%; /* Adjusts to divide the container */
+.vertical-line:nth-child(2) {
+  left: 66.66%;
 }
 
-.horizontal-line-1, .horizontal-line-2 {
-  width: 100%;
+.horizontal-line {
+  position: absolute;
   height: 3px;
-  top: 33.33%; /* Adjusts to divide the container */
-  left: 0;
+  width: 100%;
+  background-color: transparent;
+  border-top: 2px dashed #00f;
+  border-bottom: 2px dashed #00f;
+  top: 33.33%;
 }
 
-.horizontal-line-2 {
-  top: 66.66%; /* Adjusts to divide the container */
+.horizontal-line:nth-child(4) {
+  top: 66.66%;
 }
 
 @keyframes glow {
@@ -58,13 +89,4 @@ body {
   100% {
     background-position: 0% 50%;
   }
-}
-
-.glow-line {
-  border-width: 2px;
-  border-style: dashed;
-  border-color: transparent;
-  background: linear-gradient(90deg, transparent, #00f, transparent);
-  background-size: 200% 100%;
-  animation: glow 2s linear infinite;
 }
