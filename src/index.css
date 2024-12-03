@@ -1,88 +1,80 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  overflow: hidden;
+  background-color: grey;
+  font-family: 'Arial', sans-serif;
 }
 
 .app-container {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 1rem;
-  width: 80vw;
-  height: 80vh;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.line {
+  position: absolute;
+  border-style: dotted;
+  border-color: white;
+  border-width: 1px;
+}
+
+.vertical-line-1 {
+  top: 0;
+  bottom: 0;
+  left: 33.33%;
+  width: 0;
+  border-left: 1px dotted white;
+}
+
+.vertical-line-2 {
+  top: 0;
+  bottom: 0;
+  left: 66.66%;
+  width: 0;
+  border-left: 1px dotted white;
+}
+
+.horizontal-line-1 {
+  left: 0;
+  right: 0;
+  top: 33.33%;
+  height: 0;
+  border-top: 1px dotted white;
+}
+
+.horizontal-line-2 {
+  left: 0;
+  right: 0;
+  top: 66.66%;
+  height: 0;
+  border-top: 1px dotted white;
 }
 
 .section {
+  width: 30%;
+  height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px dashed #00f;
-  border-radius: 8px;
   color: white;
-  font-size: 1.5rem;
   cursor: pointer;
-  position: relative;
+  transition: background-color 0.3s, transform 0.3s;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.section img {
+.section:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.gif {
   max-width: 100%;
   max-height: 100%;
-}
-
-.glow-line {
-  border: none;
-  border-radius: 50%;
-  background: linear-gradient(90deg, transparent, #00f, transparent);
-  background-size: 200% 100%;
-  animation: glow 2s linear infinite;
-  opacity: 0.7;
-}
-
-.vertical-line {
-  position: absolute;
-  width: 3px;
-  height: 100%;
-  background-color: transparent;
-  border-left: 2px dashed #00f;
-  border-right: 2px dashed #00f;
-  top: 0;
-  left: 33.33%;
-}
-
-.vertical-line:nth-child(2) {
-  left: 66.66%;
-}
-
-.horizontal-line {
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background-color: transparent;
-  border-top: 2px dashed #00f;
-  border-bottom: 2px dashed #00f;
-  top: 33.33%;
-}
-
-.horizontal-line:nth-child(4) {
-  top: 66.66%;
-}
-
-@keyframes glow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  border-radius: 8px;
 }
