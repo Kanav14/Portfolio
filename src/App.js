@@ -7,14 +7,16 @@ function App() {
     { id: 2, text: 'Projects' },
     { id: 3, text: 'Experience' },
     { id: 4, text: 'Education' },
-    { id: 5, text: 'Research and Patents', isGif: true }, // Section 5 with GIF
-    { id: 6, text: 'Extra Curricular' },
-    { id: 7, text: 'Certifications' },
-    { id: 8, text: 'Skills and Knowledge Base' },
+    { id: 5, text: 'Extra Curricular', isGif: true }, // Section 5 with GIF (not clickable)
+    { id: 6, text: 'Certifications' },
+    { id: 7, text: 'Skills and Knowledge Base' },
+    { id: 8, text: 'Research and Patents' }, // Research and Patents in Section 8
   ];
 
   const handleClick = (section) => {
-    alert(`You clicked on ${section.text} section`);
+    if (section.id !== 5) { // Only make clickable if it's not section 5
+      alert(`You clicked on ${section.text} section`);
+    }
   };
 
   return (
