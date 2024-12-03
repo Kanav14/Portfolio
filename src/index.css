@@ -2,19 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Glow Animation for Vertical and Horizontal Lines */
-.bg-glow-vertical {
-  background: linear-gradient(90deg, #00FFFF, #0099CC, #00FFFF, #0099CC);
+/* Custom Glow Animation for Lines */
+.bg-glow {
+  background: linear-gradient(90deg, #00BFFF, #004080);
   background-size: 200% 100%;
-  filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8));
-  animation: glow-motion 4s linear infinite;
-}
-
-.bg-glow-horizontal {
-  background: linear-gradient(0deg, #00FFFF, #0099CC, #00FFFF, #0099CC);
-  background-size: 200% 100%;
-  filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8));
-  animation: glow-motion 4s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.8));
+  animation: glow-motion 2s infinite;
 }
 
 /* Ensure the grid is visually clear */
