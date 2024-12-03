@@ -21,11 +21,11 @@ function App() {
 
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden">
-      {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-0.5 h-full bg-glow animate-glow left-1/3"></div>
-      <div className="absolute w-0.5 h-full bg-glow animate-glow left-2/3"></div>
-      <div className="absolute h-0.5 w-full bg-glow animate-glow top-1/3"></div>
-      <div className="absolute h-0.5 w-full bg-glow animate-glow top-2/3"></div>
+      {/* Enhanced Vertical and Horizontal Glowing Lines */}
+      <div className="absolute w-1 h-full bg-vertical-glow animate-glow left-1/3"></div>
+      <div className="absolute w-1 h-full bg-vertical-glow animate-glow left-2/3"></div>
+      <div className="absolute h-0.5 w-full bg-horizontal-glow animate-glow top-1/3"></div>
+      <div className="absolute h-0.5 w-full bg-horizontal-glow animate-glow top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
