@@ -7,7 +7,7 @@ function App() {
     { id: 2, text: 'Projects' },
     { id: 3, text: 'Experience' },
     { id: 4, text: 'Education' },
-    { id: 5, isImage: true }, // Section 5 with image and no text
+    { id: 5, isImage: true }, // Section 5 with image
     { id: 6, text: 'Certifications' },
     { id: 7, text: 'Skills and Knowledge Base' },
     { id: 8, text: 'Extra Curricular' },
@@ -39,9 +39,9 @@ function App() {
         >
           {section.isImage ? (
             <img
-              src="/7030842.jpg" // Replace with the path to your uploaded image
+              src="7030842.jpg" // Path to your image
               alt="DevOps"
-              className="image"
+              className="section-image"
             />
           ) : (
             <p>{section.text}</p>
