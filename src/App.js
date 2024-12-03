@@ -7,7 +7,7 @@ function App() {
     { id: 2, text: 'Projects' },
     { id: 3, text: 'Experience' },
     { id: 4, text: 'Education' },
-    { id: 5, isGif: true }, // Section 5 with GIF and no text
+    { id: 5, isImage: true }, // Section 5 with an image and custom background
     { id: 6, text: 'Certifications' },
     { id: 7, text: 'Skills and Knowledge Base' },
     { id: 8, text: 'Extra Curricular' },
@@ -34,17 +34,17 @@ function App() {
       {sections.map((section) => (
         <div
           key={section.id}
-          className={`section section-${section.id}`}
+          className={`section section-${section.id} ${section.isImage ? 'image-section' : ''}`}
           onClick={() => handleClick(section)}
         >
-          {section.isGif ? (
+          {section.isImage ? (
             <img
-              src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif" // Replace with your desired GIF
-              alt="GIF"
-              className="gif"
+              src="/7030842.jpg" // Replace with your image name only
+              alt="Section 5 Background"
+              className="background-image"
             />
           ) : (
-            <p>{section.text}</p>
+            <p className="section-text">{section.text}</p>
           )}
         </div>
       ))}
