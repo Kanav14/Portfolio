@@ -2,18 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Glow Effect for Lines */
+/* Custom Glow Animation for Solid Lines */
 .bg-glow {
-  background: linear-gradient(90deg, rgba(0, 102, 255, 0.8), rgba(0, 0, 0, 0));
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.8), rgba(0, 0, 0, 0));
   background-size: 200% 100%;
-  filter: drop-shadow(0 0 20px rgba(0, 102, 255, 0.8));
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
+  animation: glow-animation 2s infinite;
 }
 
-/* Container to prevent overflow */
+/* Add bounce animation */
+.animate-glow-animate {
+  animation: bounce-animation 1s infinite;
+}
+
+/* Ensure the grid is visually clear */
 .grid > div {
-  overflow: hidden; /* Ensure hover state stays within the grid */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px; /* Optional: add border radius for visual appeal */
+  border: none; /* Remove default borders if any */
 }
