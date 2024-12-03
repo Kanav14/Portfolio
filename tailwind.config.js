@@ -1,4 +1,3 @@
-// tailwind.config.js
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -7,17 +6,24 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "glow-bounce": "glow-bounce 1.2s ease-in-out infinite",
+        'glow': 'glow-animation 2s infinite', // Define your glowing animation
+        'glow-motion': 'glow-motion 4s linear infinite',
       },
       keyframes: {
-        "glow-bounce": {
-          "0%, 100%": { backgroundPosition: "0% 0%" },
-          "50%": { backgroundPosition: "200% 0%" },
+        'glow-animation': {
+          '0%': { backgroundPosition: '200% 0%' },
+          '100%': { backgroundPosition: '0% 0%' },
+        },
+        'glow-motion': {
+          '0%': { backgroundPosition: '0% 0%' },
+          '50%': { backgroundPosition: '100% 0%' },
+          '100%': { backgroundPosition: '0% 0%' },
         },
       },
       colors: {
         glow: {
-          DEFAULT: "#0066FF", // Darker blue glow color
+          light: '#00FFFF', // Light cyan
+          dark: '#0099CC', // Darker cyan for contrast
         },
       },
     },
