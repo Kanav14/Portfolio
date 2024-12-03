@@ -1,21 +1,8 @@
-/* Gradient Glow for Text */
-.text-gradient {
-  background: linear-gradient(90deg, #00f260, #0575e6);
-  -webkit-background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 5px #0575e6, 0 0 10px #00f260, 0 0 15px #0575e6;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Glow Animation */
-.animate-glow-text {
-  animation: glow-text 2s infinite alternate;
-}
-
-@keyframes glow-text {
-  0% {
-    text-shadow: 0 0 5px #0575e6, 0 0 10px #00f260, 0 0 15px #0575e6;
-  }
-  100% {
-    text-shadow: 0 0 15px #00f260, 0 0 25px #0575e6, 0 0 35px #00f260;
-  }
+/* Custom Glow for Text */
+.glow-text {
+  text-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 15px #00FFFF, 0 0 20px #00FFFF;
 }
