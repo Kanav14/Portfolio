@@ -37,7 +37,7 @@ function App() {
           >
             {section.isImage ? (
               <img
-                src="https://github.com/Kanav14/Portfolio/blob/main/7030842.jpg" // Replace with your image URL
+                src="https://github.com/Kanav14/Portfolio/blob/main/7030842.jpg?raw=true" // Replace with your image URL
                 alt="Image"
                 className="max-w-full max-h-full rounded-md"
               />
