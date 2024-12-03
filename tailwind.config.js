@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'glow': 'glow-animation 2s infinite', // Define your glowing animation
+        'glow': 'glow-animation 2s linear infinite', // Line glow animation
       },
       keyframes: {
         'glow-animation': {
