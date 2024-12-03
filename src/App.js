@@ -6,7 +6,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, isImage: true }, // Section with custom image instead of GIF
+    { id: 5, isGif: true }, // GIF section
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -20,29 +20,29 @@ function App() {
   };
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
+    <div className="relative w-full h-screen bg-black">
       {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-0.5 h-full bg-glow animate-glow-animate left-1/3"></div>
-      <div className="absolute w-0.5 h-full bg-glow animate-glow-animate left-2/3"></div>
-      <div className="absolute h-0.5 w-full bg-glow animate-glow-animate top-1/3"></div>
-      <div className="absolute h-0.5 w-full bg-glow animate-glow-animate top-2/3"></div>
+      <div className="absolute w-1 h-full bg-glow animate-glow-bounce left-1/3"></div>
+      <div className="absolute w-1 h-full bg-glow animate-glow-bounce left-2/3"></div>
+      <div className="absolute h-1 w-full bg-glow animate-glow-bounce top-1/3"></div>
+      <div className="absolute h-1 w-full bg-glow animate-glow-bounce top-2/3"></div>
 
       {/* Grid Sections */}
-      <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
+      <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
         {sections.map((section) => (
           <div
             key={section.id}
-            className="flex justify-center items-center text-white cursor-pointer hover:bg-white/10 transition-transform duration-300 transform hover:scale-105"
+            className="flex justify-center items-center text-white cursor-pointer hover:scale-100 hover:bg-white/10 transition-transform duration-300 overflow-hidden"
             onClick={() => handleClick(section)}
           >
-            {section.isImage ? (
+            {section.isGif ? (
               <img
-                src="/7030842.jpg" // Replace with your actual image path in the public folder
-                alt="Custom Image"
-                className="max-w-full max-h-full rounded-md border border-blue-600"
+                src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif"
+                alt="GIF"
+                className="max-w-full max-h-full rounded-md"
               />
             ) : (
-              <p className="text-xl font-semibold">{section.text}</p>
+              <p>{section.text}</p>
             )}
           </div>
         ))}
