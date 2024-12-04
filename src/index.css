@@ -56,16 +56,23 @@
 }
 
 /* Gradient styles for lines */
-.bg-gradient-vertical {
+.bg-glow {
   background: linear-gradient(90deg, #1e3a8a, #3b82f6, #9333ea, #ec4899);
   background-size: 200% 100%;
   animation: gradient-vertical 3s linear infinite;
 }
 
-.bg-gradient-horizontal {
+.bg-glow-horizontal {
   background: linear-gradient(90deg, #6ee7b7, #3b82f6, #9333ea, #facc15);
   background-size: 200% 100%;
   animation: gradient-horizontal 3s linear infinite;
+}
+
+/* Original glow effect */
+.bg-glow-original {
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.8), rgba(0, 0, 0, 0));
+  background-size: 200% 100%;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
 }
 
 /* For the grid sections */
