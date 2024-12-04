@@ -22,10 +22,10 @@ function App() {
   return (
     <div className="relative w-full h-screen bg-black">
       {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-1 h-full bg-glow animate-glow-bounce vertical-line left-1/3"></div>
-      <div className="absolute w-1 h-full bg-glow animate-glow-bounce vertical-line left-2/3"></div>
-      <div className="absolute h-1 w-full bg-glow animate-glow-bounce horizontal-line top-1/3"></div>
-      <div className="absolute h-1 w-full bg-glow animate-glow-bounce horizontal-line top-2/3"></div>
+      <div className="absolute w-1 h-full bg-glow animate-line-flow left-1/3"></div>
+      <div className="absolute w-1 h-full bg-glow animate-line-flow left-2/3"></div>
+      <div className="absolute h-1 w-full bg-glow animate-line-flow top-1/3"></div>
+      <div className="absolute h-1 w-full bg-glow animate-line-flow top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
@@ -36,7 +36,7 @@ function App() {
             onClick={() => handleClick(section)}
           >
             {section.isHighlight ? (
-              <p className="text-2xl font-extrabold text-cyan-500 animate-pulse glow-text">
+              <p className="text-2xl font-extrabold text-blue-500 animate-pulse glow-text">
                 DevOps Engineer
               </p>
             ) : (
