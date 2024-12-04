@@ -2,24 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Glow for Text */
-.glow-text {
-  text-shadow: 0 0 5px #0044cc, 0 0 10px #0044cc, 0 0 15px #0044cc, 0 0 20px #0044cc;
-}
-
-/* Glowing Line Customizations */
-.bg-glow {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 255, 0.8) 25%,
-    rgba(0, 0, 0, 0) 75%
-  );
+/* Gradient Glow for Lines */
+.bg-gradient-to-r,
+.bg-gradient-to-b {
   background-size: 200% 100%;
-  filter: drop-shadow(0 0 15px rgba(0, 0, 255, 0.6));
+  filter: brightness(1.2);
 }
 
 .animate-line-flow {
-  animation: line-flow 1.5s linear infinite;
+  animation: line-flow 2s linear infinite;
 }
 
 @keyframes line-flow {
@@ -28,5 +19,28 @@
   }
   100% {
     background-position: 0% 0%;
+  }
+}
+
+/* Typewriter Animation */
+.animate-typewriter {
+  animation: typing 3s steps(20, end), blink-caret 0.5s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 15ch; /* Adjust length to match text length */
+  }
+}
+
+@keyframes blink-caret {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: white;
   }
 }
