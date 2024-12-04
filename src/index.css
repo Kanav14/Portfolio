@@ -5,13 +5,7 @@
 /* SVG Line Styling */
 .line-gradient {
   stroke: url(#lineGradient);
-  stroke-width: 2.5;
+  stroke-width: 4; /* Thicker lines */
   stroke-linecap: round;
   stroke-dasharray: 400;
-}
-
-/* Custom Grid Section Hover */
-.grid > div {
-  overflow: hidden;
-  border: none;
 }
