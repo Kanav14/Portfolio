@@ -22,10 +22,10 @@ function App() {
   return (
     <div className="relative w-full h-screen bg-black">
       {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-2 h-full bg-gradient-to-b from-blue-500 via-blue-700 to-blue-900 animate-line-flow left-1/3"></div>
-      <div className="absolute w-2 h-full bg-gradient-to-b from-blue-500 via-blue-700 to-blue-900 animate-line-flow left-2/3"></div>
-      <div className="absolute h-2 w-full bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 animate-line-flow top-1/3"></div>
-      <div className="absolute h-2 w-full bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 animate-line-flow top-2/3"></div>
+      <div className="absolute w-2 h-full bg-gradient-to-b from-purple-500 via-blue-500 to-cyan-500 animate-line-dash left-1/3"></div>
+      <div className="absolute w-2 h-full bg-gradient-to-b from-purple-500 via-blue-500 to-cyan-500 animate-line-dash left-2/3"></div>
+      <div className="absolute h-2 w-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 animate-line-dash top-1/3"></div>
+      <div className="absolute h-2 w-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 animate-line-dash top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
