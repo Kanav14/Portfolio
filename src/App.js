@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 function App() {
   const sections = [
@@ -21,22 +22,137 @@ function App() {
 
   return (
     <div className="relative w-full h-screen bg-black">
-      {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-2 h-full bg-gradient-to-b from-purple-500 via-blue-500 to-cyan-500 animate-line-dash left-1/3"></div>
-      <div className="absolute w-2 h-full bg-gradient-to-b from-purple-500 via-blue-500 to-cyan-500 animate-line-dash left-2/3"></div>
-      <div className="absolute h-2 w-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 animate-line-dash top-1/3"></div>
-      <div className="absolute h-2 w-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 animate-line-dash top-2/3"></div>
+      {/* SVG Glowing Lines */}
+      <motion.svg
+        className="absolute w-2 h-full left-1/3"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 10 100"
+      >
+        <motion.rect
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          fill="url(#gradient1)"
+          animate={{
+            y: [0, 50, 0], // Moves up and down
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "mirror",
+          }}
+        />
+        <defs>
+          <linearGradient id="gradient1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#00f" />
+            <stop offset="50%" stopColor="#0ff" />
+            <stop offset="100%" stopColor="#00f" />
+          </linearGradient>
+        </defs>
+      </motion.svg>
+
+      <motion.svg
+        className="absolute w-2 h-full left-2/3"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 10 100"
+      >
+        <motion.rect
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          fill="url(#gradient2)"
+          animate={{
+            y: [0, 50, 0], // Moves up and down
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "mirror",
+          }}
+        />
+        <defs>
+          <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#00f" />
+            <stop offset="50%" stopColor="#0ff" />
+            <stop offset="100%" stopColor="#00f" />
+          </linearGradient>
+        </defs>
+      </motion.svg>
+
+      <motion.svg
+        className="absolute w-full h-2 top-1/3"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 100 10"
+      >
+        <motion.rect
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          fill="url(#gradient3)"
+          animate={{
+            x: [0, 50, 0], // Moves left and right
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "mirror",
+          }}
+        />
+        <defs>
+          <linearGradient id="gradient3" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#00f" />
+            <stop offset="50%" stopColor="#0ff" />
+            <stop offset="100%" stopColor="#00f" />
+          </linearGradient>
+        </defs>
+      </motion.svg>
+
+      <motion.svg
+        className="absolute w-full h-2 top-2/3"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 100 10"
+      >
+        <motion.rect
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          fill="url(#gradient4)"
+          animate={{
+            x: [0, 50, 0], // Moves left and right
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "mirror",
+          }}
+        />
+        <defs>
+          <linearGradient id="gradient4" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#00f" />
+            <stop offset="50%" stopColor="#0ff" />
+            <stop offset="100%" stopColor="#00f" />
+          </linearGradient>
+        </defs>
+      </motion.svg>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
         {sections.map((section) => (
           <div
             key={section.id}
-            className="flex justify-center items-center text-white cursor-pointer hover:scale-100 hover:bg-white/10 transition-transform duration-300 overflow-hidden"
+            className="flex justify-center items-center text-white cursor-pointer hover:bg-white/10 transition-transform duration-300"
             onClick={() => handleClick(section)}
           >
             {section.isHighlight ? (
-              <p className="text-2xl font-bold text-white animate-typewriter whitespace-nowrap overflow-hidden border-r-2 border-white">
+              <p className="text-2xl font-bold animate-typewriter">
                 DevOps Engineer
               </p>
             ) : (
