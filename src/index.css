@@ -2,37 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* The @font-face rule is used to include a variable font */
-@font-face {
-  font-family: 'TheFont';
-  src: url("https://garet.typeforward.com/assets/fonts/shared/TFMixVF.woff2")
-    format('woff2');
+/* Line Animations */
+.animate-gradient-vertical {
+  background-size: 100% 200%;
+  animation: gradient-vertical 3s infinite linear;
 }
 
-/* Styling for the "Hello World" screen */
-.breathe-animation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: black;
-  height: 100vh;
+.animate-gradient-horizontal {
+  background-size: 200% 100%;
+  animation: gradient-horizontal 3s infinite linear;
 }
 
-.breathe-text {
-  font-family: 'TheFont';
-  font-size: clamp(10vw, 20vw, 50vh);
-  color: white;
-  text-align: center;
-  animation: letter-breathe 3s ease-in-out infinite;
-}
-
-/* Keyframes for the breathing animation */
-@keyframes letter-breathe {
-  from,
-  to {
-    font-variation-settings: 'wght' 100;
+/* New Animations */
+@keyframes hanging {
+  0%, 100% {
+    transform: translateY(0);
   }
   50% {
-    font-variation-settings: 'wght' 900;
+    transform: translateY(10px);
   }
+}
+
+.animate-hanging {
+  animation: hanging 2s ease-in-out infinite;
 }
