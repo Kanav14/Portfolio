@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "gradient-vertical": "gradient-vertical 3s linear infinite",
-        "gradient-horizontal": "gradient-horizontal 3s linear infinite",
+        "gradient-vertical": "gradient-vertical 1.5s linear infinite",
+        "gradient-horizontal": "gradient-horizontal 1.5s linear infinite",
       },
       keyframes: {
         "gradient-vertical": {
