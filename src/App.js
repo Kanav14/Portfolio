@@ -7,14 +7,32 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowHelloWorld(false);
-    }, 4000); // 4 seconds delay
+    }, 4000); // 4 seconds delay for "Hello World" screen
     return () => clearTimeout(timer);
   }, []);
+
+  const sections = [
+    { id: 1, text: "About Me" },
+    { id: 2, text: "Projects" },
+    { id: 3, text: "Experience" },
+    { id: 4, text: "Education" },
+    { id: 5, isHighlight: true }, // Highlighted section
+    { id: 6, text: "Certifications" },
+    { id: 7, text: "Skills and Knowledge Base" },
+    { id: 8, text: "Extra Curricular" },
+    { id: 9, text: "Research and Patents" },
+  ];
+
+  const handleClick = (section) => {
+    if (!section.isHighlight) {
+      alert(`You clicked on ${section.text} section`);
+    }
+  };
 
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Initial "Hello World" Screen */}
-      {showHelloWorld && (
+      {showHelloWorld ? (
         <div className="flex h-full">
           {/* Left part: Black background */}
           <div className="flex-1 bg-black flex justify-center items-center">
@@ -28,22 +46,17 @@ function App() {
             </motion.h1>
           </div>
 
-          {/* Right part: White background with the GIF centered */}
-          <div className="flex-1 bg-[#efefef] flex justify-center items-center">
-            <motion.img
-              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExczlrbzJnNmJ2OTExNmszbjY1MXhjMmpxcTNlbHQ4NnhzMHN3eTlkaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SWoSkN6DxTszqIKEqv/giphy.gif"
+          {/* Right part: White background with the fixed GIF */}
+          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
               alt="Cloud with rain"
-              className="w-3/4 h-auto max-w-full"
-              initial={{ scale: 1 }}
-              animate={{ scale: 1.1 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none" }}
             />
           </div>
         </div>
-      )}
-
-      {/* Main Content */}
-      {!showHelloWorld && (
+      ) : (
         <div className="relative w-full h-screen">
           {/* Vertical and Horizontal Glowing Lines */}
           <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
