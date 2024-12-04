@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import './src/index.css'; // Make sure to import the CSS file for the custom styles
+import './index.css'; // Make sure to import the CSS file for the custom styles
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
