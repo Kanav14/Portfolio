@@ -47,7 +47,7 @@ function App() {
           </div>
 
           {/* Right part: White background with GIF */}
-          <div className="flex-1 bg-white flex justify-center items-center">
+          <div className="flex-1 bg-white flex justify-center items-center overflow-hidden">
             <motion.img
               src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
               alt="Cloud with rain"
@@ -64,10 +64,10 @@ function App() {
       {!showHelloWorld && (
         <div className="relative w-full h-screen">
           {/* Vertical and Horizontal Glowing Lines */}
-          <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
-          <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
-          <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
-          <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
+          <div className="absolute w-1 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
+          <div className="absolute w-1 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
+          <div className="absolute h-1 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
+          <div className="absolute h-1 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
 
           {/* Grid Sections */}
           <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
