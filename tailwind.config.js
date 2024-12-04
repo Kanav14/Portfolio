@@ -6,12 +6,13 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "to-and-fro": "to-and-fro 3s ease-in-out infinite",
+        "to-and-fro": "to-and-fro 3s linear infinite",
       },
       keyframes: {
         "to-and-fro": {
-          "0%, 100%": { strokeDashoffset: 400 },
+          "0%": { strokeDashoffset: 400 },
           "50%": { strokeDashoffset: 0 },
+          "100%": { strokeDashoffset: -400 },
         },
       },
       backgroundImage: {
