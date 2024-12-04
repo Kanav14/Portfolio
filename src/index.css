@@ -6,3 +6,34 @@
 .glow-text {
   text-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 15px #00FFFF, 0 0 20px #00FFFF;
 }
+
+/* Lines Customizations */
+.vertical-line {
+  background: linear-gradient(0deg, rgba(0, 255, 255, 0.8), rgba(0, 0, 0, 0));
+  background-size: 200% 100%;
+  animation: vertical-glow 1.5s infinite linear;
+}
+
+.horizontal-line {
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.8), rgba(0, 0, 0, 0));
+  background-size: 200% 100%;
+  animation: horizontal-glow 1.5s infinite linear;
+}
+
+@keyframes vertical-glow {
+  0% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+@keyframes horizontal-glow {
+  0% {
+    background-position: 200% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
