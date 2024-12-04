@@ -6,13 +6,17 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "to-and-fro": "to-and-fro 3s linear infinite",
+        "gradient-vertical": "gradient-vertical 3s linear infinite",
+        "gradient-horizontal": "gradient-horizontal 3s linear infinite",
       },
       keyframes: {
-        "to-and-fro": {
-          "0%": { strokeDashoffset: 400 },
-          "50%": { strokeDashoffset: 0 },
-          "100%": { strokeDashoffset: -400 },
+        "gradient-vertical": {
+          "0%": { backgroundPosition: "0% 0%" },
+          "100%": { backgroundPosition: "0% 100%" },
+        },
+        "gradient-horizontal": {
+          "0%": { backgroundPosition: "0% 0%" },
+          "100%": { backgroundPosition: "100% 0%" },
         },
       },
       backgroundImage: {
