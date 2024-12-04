@@ -7,7 +7,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, isHighlight: true }, // Highlighted section for "DevOps Engineer"
+    { id: 5, isHighlight: true }, // Highlighted section
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -15,73 +15,66 @@ function App() {
   ];
 
   const handleClick = (section) => {
-    if (section.id !== 5) {
+    if (!section.isHighlight) {
       alert(`You clicked on ${section.text} section`);
     }
   };
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
-      {/* Vertical Glowing Gradient Lines */}
-      <motion.div
-        className="absolute left-1/3 top-0 h-full w-2"
-        initial={{ backgroundPosition: "0% 0%" }}
-        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          background:
-            "linear-gradient(180deg, cyan, magenta, purple, yellow, cyan)",
-          backgroundSize: "200% 200%",
-        }}
-      />
-      <motion.div
-        className="absolute left-2/3 top-0 h-full w-2"
-        initial={{ backgroundPosition: "0% 0%" }}
-        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          background:
-            "linear-gradient(180deg, cyan, magenta, purple, yellow, cyan)",
-          backgroundSize: "200% 200%",
-        }}
-      />
-
-      {/* Horizontal Glowing Gradient Lines */}
-      <motion.div
-        className="absolute top-1/3 left-0 w-full h-2"
-        initial={{ backgroundPosition: "0% 0%" }}
-        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          background:
-            "linear-gradient(90deg, cyan, magenta, purple, yellow, cyan)",
-          backgroundSize: "200% 200%",
-        }}
-      />
-      <motion.div
-        className="absolute top-2/3 left-0 w-full h-2"
-        initial={{ backgroundPosition: "0% 0%" }}
-        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          background:
-            "linear-gradient(90deg, cyan, magenta, purple, yellow, cyan)",
-          backgroundSize: "200% 200%",
-        }}
-      />
+    <div className="relative w-full h-screen bg-overall-gradient">
+      {/* Vertical and Horizontal Glowing Lines */}
+      <svg
+        className="absolute w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <line
+          x1="33%"
+          x2="33%"
+          y1="0"
+          y2="100%"
+          className="line-gradient animate-line-motion"
+        />
+        <line
+          x1="67%"
+          x2="67%"
+          y1="0"
+          y2="100%"
+          className="line-gradient animate-line-motion"
+        />
+        <line
+          x1="0"
+          x2="100%"
+          y1="33%"
+          y2="33%"
+          className="line-gradient animate-line-motion"
+        />
+        <line
+          x1="0"
+          x2="100%"
+          y1="67%"
+          y2="67%"
+          className="line-gradient animate-line-motion"
+        />
+      </svg>
 
       {/* Grid Sections */}
-      <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
+      <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
         {sections.map((section) => (
           <div
             key={section.id}
-            className="flex justify-center items-center text-white cursor-pointer hover:bg-white/10 transition-transform duration-300"
+            className={`${
+              section.isHighlight
+                ? "bg-radial-highlight"
+                : "bg-transparent"
+            } flex justify-center items-center text-white cursor-pointer hover:bg-white/10 transition-transform duration-300`}
             onClick={() => handleClick(section)}
           >
             {section.isHighlight ? (
               <div className="text-center">
                 <motion.h1
-                  className="text-5xl font-extrabold"
+                  className="text-5xl font-extrabold text-white"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, ease: "easeOut" }}
@@ -89,7 +82,7 @@ function App() {
                   Kanav Sharma
                 </motion.h1>
                 <motion.p
-                  className="text-2xl mt-2 font-medium"
+                  className="text-2xl mt-2 font-medium text-cyan-400"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
