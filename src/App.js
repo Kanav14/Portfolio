@@ -1,17 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Set a timeout to switch from preloader to main content after 4 seconds
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, []);
-
   const sections = [
     { id: 1, text: "About Me" },
     { id: 2, text: "Projects" },
@@ -30,26 +20,13 @@ function App() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex flex-col justify-center items-center w-full h-screen bg-black">
-        <h1 className="text-white text-6xl font-bold animate-fade-in">Hello World!</h1>
-        <img
-          src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjA2MTVud2JwMTF6OXQ1cnR6ajh1OWh4eHk1OHFpYWhqb2t6N3ZzbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KGhpQ5NMoWKQurlHwI/giphy.gif"
-          alt="Cloud with rain"
-          className="absolute top-10 right-10 w-24 h-24 animate-bounce"
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-1 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
-      <div className="absolute w-1 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
-      <div className="absolute h-1 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
-      <div className="absolute h-1 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
+      <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
+      <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
+      <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
+      <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
@@ -58,15 +35,15 @@ function App() {
             key={section.id}
             className={`${
               section.isHighlight
-                ? "bg-radial-highlight"
-                : "bg-transparent"
-            } flex justify-center items-center text-white cursor-pointer hover:bg-white/10 transition-transform duration-300`}
+                ? "bg-radial-highlight text-white"
+                : "bg-transparent text-black"
+            } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300`}
             onClick={() => handleClick(section)}
           >
             {section.isHighlight ? (
               <div className="text-center">
                 <motion.h1
-                  className="text-5xl font-extrabold text-white"
+                  className="text-5xl font-extrabold"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, ease: "easeOut" }}
