@@ -7,17 +7,26 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "glow-bounce": "glow-bounce 1.5s linear infinite",
+        "line-dash": "dash-flow 2s infinite linear alternate",
+        typewriter: "typing 3s steps(20, end), blink-caret 0.5s step-end infinite",
       },
       keyframes: {
-        "glow-bounce": {
-          "0%": { backgroundPosition: "200% 0%" },
-          "100%": { backgroundPosition: "0% 0%" },
+        "dash-flow": {
+          "0%": { backgroundPosition: "0 0" },
+          "100%": { backgroundPosition: "40px 0" },
+        },
+        typing: {
+          from: { width: "0" },
+          to: { width: "15ch" },
+        },
+        "blink-caret": {
+          from: { borderColor: "transparent" },
+          to: { borderColor: "white" },
         },
       },
       colors: {
         glow: {
-          DEFAULT: "#00FFFF",
+          DEFAULT: "#0044cc", // Dark glossy blue
         },
       },
     },
