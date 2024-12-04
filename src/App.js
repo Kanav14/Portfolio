@@ -24,38 +24,47 @@ function App() {
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Vertical and Horizontal Glowing Lines */}
       <svg
-        className="absolute w-full h-full"
+        className="absolute w-full h-full pointer-events-none"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
+        {/* Define the gradient */}
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#00FFFF" />
+            <stop offset="50%" stopColor="#FF00FF" />
+            <stop offset="100%" stopColor="#FFFF00" />
+          </linearGradient>
+        </defs>
+        {/* Lines */}
         <line
           x1="33%"
           x2="33%"
           y1="0"
           y2="100%"
-          className="line-gradient animate-line-motion"
+          className="line-gradient animate-to-and-fro"
         />
         <line
           x1="67%"
           x2="67%"
           y1="0"
           y2="100%"
-          className="line-gradient animate-line-motion"
+          className="line-gradient animate-to-and-fro"
         />
         <line
           x1="0"
           x2="100%"
           y1="33%"
           y2="33%"
-          className="line-gradient animate-line-motion"
+          className="line-gradient animate-to-and-fro"
         />
         <line
           x1="0"
           x2="100%"
           y1="67%"
           y2="67%"
-          className="line-gradient animate-line-motion"
+          className="line-gradient animate-to-and-fro"
         />
       </svg>
 
@@ -85,7 +94,11 @@ function App() {
                   className="text-2xl mt-2 font-medium text-cyan-400"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+                  transition={{
+                    duration: 1.5,
+                    ease: "easeOut",
+                    delay: 0.3,
+                  }}
                 >
                   DevOps Engineer
                 </motion.p>
