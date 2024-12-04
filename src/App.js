@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
-  const [showPreloader, setShowPreloader] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  // Automatically hide the preloader after 4 seconds
   useEffect(() => {
+    // Set a timeout to switch from preloader to main content after 4 seconds
     const timer = setTimeout(() => {
-      setShowPreloader(false);
+      setLoading(false);
     }, 4000);
-
-    return () => clearTimeout(timer); // Cleanup the timer on unmount
+    return () => clearTimeout(timer);
   }, []);
 
   const sections = [
@@ -17,7 +16,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, text: "Kanav Sharma\nDevOps Engineer" }, // Text section
+    { id: 5, text: "Kanav Sharma", subtitle: "DevOps Engineer" }, // Section with name and title
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -25,37 +24,48 @@ function App() {
   ];
 
   const handleClick = (section) => {
-    alert(`You clicked on ${section.text} section`);
+    if (section.id !== 5) {
+      alert(`You clicked on ${section.text} section`);
+    }
   };
 
-  return showPreloader ? (
-    <div className="w-full h-screen bg-black flex flex-col justify-center items-center">
-      <h1 className="text-white text-6xl font-bold mb-10 animate-fade-in">
-        Hello World!!
-      </h1>
-      <img
-        src="https://media.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif"
-        alt="Cloud with Rain"
-        className="w-32 h-32 absolute top-10 right-10"
-      />
-    </div>
-  ) : (
-    <div className="relative w-full h-screen bg-gradient-to-t from-gray-900 to-black overflow-hidden">
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center w-full h-screen bg-black">
+        <h1 className="text-white text-6xl font-bold animate-fade-in">Hello World!</h1>
+        <img
+          src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif"
+          alt="Cloud with rain"
+          className="absolute top-10 right-10 w-24 h-24 animate-bounce"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-full h-screen bg-black">
       {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-1 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
-      <div className="absolute w-1 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
-      <div className="absolute h-1 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
-      <div className="absolute h-1 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
+      <div className="absolute w-2 h-full bg-glow-vertical animate-glow-vertical left-1/3"></div>
+      <div className="absolute w-2 h-full bg-glow-vertical animate-glow-vertical left-2/3"></div>
+      <div className="absolute h-2 w-full bg-glow-horizontal animate-glow-horizontal top-1/3"></div>
+      <div className="absolute h-2 w-full bg-glow-horizontal animate-glow-horizontal top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
         {sections.map((section) => (
           <div
             key={section.id}
-            className="flex justify-center items-center text-white cursor-pointer hover:scale-100 hover:bg-white/10 transition-transform duration-300 overflow-hidden"
+            className="flex justify-center items-center text-white cursor-pointer hover:scale-105 hover:bg-white/10 transition-transform duration-300 overflow-hidden"
             onClick={() => handleClick(section)}
           >
-            <p className="whitespace-pre-line text-center">{section.text}</p>
+            {section.id === 5 ? (
+              <div className="text-center">
+                <h2 className="text-white text-4xl font-bold">{section.text}</h2>
+                <p className="text-white text-lg">{section.subtitle}</p>
+              </div>
+            ) : (
+              <p>{section.text}</p>
+            )}
           </div>
         ))}
       </div>
