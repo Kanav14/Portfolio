@@ -49,7 +49,7 @@ function App() {
           {/* Right part: White background with GIF */}
           <div className="flex-1 bg-white flex justify-center items-center">
             <motion.img
-              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExczlrbzJnNmJ2OTExNmszbjY1MXhjMmpxcTNlbHQ4NnhzMHN3eTlkaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SWoSkN6DxTszqIKEqv/giphy.gif"
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
               alt="Cloud with rain"
               className="w-full h-full object-cover"
               initial={{ scale: 1 }}
