@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import './App.css'; // Make sure to import the CSS file for the custom styles
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -33,28 +34,8 @@ function App() {
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Initial "Hello World" Screen */}
       {showHelloWorld ? (
-        <div className="flex h-full">
-          {/* Left part: Black background */}
-          <div className="flex-1 bg-black flex justify-center items-center">
-            <motion.h1
-              className="text-white text-8xl font-extrabold animate-breathe"
-              initial={{ y: 0 }}
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
-            >
-              Hello World!
-            </motion.h1>
-          </div>
-
-          {/* Right part: White background with the fixed GIF */}
-          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
-            <img
-              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-              alt="Cloud with rain"
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
-              style={{ pointerEvents: "none" }}
-            />
-          </div>
+        <div className="breathe-animation">
+          <span className="breathe-text">Hello World!</span>
         </div>
       ) : (
         <div className="relative w-full h-screen">
