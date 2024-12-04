@@ -23,53 +23,10 @@ function App() {
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Vertical and Horizontal Glowing Lines */}
-      <svg
-        className="absolute w-full h-full pointer-events-none"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        {/* Gradient Definition */}
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#00FFFF" />
-            <stop offset="50%" stopColor="#FF00FF" />
-            <stop offset="100%" stopColor="#FFFF00" />
-          </linearGradient>
-        </defs>
-
-        {/* Vertical Lines */}
-        <line
-          x1="33%"
-          x2="33%"
-          y1="0"
-          y2="100%"
-          className="line-gradient animate-to-and-fro"
-        />
-        <line
-          x1="67%"
-          x2="67%"
-          y1="0"
-          y2="100%"
-          className="line-gradient animate-to-and-fro"
-        />
-
-        {/* Horizontal Lines */}
-        <line
-          x1="0"
-          x2="100%"
-          y1="33%"
-          y2="33%"
-          className="line-gradient animate-to-and-fro"
-        />
-        <line
-          x1="0"
-          x2="100%"
-          y1="67%"
-          y2="67%"
-          className="line-gradient animate-to-and-fro"
-        />
-      </svg>
+      <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
+      <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
+      <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
+      <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
@@ -87,7 +44,7 @@ function App() {
               <div className="text-center">
                 <motion.h1
                   className="text-5xl font-extrabold text-white"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, ease: "easeOut" }}
                 >
