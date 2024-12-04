@@ -13,16 +13,16 @@
   animation: gradient-horizontal 3s infinite linear;
 }
 
-/* Preloader animation */
-@keyframes fade-in {
-  from {
+/* New Animations */
+@keyframes fade-in-out {
+  0%, 100% {
     opacity: 0;
   }
-  to {
+  50% {
     opacity: 1;
   }
 }
 
-#preloader h1 {
-  animation: fade-in 2s ease-in;
+.animate-fade-in-out {
+  animation: fade-in-out 2s ease-in-out infinite;
 }
