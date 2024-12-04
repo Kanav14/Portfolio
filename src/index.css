@@ -6,19 +6,26 @@
 .bg-gradient-to-r,
 .bg-gradient-to-b {
   background-size: 200% 100%;
-  filter: brightness(1.2);
+  filter: brightness(1.3);
 }
 
-.animate-line-flow {
-  animation: line-flow 2s linear infinite;
+/* Animation for Dashed Lines */
+.animate-line-dash {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 1) 50%
+  );
+  background-size: 20px 20px; /* Adjust segment size */
+  animation: dash-flow 2s infinite linear alternate;
 }
 
-@keyframes line-flow {
+@keyframes dash-flow {
   0% {
-    background-position: 200% 0%;
+    background-position: 0 0;
   }
   100% {
-    background-position: 0% 0%;
+    background-position: 40px 0;
   }
 }
 
