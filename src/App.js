@@ -34,8 +34,20 @@ function App() {
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Initial "Hello World" Screen */}
       {showHelloWorld ? (
-        <div className="breathe-animation">
-          <span className="breathe-text">Hello World!</span>
+        <div className="flex w-full h-full">
+          {/* Left side - Black background */}
+          <div className="flex-1 bg-black flex justify-center items-center">
+            <span className="breathe-text">Hello World!</span>
+          </div>
+
+          {/* Right side - White background with GIF */}
+          <div className="flex-1 bg-[#efefef] flex justify-center items-center">
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+              alt="Rain GIF"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </div>
       ) : (
         <div className="relative w-full h-screen">
