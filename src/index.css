@@ -13,16 +13,16 @@
   animation: gradient-horizontal 3s infinite linear;
 }
 
-/* New Animations */
-@keyframes hanging {
+/* Breathing Animation */
+@keyframes breathe {
   0%, 100% {
-    transform: translateY(0);
+    transform: scale(1);
   }
   50% {
-    transform: translateY(10px);
+    transform: scale(1.05);
   }
 }
 
-.animate-hanging {
-  animation: hanging 2s ease-in-out infinite;
+.animate-breathe {
+  animation: breathe 3s infinite ease-in-out;
 }
