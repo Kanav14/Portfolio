@@ -27,24 +27,22 @@ function App() {
         className="absolute left-1/3 top-0 h-full w-2"
         initial={{ backgroundPosition: "0% 0%" }}
         animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         style={{
           background:
             "linear-gradient(180deg, cyan, magenta, purple, yellow, cyan)",
           backgroundSize: "200% 200%",
-          filter: "blur(2px)",
         }}
       />
       <motion.div
         className="absolute left-2/3 top-0 h-full w-2"
         initial={{ backgroundPosition: "0% 0%" }}
         animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         style={{
           background:
             "linear-gradient(180deg, cyan, magenta, purple, yellow, cyan)",
           backgroundSize: "200% 200%",
-          filter: "blur(2px)",
         }}
       />
 
@@ -53,24 +51,22 @@ function App() {
         className="absolute top-1/3 left-0 w-full h-2"
         initial={{ backgroundPosition: "0% 0%" }}
         animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         style={{
           background:
             "linear-gradient(90deg, cyan, magenta, purple, yellow, cyan)",
           backgroundSize: "200% 200%",
-          filter: "blur(2px)",
         }}
       />
       <motion.div
         className="absolute top-2/3 left-0 w-full h-2"
         initial={{ backgroundPosition: "0% 0%" }}
         animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         style={{
           background:
             "linear-gradient(90deg, cyan, magenta, purple, yellow, cyan)",
           backgroundSize: "200% 200%",
-          filter: "blur(2px)",
         }}
       />
 
@@ -83,9 +79,24 @@ function App() {
             onClick={() => handleClick(section)}
           >
             {section.isHighlight ? (
-              <p className="text-3xl font-bold animate-typewriter">
-                DevOps Engineer
-              </p>
+              <div className="text-center">
+                <motion.h1
+                  className="text-5xl font-extrabold"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                >
+                  Kanav Sharma
+                </motion.h1>
+                <motion.p
+                  className="text-2xl mt-2 font-medium"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+                >
+                  DevOps Engineer
+                </motion.p>
+              </div>
             ) : (
               <p>{section.text}</p>
             )}
