@@ -2,52 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Gradient Glow for Lines */
-.bg-gradient-to-r,
-.bg-gradient-to-b {
-  background-size: 200% 100%;
-  filter: brightness(1.3);
+/* SVG Line Gradient */
+.line-gradient {
+  stroke: url(#lineGradient);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 0;
 }
 
-/* Animation for Dashed Lines */
-.animate-line-dash {
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 50%,
-    rgba(255, 255, 255, 1) 50%
-  );
-  background-size: 20px 20px; /* Adjust segment size */
-  animation: dash-flow 2s infinite linear alternate;
+/* Gradient Definition */
+svg {
+  display: block;
+}
+svg defs {
+  display: none;
 }
 
-@keyframes dash-flow {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 40px 0;
-  }
-}
-
-/* Typewriter Animation */
-.animate-typewriter {
-  animation: typing 3s steps(20, end), blink-caret 0.5s step-end infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 15ch; /* Adjust length to match text length */
-  }
-}
-
-@keyframes blink-caret {
-  from {
-    border-color: transparent;
-  }
-  to {
-    border-color: white;
-  }
+svg {
+  stroke: none;
+  fill: none;
 }
