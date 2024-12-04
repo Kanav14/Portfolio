@@ -6,17 +6,12 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "line-motion": "line-motion 5s linear infinite",
+        "to-and-fro": "to-and-fro 3s ease-in-out infinite",
       },
       keyframes: {
-        "line-motion": {
-          "0%": { strokeDashoffset: 200 },
-          "100%": { strokeDashoffset: 0 },
-        },
-      },
-      colors: {
-        glow: {
-          DEFAULT: "#00FFFF", // Cyan
+        "to-and-fro": {
+          "0%, 100%": { strokeDashoffset: 400 },
+          "50%": { strokeDashoffset: 0 },
         },
       },
       backgroundImage: {
