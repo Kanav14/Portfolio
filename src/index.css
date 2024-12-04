@@ -2,24 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* SVG Line Gradient */
+/* SVG Line Styling */
 .line-gradient {
   stroke: url(#lineGradient);
-  stroke-width: 2;
+  stroke-width: 2.5;
   stroke-linecap: round;
-  stroke-dasharray: 200;
-  stroke-dashoffset: 0;
+  stroke-dasharray: 400;
 }
 
-/* Gradient Definition */
-svg {
-  display: block;
-}
-svg defs {
-  display: none;
-}
-
-svg {
-  stroke: none;
-  fill: none;
+/* Custom Grid Section Hover */
+.grid > div {
+  overflow: hidden;
+  border: none;
 }
