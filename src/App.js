@@ -29,7 +29,7 @@ function App() {
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
-        {/* Define the gradient */}
+        {/* Gradient Definition */}
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#00FFFF" />
@@ -37,7 +37,8 @@ function App() {
             <stop offset="100%" stopColor="#FFFF00" />
           </linearGradient>
         </defs>
-        {/* Lines */}
+
+        {/* Vertical Lines */}
         <line
           x1="33%"
           x2="33%"
@@ -52,6 +53,8 @@ function App() {
           y2="100%"
           className="line-gradient animate-to-and-fro"
         />
+
+        {/* Horizontal Lines */}
         <line
           x1="0"
           x2="100%"
