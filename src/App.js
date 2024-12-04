@@ -22,125 +22,105 @@ function App() {
 
   return (
     <div className="relative w-full h-screen bg-black">
-      {/* SVG Glowing Lines */}
+      {/* SVG Animated Glowing Lines */}
+      {/* Vertical Lines */}
       <motion.svg
-        className="absolute w-2 h-full left-1/3"
+        className="absolute w-3 left-1/3 h-full"
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
         viewBox="0 0 10 100"
       >
         <motion.rect
-          x="0"
-          y="0"
           width="100%"
           height="100%"
-          fill="url(#gradient1)"
+          fill="url(#verticalGradient)"
           animate={{
-            y: [0, 50, 0], // Moves up and down
+            y: [0, -50, 0], // Moves line back and forth
+            x: [0, 5, 0], // Slight wobble
           }}
           transition={{
             duration: 2,
             repeat: Infinity,
-            repeatType: "mirror",
+            ease: "easeInOut",
           }}
         />
         <defs>
-          <linearGradient id="gradient1" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="verticalGradient" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#00f" />
-            <stop offset="50%" stopColor="#0ff" />
+            <stop offset="25%" stopColor="#0f0" />
+            <stop offset="50%" stopColor="#f00" />
+            <stop offset="75%" stopColor="#ff0" />
             <stop offset="100%" stopColor="#00f" />
           </linearGradient>
         </defs>
       </motion.svg>
-
       <motion.svg
-        className="absolute w-2 h-full left-2/3"
+        className="absolute w-3 left-2/3 h-full"
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
         viewBox="0 0 10 100"
       >
         <motion.rect
-          x="0"
-          y="0"
           width="100%"
           height="100%"
-          fill="url(#gradient2)"
+          fill="url(#verticalGradient)"
           animate={{
-            y: [0, 50, 0], // Moves up and down
+            y: [0, -50, 0], // Moves line back and forth
+            x: [0, -5, 0], // Slight wobble
           }}
           transition={{
             duration: 2,
             repeat: Infinity,
-            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+        />
+      </motion.svg>
+
+      {/* Horizontal Lines */}
+      <motion.svg
+        className="absolute h-3 top-1/3 w-full"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 10"
+      >
+        <motion.rect
+          width="100%"
+          height="100%"
+          fill="url(#horizontalGradient)"
+          animate={{
+            x: [0, -50, 0], // Moves line back and forth
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
         />
         <defs>
-          <linearGradient id="gradient2" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="horizontalGradient" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#00f" />
-            <stop offset="50%" stopColor="#0ff" />
+            <stop offset="25%" stopColor="#0f0" />
+            <stop offset="50%" stopColor="#f00" />
+            <stop offset="75%" stopColor="#ff0" />
             <stop offset="100%" stopColor="#00f" />
           </linearGradient>
         </defs>
       </motion.svg>
-
       <motion.svg
-        className="absolute w-full h-2 top-1/3"
+        className="absolute h-3 top-2/3 w-full"
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
         viewBox="0 0 100 10"
       >
         <motion.rect
-          x="0"
-          y="0"
           width="100%"
           height="100%"
-          fill="url(#gradient3)"
+          fill="url(#horizontalGradient)"
           animate={{
-            x: [0, 50, 0], // Moves left and right
+            x: [0, 50, 0], // Moves line back and forth
           }}
           transition={{
             duration: 2,
             repeat: Infinity,
-            repeatType: "mirror",
+            ease: "easeInOut",
           }}
         />
-        <defs>
-          <linearGradient id="gradient3" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#00f" />
-            <stop offset="50%" stopColor="#0ff" />
-            <stop offset="100%" stopColor="#00f" />
-          </linearGradient>
-        </defs>
-      </motion.svg>
-
-      <motion.svg
-        className="absolute w-full h-2 top-2/3"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 100 10"
-      >
-        <motion.rect
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          fill="url(#gradient4)"
-          animate={{
-            x: [0, 50, 0], // Moves left and right
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "mirror",
-          }}
-        />
-        <defs>
-          <linearGradient id="gradient4" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#00f" />
-            <stop offset="50%" stopColor="#0ff" />
-            <stop offset="100%" stopColor="#00f" />
-          </linearGradient>
-        </defs>
       </motion.svg>
 
       {/* Grid Sections */}
