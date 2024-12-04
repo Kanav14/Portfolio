@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import './index.css'; // Make sure to import the CSS file for the custom styles
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -34,18 +33,26 @@ function App() {
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Initial "Hello World" Screen */}
       {showHelloWorld ? (
-        <div className="flex w-full h-full">
-          {/* Left side - Black background */}
+        <div className="flex h-full">
+          {/* Left part: Black background */}
           <div className="flex-1 bg-black flex justify-center items-center">
-            <span className="breathe-text">Hello World!</span>
+            <motion.h1
+              className="text-white text-8xl font-extrabold animate-hanging"
+              initial={{ y: 0 }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+            >
+              Hello World!
+            </motion.h1>
           </div>
 
-          {/* Right side - White background with GIF */}
-          <div className="flex-1 bg-[#efefef] flex justify-center items-center">
+          {/* Right part: White background with the fixed GIF */}
+          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
             <img
               src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-              alt="Rain GIF"
-              className="h-full w-full object-cover"
+              alt="Cloud with rain"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none" }}
             />
           </div>
         </div>
