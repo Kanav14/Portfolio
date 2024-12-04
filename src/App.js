@@ -33,24 +33,30 @@ function App() {
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Initial "Hello World" Screen */}
       {showHelloWorld && (
-        <div className="absolute inset-0 flex flex-col justify-center items-center bg-black">
-          <motion.h1
-            className="text-white text-6xl font-bold mb-4 animate-fade-in-out"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
-          >
-            Hello World!
-          </motion.h1>
-          <motion.img
-            src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExczlrbzJnNmJ2OTExNmszbjY1MXhjMmpxcTNlbHQ4NnhzMHN3eTlkaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SWoSkN6DxTszqIKEqv/giphy.gif"
-            alt="Cloud with rain"
-            className="w-32 h-32 animate-bounce"
-            initial={{ y: 0 }}
-            animate={{ y: [0, 20, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          />
+        <div className="flex h-full">
+          {/* Left part: Black background */}
+          <div className="flex-1 bg-black flex justify-center items-center">
+            <motion.h1
+              className="text-white text-8xl font-extrabold animate-hanging"
+              initial={{ y: 0 }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+            >
+              Hello World!
+            </motion.h1>
+          </div>
+
+          {/* Right part: White background with GIF */}
+          <div className="flex-1 bg-white flex justify-center items-center">
+            <motion.img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExczlrbzJnNmJ2OTExNmszbjY1MXhjMmpxcTNlbHQ4NnhzMHN3eTlkaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SWoSkN6DxTszqIKEqv/giphy.gif"
+              alt="Cloud with rain"
+              className="w-full h-full object-cover"
+              initial={{ scale: 1 }}
+              animate={{ scale: 1.1 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
         </div>
       )}
 
