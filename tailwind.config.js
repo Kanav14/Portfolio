@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "gradient-vertical": "gradient-vertical 1.5s linear infinite",
-        "gradient-horizontal": "gradient-horizontal 1.5s linear infinite",
+        "gradient-vertical": "gradient-vertical 3s linear infinite",
+        "gradient-horizontal": "gradient-horizontal 3s linear infinite",
         "fade-in": "fade-in 2s ease-in",
         "bounce": "bounce 1s infinite",
       },
@@ -27,9 +27,9 @@ module.exports = {
       },
       backgroundImage: {
         "overall-gradient":
-          "linear-gradient(135deg, #0F2027, #203A43, #2C5364)",
+          "linear-gradient(135deg, #ffffff, #e6e6e6, #f0f0f0)", // White gradient
         "radial-highlight":
-          "radial-gradient(circle, #1A1A40, #292E49)",
+          "radial-gradient(circle, #1A1A40, #292E49)", // Highlighted section gradient
       },
     },
   },
