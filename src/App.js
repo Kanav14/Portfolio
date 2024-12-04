@@ -35,7 +35,7 @@ function App() {
       <div className="flex flex-col justify-center items-center w-full h-screen bg-black">
         <h1 className="text-white text-6xl font-bold animate-fade-in">Hello World!</h1>
         <img
-          src="https://media.giphy.com/media/3o7ablnjH9XoVrwWdo/giphy.gif"
+          src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjA2MTVud2JwMTF6OXQ1cnR6ajh1OWh4eHk1OHFpYWhqb2t6N3ZzbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KGhpQ5NMoWKQurlHwI/giphy.gif"
           alt="Cloud with rain"
           className="absolute top-10 right-10 w-24 h-24 animate-bounce"
         />
@@ -46,10 +46,10 @@ function App() {
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Vertical and Horizontal Glowing Lines */}
-      <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
-      <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
-      <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
-      <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
+      <div className="absolute w-1 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
+      <div className="absolute w-1 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
+      <div className="absolute h-1 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
+      <div className="absolute h-1 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
 
       {/* Grid Sections */}
       <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
