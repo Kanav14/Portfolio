@@ -1,24 +1,29 @@
-// tailwind.config.js
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html",
+  ],
   theme: {
     extend: {
       animation: {
-        "glow-flow": "glow-animation 2s infinite",
+        "line-motion": "line-motion 5s linear infinite",
       },
       keyframes: {
-        "glow-animation": {
-          "0%": { backgroundPosition: "200% 0%" },
-          "100%": { backgroundPosition: "0% 0%" },
+        "line-motion": {
+          "0%": { strokeDashoffset: 200 },
+          "100%": { strokeDashoffset: 0 },
         },
       },
       colors: {
         glow: {
-          DEFAULT: "#00FFFF", // Cyan glow color
+          DEFAULT: "#00FFFF", // Cyan
         },
       },
-      fontFamily: {
-        sans: ["Poppins", "sans-serif"],
+      backgroundImage: {
+        "overall-gradient":
+          "linear-gradient(135deg, #0F2027, #203A43, #2C5364)",
+        "radial-highlight":
+          "radial-gradient(circle, #1A1A40, #292E49)",
       },
     },
   },
