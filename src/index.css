@@ -2,86 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS for Preloader */
-#preloader {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #000;
-  width: 100%;
-  height: 100vh;
+/* Line Animations */
+.animate-gradient-vertical {
+  background-size: 100% 200%;
+  animation: gradient-vertical 3s infinite linear;
+}
+
+.animate-gradient-horizontal {
+  background-size: 200% 100%;
+  animation: gradient-horizontal 3s infinite linear;
 }
 
 /* Preloader animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #preloader h1 {
-  font-family: 'Roboto', sans-serif;
-  color: #ffffff;
-  font-size: 4rem;
-  font-weight: bold;
-  animation: fade-in 2s ease-out;
-}
-
-#preloader img {
-  width: 80px;
-  height: 80px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  animation: bounce 2s infinite;
-}
-
-/* Gradient animations for lines */
-@keyframes gradient-vertical {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes gradient-horizontal {
-  0% {
-    background-position: 50% 0%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 50% 0%;
-  }
-}
-
-/* Line gradient styles */
-.bg-glow-vertical {
-  background: linear-gradient(90deg, #1e3a8a, #3b82f6, #9333ea, #ec4899);
-  background-size: 200% 100%;
-  animation: gradient-vertical 2s linear infinite;
-  filter: brightness(0.8);
-}
-
-.bg-glow-horizontal {
-  background: linear-gradient(90deg, #6ee7b7, #3b82f6, #9333ea, #facc15);
-  background-size: 200% 100%;
-  animation: gradient-horizontal 2s linear infinite;
-  filter: brightness(0.8);
-}
-
-/* Text and other grid sections */
-.grid > div {
-  border: none;
-  overflow: hidden;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.grid > div:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  animation: fade-in 2s ease-in;
 }
