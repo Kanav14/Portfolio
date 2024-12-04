@@ -21,110 +21,61 @@ function App() {
   };
 
   return (
-    <div className="relative w-full h-screen bg-black">
-      {/* SVG Animated Glowing Lines */}
-      {/* Vertical Lines */}
-      <motion.svg
-        className="absolute w-3 left-1/3 h-full"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 10 100"
-      >
-        <motion.rect
-          width="100%"
-          height="100%"
-          fill="url(#verticalGradient)"
-          animate={{
-            y: [0, -50, 0], // Moves line back and forth
-            x: [0, 5, 0], // Slight wobble
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <defs>
-          <linearGradient id="verticalGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#00f" />
-            <stop offset="25%" stopColor="#0f0" />
-            <stop offset="50%" stopColor="#f00" />
-            <stop offset="75%" stopColor="#ff0" />
-            <stop offset="100%" stopColor="#00f" />
-          </linearGradient>
-        </defs>
-      </motion.svg>
-      <motion.svg
-        className="absolute w-3 left-2/3 h-full"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 10 100"
-      >
-        <motion.rect
-          width="100%"
-          height="100%"
-          fill="url(#verticalGradient)"
-          animate={{
-            y: [0, -50, 0], // Moves line back and forth
-            x: [0, -5, 0], // Slight wobble
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </motion.svg>
+    <div className="relative w-full h-screen bg-black overflow-hidden">
+      {/* Vertical Glowing Gradient Lines */}
+      <motion.div
+        className="absolute left-1/3 top-0 h-full w-2"
+        initial={{ backgroundPosition: "0% 0%" }}
+        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          background:
+            "linear-gradient(180deg, cyan, magenta, purple, yellow, cyan)",
+          backgroundSize: "200% 200%",
+          filter: "blur(2px)",
+        }}
+      />
+      <motion.div
+        className="absolute left-2/3 top-0 h-full w-2"
+        initial={{ backgroundPosition: "0% 0%" }}
+        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          background:
+            "linear-gradient(180deg, cyan, magenta, purple, yellow, cyan)",
+          backgroundSize: "200% 200%",
+          filter: "blur(2px)",
+        }}
+      />
 
-      {/* Horizontal Lines */}
-      <motion.svg
-        className="absolute h-3 top-1/3 w-full"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 100 10"
-      >
-        <motion.rect
-          width="100%"
-          height="100%"
-          fill="url(#horizontalGradient)"
-          animate={{
-            x: [0, -50, 0], // Moves line back and forth
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <defs>
-          <linearGradient id="horizontalGradient" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#00f" />
-            <stop offset="25%" stopColor="#0f0" />
-            <stop offset="50%" stopColor="#f00" />
-            <stop offset="75%" stopColor="#ff0" />
-            <stop offset="100%" stopColor="#00f" />
-          </linearGradient>
-        </defs>
-      </motion.svg>
-      <motion.svg
-        className="absolute h-3 top-2/3 w-full"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 100 10"
-      >
-        <motion.rect
-          width="100%"
-          height="100%"
-          fill="url(#horizontalGradient)"
-          animate={{
-            x: [0, 50, 0], // Moves line back and forth
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </motion.svg>
+      {/* Horizontal Glowing Gradient Lines */}
+      <motion.div
+        className="absolute top-1/3 left-0 w-full h-2"
+        initial={{ backgroundPosition: "0% 0%" }}
+        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          background:
+            "linear-gradient(90deg, cyan, magenta, purple, yellow, cyan)",
+          backgroundSize: "200% 200%",
+          filter: "blur(2px)",
+        }}
+      />
+      <motion.div
+        className="absolute top-2/3 left-0 w-full h-2"
+        initial={{ backgroundPosition: "0% 0%" }}
+        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          background:
+            "linear-gradient(90deg, cyan, magenta, purple, yellow, cyan)",
+          backgroundSize: "200% 200%",
+          filter: "blur(2px)",
+        }}
+      />
 
       {/* Grid Sections */}
-      <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
+      <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
         {sections.map((section) => (
           <div
             key={section.id}
@@ -132,7 +83,7 @@ function App() {
             onClick={() => handleClick(section)}
           >
             {section.isHighlight ? (
-              <p className="text-2xl font-bold animate-typewriter">
+              <p className="text-3xl font-bold animate-typewriter">
                 DevOps Engineer
               </p>
             ) : (
