@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* SVG Line Styling */
-.line-gradient {
-  stroke: url(#lineGradient);
-  stroke-width: 4; /* Thicker lines */
-  stroke-linecap: round;
-  stroke-dasharray: 400;
+/* Line Animations */
+.animate-gradient-vertical {
+  background-size: 100% 200%;
+  animation: gradient-vertical 3s infinite linear;
+}
+
+.animate-gradient-horizontal {
+  background-size: 200% 100%;
+  animation: gradient-horizontal 3s infinite linear;
 }
