@@ -71,7 +71,7 @@ function App() {
                 key={section.id}
                 className={`${
                   section.isHighlight
-                    ? "bg-radial-highlight text-white"
+                    ? "bg-gradient-to-r from-black via-gray-800 to-black text-white"
                     : "bg-transparent text-black"
                 } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300 relative`}
                 onClick={() => handleClick(section)}
