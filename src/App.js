@@ -12,15 +12,15 @@ function App() {
   }, []);
 
   const sections = [
-    { id: 1, text: "About Me" },
-    { id: 2, text: "Projects" },
-    { id: 3, text: "Experience" },
-    { id: 4, text: "Education" },
-    { id: 5, isHighlight: true }, // Highlighted section
-    { id: 6, text: "Certifications" },
-    { id: 7, text: "Skills and Knowledge Base" },
-    { id: 8, text: "Extra Curricular" },
-    { id: 9, text: "Research and Patents" },
+    { id: 1, text: "About Me", delay: 0.1 },
+    { id: 2, text: "Projects", delay: 0.2 },
+    { id: 3, text: "Experience", delay: 0.3 },
+    { id: 4, text: "Education", delay: 0.4 },
+    { id: 5, isHighlight: true, delay: 0.5 }, // Highlighted section
+    { id: 6, text: "Certifications", delay: 0.6 },
+    { id: 7, text: "Skills and Knowledge Base", delay: 0.7 },
+    { id: 8, text: "Extra Curricular", delay: 0.8 },
+    { id: 9, text: "Research and Patents", delay: 0.9 },
   ];
 
   const handleClick = (section) => {
@@ -73,7 +73,8 @@ function App() {
                   section.isHighlight
                     ? "bg-black text-white"
                     : "bg-transparent text-black"
-                } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300 relative`}
+                } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300 relative animate-fade-in-up`}
+                style={{ animationDelay: `${section.delay}s` }}
                 onClick={() => handleClick(section)}
               >
                 {section.isHighlight ? (
