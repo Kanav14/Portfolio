@@ -16,7 +16,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, isHighlight: true, isSpecial: true }, // Highlighted and special section
+    { id: 5, isHighlight: true }, // Highlighted section
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -24,7 +24,7 @@ function App() {
   ];
 
   const handleClick = (section) => {
-    if (!section.isHighlight && !section.isSpecial) {
+    if (!section.isHighlight) {
       alert(`You clicked on ${section.text} section`);
     }
   };
@@ -72,40 +72,35 @@ function App() {
                 className={`${
                   section.isHighlight
                     ? "bg-radial-highlight text-white"
-                    : section.isSpecial
-                    ? "relative group bg-transparent text-black"
                     : "bg-transparent text-black"
-                } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300`}
+                } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300 relative`}
                 onClick={() => handleClick(section)}
               >
-                {section.isSpecial ? (
-                  <div className="relative flex justify-center items-center">
-                    {/* Gradient behind section 5 */}
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 opacity-75 blur transition duration-300 group-hover:opacity-100"></div>
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 opacity-75 blur transition duration-300 group-hover:opacity-100 animation-delay-200"></div>
-
-                    <motion.div className="text-center">
-                      <motion.h1
-                        className="text-5xl font-extrabold"
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                      >
-                        Kanav Sharma
-                      </motion.h1>
-                      <motion.p
-                        className="text-2xl mt-2 font-medium text-cyan-400"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 1.5,
-                          ease: "easeOut",
-                          delay: 0.3,
-                        }}
-                      >
-                        DevOps Engineer
-                      </motion.p>
-                    </motion.div>
+                {section.id === 5 ? (
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-75 blur transition duration-300"></div>
+                ) : null}
+                {section.isHighlight ? (
+                  <div className="text-center">
+                    <motion.h1
+                      className="text-5xl font-extrabold"
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                    >
+                      Kanav Sharma
+                    </motion.h1>
+                    <motion.p
+                      className="text-2xl mt-2 font-medium text-cyan-400"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 1.5,
+                        ease: "easeOut",
+                        delay: 0.3,
+                      }}
+                    >
+                      DevOps Engineer
+                    </motion.p>
                   </div>
                 ) : (
                   <p>{section.text}</p>
