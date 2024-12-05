@@ -76,11 +76,13 @@ function App() {
                 } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300 relative`}
                 onClick={() => handleClick(section)}
               >
+                {/* Add a shadow-like effect for the highlighted section */}
                 {section.id === 5 ? (
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-75 blur transition duration-300"></div>
+                  <div className="absolute inset-0 border-4 border-transparent rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 opacity-50 shadow-lg shadow-cyan-500/50"></div>
                 ) : null}
+
                 {section.isHighlight ? (
-                  <div className="text-center">
+                  <div className="text-center relative">
                     <motion.h1
                       className="text-5xl font-extrabold"
                       initial={{ opacity: 0, y: -20 }}
