@@ -46,22 +46,21 @@ function App() {
             </motion.h1>
           </div>
 
-          {/* Right part: White background with rotating loader */}
+          {/* Right part: White background with the fixed GIF */}
           <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
-            <div className="loader-container">
-              <div className="loader">
-                {[...Array(12)].map((_, index) => (
-                  <div key={index} className="circle"></div>
-                ))}
-              </div>
-            </div>
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+              alt="Cloud with rain"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none" }}
+            />
           </div>
         </div>
       ) : (
         <div className="relative w-full h-screen overflow-hidden">
           {/* Neon GIF in the background */}
           <img
-            src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif" // Replace with your actual GitHub URL
+            src="https://github.com/Kanav14/Portfolio/blob/main/vecteezy_neon-frame-motion-infinite-seamless-background_49097691-ezgif.com-resize.gif?raw=true" // Replace with your actual GitHub URL
             alt="Background Neon Light"
             className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
           />
