@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowHelloWorld(false);
-    }, 4000); // 4 seconds delay for "Hello World" screen
+    }, 2000); // 4 seconds delay for "Hello World" screen
     return () => clearTimeout(timer);
   }, []);
 
