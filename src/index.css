@@ -13,10 +13,9 @@
   animation: gradient-horizontal 3s infinite linear;
 }
 
-/* Hanging Animation */
+/* New Animations */
 @keyframes hanging {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0);
   }
   50% {
@@ -28,7 +27,76 @@
   animation: hanging 2s ease-in-out infinite;
 }
 
-/* Neon Shadow for Section 5 */
+/* Loading Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* General Styles */
+.bg-overall-gradient {
+  background: linear-gradient(to right, #2e2e2e, #1a1a1a);
+}
+
+.bg-radial-highlight {
+  background: radial-gradient(circle, #ff00ff 20%, #000000 80%);
+}
+
 .shadow-highlight {
-  box-shadow: 0 0 20px cyan, 0 0 40px cyan, 0 0 80px cyan;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hover\:shadow-lg:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.transition-transform {
+  transition: transform 0.3s ease-in-out;
+}
+
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Border Lights */
+.border-cyan-400 {
+  border-color: #36cfc1;
+}
+
+/* Other Utility Classes */
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-black {
+  color: black;
+}
+
+.text-cyan-400 {
+  color: #36cfc1;
+}
+
+.bg-black {
+  background-color: #000000;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+/* Custom Shadows */
+.shadow-lg {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
