@@ -57,27 +57,28 @@ function App() {
           </div>
         </div>
       ) : (
-        <div className="relative w-full h-screen">
-          {/* Vertical and Horizontal Glowing Lines */}
-          <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
-          <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
-          <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
-          <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
+        <div className="relative w-full h-screen overflow-hidden">
+          {/* Neon GIF in the background */}
+          <img
+            src="https://github.com/Kanav14/Portfolio/blob/main/vecteezy_neon-frame-motion-infinite-seamless-background_49097691-ezgif.com-resize.gif?raw=true" // Replace with your actual GitHub URL
+            alt="Background Neon Light"
+            className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
+          />
 
           {/* Grid Sections */}
-          <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
+          <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
             {sections.map((section) => (
               <div
                 key={section.id}
-                className={`${
+                className={`relative m-2 ${
                   section.isHighlight
-                    ? "bg-black text-white shadow-highlight"
-                    : "bg-transparent text-black"
-                } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300 relative`}
+                    ? "bg-black text-white shadow-highlight border border-cyan-400"
+                    : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
+                } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
                 onClick={() => handleClick(section)}
               >
                 {section.isHighlight ? (
-                  <div className="text-center relative">
+                  <div className="text-center">
                     <motion.h1
                       className="text-5xl font-extrabold"
                       initial={{ opacity: 0, y: -20 }}
