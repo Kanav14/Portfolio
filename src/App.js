@@ -46,13 +46,12 @@ function App() {
             </motion.h1>
           </div>
 
-          {/* Right part: White background with Loader */}
+          {/* Right part: White background with rotating loader */}
           <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
-            {/* Loader */}
             <div className="loader-container">
               <div className="loader">
-                {[...Array(12)].map((_, i) => (
-                  <div key={i} className="circle"></div>
+                {[...Array(12)].map((_, index) => (
+                  <div key={index} className="circle"></div>
                 ))}
               </div>
             </div>
