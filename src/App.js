@@ -60,7 +60,7 @@ function App() {
         <div className="relative w-full h-screen overflow-hidden">
           {/* Neon GIF in the background */}
           <img
-            src="https://github.com/Kanav14/Portfolio/blob/main/vecteezy_neon-frame-motion-infinite-seamless-background_49097691-ezgif.com-resize.gif?raw=true" // Replace with your actual GitHub URL
+            src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif" // Replace with your actual GitHub URL
             alt="Background Neon Light"
             className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
           />
