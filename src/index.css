@@ -1,9 +1,9 @@
-/* Loader Styles */
+/* Rotating Loader Styles */
 .loader-container {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   height: 100%;
 }
 
@@ -18,13 +18,13 @@
   width: 100%;
   height: 100%;
   border: 4px solid transparent;
-  border-top: 4px solid #3498db; /* Blue color for spinning effect */
+  border-top: 4px solid #3498db; /* Blue spinner */
   border-radius: 50%;
   animation: rotate 1s linear infinite;
 }
 
 .circle:nth-child(2) {
-  border: 4px solid #e74c3c; /* Red color */
+  border-top: 4px solid #e74c3c; /* Red spinner */
   animation-delay: -0.5s;
 }
 
