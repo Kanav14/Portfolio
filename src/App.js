@@ -3,31 +3,15 @@ import { motion } from "framer-motion";
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowHelloWorld(false);
-    }, 2000); // 4 seconds delay for "Hello World" screen
+      setLoading(false);
+    }, 4000); // 4 seconds delay for "Hello World" screen
     return () => clearTimeout(timer);
   }, []);
-
-  const sections = [
-    { id: 1, text: "About Me" },
-    { id: 2, text: "Projects" },
-    { id: 3, text: "Experience" },
-    { id: 4, text: "Education" },
-    { id: 5, isHighlight: true }, // Highlighted section
-    { id: 6, text: "Certifications" },
-    { id: 7, text: "Skills and Knowledge Base" },
-    { id: 8, text: "Extra Curricular" },
-    { id: 9, text: "Research and Patents" },
-  ];
-
-  const handleClick = (section) => {
-    if (!section.isHighlight) {
-      alert(`You clicked on ${section.text} section`);
-    }
-  };
 
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
@@ -36,6 +20,11 @@ function App() {
         <div className="flex h-full">
           {/* Left part: Black background */}
           <div className="flex-1 bg-black flex justify-center items-center">
+            {loading && (
+              <div className="flex items-center justify-center">
+                <div className="w-16 h-16 border-4 border-t-transparent border-white border-solid rounded-full animate-spin"></div>
+              </div>
+            )}
             <motion.h1
               className="text-white text-8xl font-extrabold animate-hanging"
               initial={{ y: 0 }}
@@ -60,7 +49,7 @@ function App() {
         <div className="relative w-full h-screen overflow-hidden">
           {/* Neon GIF in the background */}
           <img
-            src="https://github.com/Kanav14/Portfolio/blob/main/vecteezy_neon-frame-motion-infinite-seamless-background_49097691-ezgif.com-resize.gif?raw=true" // Replace with your actual GitHub URL
+            src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif" // Replace with your actual GitHub URL
             alt="Background Neon Light"
             className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
           />
