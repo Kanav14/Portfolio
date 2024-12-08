@@ -1,42 +1,112 @@
-import React from "react";
-import "./index.css";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 function App() {
-  return (
-    <div className="bg-gray-100 text-gray-900 min-h-screen">
-      {/* Hello World Section */}
-      <section className="flex h-screen">
-        {/* Left Half */}
-        <div className="flex-1 bg-black text-white flex items-center justify-center">
-          <h1 className="text-6xl font-bold">Hello World</h1>
-        </div>
-        {/* Right Half */}
-        <div className="flex-1 bg-efefef flex items-center justify-center">
-          <img
-            src="your-animation.gif"
-            alt="Animation"
-            className="w-3/4 max-w-md rounded-lg shadow-lg"
-          />
-        </div>
-      </section>
+  const [showHelloWorld, setShowHelloWorld] = useState(true);
 
-      {/* Portfolio Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto grid grid-cols-3 gap-6">
-          <div className="portfolio-card">About Me</div>
-          <div className="portfolio-card">Projects</div>
-          <div className="portfolio-card">Experience</div>
-          <div className="portfolio-card">Education</div>
-          <div className="portfolio-card bg-black text-white flex flex-col items-center justify-center">
-            <h2 className="text-4xl font-bold">Kanav Sharma</h2>
-            <p className="text-lg text-cyan-400">DevOps Engineer</p>
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowHelloWorld(false);
+    }, 4000); // 4 seconds delay for "Hello World" screen
+    return () => clearTimeout(timer);
+  }, []);
+
+  const sections = [
+    { id: 1, text: "About Me" },
+    { id: 2, text: "Projects" },
+    { id: 3, text: "Experience" },
+    { id: 4, text: "Education" },
+    { id: 5, isHighlight: true }, // Highlighted section
+    { id: 6, text: "Certifications" },
+    { id: 7, text: "Skills and Knowledge Base" },
+    { id: 8, text: "Extra Curricular" },
+    { id: 9, text: "Research and Patents" },
+  ];
+
+  const handleClick = (section) => {
+    if (!section.isHighlight) {
+      alert(`You clicked on ${section.text} section`);
+    }
+  };
+
+  return (
+    <div className="relative w-full h-screen bg-overall-gradient">
+      {/* Initial "Hello World" Screen */}
+      {showHelloWorld ? (
+        <div className="flex h-full">
+          {/* Left part: Black background */}
+          <div className="flex-1 bg-black flex justify-center items-center">
+            <motion.h1
+              className="text-white text-8xl font-extrabold animate-hanging"
+              initial={{ y: 0 }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+            >
+              Hello World!
+            </motion.h1>
           </div>
-          <div className="portfolio-card">Certifications</div>
-          <div className="portfolio-card">Skills and Knowledge Base</div>
-          <div className="portfolio-card">Extra Curricular</div>
-          <div className="portfolio-card">Research and Patents</div>
+
+          {/* Right part: White background with the fixed GIF */}
+          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+              alt="Cloud with rain"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none" }}
+            />
+          </div>
         </div>
-      </section>
+      ) : (
+        <div className="relative w-full h-screen">
+          {/* Vertical and Horizontal Glowing Lines */}
+          <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-1/3"></div>
+          <div className="absolute w-0.5 h-full bg-gradient-to-b from-blue-500 via-green-400 to-purple-500 animate-gradient-vertical left-2/3"></div>
+          <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-1/3"></div>
+          <div className="absolute h-0.5 w-full bg-gradient-to-r from-yellow-400 via-red-500 to-purple-500 animate-gradient-horizontal top-2/3"></div>
+
+          {/* Grid Sections */}
+          <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
+            {sections.map((section) => (
+              <div
+                key={section.id}
+                className={`${
+                  section.isHighlight
+                    ? "bg-black text-white shadow-highlight"
+                    : "bg-transparent text-black"
+                } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300 relative`}
+                onClick={() => handleClick(section)}
+              >
+                {section.isHighlight ? (
+                  <div className="text-center relative">
+                    <motion.h1
+                      className="text-5xl font-extrabold"
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                    >
+                      Kanav Sharma
+                    </motion.h1>
+                    <motion.p
+                      className="text-2xl mt-2 font-medium text-cyan-400"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 1.5,
+                        ease: "easeOut",
+                        delay: 0.3,
+                      }}
+                    >
+                      DevOps Engineer
+                    </motion.p>
+                  </div>
+                ) : (
+                  <p>{section.text}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
