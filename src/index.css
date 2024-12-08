@@ -1,39 +1,51 @@
-/* Restore Hello World Section Styling */
-.hello-world-left {
-  background-color: #000;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Line Animations */
+.animate-gradient-vertical {
+  background-size: 100% 200%;
+  animation: gradient-vertical 3s infinite linear;
 }
 
-.hello-world-right {
-  background-color: #efefef;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.animate-gradient-horizontal {
+  background-size: 200% 100%;
+  animation: gradient-horizontal 3s infinite linear;
 }
 
-/* Portfolio Section */
-.portfolio-card {
-  background: white;
-  color: black;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.portfolio-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-  background: #f3f4f6; /* Subtle gray hover effect */
-}
-
-/* Responsive Grid */
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+@keyframes gradient-vertical {
+  0% {
+    background-position: 0% 0%;
   }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes gradient-horizontal {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+/* New Animations */
+@keyframes hanging {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.animate-hanging {
+  animation: hanging 2s ease-in-out infinite;
+}
+
+/* Highlight Section Shadow */
+.shadow-highlight {
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.8), 0 0 50px rgba(0, 100, 255, 0.6);
 }
