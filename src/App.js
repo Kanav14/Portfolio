@@ -46,14 +46,23 @@ function App() {
             </motion.h1>
           </div>
 
-          {/* Right part: White background with the loader */}
+          {/* Right part: White background with the fixed GIF and centered loader */}
           <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
-            <main className="flex justify-center items-center">
+            {/* Cloud GIF */}
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+              alt="Cloud with rain"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none", zIndex: 1 }}
+            />
+
+            {/* Centered Loader */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
               <svg className="ip w-64 h-32" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stopColor="#5ebd3e" />
-                    <stop offset="33%" stopColor="#ffb900" />
+                    <stop offset="33%" stopColor="#ffb900" />>
                     <stop offset="67%" stopColor="#f78200" />
                     <stop offset="100%" stopColor="#e23838" />
                   </linearGradient>
@@ -75,14 +84,15 @@ function App() {
                   </g>
                 </g>
               </svg>
-            </main>
+            </div>
           </div>
         </div>
       ) : (
+        // Rest of the code remains the same
         <div className="relative w-full h-screen overflow-hidden">
           {/* Existing code for main page */}
           <img
-            src="https://github.com/Kanav14/Portfolio/blob/main/vecteezy_neon-frame-motion-infinite-seamless-background_49097691-ezgif.com-resize.gif?raw=true"
+            src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif"
             alt="Background Neon Light"
             className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
           />
