@@ -27,14 +27,14 @@
   animation: hanging 2s ease-in-out infinite;
 }
 
-/* Loading Animation */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Loading Bar Animation */
+@keyframes loading-bar {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 
-.animate-spin {
-  animation: spin 1s linear infinite;
+.animate-loading-bar {
+  animation: loading-bar 2s linear infinite;
 }
 
 /* General Styles */
