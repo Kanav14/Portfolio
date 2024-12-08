@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowHelloWorld(false);
-    }, 2000); // 2 seconds delay for "Hello World" screen
+    }, 4000); // 4 seconds delay for "Hello World" screen
     return () => clearTimeout(timer);
   }, []);
 
@@ -33,11 +33,11 @@ function App() {
     <div className="relative w-full h-screen bg-overall-gradient">
       {/* Initial "Hello World" Screen */}
       {showHelloWorld ? (
-        <div className="flex h-full flex-col justify-center items-center">
+        <div className="flex h-full">
           {/* Left part: Black background */}
           <div className="flex-1 bg-black flex justify-center items-center">
             <motion.h1
-              className="text-white text-8xl font-extrabold"
+              className="text-white text-8xl font-extrabold animate-hanging"
               initial={{ y: 0 }}
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
@@ -46,28 +46,35 @@ function App() {
             </motion.h1>
           </div>
 
-          {/* Loading bar at the bottom */}
-          <div className="w-full flex justify-center items-center mt-4">
-            <div className="relative w-3/4 h-4 bg-white border border-black rounded-lg overflow-hidden">
-              <div className="absolute top-0 left-0 h-full bg-black animate-loading-bar"></div>
-            </div>
-            <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-semibold">
-              Portfolio Loading
-            </p>
+          {/* Right part: White background with the fixed GIF */}
+          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+              alt="Cloud with rain"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none" }}
+            />
           </div>
         </div>
       ) : (
-        <div className="relative w-full h-screen">
-          {/* Existing section content */}
-          <div className="grid grid-cols-3 grid-rows-3 w-full h-full overflow-hidden">
+        <div className="relative w-full h-screen overflow-hidden">
+          {/* Neon GIF in the background */}
+          <img
+            src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif" // Replace with your actual GitHub URL
+            alt="Background Neon Light"
+            className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
+          />
+
+          {/* Grid Sections */}
+          <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
             {sections.map((section) => (
               <div
                 key={section.id}
-                className={`${
+                className={`relative m-2 ${
                   section.isHighlight
-                    ? "bg-radial-highlight text-white"
-                    : "bg-transparent text-black"
-                } flex justify-center items-center cursor-pointer hover:bg-white/10 transition-transform duration-300`}
+                    ? "bg-black text-white shadow-highlight border border-cyan-400"
+                    : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
+                } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
                 onClick={() => handleClick(section)}
               >
                 {section.isHighlight ? (
