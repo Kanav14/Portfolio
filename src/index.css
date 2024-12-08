@@ -1,34 +1,38 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Line Animations */
-.animate-gradient-vertical {
-  background-size: 100% 200%;
-  animation: gradient-vertical 3s infinite linear;
+/* Loader Styles */
+.loader-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.animate-gradient-horizontal {
-  background-size: 200% 100%;
-  animation: gradient-horizontal 3s infinite linear;
+.loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
 }
 
-/* Hanging Animation */
-@keyframes hanging {
-  0%,
+.circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 4px solid transparent;
+  border-top: 4px solid #3498db; /* Blue color for spinning effect */
+  border-radius: 50%;
+  animation: rotate 1s linear infinite;
+}
+
+.circle:nth-child(2) {
+  border: 4px solid #e74c3c; /* Red color */
+  animation-delay: -0.5s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
   100% {
-    transform: translateY(0);
+    transform: rotate(360deg);
   }
-  50% {
-    transform: translateY(10px);
-  }
-}
-
-.animate-hanging {
-  animation: hanging 2s ease-in-out infinite;
-}
-
-/* Neon Shadow for Section 5 */
-.shadow-highlight {
-  box-shadow: 0 0 20px cyan, 0 0 40px cyan, 0 0 80px cyan;
 }
