@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowHelloWorld(false);
-    }, 4000); // 4 seconds delay for "Hello World" screen
+    }, 2000); // 2 seconds delay for "Hello World" screen
     return () => clearTimeout(timer);
   }, []);
 
@@ -37,7 +37,7 @@ function App() {
           {/* Left part: Black background */}
           <div className="flex-1 bg-black flex justify-center items-center">
             <motion.h1
-              className="text-white text-8xl font-extrabold animate-hanging"
+              className="text-white text-8xl font-extrabold"
               initial={{ y: 0 }}
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
