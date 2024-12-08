@@ -1,44 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Line Animations */
-.animate-gradient-vertical {
-  background-size: 100% 200%;
-  animation: gradient-vertical 3s infinite linear;
-}
-
-.animate-gradient-horizontal {
-  background-size: 200% 100%;
-  animation: gradient-horizontal 3s infinite linear;
-}
-
-/* New Animations */
-@keyframes hanging {
+/* Pulse Animation for "Hello World" */
+@keyframes pulse {
   0%, 100% {
-    transform: translateY(0);
+    transform: scale(1);
+    opacity: 1;
   }
   50% {
-    transform: translateY(10px);
+    transform: scale(1.1);
+    opacity: 0.8;
   }
 }
 
-.animate-hanging {
-  animation: hanging 2s ease-in-out infinite;
+.animate-pulse {
+  animation: pulse 2s infinite ease-in-out;
 }
 
-/* Fade-in Up Animation for Grid Sections */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Smooth Grid Hover Effect */
+.section-card {
+  background: white;
+  color: black;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 10px;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 1s ease-out forwards;
+.section-card:hover {
+  transform: translateY(-10px);
+  color: white;
+}
+
+.section-card-main {
+  grid-column: span 2;
+  background: black;
+  color: white;
+  padding: 3rem;
+  text-align: center;
+  border-radius: 10px;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
