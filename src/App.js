@@ -45,7 +45,15 @@ function App() {
             </motion.h1>
           </div>
           {/* Right part: White background */}
-          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative"></div>
+          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
+            {/* Cloud GIF */}
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+              alt="Cloud with rain"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none", zIndex: 1 }}
+            />
+          </div>
 
           {/* Shared Infinity Symbol */}
           <div className="absolute w-full top-1/2 transform -translate-y-1/2 flex justify-center z-10">
