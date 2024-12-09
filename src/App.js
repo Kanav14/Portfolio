@@ -56,7 +56,7 @@ function App() {
           </div>
 
           {/* Shared Infinity Symbol */}
-          <div className="absolute w-full top-1/2 transform -translate-y-1/2 flex justify-center z-10">
+          <div className="absolute w-full top-[55%] transform -translate-y-1/2 flex justify-center z-10">
             <svg
               viewBox="0 0 256 128"
               width="256px"
