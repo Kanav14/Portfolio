@@ -34,7 +34,7 @@ function App() {
       {showHelloWorld ? (
         <div className="flex h-full">
           {/* Left part: Black background with polka dots */}
-          <div className="flex-1 bg-black flex justify-center items-center relative black-background">
+          <div className="flex-1 bg-black polka-dots-pattern flex justify-center items-center relative">
             <motion.h1
               className="text-white text-8xl font-extrabold animate-hanging"
               initial={{ y: 0 }}
