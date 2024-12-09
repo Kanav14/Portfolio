@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import "./App.css"; // Ensure to import your custom CSS file
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -101,7 +100,6 @@ function App() {
           </div>
         </div>
       ) : (
-        // Rest of the code remains the same
         <div className="relative w-full h-screen overflow-hidden">
           {/* Existing code for main page */}
           <img
