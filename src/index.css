@@ -95,3 +95,10 @@
     stroke: hsl(var(--hue),90%,15%);
   }
 }
+
+/* Polka Dots for the Black Side */
+.polka-dots-pattern {
+  background-image: radial-gradient(circle, #add8e6 10%, transparent 10%);
+  background-size: 20px 20px; /* Adjust size of the polka dots */
+  background-repeat: repeat; /* Ensures the pattern repeats */
+}
