@@ -109,8 +109,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(circle, rgba(0, 204, 255, 0.5) 2px, transparent 2px); /* Adjusted color to neon blue */
-  background-size: 12px 12px; /* Reduced size of dots */
+  background-image: radial-gradient(circle, rgba(0, 204, 255, 0.8) 3px, transparent 10px); /* Brighter and adjusted opacity */
+  background-size: 30px 30px; /* Increased gaps between dots */
   background-repeat: repeat;
   pointer-events: none; /* Ensures it doesn't interfere with clicking */
 }
