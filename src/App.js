@@ -1,4 +1,3 @@
-// App.js
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -32,7 +31,6 @@ function App() {
 
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
-      {/* Initial "Hello World" Screen */}
       {showHelloWorld ? (
         <div className="flex h-full">
           {/* Left part: Black background */}
@@ -55,51 +53,6 @@ function App() {
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
               style={{ pointerEvents: "none", zIndex: 1 }}
             />
-            {/* Add the single centered infinity symbol */}
-            <div className="absolute bottom-0 left-0 w-full flex justify-center">
-              <svg
-                className="w-1/2 h-16"
-                viewBox="0 0 256 128"
-                width="256px"
-                height="128px"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#5ebd3e" />
-                    <stop offset="33%" stopColor="#ffb900" />
-                    <stop offset="67%" stopColor="#f78200" />
-                    <stop offset="100%" stopColor="#e23838" />
-                  </linearGradient>
-                  <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
-                    <stop offset="0%" stopColor="#e23838" />
-                    <stop offset="33%" stopColor="#973999" />
-                    <stop offset="67%" stopColor="#009cdf" />
-                    <stop offset="100%" stopColor="#5ebd3e" />
-                  </linearGradient>
-                </defs>
-                <g fill="none" strokeLinecap="round" strokeWidth="16">
-                  <g className="ip__track" stroke="#ddd">
-                    <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
-                    <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
-                  </g>
-                  <g strokeDasharray="180 656">
-                    <path
-                      className="ip__worm1"
-                      stroke="url(#grad1)"
-                      strokeDashoffset="0"
-                      d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"
-                    />
-                    <path
-                      className="ip__worm2"
-                      stroke="url(#grad2)"
-                      strokeDashoffset="358"
-                      d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"
-                    />
-                  </g>
-                </g>
-              </svg>
-            </div>
           </div>
         </div>
       ) : (
@@ -150,6 +103,51 @@ function App() {
                 )}
               </div>
             ))}
+          </div>
+          {/* Add the single centered infinity symbol */}
+          <div className="absolute bottom-0 left-0 w-full flex justify-center">
+            <svg
+              className="w-full h-16 bg-gradient-to-r from-black to-[#efefef]"
+              viewBox="0 0 256 128"
+              width="256px"
+              height="128px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#5ebd3e" />
+                  <stop offset="33%" stopColor="#ffb900" />
+                  <stop offset="67%" stopColor="#f78200" />
+                  <stop offset="100%" stopColor="#e23838" />
+                </linearGradient>
+                <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                  <stop offset="0%" stopColor="#e23838" />
+                  <stop offset="33%" stopColor="#973999" />
+                  <stop offset="67%" stopColor="#009cdf" />
+                  <stop offset="100%" stopColor="#5ebd3e" />
+                </linearGradient>
+              </defs>
+              <g fill="none" strokeLinecap="round" strokeWidth="16">
+                <g className="ip__track" stroke="#ddd">
+                  <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                  <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+                </g>
+                <g strokeDasharray="180 656">
+                  <path
+                    className="ip__worm1"
+                    stroke="url(#grad1)"
+                    strokeDashoffset="0"
+                    d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"
+                  />
+                  <path
+                    className="ip__worm2"
+                    stroke="url(#grad2)"
+                    strokeDashoffset="358"
+                    d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"
+                  />
+                </g>
+              </g>
+            </svg>
           </div>
         </div>
       )}
