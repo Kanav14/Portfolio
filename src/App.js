@@ -1,3 +1,4 @@
+// App.js
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -16,7 +17,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, isHighlight: true }, // Highlighted section
+    { id: 5, isHighlight: true },
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -45,8 +46,7 @@ function App() {
               Hello World!
             </motion.h1>
           </div>
-
-          {/* Right part: White background with the fixed GIF and bottom loader */}
+          {/* Right part: White background with the fixed GIF */}
           <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
             {/* Cloud GIF */}
             <img
@@ -55,65 +55,50 @@ function App() {
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
               style={{ pointerEvents: "none", zIndex: 1 }}
             />
-
-            {/* Loader positioned at the bottom, spanning both sides */}
-            <div className="absolute bottom-0 left-0 w-full h-16 flex">
-              <div className="w-1/2 bg-black flex justify-center items-center">
-                <svg className="ip w-64 h-32" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#5ebd3e" />
-                      <stop offset="33%" stopColor="#ffb900" />
-                      <stop offset="67%" stopColor="#f78200" />
-                      <stop offset="100%" stopColor="#e23838" />
-                    </linearGradient>
-                    <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
-                      <stop offset="0%" stopColor="#e23838" />
-                      <stop offset="33%" stopColor="#973999" />
-                      <stop offset="67%" stopColor="#009cdf" />
-                      <stop offset="100%" stopColor="#5ebd3e" />
-                    </linearGradient>
-                  </defs>
-                  <g fill="none" strokeLinecap="round" strokeWidth="16">
-                    <g className="ip__track" stroke="#ddd">
-                      <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
-                      <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
-                    </g>
-                    <g strokeDasharray="180 656">
-                      <path className="ip__worm1" stroke="url(#grad1)" strokeDashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
-                      <path className="ip__worm2" stroke="url(#grad2)" strokeDashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
-                    </g>
+            {/* Add the single centered infinity symbol */}
+            <div className="absolute bottom-0 left-0 w-full flex justify-center">
+              <svg
+                className="w-1/2 h-16"
+                viewBox="0 0 256 128"
+                width="256px"
+                height="128px"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#5ebd3e" />
+                    <stop offset="33%" stopColor="#ffb900" />
+                    <stop offset="67%" stopColor="#f78200" />
+                    <stop offset="100%" stopColor="#e23838" />
+                  </linearGradient>
+                  <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                    <stop offset="0%" stopColor="#e23838" />
+                    <stop offset="33%" stopColor="#973999" />
+                    <stop offset="67%" stopColor="#009cdf" />
+                    <stop offset="100%" stopColor="#5ebd3e" />
+                  </linearGradient>
+                </defs>
+                <g fill="none" strokeLinecap="round" strokeWidth="16">
+                  <g className="ip__track" stroke="#ddd">
+                    <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
+                    <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
                   </g>
-                </svg>
-              </div>
-              <div className="w-1/2 bg-[#efefef] flex justify-center items-center">
-                <svg className="ip w-64 h-32" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#5ebd3e" />
-                      <stop offset="33%" stopColor="#ffb900" />
-                      <stop offset="67%" stopColor="#f78200" />
-                      <stop offset="100%" stopColor="#e23838" />
-                    </linearGradient>
-                    <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
-                      <stop offset="0%" stopColor="#e23838" />
-                      <stop offset="33%" stopColor="#973999" />
-                      <stop offset="67%" stopColor="#009cdf" />
-                      <stop offset="100%" stopColor="#5ebd3e" />
-                    </linearGradient>
-                  </defs>
-                  <g fill="none" strokeLinecap="round" strokeWidth="16">
-                    <g className="ip__track" stroke="#ddd">
-                      <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
-                      <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
-                    </g>
-                    <g strokeDasharray="180 656">
-                      <path className="ip__worm1" stroke="url(#grad1)" strokeDashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
-                      <path className="ip__worm2" stroke="url(#grad2)" strokeDashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
-                    </g>
+                  <g strokeDasharray="180 656">
+                    <path
+                      className="ip__worm1"
+                      stroke="url(#grad1)"
+                      strokeDashoffset="0"
+                      d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"
+                    />
+                    <path
+                      className="ip__worm2"
+                      stroke="url(#grad2)"
+                      strokeDashoffset="358"
+                      d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"
+                    />
                   </g>
-                </svg>
-              </div>
+                </g>
+              </svg>
             </div>
           </div>
         </div>
@@ -126,7 +111,6 @@ function App() {
             alt="Background Neon Light"
             className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
           />
-
           <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
             {sections.map((section) => (
               <div
