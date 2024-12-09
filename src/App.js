@@ -61,8 +61,8 @@ function App() {
                   <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
                     <stop offset="0%" stopColor="#e23838" />
                     <stop offset="33%" stopColor="#973999" />
-                    <stop offset="67%" stopColor="rgba(0, 156, 223, 0.4)" /> {/* Reduced opacity */}
-                    <stop offset="100%" stopColor="rgba(94, 189, 62, 0.4)" /> {/* Reduced opacity */}
+                    <stop offset="67%" stopColor="#009cdf" />
+                    <stop offset="100%" stopColor="#5ebd3e" />
                   </linearGradient>
                 </defs>
                 <g fill="none" strokeLinecap="round" strokeWidth="16">
