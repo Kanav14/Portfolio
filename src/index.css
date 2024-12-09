@@ -96,9 +96,9 @@
   }
 }
 
-/* Polka Dots for the Black Side */
+/* Polka Dots for the Black Side with reduced opacity and smaller size */
 .polka-dots-pattern {
-  background-image: radial-gradient(circle, #add8e6 10%, transparent 10%);
-  background-size: 20px 20px; /* Adjust size of the polka dots */
+  background-image: radial-gradient(circle, rgba(173, 216, 230, 0.5) 6px, transparent 6px);
+  background-size: 12px 12px; /* Adjusted size to 40% smaller than the original */
   background-repeat: repeat; /* Ensures the pattern repeats */
 }
