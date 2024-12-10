@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -29,12 +31,61 @@ function App() {
     }
   };
 
+  const particlesInit = async (main) => {
+    await loadFull(main);
+  };
+
+  const particlesOptions = {
+    fpsLimit: 60,
+    particles: {
+      number: {
+        value: 30,
+        density: { enable: true, value_area: 800 },
+      },
+      color: {
+        value: "#00FFFF", // Cyan color
+      },
+      shape: {
+        type: "circle",
+      },
+      opacity: {
+        value: 0.6,
+        random: false,
+      },
+      size: {
+        value: 4,
+        random: true,
+      },
+      move: {
+        enable: true,
+        speed: 2,
+        direction: "none",
+        random: false,
+        straight: false,
+        outMode: "out",
+        bounce: false,
+      },
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "repulse" },
+        onClick: { enable: true, mode: "push" },
+        resize: true,
+      },
+      modes: {
+        repulse: { distance: 50, duration: 0.4 },
+        push: { quantity: 4 },
+      },
+    },
+    detectRetina: true,
+  };
+
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
       {showHelloWorld ? (
         <div className="flex h-full">
-          {/* Left part: Black background with polka dots */}
-          <div className="flex-1 bg-black polka-dots-pattern flex justify-center items-center relative">
+          {/* Left part: Black background */}
+          <div className="flex-1 bg-black flex justify-center items-center relative">
             <motion.h1
               className="text-white text-8xl font-extrabold animate-hanging"
               initial={{ y: 0 }}
@@ -87,6 +138,13 @@ function App() {
                 </g>
               </svg>
             </div>
+            {/* Particle effect */}
+            <Particles
+              id="tsparticles"
+              init={particlesInit}
+              options={particlesOptions}
+              className="absolute top-0 left-0 w-full h-full pointer-events-none"
+            />
           </div>
           {/* Right part: White background with the fixed GIF */}
           <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
@@ -100,8 +158,8 @@ function App() {
           </div>
         </div>
       ) : (
+        // Main content with grid layout
         <div className="relative w-full h-screen overflow-hidden">
-          {/* Existing code for main page */}
           <img
             src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif"
             alt="Background Neon Light"
