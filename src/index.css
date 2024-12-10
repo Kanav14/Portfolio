@@ -1,50 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Existing animations */
-.animate-gradient-vertical {
-  background-size: 100% 200%;
-  animation: gradient-vertical 3s infinite linear;
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
 }
 
-.animate-gradient-horizontal {
-  background-size: 200% 100%;
-  animation: gradient-horizontal 3s infinite linear;
+/* Background Gradient */
+.bg-overall-gradient {
+  background: linear-gradient(to right, #0f172a, #1e293b, #1e3a8a);
 }
 
-/* Hanging Animation */
+/* Black Background with Polka Dots */
+.black-background {
+  background-color: black;
+  position: relative;
+}
+
+/* Centered Neon Light */
+.neon-light {
+  background: linear-gradient(to right, #ff00ff, #00ffff);
+  padding: 20px;
+  border-radius: 50px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.7);
+}
+
+/* Animation for the "Hello World!" Text */
+.animate-hanging {
+  animation: hanging 2s infinite ease-in-out;
+}
+
 @keyframes hanging {
-  0%,
-  100% {
+  0% {
     transform: translateY(0);
   }
   50% {
     transform: translateY(10px);
   }
-}
-
-.animate-hanging {
-  animation: hanging 2s ease-in-out infinite;
-}
-
-/* Neon Shadow for Section 5 */
-.shadow-highlight {
-  box-shadow: 0 0 20px cyan, 0 0 40px cyan, 0 0 80px cyan;
-}
-
-/* Dark theme support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: hsl(223, 90%, 5%);
-    --fg: hsl(223, 90%, 95%);
-  }
-  .ip__track {
-    stroke: hsl(223, 90%, 15%);
+  100% {
+    transform: translateY(0);
   }
 }
 
-/* Add custom styles for the animation of infinity sign */
+/* Infinity Animation */
 @keyframes infinity-move {
   0% {
     transform: translateY(0);
@@ -60,3 +59,40 @@
 .animate-infinity {
   animation: infinity-move 2s infinite ease-in-out;
 }
+
+/* Grid and Sections */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px;
+}
+
+/* Highlight Section */
+.shadow-highlight {
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  border: 2px solid #00bfff;
+}
+
+/* Section Styling */
+.relative {
+  position: relative;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.hover\:shadow-lg:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.transition-transform {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Tailwind CSS Customization */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
