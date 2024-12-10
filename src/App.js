@@ -70,7 +70,7 @@ function App() {
                     <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
                     <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
                   </g>
-                  <g strokeDasharray="180 656">
+                  <g strokeDasharray="180 656" className="animate-infinity">
                     <path
                       className="ip__worm1"
                       stroke="url(#grad1)"
@@ -100,7 +100,9 @@ function App() {
           </div>
         </div>
       ) : (
+        // Rest of the code remains the same
         <div className="relative w-full h-screen overflow-hidden">
+          {/* Existing code for main page */}
           <img
             src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif"
             alt="Background Neon Light"
