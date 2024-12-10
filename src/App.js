@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -31,49 +29,12 @@ function App() {
     }
   };
 
-  const particlesInit = async (engine) => {
-    await loadFull(engine);
-  };
-
   return (
-    <div className="relative w-full h-screen bg-overall-gradient">
+    <div className="relative w-full h-screen bg-black">
       {showHelloWorld ? (
         <div className="flex h-full">
-          {/* Left part: Black background with particles */}
+          {/* Left part: Black background */}
           <div className="flex-1 bg-black flex justify-center items-center relative">
-            <Particles
-              id="tsparticles"
-              init={particlesInit}
-              options={{
-                fpsLimit: 60,
-                particles: {
-                  color: {
-                    value: "#00bfff", // Light blue color for minimalistic effect
-                  },
-                  links: {
-                    enable: false, // No particle links
-                  },
-                  move: {
-                    enable: false, // Particles are stationary
-                  },
-                  size: {
-                    value: 2, // Smaller size for particles
-                    random: true, // Randomize sizes
-                  },
-                  opacity: {
-                    value: 0.2, // Reduced opacity for subtlety
-                  },
-                  number: {
-                    value: 50, // Reduced number of particles
-                    density: {
-                      enable: true,
-                      value_area: 800,
-                    },
-                  },
-                },
-                detectRetina: true,
-              }}
-            />
             <motion.h1
               className="text-white text-8xl font-extrabold animate-hanging"
               initial={{ y: 0 }}
@@ -140,7 +101,6 @@ function App() {
         </div>
       ) : (
         <div className="relative w-full h-screen overflow-hidden">
-          {/* Existing code for main page */}
           <img
             src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif"
             alt="Background Neon Light"
