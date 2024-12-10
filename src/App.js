@@ -30,11 +30,11 @@ function App() {
   };
 
   return (
-    <div className="relative w-full h-screen bg-black">
+    <div className="relative w-full h-screen bg-overall-gradient">
       {showHelloWorld ? (
         <div className="flex h-full">
-          {/* Left part: Black background */}
-          <div className="flex-1 bg-black flex justify-center items-center relative">
+          {/* Left part: Black background with polka dots */}
+          <div className="flex-1 bg-black flex justify-center items-center relative black-background">
             <motion.h1
               className="text-white text-8xl font-extrabold animate-hanging"
               initial={{ y: 0 }}
@@ -44,7 +44,7 @@ function App() {
               Hello World!
             </motion.h1>
             {/* Add the centered infinity symbol */}
-            <div className="absolute w-full bottom-[20%] flex justify-center z-10">
+            <div className="absolute w-full bottom-[20%] flex justify-center z-10 animate-infinity">
               <svg
                 viewBox="0 0 256 128"
                 width="256px"
@@ -70,7 +70,7 @@ function App() {
                     <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
                     <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
                   </g>
-                  <g strokeDasharray="180 656" className="animate-infinity">
+                  <g strokeDasharray="180 656">
                     <path
                       className="ip__worm1"
                       stroke="url(#grad1)"
@@ -100,7 +100,6 @@ function App() {
           </div>
         </div>
       ) : (
-        // Rest of the code remains the same
         <div className="relative w-full h-screen overflow-hidden">
           {/* Existing code for main page */}
           <img
