@@ -19,7 +19,10 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm install  # Changed from `npm ci` to `npm install`
+        run: npm install
+
+      - name: Ensure react-tsparticles is installed
+        run: npm install react-tsparticles
 
       - name: Build project
         run: npm run build
