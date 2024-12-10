@@ -15,11 +15,7 @@ jobs:
         with:
           node-version: '18'
       
-      - name: Install Global react-scripts
-        run: |
-          npm install -g react-scripts
-      
-      - name: Install Local Dependencies
+      - name: Install Dependencies
         run: |
           npm install
       
