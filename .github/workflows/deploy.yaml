@@ -19,7 +19,7 @@ jobs:
         run: |
           rm -rf node_modules
           rm -rf package-lock.json
-          npm install
+          npm install -g npm@10.9.2
       
       - name: Build Project
         run: CI=false npm run build
