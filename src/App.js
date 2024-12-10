@@ -33,8 +33,8 @@ function App() {
     <div className="relative w-full h-screen bg-overall-gradient">
       {showHelloWorld ? (
         <div className="flex h-full">
-          {/* Left part: Black background with polka dots */}
-          <div className="flex-1 bg-black flex justify-center items-center relative black-background">
+          {/* Left part: Black background */}
+          <div className="flex-1 bg-black flex justify-center items-center relative">
             <motion.h1
               className="text-white text-8xl font-extrabold animate-hanging"
               initial={{ y: 0 }}
@@ -44,7 +44,7 @@ function App() {
               Hello World!
             </motion.h1>
             {/* Add the centered infinity symbol */}
-            <div className="absolute w-full bottom-[20%] flex justify-center z-10 animate-infinity">
+            <div className="absolute w-full bottom-[20%] flex justify-center z-10">
               <svg
                 viewBox="0 0 256 128"
                 width="256px"
@@ -100,6 +100,7 @@ function App() {
           </div>
         </div>
       ) : (
+        // Rest of the code remains the same
         <div className="relative w-full h-screen overflow-hidden">
           {/* Existing code for main page */}
           <img
