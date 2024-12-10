@@ -19,10 +19,9 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Ensure react-tsparticles is installed
-        run: npm install react-tsparticles
+        run: |
+          npm install
+          npm install tsparticles react-tsparticles
 
       - name: Build project
         run: npm run build
