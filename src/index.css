@@ -33,4 +33,22 @@
   box-shadow: 0 0 20px cyan, 0 0 40px cyan, 0 0 80px cyan;
 }
 
-/* Animations */
+/* Particles styles */
+.ip__track {
+  stroke: #ddd;
+}
+
+.ip__worm1,
+.ip__worm2 {
+  stroke-width: 1;
+  animation: dash 2s linear infinite;
+}
+
+@keyframes dash {
+  from {
+    stroke-dasharray: 180 656;
+  }
+  to {
+    stroke-dasharray: 0 656;
+  }
+}
