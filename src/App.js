@@ -16,7 +16,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, isHighlight: true },
+    { id: 5, isHighlight: true }, // Highlighted section
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -31,10 +31,11 @@ function App() {
 
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
+      {/* Initial "Hello World" Screen */}
       {showHelloWorld ? (
         <div className="flex h-full">
           {/* Left part: Black background */}
-          <div className="flex-1 bg-black flex justify-center items-center relative">
+          <div className="flex-1 bg-black flex justify-center items-center">
             <motion.h1
               className="text-white text-8xl font-extrabold animate-hanging"
               initial={{ y: 0 }}
@@ -43,18 +44,25 @@ function App() {
             >
               Hello World!
             </motion.h1>
-            {/* Add the centered infinity symbol */}
-            <div className="absolute w-full bottom-[20%] flex justify-center z-10">
-              <svg
-                viewBox="0 0 256 128"
-                width="256px"
-                height="128px"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+          </div>
+
+          {/* Right part: White background with the fixed GIF and centered loader */}
+          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
+            {/* Cloud GIF */}
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+              alt="Cloud with rain"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none", zIndex: 1 }}
+            />
+
+            {/* Centered Loader */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+              <svg className="ip w-64 h-32" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stopColor="#5ebd3e" />
-                    <stop offset="33%" stopColor="#ffb900" />
+                    <stop offset="33%" stopColor="#ffb900" />>
                     <stop offset="67%" stopColor="#f78200" />
                     <stop offset="100%" stopColor="#e23838" />
                   </linearGradient>
@@ -67,36 +75,16 @@ function App() {
                 </defs>
                 <g fill="none" strokeLinecap="round" strokeWidth="16">
                   <g className="ip__track" stroke="#ddd">
-                    <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56" />
-                    <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64" />
+                    <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+                    <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
                   </g>
                   <g strokeDasharray="180 656">
-                    <path
-                      className="ip__worm1"
-                      stroke="url(#grad1)"
-                      strokeDashoffset="0"
-                      d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"
-                    />
-                    <path
-                      className="ip__worm2"
-                      stroke="url(#grad2)"
-                      strokeDashoffset="358"
-                      d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"
-                    />
+                    <path className="ip__worm1" stroke="url(#grad1)" strokeDashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+                    <path className="ip__worm2" stroke="url(#grad2)" strokeDashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
                   </g>
                 </g>
               </svg>
             </div>
-          </div>
-          {/* Right part: White background with the fixed GIF */}
-          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
-            {/* Cloud GIF */}
-            <img
-              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-              alt="Cloud with rain"
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
-              style={{ pointerEvents: "none", zIndex: 1 }}
-            />
           </div>
         </div>
       ) : (
@@ -108,6 +96,7 @@ function App() {
             alt="Background Neon Light"
             className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
           />
+
           <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
             {sections.map((section) => (
               <div
