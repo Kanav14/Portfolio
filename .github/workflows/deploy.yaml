@@ -14,15 +14,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
+      
+      - name: Clear npm cache
+        run: npm cache clean --force
       
       - name: Install dependencies
-        run: |
-          npm install --legacy-peer-deps
-          npm install @jridgewell/gen-mapping
+        run: npm install
       
       - name: Build project
-        run: CI=false npm run build
+        run: npm run build
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
