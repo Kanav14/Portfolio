@@ -18,8 +18,14 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+
       - name: Install dependencies
         run: npm install
+
+      - name: Install @jridgewell/gen-mapping (if missing)
+        run: npm install @jridgewell/gen-mapping
 
       - name: Build project
         run: npm run build
