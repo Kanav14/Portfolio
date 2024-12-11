@@ -18,13 +18,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Clear npm cache
-        run: npm cache clean --force
-
       - name: Install dependencies
-        run: |
-          npm install
-          npm install framer-motion # Ensure framer-motion is explicitly installed
+        run: npm install  # Changed from `npm ci` to `npm install`
 
       - name: Build project
         run: npm run build
@@ -32,5 +27,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
