@@ -58,14 +58,7 @@ function App() {
         </div>
       ) : (
         <div className="relative w-full h-screen overflow-hidden">
-          {/* Neon GIF in the background */}
-          <img
-            src="https://raw.githubusercontent.com/username/repo/branch/assets/neon-light.gif" // Replace with your actual GitHub URL
-            alt="Background Neon Light"
-            className="absolute top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
-          />
-
-          {/* Grid Sections */}
+      
           <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
             {sections.map((section) => (
               <div
