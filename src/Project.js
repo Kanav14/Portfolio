@@ -2,7 +2,7 @@ import React from 'react';
 
 function Projects() {
   return (
-    <div className="text-white">
+    <div className="container bg-gray-900 text-white h-full overflow-y-auto">
       <h1 className="text-3xl font-bold mb-4">Projects</h1>
 
       <div className="space-y-8">
@@ -65,6 +65,12 @@ function Projects() {
             <a href="#" className="text-blue-400 underline">View on GitHub</a> {/* Placeholder for GitHub link */}
           </div>
         </div>
+      </div>
+
+      {/* Back and Next Buttons */}
+      <div className="flex justify-between mt-6">
+        <button className="bg-blue-500 text-white px-6 py-2 rounded-md">Back</button>
+        <button className="bg-blue-500 text-white px-6 py-2 rounded-md">Next</button>
       </div>
     </div>
   );
