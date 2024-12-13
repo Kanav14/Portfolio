@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Projects() {
+function Projects({ closeModal, goToNext, goToPrevious }) {
   return (
     <div className="container bg-gray-900 text-white h-full overflow-y-auto">
       <h1 className="text-3xl font-bold mb-4">Projects</h1>
@@ -10,7 +10,7 @@ function Projects() {
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
           <div className="flex items-center space-x-4">
             <img
-              src="/images/ai-infrastructure.png" // Local image for the project (AI/Cloud-related)
+              src="/images/ai-infrastructure.png"
               alt="AI-Driven Infrastructure Optimization"
               className="h-24 w-auto"
             />
@@ -32,7 +32,7 @@ function Projects() {
             <strong>Technologies Used:</strong> PyTorch, AWS Lambda, CloudWatch, SageMaker, Python.
           </p>
           <div className="flex justify-between items-center mt-4">
-            <a href="#" className="text-blue-400 underline">View on GitHub</a> {/* Placeholder for GitHub link */}
+            <a href="#" className="text-blue-400 underline">View on GitHub</a>
           </div>
         </div>
 
@@ -40,7 +40,7 @@ function Projects() {
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
           <div className="flex items-center space-x-4">
             <img
-              src="/images/k8s-cicd-pipeline.png" // Local image for the project (Kubernetes/CI-CD)
+              src="/images/k8s-cicd-pipeline.png"
               alt="Kubernetes CI/CD Pipeline"
               className="h-24 w-auto"
             />
@@ -62,15 +62,21 @@ function Projects() {
             <strong>Technologies Used:</strong> Kubernetes, Helm, Jenkins, AWS EKS, Terraform, GitHub Actions.
           </p>
           <div className="flex justify-between items-center mt-4">
-            <a href="#" className="text-blue-400 underline">View on GitHub</a> {/* Placeholder for GitHub link */}
+            <a href="#" className="text-blue-400 underline">View on GitHub</a>
           </div>
         </div>
       </div>
 
-      {/* Back and Next Buttons */}
-      <div className="flex justify-between mt-6">
-        <button className="bg-blue-500 text-white px-6 py-2 rounded-md">Back</button>
-        <button className="bg-blue-500 text-white px-6 py-2 rounded-md">Next</button>
+      <div className="modal-buttons">
+        <button className="modal-button" onClick={goToPrevious}>
+          Back
+        </button>
+        <button className="modal-button" onClick={closeModal}>
+          Main Menu
+        </button>
+        <button className="modal-button" onClick={goToNext}>
+          Next
+        </button>
       </div>
     </div>
   );
