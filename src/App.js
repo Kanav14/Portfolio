@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
-import AboutMe from './AboutMe';  // Import the new AboutMe component
+import AboutMe from './AboutMe.js';  // Import the new AboutMe component
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
