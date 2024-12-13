@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
-import AboutMe from './AboutMe.js';  // Import the new AboutMe component
+import { HashRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import AboutMe from './AboutMe';  // Import the new AboutMe component
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -27,20 +27,28 @@ function App() {
 
   const handleClick = (section) => {
     if (!section.isHighlight && section.path) {
-      // Use Link or navigation logic
-      window.location.href = section.path;
+      // Navigation logic can be handled by React Router
+      console.log(`Navigating to ${section.text}`);
     }
   };
 
-  // Placeholder Components (you'll create these later)
+  // Placeholder Components for sections not yet developed
   const PlaceholderComponent = ({ title }) => (
     <div className="relative w-full h-screen bg-overall-gradient flex items-center justify-center">
-      <h1 className="text-4xl text-white">{title} Page Coming Soon</h1>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="text-center"
+      >
+        <h1 className="text-4xl text-white mb-4">{title} Page</h1>
+        <p className="text-xl text-cyan-400">Coming Soon</p>
+      </motion.div>
     </div>
   );
 
   return (
-    <Router basename="/Portfolio">
+    <Router>
       <div className="relative w-full h-screen bg-overall-gradient">
         {/* Initial "Hello World" Screen */}
         {showHelloWorld ? (
