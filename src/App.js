@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import AboutMe from './AboutMe';
 
 function App() {
@@ -49,8 +49,8 @@ function App() {
             </div>
           </div>
         ) : (
-          <Switch>
-            <Route exact path="/">
+          <Routes>
+            <Route path="/" element={
               <div className="relative w-full h-screen overflow-hidden">
                 <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
                   {sections.map((section) => (
@@ -93,11 +93,9 @@ function App() {
                   ))}
                 </div>
               </div>
-            </Route>
-            <Route path="/about">
-              <AboutMe />
-            </Route>
-          </Switch>
+            } />
+            <Route path="/about" element={<AboutMe />} />
+          </Routes>
         )}
       </div>
     </Router>
