@@ -1,83 +1,172 @@
-import React, { useState, useEffect } from "react";
-import { HashRouter as Router, Link } from "react-router-dom";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+
 import AboutMe from './AboutMe'; // Import the AboutMe component
+// Import other section components if you have them
 
 function App() {
-  const [activeSection, setActiveSection] = useState("home"); // Default section
+  const [showAbout, setShowAbout] = useState(false);
+  const [showProjects, setShowProjects] = useState(false);
+  const [showExperience, setShowExperience] = useState(false);
+  const [showEducation, setShowEducation] = useState(false);
+  const [showCertifications, setShowCertifications] = useState(false);
+  const [showSkills, setShowSkills] = useState(false);
+  const [showResearch, setShowResearch] = useState(false);
 
-  // Listen to hash change and update active section
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.substring(1); // Get hash value without '#'
-      if (hash) {
-        setActiveSection(hash);
-      }
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-    handleHashChange(); // Set the initial section on load
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, []);
-
-  const sections = [
-    { id: 1, text: "About Me", path: "about" },
-    { id: 2, text: "Projects", path: "projects" },
-    { id: 3, text: "Experience", path: "experience" },
-    { id: 4, text: "Education", path: "education" },
-    { id: 5, text: "Certifications", path: "certifications" },
-    { id: 6, text: "Skills", path: "skills" },
-    { id: 7, text: "Research", path: "research" },
-  ];
-
-  // Conditional rendering for different sections
-  const renderSection = () => {
-    switch (activeSection) {
+  const handleSectionClick = (section) => {
+    switch (section) {
       case "about":
-        return <AboutMe />;
+        setShowAbout(!showAbout);
+        break;
       case "projects":
-        return <div>Projects Content</div>;
+        setShowProjects(!showProjects);
+        break;
       case "experience":
-        return <div>Experience Content</div>;
+        setShowExperience(!showExperience);
+        break;
       case "education":
-        return <div>Education Content</div>;
+        setShowEducation(!showEducation);
+        break;
       case "certifications":
-        return <div>Certifications Content</div>;
+        setShowCertifications(!showCertifications);
+        break;
       case "skills":
-        return <div>Skills Content</div>;
+        setShowSkills(!showSkills);
+        break;
       case "research":
-        return <div>Research Content</div>;
+        setShowResearch(!showResearch);
+        break;
       default:
-        return <div>Welcome to My Portfolio</div>;
+        break;
     }
   };
 
   return (
-    <Router>
-      <div className="relative w-full h-screen bg-overall-gradient">
-        {/* Navigation Links */}
-        <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
-          {sections.map((section) => (
-            <Link
-              key={section.id}
-              to={`#${section.path}`} // Link with hash to trigger section change
-              onClick={() => setActiveSection(section.path)} // Update state for active section
-              className="relative m-2 bg-white text-black border border-gray-200 rounded-lg shadow-md flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300"
-            >
-              <p>{section.text}</p>
-            </Link>
-          ))}
+    <div className="relative w-full h-screen bg-overall-gradient">
+      {/* Navigation Links */}
+      <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
+        <div
+          onClick={() => handleSectionClick("about")}
+          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
+        >
+          <p>About Me</p>
         </div>
-
-        {/* Render Section Content Based on Active Section */}
-        <div className="content-section">
-          {renderSection()}
+        <div
+          onClick={() => handleSectionClick("projects")}
+          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
+        >
+          <p>Projects</p>
+        </div>
+        <div
+          onClick={() => handleSectionClick("experience")}
+          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
+        >
+          <p>Experience</p>
+        </div>
+        <div
+          onClick={() => handleSectionClick("education")}
+          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
+        >
+          <p>Education</p>
+        </div>
+        <div
+          onClick={() => handleSectionClick("certifications")}
+          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
+        >
+          <p>Certifications</p>
+        </div>
+        <div
+          onClick={() => handleSectionClick("skills")}
+          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
+        >
+          <p>Skills</p>
+        </div>
+        <div
+          onClick={() => handleSectionClick("research")}
+          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
+        >
+          <p>Research</p>
         </div>
       </div>
-    </Router>
+
+      {/* Section Cards - Will Show/Hide based on State */}
+      {showAbout && (
+        <motion.div
+          className="card-detail"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <AboutMe />
+        </motion.div>
+      )}
+
+      {showProjects && (
+        <motion.div
+          className="card-detail"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>Projects Content</div>
+        </motion.div>
+      )}
+
+      {showExperience && (
+        <motion.div
+          className="card-detail"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>Experience Content</div>
+        </motion.div>
+      )}
+
+      {showEducation && (
+        <motion.div
+          className="card-detail"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>Education Content</div>
+        </motion.div>
+      )}
+
+      {showCertifications && (
+        <motion.div
+          className="card-detail"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>Certifications Content</div>
+        </motion.div>
+      )}
+
+      {showSkills && (
+        <motion.div
+          className="card-detail"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>Skills Content</div>
+        </motion.div>
+      )}
+
+      {showResearch && (
+        <motion.div
+          className="card-detail"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div>Research Content</div>
+        </motion.div>
+      )}
+    </div>
   );
 }
 
