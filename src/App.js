@@ -1,170 +1,105 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-import AboutMe from './AboutMe'; // Import the AboutMe component
-// Import other section components if you have them
-
 function App() {
-  const [showAbout, setShowAbout] = useState(false);
-  const [showProjects, setShowProjects] = useState(false);
-  const [showExperience, setShowExperience] = useState(false);
-  const [showEducation, setShowEducation] = useState(false);
-  const [showCertifications, setShowCertifications] = useState(false);
-  const [showSkills, setShowSkills] = useState(false);
-  const [showResearch, setShowResearch] = useState(false);
+  const [showHelloWorld, setShowHelloWorld] = useState(true);
 
-  const handleSectionClick = (section) => {
-    switch (section) {
-      case "about":
-        setShowAbout(!showAbout);
-        break;
-      case "projects":
-        setShowProjects(!showProjects);
-        break;
-      case "experience":
-        setShowExperience(!showExperience);
-        break;
-      case "education":
-        setShowEducation(!showEducation);
-        break;
-      case "certifications":
-        setShowCertifications(!showCertifications);
-        break;
-      case "skills":
-        setShowSkills(!showSkills);
-        break;
-      case "research":
-        setShowResearch(!showResearch);
-        break;
-      default:
-        break;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowHelloWorld(false);
+    }, 4000); // 4 seconds delay for "Hello World" screen
+    return () => clearTimeout(timer);
+  }, []);
+
+  const sections = [
+    { id: 1, text: "About Me" },
+    { id: 2, text: "Projects" },
+    { id: 3, text: "Experience" },
+    { id: 4, text: "Education" },
+    { id: 5, isHighlight: true }, // Highlighted section
+    { id: 6, text: "Certifications" },
+    { id: 7, text: "Skills and Knowledge Base" },
+    { id: 8, text: "Extra Curricular" },
+    { id: 9, text: "Research and Patents" },
+  ];
+
+  const handleClick = (section) => {
+    if (!section.isHighlight) {
+      alert(`You clicked on ${section.text} section`);
     }
   };
 
   return (
     <div className="relative w-full h-screen bg-overall-gradient">
-      {/* Navigation Links */}
-      <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
-        <div
-          onClick={() => handleSectionClick("about")}
-          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
-        >
-          <p>About Me</p>
-        </div>
-        <div
-          onClick={() => handleSectionClick("projects")}
-          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
-        >
-          <p>Projects</p>
-        </div>
-        <div
-          onClick={() => handleSectionClick("experience")}
-          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
-        >
-          <p>Experience</p>
-        </div>
-        <div
-          onClick={() => handleSectionClick("education")}
-          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
-        >
-          <p>Education</p>
-        </div>
-        <div
-          onClick={() => handleSectionClick("certifications")}
-          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
-        >
-          <p>Certifications</p>
-        </div>
-        <div
-          onClick={() => handleSectionClick("skills")}
-          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
-        >
-          <p>Skills</p>
-        </div>
-        <div
-          onClick={() => handleSectionClick("research")}
-          className="card bg-white text-black border border-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
-        >
-          <p>Research</p>
-        </div>
-      </div>
+      {/* Initial "Hello World" Screen */}
+      {showHelloWorld ? (
+        <div className="flex h-full">
+          {/* Left part: Black background */}
+          <div className="flex-1 bg-black flex justify-center items-center">
+            <motion.h1
+              className="text-white text-8xl font-extrabold animate-hanging"
+              initial={{ y: 0 }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+            >
+              Hello World!
+            </motion.h1>
+          </div>
 
-      {/* Section Cards - Will Show/Hide based on State */}
-      {showAbout && (
-        <motion.div
-          className="card-detail"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <AboutMe />
-        </motion.div>
-      )}
-
-      {showProjects && (
-        <motion.div
-          className="card-detail"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div>Projects Content</div>
-        </motion.div>
-      )}
-
-      {showExperience && (
-        <motion.div
-          className="card-detail"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div>Experience Content</div>
-        </motion.div>
-      )}
-
-      {showEducation && (
-        <motion.div
-          className="card-detail"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div>Education Content</div>
-        </motion.div>
-      )}
-
-      {showCertifications && (
-        <motion.div
-          className="card-detail"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div>Certifications Content</div>
-        </motion.div>
-      )}
-
-      {showSkills && (
-        <motion.div
-          className="card-detail"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div>Skills Content</div>
-        </motion.div>
-      )}
-
-      {showResearch && (
-        <motion.div
-          className="card-detail"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div>Research Content</div>
-        </motion.div>
+          {/* Right part: White background with the fixed GIF */}
+          <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
+            <img
+              src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+              alt="Cloud with rain"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+              style={{ pointerEvents: "none" }}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="relative w-full h-screen overflow-hidden">
+      
+          <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
+            {sections.map((section) => (
+              <div
+                key={section.id}
+                className={`relative m-2 ${
+                  section.isHighlight
+                    ? "bg-black text-white shadow-highlight border border-cyan-400"
+                    : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
+                } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
+                onClick={() => handleClick(section)}
+              >
+                {section.isHighlight ? (
+                  <div className="text-center">
+                    <motion.h1
+                      className="text-5xl font-extrabold"
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                    >
+                      Kanav Sharma
+                    </motion.h1>
+                    <motion.p
+                      className="text-2xl mt-2 font-medium text-cyan-400"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 1.5,
+                        ease: "easeOut",
+                        delay: 0.3,
+                      }}
+                    >
+                      DevOps Engineer
+                    </motion.p>
+                  </div>
+                ) : (
+                  <p>{section.text}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
