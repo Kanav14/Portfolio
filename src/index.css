@@ -37,6 +37,22 @@
   animation: loading-bar 2s linear infinite;
 }
 
+/* Modal Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-animate {
+  animation: fadeIn 0.3s ease-out;
+}
+
 /* General Styles */
 .bg-overall-gradient {
   background: linear-gradient(to right, #2e2e2e, #1a1a1a);
@@ -107,9 +123,18 @@
 }
 
 .modal-content {
-  @apply bg-white rounded-lg shadow-lg w-3/4 max-w-4xl p-6 relative;
+  @apply bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-lg shadow-highlight w-11/12 md:w-3/4 lg:max-w-4xl p-8 text-white;
 }
 
 .modal-close-btn {
-  @apply absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-xl;
+  @apply absolute top-3 right-3 text-white text-xl hover:text-cyan-400 cursor-pointer;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  @apply flex justify-between mt-6 gap-4;
+}
+
+.modal-button {
+  @apply px-6 py-2 rounded-lg text-white bg-cyan-400 hover:bg-cyan-300 font-bold transition-transform transform hover:scale-105;
 }
