@@ -12,7 +12,7 @@ function App() {
   }, []);
 
   const sections = [
-    { id: 1, text: "About Me" },
+    { id: 1, text: "About Me", isAbout: true }, // Added isAbout flag to trigger About Me card styling
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
@@ -58,19 +58,43 @@ function App() {
         </div>
       ) : (
         <div className="relative w-full h-screen overflow-hidden">
-      
           <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
             {sections.map((section) => (
               <div
                 key={section.id}
                 className={`relative m-2 ${
-                  section.isHighlight
+                  section.isAbout
+                    ? "bg-white text-black border border-gray-200 rounded-lg shadow-md hover:shadow-lg p-4 transition-transform"
+                    : section.isHighlight
                     ? "bg-black text-white shadow-highlight border border-cyan-400"
                     : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
-                } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
+                } flex justify-center items-center cursor-pointer`}
                 onClick={() => handleClick(section)}
               >
-                {section.isHighlight ? (
+                {section.isAbout ? (
+                  <div className="card-detail p-6">
+                    <motion.h1
+                      className="text-4xl font-bold"
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, ease: "easeOut" }}
+                    >
+                      About Me
+                    </motion.h1>
+                    <motion.p
+                      className="text-xl mt-2 font-medium text-cyan-400"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 1.5,
+                        ease: "easeOut",
+                        delay: 0.3,
+                      }}
+                    >
+                      I am a passionate DevOps engineer with a background in cloud technologies. I have a deep interest in automating processes and optimizing systems to improve performance and scalability. My work is driven by curiosity and a passion for innovation.
+                    </motion.p>
+                  </div>
+                ) : section.isHighlight ? (
                   <div className="text-center">
                     <motion.h1
                       className="text-5xl font-extrabold"
