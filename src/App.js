@@ -30,22 +30,45 @@ function App() {
 
   // Handle section click
   const handleClick = (section) => {
-    if (!section.isHighlight) setActiveSection(section);
+    if (!section.isHighlight) {
+      setActiveSection(section);
+      const index = sections.findIndex(s => s.text === section.text);
+      setCurrentSectionIndex(index);
+    }
   };
 
   // Close modal
   const closeModal = () => setActiveSection(null);
 
-  // Handle Next and Back buttons
-  const handleNext = () => {
-    if (currentSectionIndex < sections.length - 1) {
-      setCurrentSectionIndex(currentSectionIndex + 1);
+  // Navigate to next section
+  const goToNext = () => {
+    const nextIndex = (currentSectionIndex + 1) % sections.length;
+    const nextSection = sections.find((_, index) => index === nextIndex);
+    
+    // Skip highlight section
+    if (nextSection.isHighlight) {
+      const afterHighlightIndex = (nextIndex + 1) % sections.length;
+      setActiveSection(sections[afterHighlightIndex]);
+      setCurrentSectionIndex(afterHighlightIndex);
+    } else {
+      setActiveSection(nextSection);
+      setCurrentSectionIndex(nextIndex);
     }
   };
 
-  const handleBack = () => {
-    if (currentSectionIndex > 0) {
-      setCurrentSectionIndex(currentSectionIndex - 1);
+  // Navigate to previous section
+  const goToPrevious = () => {
+    const prevIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
+    const prevSection = sections.find((_, index) => index === prevIndex);
+    
+    // Skip highlight section
+    if (prevSection.isHighlight) {
+      const beforeHighlightIndex = (prevIndex - 1 + sections.length) % sections.length;
+      setActiveSection(sections[beforeHighlightIndex]);
+      setCurrentSectionIndex(beforeHighlightIndex);
+    } else {
+      setActiveSection(prevSection);
+      setCurrentSectionIndex(prevIndex);
     }
   };
 
@@ -135,35 +158,28 @@ function App() {
             &times;
           </button>
           {activeSection.text === "About Me" ? (
-            <AboutMe closeModal={closeModal} />
+            <AboutMe 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Projects" ? (
-            <Project />
+            <Project 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Experience" ? (
-            <Experience />
+            <Experience 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : (
             <h2 className="text-xl font-bold text-white">
               Content for {activeSection.text} coming soon!
             </h2>
           )}
-          <div className="flex justify-between mt-4">
-            {/* Only show Back and Next buttons when active section is not "About Me" */}
-            {activeSection.text !== "About Me" && (
-              <>
-                <button
-                  className="text-white bg-blue-500 px-4 py-2 rounded-md"
-                  onClick={handleBack}
-                >
-                  Back
-                </button>
-                <button
-                  className="text-white bg-blue-500 px-4 py-2 rounded-md"
-                  onClick={handleNext}
-                >
-                  Next
-                </button>
-              </>
-            )}
-          </div>
         </div>
       </div>
     );
