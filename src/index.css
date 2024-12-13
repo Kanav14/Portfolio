@@ -138,3 +138,9 @@
 .modal-button {
   @apply px-6 py-2 rounded-lg text-white bg-cyan-400 hover:bg-cyan-300 font-bold transition-transform transform hover:scale-105;
 }
+
+/* Scrollable Content */
+.page-content {
+  overflow-y: auto; /* Allows scrolling */
+  max-height: 100vh; /* Prevents overflowing outside viewport */
+}
