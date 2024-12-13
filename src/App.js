@@ -146,18 +146,23 @@ function App() {
             </h2>
           )}
           <div className="flex justify-between mt-4">
-            <button
-              className="text-white bg-blue-500 px-4 py-2 rounded-md"
-              onClick={handleBack}
-            >
-              Back
-            </button>
-            <button
-              className="text-white bg-blue-500 px-4 py-2 rounded-md"
-              onClick={handleNext}
-            >
-              Next
-            </button>
+            {/* Only show Back and Next buttons when active section is not "About Me" */}
+            {activeSection.text !== "About Me" && (
+              <>
+                <button
+                  className="text-white bg-blue-500 px-4 py-2 rounded-md"
+                  onClick={handleBack}
+                >
+                  Back
+                </button>
+                <button
+                  className="text-white bg-blue-500 px-4 py-2 rounded-md"
+                  onClick={handleNext}
+                >
+                  Next
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
