@@ -1,50 +1,61 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const AboutMe = () => {
+const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
   return (
-    <div className="relative w-full min-h-screen bg-overall-gradient flex items-center justify-center p-8">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <motion.div
-          className="flex justify-center items-center"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden shadow-highlight border-4 border-cyan-400">
-            <img
-              src="https://github.com/kanavsharma/kanav-profile.jpg"
-              alt="Kanav Sharma"
-              className="w-full h-full object-cover"
-            />
+    <div className="modal-overlay">
+      <motion.div
+        className="modal-content"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-4xl font-bold text-cyan-400 mb-4">About Me</h2>
+        <div className="space-y-4 text-white text-lg leading-relaxed">
+          <p>
+            Hi, I'm Kanav Sharma, a passionate DevOps Engineer with expertise in 
+            cloud infrastructure, CI/CD, and automation tools like Docker, Kubernetes, AWS, and Jenkins.
+          </p>
+          <p>
+            I strive to innovate solutions to complex infrastructure challenges while 
+            ensuring collaboration and technical excellence.
+          </p>
+        </div>
+
+        <div className="mt-4">
+          <h3 className="text-xl text-cyan-400 font-semibold">Quick Stats</h3>
+          <div className="grid grid-cols-3 gap-4 mt-2">
+            {[
+              { label: "DevOps Tools", value: "10+" },
+              { label: "Cloud Platforms", value: "3+" },
+              { label: "Certifications", value: "5+" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                className="bg-black bg-opacity-70 text-white p-4 rounded-lg shadow-md text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <h3 className="text-2xl font-bold text-cyan-400">{stat.value}</h3>
+                <p className="text-sm">{stat.label}</p>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
-        <motion.div
-          className="text-white"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h2 className="text-4xl font-bold mb-4 text-cyan-400">About Me</h2>
-          <div className="space-y-4 text-lg leading-relaxed">
-            <p>
-              Hi, I'm Kanav Sharma, a passionate DevOps Engineer with expertise in cloud
-              infrastructure, containerization, and CI/CD strategies.
-            </p>
-          </div>
-          <motion.button
-            className="mt-8 px-6 py-3 bg-cyan-400 text-black font-bold rounded-full hover:bg-cyan-300 transition-colors"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1 }}
-            onClick={() =>
-              window.open("https://www.linkedin.com/in/kanavsharma", "_blank")
-            }
-          >
-            Connect on LinkedIn
-          </motion.button>
-        </motion.div>
-      </div>
+        </div>
+
+        <div className="modal-buttons">
+          <button className="modal-button" onClick={goToPrevious}>
+            Back
+          </button>
+          <button className="modal-button" onClick={closeModal}>
+            Main Menu
+          </button>
+          <button className="modal-button" onClick={goToNext}>
+            Next
+          </button>
+        </div>
+      </motion.div>
     </div>
   );
 };
