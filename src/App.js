@@ -125,7 +125,7 @@ function App() {
         onClick={closeModal}
       >
         <div
-          className="modal-content bg-gray-800 p-6 rounded-lg shadow-lg relative"
+          className="modal-content bg-gray-800 p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
         >
           <button
