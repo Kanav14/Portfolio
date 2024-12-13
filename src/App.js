@@ -50,53 +50,50 @@ function App() {
           </div>
         ) : (
           <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="relative w-full h-screen overflow-hidden">
-                  <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
-                    {sections.map((section) => (
-                      <Link
-                        key={section.id}
-                        to={section.link || "#"}
-                        className={`relative m-2 ${
-                          section.isHighlight
-                            ? "bg-black text-white shadow-highlight border border-cyan-400"
-                            : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
-                        } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
-                      >
-                        {section.isHighlight ? (
-                          <div className="text-center">
-                            <motion.h1
-                              className="text-5xl font-extrabold"
-                              initial={{ opacity: 0, y: -20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 1, ease: "easeOut" }}
-                            >
-                              Kanav Sharma
-                            </motion.h1>
-                            <motion.p
-                              className="text-2xl mt-2 font-medium text-cyan-400"
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{
-                                duration: 1.5,
-                                ease: "easeOut",
-                                delay: 0.3,
-                              }}
-                            >
-                              DevOps Engineer
-                            </motion.p>
-                          </div>
-                        ) : (
-                          <p>{section.text}</p>
-                        )}
-                      </Link>
-                    ))}
-                  </div>
+            <Route path="/" element={
+              <div className="relative w-full h-screen overflow-hidden">
+                <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
+                  {sections.map((section) => (
+                    <Link
+                      key={section.id}
+                      to={section.link || "#"}
+                      className={`relative m-2 ${
+                        section.isHighlight
+                          ? "bg-black text-white shadow-highlight border border-cyan-400"
+                          : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
+                      } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
+                    >
+                      {section.isHighlight ? (
+                        <div className="text-center">
+                          <motion.h1
+                            className="text-5xl font-extrabold"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                          >
+                            Kanav Sharma
+                          </motion.h1>
+                          <motion.p
+                            className="text-2xl mt-2 font-medium text-cyan-400"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                              duration: 1.5,
+                              ease: "easeOut",
+                              delay: 0.3,
+                            }}
+                          >
+                            DevOps Engineer
+                          </motion.p>
+                        </div>
+                      ) : (
+                        <p>{section.text}</p>
+                      )}
+                    </Link>
+                  ))}
                 </div>
-              }
-            />
+              </div>
+            } />
             <Route path="/about" element={<AboutMe />} />
           </Routes>
         )}
