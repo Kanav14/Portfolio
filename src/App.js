@@ -5,12 +5,7 @@ import AboutMe from "./AboutMe";
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
   const [activeSection, setActiveSection] = useState(null);
-
-  // Hide "Hello World" after 4 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => setShowHelloWorld(false), 4000);
-    return () => clearTimeout(timer);
-  }, []);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
 
   // Sections Data
   const sections = [
@@ -25,6 +20,12 @@ function App() {
     { id: 9, text: "Research and Patents" },
   ];
 
+  // Hide "Hello World" after 4 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setShowHelloWorld(false), 4000);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Handle section click
   const handleClick = (section) => {
     if (!section.isHighlight) setActiveSection(section);
@@ -32,6 +33,19 @@ function App() {
 
   // Close modal
   const closeModal = () => setActiveSection(null);
+
+  // Handle Next and Back buttons
+  const handleNext = () => {
+    if (currentSectionIndex < sections.length - 1) {
+      setCurrentSectionIndex(currentSectionIndex + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentSectionIndex > 0) {
+      setCurrentSectionIndex(currentSectionIndex - 1);
+    }
+  };
 
   // Render the "Hello World" screen
   const renderHelloWorld = () => (
@@ -60,7 +74,7 @@ function App() {
   // Render sections grid
   const renderSectionsGrid = () => (
     <div className="grid grid-cols-3 grid-rows-3 w-full h-full">
-      {sections.map((section) => (
+      {sections.map((section, index) => (
         <div
           key={section.id}
           className={`relative m-2 ${
@@ -125,6 +139,20 @@ function App() {
               Content for {activeSection.text} coming soon!
             </h2>
           )}
+          <div className="flex justify-between mt-4">
+            <button
+              className="text-white bg-blue-500 px-4 py-2 rounded-md"
+              onClick={handleBack}
+            >
+              Back
+            </button>
+            <button
+              className="text-white bg-blue-500 px-4 py-2 rounded-md"
+              onClick={handleNext}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     );
