@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import AboutMe from "./AboutMe";
+import Project from "./Project";
+import Experience from "./Experience";
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -13,7 +15,7 @@ function App() {
     { id: 2, text: "Projects" },
     { id: 3, text: "Experience" },
     { id: 4, text: "Education" },
-    { id: 5, isHighlight: true }, // Highlighted Section
+    { id: 5, isHighlight: true },
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
@@ -134,6 +136,10 @@ function App() {
           </button>
           {activeSection.text === "About Me" ? (
             <AboutMe closeModal={closeModal} />
+          ) : activeSection.text === "Projects" ? (
+            <Project />
+          ) : activeSection.text === "Experience" ? (
+            <Experience />
           ) : (
             <h2 className="text-xl font-bold text-white">
               Content for {activeSection.text} coming soon!
