@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Experience() {
+function Experience({ closeModal, goToNext, goToPrevious }) {
   return (
     <div className="container bg-gray-900 text-white h-full overflow-y-auto">
       <h1 className="text-3xl font-bold mb-4">Experience</h1>
@@ -48,10 +48,17 @@ function Experience() {
         </div>
       </div>
 
-      {/* Back and Next Buttons */}
-      <div className="flex justify-between mt-6">
-        <button className="bg-blue-500 text-white px-6 py-2 rounded-md">Back</button>
-        <button className="bg-blue-500 text-white px-6 py-2 rounded-md">Next</button>
+      {/* Modal Buttons */}
+      <div className="modal-buttons">
+        <button className="modal-button" onClick={goToPrevious}>
+          Back
+        </button>
+        <button className="modal-button" onClick={closeModal}>
+          Main Menu
+        </button>
+        <button className="modal-button" onClick={goToNext}>
+          Next
+        </button>
       </div>
     </div>
   );
