@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { HashRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
-import AboutMe from './AboutMe';  // Import the new AboutMe component
+import AboutMe from './AboutMe';  // Import the AboutMe component
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -24,13 +24,6 @@ function App() {
     { id: 8, text: "Extra Curricular", path: "/extracurricular" },
     { id: 9, text: "Research and Patents", path: "/research" },
   ];
-
-  const handleClick = (section) => {
-    if (!section.isHighlight && section.path) {
-      // Navigation logic can be handled by React Router
-      console.log(`Navigating to ${section.text}`);
-    }
-  };
 
   // Placeholder Components for sections not yet developed
   const PlaceholderComponent = ({ title }) => (
@@ -87,7 +80,6 @@ function App() {
                       ? "bg-black text-white shadow-highlight border border-cyan-400"
                       : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
                   } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
-                  onClick={() => handleClick(section)}
                 >
                   {section.isHighlight ? (
                     <div className="text-center">
