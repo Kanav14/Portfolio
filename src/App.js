@@ -104,15 +104,24 @@ function App() {
   // Render modal
   const renderModal = () =>
     activeSection && (
-      <div className="modal-overlay">
-        <div className="modal-content">
-          <button className="modal-close-btn" onClick={closeModal}>
+      <div
+        className="modal-overlay flex justify-center items-center"
+        onClick={closeModal}
+      >
+        <div
+          className="modal-content bg-gray-800 p-6 rounded-lg shadow-lg relative"
+          onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+        >
+          <button
+            className="modal-close-btn absolute top-2 right-2 text-white font-bold text-lg"
+            onClick={closeModal}
+          >
             &times;
           </button>
           {activeSection.text === "About Me" ? (
-            <AboutMe />
+            <AboutMe closeModal={closeModal} />
           ) : (
-            <h2 className="text-xl font-bold">
+            <h2 className="text-xl font-bold text-white">
               Content for {activeSection.text} coming soon!
             </h2>
           )}
