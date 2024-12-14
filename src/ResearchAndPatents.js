@@ -3,11 +3,13 @@ import React from 'react';
 function ResearchAndPatents({ closeModal, goToNext, goToPrevious }) {
   return (
     <div className="container bg-gray-900 text-white h-full overflow-y-auto">
-      <h1 className="text-3xl font-bold mb-4">Research and Patents</h1>
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
+        Research and Patents
+      </h1>
       <div className="space-y-8">
         {/* Cricket Monitoring System Patent */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold">Cricket Monitoring System</h2>
+          <h2 className="text-2xl font-bold text-cyan-300">Cricket Monitoring System</h2>
           <p className="mt-2 text-lg">
             <strong>Patent Number: 201911004796</strong>
           </p>
@@ -20,7 +22,7 @@ function ResearchAndPatents({ closeModal, goToNext, goToPrevious }) {
 
         {/* Consumer Behavior Analysis Patent */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold">AI-Driven Consumer Behavior Analysis</h2>
+          <h2 className="text-2xl font-bold text-cyan-300">AI-Driven Consumer Behavior Analysis</h2>
           <p className="mt-2 text-lg">
             <strong>Patent Number: 201911031034</strong>
           </p>
@@ -33,7 +35,7 @@ function ResearchAndPatents({ closeModal, goToNext, goToPrevious }) {
 
         {/* Additional Research */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold">Current Research Interests</h2>
+          <h2 className="text-2xl font-bold text-cyan-300">Current Research Interests</h2>
           <ul className="list-disc pl-5 mt-4">
             <li>AI-Driven Infrastructure Optimization</li>
             <li>Machine Learning in Cloud Resource Management</li>
