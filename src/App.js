@@ -138,7 +138,9 @@ function App() {
               </motion.p>
             </div>
           ) : (
-            <p>{section.text}</p>
+            <p className="text-2xl font-bold text-center px-4 text-gray-800 hover:text-cyan-400 transition-colors duration-300">
+              {section.text}
+            </p>
           )}
         </div>
       ))}
