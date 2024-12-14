@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 import AboutMe from "./AboutMe";
 import Project from "./Project";
 import Experience from "./Experience";
+import Education from "./Education";
+import Certifications from "./Certifications";
+import ResearchAndPatents from "./ResearchAndPatents";
+import SkillsAndKnowledge from "./SkillsAndKnowledge";
+import ExtraCurricular from "./ExtraCurricular";
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -171,6 +176,36 @@ function App() {
             />
           ) : activeSection.text === "Experience" ? (
             <Experience 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Education" ? (
+            <Education 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Certifications" ? (
+            <Certifications 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Skills and Knowledge Base" ? (
+            <SkillsAndKnowledge 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Extra Curricular" ? (
+            <ExtraCurricular 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Research and Patents" ? (
+            <ResearchAndPatents 
               closeModal={closeModal} 
               goToNext={goToNext} 
               goToPrevious={goToPrevious} 
