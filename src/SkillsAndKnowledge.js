@@ -30,11 +30,13 @@ function SkillsAndKnowledge({ closeModal, goToNext, goToPrevious }) {
 
   return (
     <div className="container bg-gray-900 text-white h-full overflow-y-auto">
-      <h1 className="text-3xl font-bold mb-4">Skills and Knowledge Base</h1>
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
+        Skills and Knowledge Base
+      </h1>
       <div className="space-y-8">
         {skillCategories.map((category, index) => (
           <div key={index} className="bg-gray-800 p-6 rounded-md shadow-md">
-            <h2 className="text-2xl font-bold mb-4">{category.category}</h2>
+            <h2 className="text-2xl font-bold mb-4 text-cyan-300">{category.category}</h2>
             <div className="flex flex-wrap gap-3">
               {category.skills.map((skill, skillIndex) => (
                 <span 
@@ -50,7 +52,7 @@ function SkillsAndKnowledge({ closeModal, goToNext, goToPrevious }) {
 
         {/* Additional Knowledge Section */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold mb-4">Professional Expertise</h2>
+          <h2 className="text-2xl font-bold mb-4 text-cyan-300">Professional Expertise</h2>
           <ul className="list-disc pl-5 space-y-2">
             <li>Microservices Architecture</li>
             <li>Cloud Infrastructure Optimization</li>
