@@ -35,7 +35,15 @@ const AboutMe = ({ closeModal, goToNext }) => {
 
       {/* Existing content */}
       <p className="mb-4">
-        Hi, I'm Kanav Sharma, a passionate DevOps Engineer with expertise in cloud infrastructure, CI/CD, and automation tools like Docker, Kubernetes, AWS, and Jenkins.
+        I am a passionate DevOps Engineer with 5+ years of experience automating and managing cloud-native solutions using cutting-edge technologies like Kubernetes, Docker, and AWS. A dual-certified expert in Azure DevOps and AWS DevOps, I thrive on designing scalable and efficient CI/CD pipelines while optimizing application performance with tools like Helm, Jenkins, and Prometheus.
+
+Currently pursuing my Master’s in Information Science at DePaul University, I have a strong foundation in software engineering, backed by innovative AI-driven projects and patents in cricket monitoring systems and consumer behavior analysis. My work spans infrastructure automation, disaster recovery, and helm-based deployments, all aimed at reducing complexity and enhancing system reliability.
+
+With a knack for innovation, I recently developed a Generative AI tool to streamline error resolution using large language models. I am skilled in collaborating with cross-functional teams to deliver secure, scalable, and automated solutions that meet modern business demands.
+
+Beyond my professional achievements, I enjoy experimenting with emerging tech trends and solving real-world challenges through AI-driven solutions. Let’s connect and explore the possibilities of transforming ideas into impactful results!
+
+Skills Highlight: Python, Shell, Kubernetes, CI/CD, Ansible, AWS, Azure, Terraform, Kafka, GitHub Actions, Monitoring Tools.
       </p>
 
       {/* Quick Stats */}
