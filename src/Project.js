@@ -1,84 +1,87 @@
-import React from 'react';
+import React from "react";
+
+const ModalButton = ({ onClick, children }) => (
+  <button
+    className="bg-cyan-400 text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-cyan-500 transition-all"
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
 
 function Projects({ closeModal, goToNext, goToPrevious }) {
+  const projects = [
+    {
+      title: "AI-Driven Infrastructure Optimization with AWS",
+      imageUrl: "https://via.placeholder.com/150/36cfc1/000000?text=AI+Project",
+      overview:
+        "Developed an AI-powered tool using PyTorch to optimize AWS resources, improving infrastructure efficiency and reducing costs.",
+      problem:
+        "Many organizations struggle with optimizing AWS resources, leading to unnecessary costs and underutilization of resources.",
+      solution:
+        "Built an AI model to analyze AWS resource usage, automatically scaling EC2 instances with Lambda and monitoring using CloudWatch.",
+      impact: "Reduced AWS costs by 25% and improved resource allocation by 40%.",
+      technologies: "PyTorch, AWS Lambda, CloudWatch, SageMaker, Python.",
+      githubLink: "#",
+    },
+    {
+      title: "Kubernetes-based CI/CD Pipeline for Scalable Web Applications",
+      imageUrl: "https://via.placeholder.com/150/36cfc1/000000?text=K8s+Project",
+      overview:
+        "Created a CI/CD pipeline for web applications using Kubernetes and AWS EKS, automating build, test, and deployment processes.",
+      problem:
+        "Traditional deployment methods were slow and error-prone, affecting development cycles and time-to-market.",
+      solution:
+        "Leveraged Kubernetes, Helm, and Jenkins to build a fully automated pipeline, ensuring seamless scaling and faster delivery.",
+      impact: "Reduced deployment times by 40% and improved scalability.",
+      technologies: "Kubernetes, Helm, Jenkins, AWS EKS, Terraform, GitHub Actions.",
+      githubLink: "#",
+    },
+  ];
+
   return (
-    <div className="container bg-gray-900 text-white h-full overflow-y-auto">
+    <div className="container bg-gray-900 text-white p-6 h-full overflow-y-auto">
       <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
         Projects
       </h1>
-
       <div className="space-y-8">
-        {/* Project 1: AI-Driven Infrastructure Optimization */}
-        <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <div className="flex items-center space-x-4">
-            <img
-              src="https://via.placeholder.com/150/36cfc1/000000?text=AI+Project"
-              alt="AI-Driven Infrastructure Optimization"
-              className="h-24 w-auto rounded-lg border-2 border-cyan-400"
-            />
-            <h2 className="text-2xl font-bold text-cyan-300">AI-Driven Infrastructure Optimization with AWS</h2>
+        {projects.map((project, index) => (
+          <div key={index} className="bg-gray-800 p-6 rounded-md shadow-md">
+            <div className="flex items-center space-x-4">
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="h-24 w-auto rounded-lg border-2 border-cyan-400"
+              />
+              <h2 className="text-2xl font-bold text-cyan-300">{project.title}</h2>
+            </div>
+            <p className="text-lg mt-2">
+              <strong>Overview:</strong> {project.overview}
+            </p>
+            <p className="mt-4">
+              <strong>Problem:</strong> {project.problem}
+            </p>
+            <p className="mt-4">
+              <strong>Solution:</strong> {project.solution}
+            </p>
+            <p className="mt-4">
+              <strong>Impact:</strong> {project.impact}
+            </p>
+            <p className="mt-4">
+              <strong>Technologies Used:</strong> {project.technologies}
+            </p>
+            <div className="flex justify-between items-center mt-4">
+              <a href={project.githubLink} className="text-blue-400 underline">
+                View on GitHub
+              </a>
+            </div>
           </div>
-          <p className="text-lg mt-2">
-            <strong>Overview:</strong> This project involved developing an AI-powered tool using PyTorch to optimize AWS resources, improving infrastructure efficiency and reducing costs. The solution leveraged AWS Lambda, CloudWatch, and SageMaker to automatically scale resources based on real-time usage patterns.
-          </p>
-          <p className="mt-4">
-            <strong>Problem:</strong> Many organizations struggle with optimizing AWS resources, leading to unnecessary costs and underutilization of resources.
-          </p>
-          <p className="mt-4">
-            <strong>Solution:</strong> We built an AI model that analyzed AWS resource usage, identifying opportunities for cost savings. The tool utilized Lambda to automatically scale EC2 instances, and CloudWatch was used for monitoring and alerting.
-          </p>
-          <p className="mt-4">
-            <strong>Impact:</strong> This optimization led to a 25% reduction in AWS costs and improved resource allocation by 40%.
-          </p>
-          <p className="mt-4">
-            <strong>Technologies Used:</strong> PyTorch, AWS Lambda, CloudWatch, SageMaker, Python.
-          </p>
-          <div className="flex justify-between items-center mt-4">
-            <a href="#" className="text-blue-400 underline">View on GitHub</a>
-          </div>
-        </div>
-
-        {/* Project 2: Kubernetes-based CI/CD Pipeline */}
-        <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <div className="flex items-center space-x-4">
-            <img
-              src="https://via.placeholder.com/150/36cfc1/000000?text=K8s+Project"
-              alt="Kubernetes CI/CD Pipeline"
-              className="h-24 w-auto rounded-lg border-2 border-cyan-400"
-            />
-            <h2 className="text-2xl font-bold text-cyan-300">Kubernetes-based CI/CD Pipeline for Scalable Web Applications</h2>
-          </div>
-          <p className="text-lg mt-2">
-            <strong>Overview:</strong> This project focused on creating a CI/CD pipeline for scalable web applications using Kubernetes and AWS EKS. The pipeline automated the build, test, and deployment processes, ensuring quick and reliable updates for the applications.
-          </p>
-          <p className="mt-4">
-            <strong>Problem:</strong> Traditional deployment methods were slow and error-prone, affecting development cycles and time-to-market.
-          </p>
-          <p className="mt-4">
-            <strong>Solution:</strong> By leveraging Kubernetes, Helm, and Jenkins, we built a fully automated pipeline on AWS EKS. The solution ensured seamless scaling and faster application delivery.
-          </p>
-          <p className="mt-4">
-            <strong>Impact:</strong> The new CI/CD pipeline reduced deployment times by 40% and improved application scalability, enabling faster rollouts and consistent updates.
-          </p>
-          <p className="mt-4">
-            <strong>Technologies Used:</strong> Kubernetes, Helm, Jenkins, AWS EKS, Terraform, GitHub Actions.
-          </p>
-          <div className="flex justify-between items-center mt-4">
-            <a href="#" className="text-blue-400 underline">View on GitHub</a>
-          </div>
-        </div>
+        ))}
       </div>
-
-      <div className="modal-buttons">
-        <button className="modal-button" onClick={goToPrevious}>
-          Back
-        </button>
-        <button className="modal-button" onClick={closeModal}>
-          Main Menu
-        </button>
-        <button className="modal-button" onClick={goToNext}>
-          Next
-        </button>
+      <div className="flex justify-between mt-8">
+        <ModalButton onClick={goToPrevious}>Back</ModalButton>
+        <ModalButton onClick={closeModal}>Main Menu</ModalButton>
+        <ModalButton onClick={goToNext}>Next</ModalButton>
       </div>
     </div>
   );
