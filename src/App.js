@@ -17,9 +17,9 @@ function App() {
   // Sections Data
   const sections = [
     { id: 1, text: "About Me" },
-    { id: 2, text: "Projects" },
-    { id: 3, text: "Experience" },
-    { id: 4, text: "Education" },
+    { id: 2, text: "Experience" },
+    { id: 3, text: "Education" },
+    { id: 4, text: "Projects" },
     { id: 5, isHighlight: true },
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
