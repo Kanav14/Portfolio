@@ -2,12 +2,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import { LinkedinIcon, Mail } from "lucide-react";
 
-const AboutMe = ({ closeModal, goToNext }) => {
+const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
   return (
     <div className="container bg-gray-900 text-white">
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
+        About Me
+      </h1>
       <div className="flex items-center mb-6">
         <img 
-          src="/path/to/your/picture.jpg" 
+          src="https://avatars.githubusercontent.com/u/your-avatar-url" 
           alt="Kanav Sharma" 
           className="w-32 h-32 rounded-full mr-6 border-4 border-cyan-400"
         />
@@ -33,15 +36,14 @@ const AboutMe = ({ closeModal, goToNext }) => {
         </div>
       </div>
 
-      {/* Existing content */}
       <p className="mb-4">
         I am a passionate DevOps Engineer with 5+ years of experience automating and managing cloud-native solutions using cutting-edge technologies like Kubernetes, Docker, and AWS. A dual-certified expert in Azure DevOps and AWS DevOps, I thrive on designing scalable and efficient CI/CD pipelines while optimizing application performance with tools like Helm, Jenkins, and Prometheus.
 
-Currently pursuing my Master’s in Information Science at DePaul University, I have a strong foundation in software engineering, backed by innovative AI-driven projects and patents in cricket monitoring systems and consumer behavior analysis. My work spans infrastructure automation, disaster recovery, and helm-based deployments, all aimed at reducing complexity and enhancing system reliability.
+Currently pursuing my Master's in Information Science at DePaul University, I have a strong foundation in software engineering, backed by innovative AI-driven projects and patents in cricket monitoring systems and consumer behavior analysis. My work spans infrastructure automation, disaster recovery, and helm-based deployments, all aimed at reducing complexity and enhancing system reliability.
 
 With a knack for innovation, I recently developed a Generative AI tool to streamline error resolution using large language models. I am skilled in collaborating with cross-functional teams to deliver secure, scalable, and automated solutions that meet modern business demands.
 
-Beyond my professional achievements, I enjoy experimenting with emerging tech trends and solving real-world challenges through AI-driven solutions. Let’s connect and explore the possibilities of transforming ideas into impactful results!
+Beyond my professional achievements, I enjoy experimenting with emerging tech trends and solving real-world challenges through AI-driven solutions. Let's connect and explore the possibilities of transforming ideas into impactful results!
 
 Skills Highlight: Python, Shell, Kubernetes, CI/CD, Ansible, AWS, Azure, Terraform, Kafka, GitHub Actions, Monitoring Tools.
       </p>
@@ -64,7 +66,10 @@ Skills Highlight: Python, Shell, Kubernetes, CI/CD, Ansible, AWS, Azure, Terrafo
       </div>
 
       {/* Modal Buttons */}
-      <div className="modal-buttons mt-6">
+      <div className="modal-buttons">
+        <button className="modal-button" onClick={goToPrevious}>
+          Back
+        </button>
         <button className="modal-button" onClick={closeModal}>
           Main Menu
         </button>
