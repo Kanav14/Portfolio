@@ -3,11 +3,13 @@ import React from 'react';
 function ExtraCurricular({ closeModal, goToNext, goToPrevious }) {
   return (
     <div className="container bg-gray-900 text-white h-full overflow-y-auto">
-      <h1 className="text-3xl font-bold mb-4">Extra Curricular Activities</h1>
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
+        Extra Curricular Activities
+      </h1>
       <div className="space-y-8">
         {/* Technical Workshops and Conferences */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold">Technical Engagement</h2>
+          <h2 className="text-2xl font-bold text-cyan-300">Technical Engagement</h2>
           <ul className="list-disc pl-5 mt-4 space-y-2">
             <li>Regular participant in DevOps and Cloud Computing conferences</li>
             <li>Speaker at local tech meetups on AI and DevOps innovations</li>
@@ -17,7 +19,7 @@ function ExtraCurricular({ closeModal, goToNext, goToPrevious }) {
 
         {/* Volunteer Work */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold">Community Involvement</h2>
+          <h2 className="text-2xl font-bold text-cyan-300">Community Involvement</h2>
           <ul className="list-disc pl-5 mt-4 space-y-2">
             <li>Technical mentor for coding bootcamps and student workshops</li>
             <li>Volunteer at STEM education initiatives</li>
@@ -27,7 +29,7 @@ function ExtraCurricular({ closeModal, goToNext, goToPrevious }) {
 
         {/* Personal Projects and Hobbies */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold">Personal Development</h2>
+          <h2 className="text-2xl font-bold text-cyan-300">Personal Development</h2>
           <ul className="list-disc pl-5 mt-4 space-y-2">
             <li>Continuous learning in emerging technologies</li>
             <li>Building personal AI and DevOps projects</li>
