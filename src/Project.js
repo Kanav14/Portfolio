@@ -3,18 +3,20 @@ import React from 'react';
 function Projects({ closeModal, goToNext, goToPrevious }) {
   return (
     <div className="container bg-gray-900 text-white h-full overflow-y-auto">
-      <h1 className="text-3xl font-bold mb-4">Projects</h1>
+      <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
+        Projects
+      </h1>
 
       <div className="space-y-8">
         {/* Project 1: AI-Driven Infrastructure Optimization */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
           <div className="flex items-center space-x-4">
             <img
-              src="/images/ai-infrastructure.png"
+              src="https://via.placeholder.com/150/36cfc1/000000?text=AI+Project"
               alt="AI-Driven Infrastructure Optimization"
-              className="h-24 w-auto"
+              className="h-24 w-auto rounded-lg border-2 border-cyan-400"
             />
-            <h2 className="text-2xl font-bold">AI-Driven Infrastructure Optimization with AWS</h2>
+            <h2 className="text-2xl font-bold text-cyan-300">AI-Driven Infrastructure Optimization with AWS</h2>
           </div>
           <p className="text-lg mt-2">
             <strong>Overview:</strong> This project involved developing an AI-powered tool using PyTorch to optimize AWS resources, improving infrastructure efficiency and reducing costs. The solution leveraged AWS Lambda, CloudWatch, and SageMaker to automatically scale resources based on real-time usage patterns.
@@ -40,11 +42,11 @@ function Projects({ closeModal, goToNext, goToPrevious }) {
         <div className="bg-gray-800 p-6 rounded-md shadow-md">
           <div className="flex items-center space-x-4">
             <img
-              src="/images/k8s-cicd-pipeline.png"
+              src="https://via.placeholder.com/150/36cfc1/000000?text=K8s+Project"
               alt="Kubernetes CI/CD Pipeline"
-              className="h-24 w-auto"
+              className="h-24 w-auto rounded-lg border-2 border-cyan-400"
             />
-            <h2 className="text-2xl font-bold">Kubernetes-based CI/CD Pipeline for Scalable Web Applications</h2>
+            <h2 className="text-2xl font-bold text-cyan-300">Kubernetes-based CI/CD Pipeline for Scalable Web Applications</h2>
           </div>
           <p className="text-lg mt-2">
             <strong>Overview:</strong> This project focused on creating a CI/CD pipeline for scalable web applications using Kubernetes and AWS EKS. The pipeline automated the build, test, and deployment processes, ensuring quick and reliable updates for the applications.
