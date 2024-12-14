@@ -7,10 +7,10 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
         Professional Certifications
       </h1>
       <div className="space-y-8">
-        {/* Azure DevOps Engineer Expert */}
+        {/* Azure DevOps Certification */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md flex items-center">
           <img 
-            src="/images/azure-devops-cert.png" 
+            src="https://via.placeholder.com/150/36cfc1/000000?text=Azure+Cert" 
             alt="Azure DevOps Certification" 
             className="w-48 h-32 mr-6 rounded-lg object-cover border-2 border-cyan-400"
           />
@@ -27,10 +27,10 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
           </div>
         </div>
         
-        {/* AWS DevOps Engineer Professional */}
+        {/* AWS DevOps Certification */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md flex items-center">
           <img 
-            src="/images/aws-devops-cert.png" 
+            src="https://via.placeholder.com/150/36cfc1/000000?text=AWS+Cert" 
             alt="AWS DevOps Certification" 
             className="w-48 h-32 mr-6 rounded-lg object-cover border-2 border-cyan-400"
           />
