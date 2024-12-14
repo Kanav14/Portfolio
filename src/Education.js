@@ -10,7 +10,7 @@ function Education({ closeModal, goToNext, goToPrevious }) {
         {/* Master's Degree */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md flex items-center">
           <img 
-            src="/images/depaul-logo.png" 
+            src="https://via.placeholder.com/150/36cfc1/000000?text=DePaul" 
             alt="DePaul University Logo" 
             className="w-32 h-32 mr-6 rounded-full object-cover border-4 border-cyan-400"
           />
@@ -33,7 +33,7 @@ function Education({ closeModal, goToNext, goToPrevious }) {
         {/* Bachelor's Degree */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md flex items-center">
           <img 
-            src="/images/cgc-logo.png" 
+            src="https://via.placeholder.com/150/36cfc1/000000?text=CGC" 
             alt="Chandigarh Group of Colleges Logo" 
             className="w-32 h-32 mr-6 rounded-full object-cover border-4 border-cyan-400"
           />
