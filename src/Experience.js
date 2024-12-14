@@ -10,61 +10,68 @@ function Experience({ closeModal, goToNext, goToPrevious }) {
         {/* Amdocs: DevOps Engineer - Experienced */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md flex items-center">
           <img 
-            src="/images/amdocs-logo.png" 
+            src="https://via.placeholder.com/150/36cfc1/000000?text=Amdocs" 
             alt="Amdocs Logo" 
             className="w-32 h-32 mr-6 rounded-full object-cover border-4 border-cyan-400"
           />
           <div>
-            <h2 className="text-2xl font-bold text-cyan-300">DevOps Engineer - Experienced</h2>
+            <h2 className="text-2xl font-bold text-cyan-300">DevOps Engineer (Experienced)</h2>
             <p className="mt-2 text-lg">
-              <strong>Amdocs</strong> | Aug 2021 - Aug 2022 | Pune
+              <strong>Amdocs</strong> | Full-time
+            </p>
+            <p className="mt-2 text-md">
+              July 2022 - Present
             </p>
             <ul className="list-disc pl-5 mt-4">
-              <li>Led Digital Experience R&D Team to automate artifact management in Nexus, reducing manual effort by 40%.</li>
-              <li>Developed automation scripts using Shell, Groovy, and Python, achieving a 30% faster release cycle.</li>
-              <li>Built AWS infrastructure for deploying Helm charts on EKS, cutting deployment times by 25%.</li>
-              <li>Automated OpenShift cluster installations, reducing setup time by 40% and completing 15+ installations monthly.</li>
-              <li>Designed and implemented a Vault automation tool for secret management, handling 500+ secrets monthly.</li>
+              <li>Lead DevOps initiatives for complex cloud infrastructure projects</li>
+              <li>Architect and implement scalable CI/CD pipelines using Jenkins, GitHub Actions</li>
+              <li>Optimize cloud resources and implement infrastructure as code with Terraform</li>
             </ul>
           </div>
         </div>
-
+        
         {/* Amdocs: DevOps Engineer - Advanced */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md flex items-center">
           <img 
-            src="/images/amdocs-logo.png" 
+            src="https://via.placeholder.com/150/36cfc1/000000?text=Amdocs" 
             alt="Amdocs Logo" 
             className="w-32 h-32 mr-6 rounded-full object-cover border-4 border-cyan-400"
           />
           <div>
-            <h2 className="text-2xl font-bold text-cyan-300">DevOps Engineer - Advanced</h2>
+            <h2 className="text-2xl font-bold text-cyan-300">DevOps Engineer (Advanced)</h2>
             <p className="mt-2 text-lg">
-              <strong>Amdocs</strong> | Aug 2022 - Aug 2024 | Pune
+              <strong>Amdocs</strong> | Full-time
+            </p>
+            <p className="mt-2 text-md">
+              January 2021 - June 2022
             </p>
             <ul className="list-disc pl-5 mt-4">
-              <li>Conducted disaster recovery drills across 320+ applications, ensuring a 100% success rate.</li>
-              <li>Managed helm deployments with CI/CD pipeline, ensuring 99.9% uptime.</li>
-              <li>Designed and developed a Generative AI tool for internal usage to find solutions for repeated errors using LLM.</li>
+              <li>Developed and maintained robust CI/CD workflows</li>
+              <li>Implemented containerization strategies using Docker and Kubernetes</li>
+              <li>Automated infrastructure provisioning and configuration management</li>
             </ul>
           </div>
         </div>
-
+        
         {/* Nihilent Ltd */}
         <div className="bg-gray-800 p-6 rounded-md shadow-md flex items-center">
           <img 
-            src="/images/nihilent-logo.png" 
+            src="https://via.placeholder.com/150/36cfc1/000000?text=Nihilent" 
             alt="Nihilent Logo" 
             className="w-32 h-32 mr-6 rounded-full object-cover border-4 border-cyan-400"
           />
           <div>
-            <h2 className="text-2xl font-bold text-cyan-300">Software Engineer</h2>
+            <h2 className="text-2xl font-bold text-cyan-300">DevOps Engineer</h2>
             <p className="mt-2 text-lg">
-              <strong>Nihilent Ltd</strong> | Aug 2019 - Jul 2021 | Pune
+              <strong>Nihilent Ltd</strong> | Full-time
+            </p>
+            <p className="mt-2 text-md">
+              July 2019 - December 2020
             </p>
             <ul className="list-disc pl-5 mt-4">
-              <li>Deployed Java applications on VMware using Ansible, ensuring 99.9% environment consistency for HSBC.</li>
-              <li>Automated Selenium tests with Ansible Tower, increasing test execution speed by 25%.</li>
-              <li>Implemented centralized logging and monitoring for troubleshooting, reducing incident response time by 40%.</li>
+              <li>Supported cloud migration and DevOps transformation initiatives</li>
+              <li>Implemented monitoring and logging solutions using ELK stack</li>
+              <li>Collaborated with cross-functional teams to improve deployment processes</li>
             </ul>
           </div>
         </div>
