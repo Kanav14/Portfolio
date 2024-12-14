@@ -1,47 +1,62 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { LinkedinIcon, Mail } from "lucide-react";
 
-const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
+const AboutMe = ({ closeModal, goToNext }) => {
   return (
-    <div>
-      <h2 className="text-4xl font-bold text-cyan-400 mb-4">About Me</h2>
-      <div className="space-y-4 text-white text-lg leading-relaxed">
-        <p>
-          Hi, I'm Kanav Sharma, a passionate DevOps Engineer with expertise in 
-          cloud infrastructure, CI/CD, and automation tools like Docker, Kubernetes, AWS, and Jenkins.
-        </p>
-        <p>
-          I strive to innovate solutions to complex infrastructure challenges while 
-          ensuring collaboration and technical excellence.
-        </p>
-      </div>
-
-      <div className="mt-4">
-        <h3 className="text-xl text-cyan-400 font-semibold">Quick Stats</h3>
-        <div className="grid grid-cols-3 gap-4 mt-2">
-          {[
-            { label: "DevOps Tools", value: "10+" },
-            { label: "Cloud Platforms", value: "3+" },
-            { label: "Certifications", value: "5+" },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              className="bg-black bg-opacity-70 text-white p-4 rounded-lg shadow-md text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+    <div className="container bg-gray-900 text-white">
+      <div className="flex items-center mb-6">
+        <img 
+          src="/path/to/your/picture.jpg" 
+          alt="Kanav Sharma" 
+          className="w-32 h-32 rounded-full mr-6 border-4 border-cyan-400"
+        />
+        <div>
+          <h1 className="text-3xl font-bold text-cyan-400">Kanav Sharma</h1>
+          <p className="text-xl">DevOps Engineer</p>
+          <div className="flex space-x-4 mt-2">
+            <a 
+              href="https://www.linkedin.com/in/kanav-sharma" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-cyan-400 flex items-center"
             >
-              <h3 className="text-2xl font-bold text-cyan-400">{stat.value}</h3>
-              <p className="text-sm">{stat.label}</p>
-            </motion.div>
-          ))}
+              <LinkedinIcon className="mr-2" /> LinkedIn
+            </a>
+            <a 
+              href="mailto:kanav.sharma@example.com"
+              className="hover:text-cyan-400 flex items-center"
+            >
+              <Mail className="mr-2" /> Email
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="modal-buttons">
-        <button className="modal-button" onClick={goToPrevious}>
-          Back
-        </button>
+      {/* Existing content */}
+      <p className="mb-4">
+        Hi, I'm Kanav Sharma, a passionate DevOps Engineer with expertise in cloud infrastructure, CI/CD, and automation tools like Docker, Kubernetes, AWS, and Jenkins.
+      </p>
+
+      {/* Quick Stats */}
+      <div className="grid grid-cols-3 gap-4 mt-6">
+        {[
+          { label: "DevOps Tools", value: "10+" },
+          { label: "Cloud Platforms", value: "3+" },
+          { label: "Certifications", value: "5+" },
+        ].map((stat, index) => (
+          <div 
+            key={index} 
+            className="bg-gray-800 p-4 rounded-md text-center"
+          >
+            <div className="text-3xl font-bold text-cyan-400">{stat.value}</div>
+            <div className="text-sm">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Modal Buttons */}
+      <div className="modal-buttons mt-6">
         <button className="modal-button" onClick={closeModal}>
           Main Menu
         </button>
