@@ -1,54 +1,63 @@
-import React from 'react';
+import React from "react";
+
+const ModalButton = ({ onClick, children }) => (
+  <button
+    className="bg-cyan-400 text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-cyan-500 transition-all"
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
 
 function ExtraCurricular({ closeModal, goToNext, goToPrevious }) {
+  const activities = [
+    {
+      title: "Technical Engagement",
+      points: [
+        "Regular participant in DevOps and Cloud Computing conferences",
+        "Speaker at local tech meetups on AI and DevOps innovations",
+        "Active contributor to open-source projects on GitHub",
+      ],
+    },
+    {
+      title: "Community Involvement",
+      points: [
+        "Technical mentor for coding bootcamps and student workshops",
+        "Volunteer at STEM education initiatives",
+        "Participated in hackathons and innovation challenges",
+      ],
+    },
+    {
+      title: "Personal Development",
+      points: [
+        "Continuous learning in emerging technologies",
+        "Building personal AI and DevOps projects",
+        "Reading tech blogs and research papers",
+      ],
+    },
+  ];
+
   return (
-    <div className="container bg-gray-900 text-white h-full overflow-y-auto">
+    <div className="container bg-gray-900 text-white p-6 h-full overflow-y-auto">
       <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
         Extra Curricular Activities
       </h1>
       <div className="space-y-8">
-        {/* Technical Workshops and Conferences */}
-        <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold text-cyan-300">Technical Engagement</h2>
-          <ul className="list-disc pl-5 mt-4 space-y-2">
-            <li>Regular participant in DevOps and Cloud Computing conferences</li>
-            <li>Speaker at local tech meetups on AI and DevOps innovations</li>
-            <li>Active contributor to open-source projects on GitHub</li>
-          </ul>
-        </div>
-
-        {/* Volunteer Work */}
-        <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold text-cyan-300">Community Involvement</h2>
-          <ul className="list-disc pl-5 mt-4 space-y-2">
-            <li>Technical mentor for coding bootcamps and student workshops</li>
-            <li>Volunteer at STEM education initiatives</li>
-            <li>Participated in hackathons and innovation challenges</li>
-          </ul>
-        </div>
-
-        {/* Personal Projects and Hobbies */}
-        <div className="bg-gray-800 p-6 rounded-md shadow-md">
-          <h2 className="text-2xl font-bold text-cyan-300">Personal Development</h2>
-          <ul className="list-disc pl-5 mt-4 space-y-2">
-            <li>Continuous learning in emerging technologies</li>
-            <li>Building personal AI and DevOps projects</li>
-            <li>Reading tech blogs and research papers</li>
-          </ul>
-        </div>
+        {activities.map((activity, index) => (
+          <div key={index} className="bg-gray-800 p-6 rounded-md shadow-md">
+            <h2 className="text-2xl font-bold text-cyan-300">{activity.title}</h2>
+            <ul className="list-disc pl-5 mt-4 space-y-2">
+              {activity.points.map((point, idx) => (
+                <li key={idx}>{point}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
-
-      {/* Modal Buttons */}
-      <div className="modal-buttons">
-        <button className="modal-button" onClick={goToPrevious}>
-          Back
-        </button>
-        <button className="modal-button" onClick={closeModal}>
-          Main Menu
-        </button>
-        <button className="modal-button" onClick={goToNext}>
-          Next
-        </button>
+      <div className="flex justify-between mt-8">
+        <ModalButton onClick={goToPrevious}>Back</ModalButton>
+        <ModalButton onClick={closeModal}>Main Menu</ModalButton>
+        <ModalButton onClick={goToNext}>Next</ModalButton>
       </div>
     </div>
   );
