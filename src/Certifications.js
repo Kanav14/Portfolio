@@ -1,8 +1,10 @@
-import React from "react";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Award } from 'lucide-react';
 
 const ModalButton = ({ onClick, children }) => (
   <button
-    className="bg-cyan-400 text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-cyan-500 transition-all"
+    className="bg-cyan-400 text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-cyan-500 transition-all shadow-lg hover:shadow-cyan-400/50"
     onClick={onClick}
   >
     {children}
@@ -34,37 +36,60 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
   ];
 
   return (
-    <div className="container bg-gray-900 text-white p-6 h-full overflow-y-auto">
-      <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
-        Professional Certifications
-      </h1>
-      <div className="space-y-8">
+    <div className="container bg-gray-900 text-white p-4 md:p-6 h-full overflow-y-auto">
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex items-center justify-center mb-6"
+      >
+        <Award className="w-8 h-8 text-cyan-400 mr-2" />
+        <h1 className="text-3xl md:text-4xl font-extrabold text-center text-cyan-400">
+          Professional Certifications
+        </h1>
+      </motion.div>
+      
+      <div className="space-y-6 md:space-y-8">
         {certifications.map((cert, index) => (
-          <div key={index} className="bg-gray-800 p-6 rounded-md shadow-md flex items-center">
-            <img
-              src={cert.imageUrl}
-              alt={`${cert.title} Logo`}
-              className="w-48 h-32 mr-6 rounded-lg object-cover border-2 border-cyan-400"
-            />
-            <div>
-              <h2 className="text-2xl font-bold text-cyan-300">{cert.title}</h2>
-              <p className="mt-2 text-lg">
+          <motion.div
+            key={index}
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: index * 0.2 }}
+            className="bg-gray-800 p-4 md:p-6 rounded-md shadow-md flex flex-col md:flex-row items-center"
+          >
+            <div className="w-full md:w-48 mb-4 md:mb-0 md:mr-6">
+              <img
+                src={cert.imageUrl}
+                alt={`${cert.title} Logo`}
+                className="w-full h-32 rounded-lg object-cover border-2 border-cyan-400 hover:border-cyan-300 transition-colors"
+              />
+            </div>
+            <div className="flex-1">
+              <h2 className="text-xl md:text-2xl font-bold text-cyan-300">{cert.title}</h2>
+              <p className="mt-2 text-base md:text-lg">
                 <strong>{cert.provider}</strong>
               </p>
               <ul className="list-disc pl-5 mt-4 space-y-2">
                 {cert.description.map((item, idx) => (
-                  <li key={idx}>{item}</li>
+                  <li key={idx} className="text-sm md:text-base">{item}</li>
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-      <div className="flex justify-between mt-8">
+      
+      <motion.div 
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="flex justify-between mt-6 md:mt-8 space-x-2"
+      >
         <ModalButton onClick={goToPrevious}>Back</ModalButton>
         <ModalButton onClick={closeModal}>Main Menu</ModalButton>
         <ModalButton onClick={goToNext}>Next</ModalButton>
-      </div>
+      </motion.div>
     </div>
   );
 }
