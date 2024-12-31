@@ -226,7 +226,7 @@ const EnhancedPortfolio = () => {
                     relative flex justify-center items-center cursor-pointer
                     ${section.isHighlight 
                       ? 'bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg' 
-                      : 'bg-white hover:bg-gray-50 border border-gray-200'}
+                      : 'bg-gray-800 hover:bg-gray-700 border border-gray-700'}
                     rounded-lg transition-all duration-300 ease-in-out
                   `}
                 >
@@ -250,8 +250,8 @@ const EnhancedPortfolio = () => {
                     </div>
                   ) : (
                     <div className="text-center">
-                      <div className="text-3xl mb-2">{section.icon}</div>
-                      <h2 className="text-lg font-semibold text-gray-800">{section.text}</h2>
+                      <div className="text-3xl mb-2 text-cyan-400">{section.icon}</div>
+                      <h2 className="text-lg font-semibold text-white">{section.text}</h2>
                     </div>
                   )}
                 </motion.div>
