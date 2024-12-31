@@ -220,17 +220,19 @@ const EnhancedPortfolio = () => {
                 </h1>
               </motion.div>
             </div>
-            <div className="flex-1 bg-gray-100 flex items-center justify-center relative">
-              <motion.img
-                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-                alt="Cloud with rain"
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
-                style={{ pointerEvents: "none" }}
-                animate={{
-                  scale: [1, 1.05, 1],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              />
+            <div className="flex-1 bg-[#efefef] flex items-center justify-center">
+              <motion.div className="w-full h-full flex items-center justify-center">
+                <motion.img
+                  src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+                  alt="Cloud with rain"
+                  className="w-3/4 h-auto max-w-full object-contain"
+                  style={{ pointerEvents: "none" }}
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    transition: { duration: 2, repeat: Infinity }
+                  }}
+                />
+              </motion.div>
             </div>
           </motion.div>
         ) : (
@@ -239,9 +241,9 @@ const EnhancedPortfolio = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="container mx-auto p-4"
+            className="container mx-auto px-4 py-8 max-w-6xl"
           >
-            <div className="grid grid-cols-3 gap-6 p-4">
+            <div className="grid grid-cols-3 gap-4">
               {sections.map((section) => (
                 <motion.div
                   key={section.id}
@@ -250,7 +252,7 @@ const EnhancedPortfolio = () => {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleClick(section)}
                   className={`
-                    aspect-square p-6 rounded-xl cursor-pointer flex items-center justify-center
+                    h-40 p-4 rounded-xl cursor-pointer flex items-center justify-center
                     ${section.isHighlight 
                       ? 'bg-gradient-to-br from-cyan-500 to-blue-600' 
                       : 'bg-gray-800 hover:bg-gray-700'}
@@ -260,7 +262,7 @@ const EnhancedPortfolio = () => {
                   {section.isHighlight ? (
                     <div className="text-center">
                       <motion.h1 
-                        className="text-4xl font-bold mb-2"
+                        className="text-3xl font-bold mb-2"
                         animate={{
                           backgroundPosition: ['0%', '100%'],
                           transition: { duration: 3, repeat: Infinity }
@@ -268,17 +270,17 @@ const EnhancedPortfolio = () => {
                       >
                         {section.text}
                       </motion.h1>
-                      <p className="text-xl text-cyan-200">{section.subtitle}</p>
-                      <div className="flex justify-center gap-4 mt-4">
-                        <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                        <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                        <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                      <p className="text-lg text-cyan-200">{section.subtitle}</p>
+                      <div className="flex justify-center gap-4 mt-2">
+                        <Github className="w-5 h-5 hover:text-cyan-300 cursor-pointer" />
+                        <Linkedin className="w-5 h-5 hover:text-cyan-300 cursor-pointer" />
+                        <Mail className="w-5 h-5 hover:text-cyan-300 cursor-pointer" />
                       </div>
                     </div>
                   ) : (
                     <div className="text-center">
-                      <div className="text-3xl mb-2">{section.icon}</div>
-                      <h2 className="text-lg font-semibold">{section.text}</h2>
+                      <div className="text-2xl mb-2">{section.icon}</div>
+                      <h2 className="text-base font-semibold">{section.text}</h2>
                     </div>
                   )}
                 </motion.div>
@@ -287,13 +289,13 @@ const EnhancedPortfolio = () => {
 
             {/* DevOps Quote Section */}
             <motion.div 
-              className="mt-8 p-6 bg-gray-800 rounded-xl"
+              className="mt-6 p-4 bg-gray-800 rounded-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
               <div className="flex items-center justify-center space-x-4">
-                <Terminal className="w-8 h-8 text-cyan-400" />
+                <Terminal className="w-6 h-6 text-cyan-400" />
                 <motion.div
                   key={currentQuoteIndex}
                   initial={{ opacity: 0, y: 20 }}
@@ -301,11 +303,11 @@ const EnhancedPortfolio = () => {
                   exit={{ opacity: 0, y: -20 }}
                   className="text-center"
                 >
-                  <p className="text-2xl font-semibold text-cyan-200">
+                  <p className="text-xl font-semibold text-cyan-200">
                     {devopsQuotes[currentQuoteIndex].icon} {devopsQuotes[currentQuoteIndex].text}
                   </p>
                 </motion.div>
-                <Terminal className="w-8 h-8 text-cyan-400" />
+                <Terminal className="w-6 h-6 text-cyan-400" />
               </div>
             </motion.div>
 
