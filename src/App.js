@@ -289,13 +289,12 @@ const EnhancedPortfolio = () => {
 
             {/* DevOps Quote Section */}
             <motion.div 
-              className="mt-6 p-4 bg-gray-800 rounded-xl"
+              className="mt-16 mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex items-center justify-center space-x-4">
-                <Terminal className="w-6 h-6 text-cyan-400" />
+              <div className="flex items-center justify-center">
                 <motion.div
                   key={currentQuoteIndex}
                   initial={{ opacity: 0, y: 20 }}
@@ -303,11 +302,10 @@ const EnhancedPortfolio = () => {
                   exit={{ opacity: 0, y: -20 }}
                   className="text-center"
                 >
-                  <p className="text-xl font-semibold text-cyan-200">
-                    {devopsQuotes[currentQuoteIndex].icon} {devopsQuotes[currentQuoteIndex].text}
+                  <p className="text-3xl font-bold text-cyan-400">
+                    &quot;{devopsQuotes[currentQuoteIndex].icon} {devopsQuotes[currentQuoteIndex].text}&quot;
                   </p>
                 </motion.div>
-                <Terminal className="w-6 h-6 text-cyan-400" />
               </div>
             </motion.div>
 
