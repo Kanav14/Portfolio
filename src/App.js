@@ -77,10 +77,10 @@ function App() {
     }
   };
 
-  // Render the "Hello World" screen with responsive design
+  // Render the "Hello World" screen
   const renderHelloWorld = () => (
-    <div className="flex flex-col md:flex-row h-full">
-      <div className="flex-1 bg-black flex justify-center items-center py-20 md:py-0">
+    <div className="flex h-full">
+      <div className="flex-1 bg-black flex justify-center items-center">
         <motion.h1
           className="text-white text-4xl md:text-8xl font-extrabold animate-hanging"
           initial={{ y: 0 }}
@@ -90,7 +90,7 @@ function App() {
           Hello World!
         </motion.h1>
       </div>
-      <div className="flex-1 bg-[#efefef] flex justify-center items-center relative py-20 md:py-0">
+      <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
         <img
           src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
           alt="Cloud with rain"
@@ -101,9 +101,9 @@ function App() {
     </div>
   );
 
-  // Render sections grid with improved responsive design
+  // Render sections grid
   const renderSectionsGrid = () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-auto md:grid-rows-3 w-full h-full gap-4 p-4">
+    <div className="grid grid-cols-3 grid-rows-3 w-full h-full gap-2 p-2">
       {sections.map((section, index) => (
         <div
           key={section.id}
@@ -111,13 +111,13 @@ function App() {
             section.isHighlight
               ? "bg-black text-white shadow-highlight border border-cyan-400"
               : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
-          } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300 min-h-[200px] md:min-h-0`}
+          } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
           onClick={() => handleClick(section)}
         >
           {section.isHighlight ? (
-            <div className="text-center p-4">
+            <div className="text-center p-2">
               <motion.h1
-                className="text-3xl md:text-5xl font-extrabold"
+                className="text-2xl md:text-5xl font-extrabold"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut" }}
@@ -125,7 +125,7 @@ function App() {
                 Kanav Sharma
               </motion.h1>
               <motion.p
-                className="text-xl md:text-2xl mt-2 font-medium text-cyan-400"
+                className="text-base md:text-2xl mt-1 font-medium text-cyan-400"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -138,7 +138,7 @@ function App() {
               </motion.p>
             </div>
           ) : (
-            <p className="text-xl md:text-2xl font-bold text-center px-4 text-gray-800 hover:text-cyan-400 transition-colors duration-300">
+            <p className="text-sm md:text-2xl font-bold text-center px-2 text-gray-800 hover:text-cyan-400 transition-colors duration-300">
               {section.text}
             </p>
           )}
@@ -147,86 +147,84 @@ function App() {
     </div>
   );
 
-  // Render modal with improved responsive design
+  // Render modal
   const renderModal = () =>
     activeSection && (
       <div
-        className="modal-overlay flex justify-center items-center p-4"
+        className="modal-overlay"
         onClick={closeModal}
       >
         <div
-          className="modal-content bg-gray-800 rounded-lg shadow-lg relative max-h-[90vh] w-full max-w-4xl overflow-y-auto"
+          className="modal-content bg-gray-800 p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className="modal-close-btn absolute top-2 right-2 text-white font-bold text-lg z-10"
+            className="modal-close-btn"
             onClick={closeModal}
           >
             &times;
           </button>
-          <div className="p-4 md:p-6">
-            {activeSection.text === "About Me" ? (
-              <AboutMe 
-                closeModal={closeModal} 
-                goToNext={goToNext} 
-                goToPrevious={goToPrevious} 
-              />
-            ) : activeSection.text === "Projects" ? (
-              <Project 
-                closeModal={closeModal} 
-                goToNext={goToNext} 
-                goToPrevious={goToPrevious} 
-              />
-            ) : activeSection.text === "Experience" ? (
-              <Experience 
-                closeModal={closeModal} 
-                goToNext={goToNext} 
-                goToPrevious={goToPrevious} 
-              />
-            ) : activeSection.text === "Education" ? (
-              <Education 
-                closeModal={closeModal} 
-                goToNext={goToNext} 
-                goToPrevious={goToPrevious} 
-              />
-            ) : activeSection.text === "Certifications" ? (
-              <Certifications 
-                closeModal={closeModal} 
-                goToNext={goToNext} 
-                goToPrevious={goToPrevious} 
-              />
-            ) : activeSection.text === "Skills and Knowledge Base" ? (
-              <SkillsAndKnowledge 
-                closeModal={closeModal} 
-                goToNext={goToNext} 
-                goToPrevious={goToPrevious} 
-              />
-            ) : activeSection.text === "Extra Curricular" ? (
-              <ExtraCurricular 
-                closeModal={closeModal} 
-                goToNext={goToNext} 
-                goToPrevious={goToPrevious} 
-              />
-            ) : activeSection.text === "Research and Patents" ? (
-              <ResearchAndPatents 
-                closeModal={closeModal} 
-                goToNext={goToNext} 
-                goToPrevious={goToPrevious} 
-              />
-            ) : (
-              <h2 className="text-xl font-bold text-white">
-                Content for {activeSection.text} coming soon!
-              </h2>
-            )}
-          </div>
+          {activeSection.text === "About Me" ? (
+            <AboutMe 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Projects" ? (
+            <Project 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Experience" ? (
+            <Experience 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Education" ? (
+            <Education 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Certifications" ? (
+            <Certifications 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Skills and Knowledge Base" ? (
+            <SkillsAndKnowledge 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Extra Curricular" ? (
+            <ExtraCurricular 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Research and Patents" ? (
+            <ResearchAndPatents 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : (
+            <h2 className="text-xl font-bold text-white">
+              Content for {activeSection.text} coming soon!
+            </h2>
+          )}
         </div>
       </div>
     );
 
   return (
-    <div className="relative w-full h-screen bg-overall-gradient overflow-auto">
+    <div className="relative w-full h-screen bg-overall-gradient">
       {showHelloWorld ? renderHelloWorld() : (
-        <div className="relative w-full min-h-screen">
+        <div className="relative w-full h-screen overflow-hidden">
           {renderSectionsGrid()}
           {renderModal()}
         </div>
