@@ -2,7 +2,7 @@ import React from "react";
 
 const ModalButton = ({ onClick, children }) => (
   <button
-    className="bg-cyan-400 text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-cyan-500 transition-all"
+    className="bg-cyan-400 text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-cyan-500 transition-all text-sm md:text-base"
     onClick={onClick}
   >
     {children}
@@ -40,45 +40,47 @@ function Projects({ closeModal, goToNext, goToPrevious }) {
   ];
 
   return (
-    <div className="container bg-gray-900 text-white p-6 h-full overflow-y-auto">
-      <h1 className="text-4xl font-extrabold mb-6 text-center text-cyan-400 animate-pulse">
+    <div className="container bg-gray-900 text-white p-3 md:p-6 h-full overflow-y-auto">
+      <h1 className="text-2xl md:text-4xl font-extrabold mb-4 md:mb-6 text-center text-cyan-400 animate-pulse">
         Projects
       </h1>
-      <div className="space-y-8">
+      <div className="space-y-4 md:space-y-8">
         {projects.map((project, index) => (
-          <div key={index} className="bg-gray-800 p-6 rounded-md shadow-md">
-            <div className="flex items-center space-x-4">
+          <div key={index} className="bg-gray-800 p-4 md:p-6 rounded-md shadow-md">
+            <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
               <img
                 src={project.imageUrl}
                 alt={project.title}
-                className="h-24 w-auto rounded-lg border-2 border-cyan-400"
+                className="h-16 md:h-24 w-auto rounded-lg border-2 border-cyan-400 mb-3 md:mb-0"
               />
-              <h2 className="text-2xl font-bold text-cyan-300">{project.title}</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-cyan-300">{project.title}</h2>
             </div>
-            <p className="text-lg mt-2">
-              <strong>Overview:</strong> {project.overview}
-            </p>
-            <p className="mt-4">
-              <strong>Problem:</strong> {project.problem}
-            </p>
-            <p className="mt-4">
-              <strong>Solution:</strong> {project.solution}
-            </p>
-            <p className="mt-4">
-              <strong>Impact:</strong> {project.impact}
-            </p>
-            <p className="mt-4">
-              <strong>Technologies Used:</strong> {project.technologies}
-            </p>
+            <div className="mt-3 md:mt-4 space-y-2 md:space-y-4">
+              <p className="text-base md:text-lg">
+                <strong>Overview:</strong> {project.overview}
+              </p>
+              <p>
+                <strong>Problem:</strong> {project.problem}
+              </p>
+              <p>
+                <strong>Solution:</strong> {project.solution}
+              </p>
+              <p>
+                <strong>Impact:</strong> {project.impact}
+              </p>
+              <p>
+                <strong>Technologies Used:</strong> {project.technologies}
+              </p>
+            </div>
             <div className="flex justify-between items-center mt-4">
-              <a href={project.githubLink} className="text-blue-400 underline">
+              <a href={project.githubLink} className="text-blue-400 underline text-sm md:text-base">
                 View on GitHub
               </a>
             </div>
           </div>
         ))}
       </div>
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between mt-6 md:mt-8">
         <ModalButton onClick={goToPrevious}>Back</ModalButton>
         <ModalButton onClick={closeModal}>Main Menu</ModalButton>
         <ModalButton onClick={goToNext}>Next</ModalButton>
