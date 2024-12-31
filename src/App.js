@@ -167,7 +167,7 @@ const EnhancedPortfolio = () => {
     );
 
   return (
-    <div className="w-full h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
       <AnimatePresence mode="wait">
         {showHelloWorld ? (
           <motion.div
@@ -175,7 +175,7 @@ const EnhancedPortfolio = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="h-full flex"
+            className="h-screen flex"
           >
             <div className="flex-1 bg-black flex items-center justify-center">
               <motion.div
@@ -189,21 +189,17 @@ const EnhancedPortfolio = () => {
                 </h1>
               </motion.div>
             </div>
-            <div className="flex-1 bg-[#efefef] flex items-center justify-center">
-              <motion.div
-                className="relative w-3/4 h-auto flex items-center justify-center"
-              >
-                <motion.img
-                  src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-                  alt="Cloud with rain"
-                  className="w-full h-auto"
-                  style={{ pointerEvents: "none" }}
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    transition: { duration: 2, repeat: Infinity }
-                  }}
-                />
-              </motion.div>
+            <div className="flex-1 bg-gray-100 flex items-center justify-center relative">
+              <motion.img
+                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+                alt="Cloud with rain"
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+                style={{ pointerEvents: "none" }}
+                animate={{
+                  scale: [1, 1.05, 1],
+                  transition: { duration: 2, repeat: Infinity }
+                }}
+              />
             </div>
           </motion.div>
         ) : (
@@ -212,28 +208,28 @@ const EnhancedPortfolio = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="w-full h-full"
+            className="container mx-auto p-4"
           >
-            <div className="grid grid-cols-3 grid-rows-3 w-full h-full gap-2 p-2">
+            <div className="grid grid-cols-3 gap-4 p-4">
               {sections.map((section) => (
                 <motion.div
                   key={section.id}
                   variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => handleClick(section)}
                   className={`
-                    relative flex justify-center items-center cursor-pointer
+                    p-6 rounded-xl cursor-pointer
                     ${section.isHighlight 
-                      ? 'bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg' 
-                      : 'bg-gray-800 hover:bg-gray-700 border border-gray-700'}
-                    rounded-lg transition-all duration-300 ease-in-out
+                      ? 'bg-gradient-to-br from-cyan-500 to-blue-600' 
+                      : 'bg-gray-800 hover:bg-gray-700'}
+                    transition-all duration-300 ease-in-out
                   `}
                 >
                   {section.isHighlight ? (
                     <div className="text-center">
                       <motion.h1 
-                        className="text-4xl font-bold mb-2 text-white"
+                        className="text-4xl font-bold mb-2"
                         animate={{
                           backgroundPosition: ['0%', '100%'],
                           transition: { duration: 3, repeat: Infinity }
@@ -243,15 +239,15 @@ const EnhancedPortfolio = () => {
                       </motion.h1>
                       <p className="text-xl text-cyan-200">DevOps Engineer</p>
                       <div className="flex justify-center gap-4 mt-4">
-                        <Github className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
-                        <Linkedin className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
-                        <Mail className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                        <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                        <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                        <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
                       </div>
                     </div>
                   ) : (
                     <div className="text-center">
-                      <div className="text-3xl mb-2 text-cyan-400">{section.icon}</div>
-                      <h2 className="text-lg font-semibold text-white">{section.text}</h2>
+                      <div className="text-3xl mb-2">{section.icon}</div>
+                      <h2 className="text-lg font-semibold">{section.text}</h2>
                     </div>
                   )}
                 </motion.div>
