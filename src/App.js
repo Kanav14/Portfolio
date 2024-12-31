@@ -131,7 +131,7 @@ const EnhancedPortfolio = () => {
         <motion.div
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
-          className="bg-gray-800 p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-4xl"
+          className="bg-gray-800 p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl"
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -189,7 +189,7 @@ const EnhancedPortfolio = () => {
               goToPrevious={goToPrevious} 
             />
           ) : (
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-white">
               Content for {activeSection.text} coming soon!
             </h2>
           )}
@@ -215,7 +215,7 @@ const EnhancedPortfolio = () => {
                   transition: { duration: 2, repeat: Infinity }
                 }}
               >
-                <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text">
+                <h1 className="text-7xl md:text-9xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text">
                   Hello World!
                 </h1>
               </motion.div>
@@ -241,9 +241,9 @@ const EnhancedPortfolio = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="container mx-auto px-4 py-8 max-w-6xl"
+            className="container mx-auto px-6 py-12 max-w-7xl"
           >
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-6">
               {sections.map((section) => (
                 <motion.div
                   key={section.id}
@@ -252,7 +252,7 @@ const EnhancedPortfolio = () => {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleClick(section)}
                   className={`
-                    h-40 p-4 rounded-xl cursor-pointer flex items-center justify-center
+                    h-52 p-6 rounded-xl cursor-pointer flex items-center justify-center
                     ${section.isHighlight 
                       ? 'bg-gradient-to-br from-cyan-500 to-blue-600' 
                       : 'bg-gray-800 hover:bg-gray-700'}
@@ -262,7 +262,7 @@ const EnhancedPortfolio = () => {
                   {section.isHighlight ? (
                     <div className="text-center">
                       <motion.h1 
-                        className="text-3xl font-bold mb-2"
+                        className="text-4xl font-bold mb-3"
                         animate={{
                           backgroundPosition: ['0%', '100%'],
                           transition: { duration: 3, repeat: Infinity }
@@ -270,17 +270,17 @@ const EnhancedPortfolio = () => {
                       >
                         {section.text}
                       </motion.h1>
-                      <p className="text-lg text-cyan-200">{section.subtitle}</p>
-                      <div className="flex justify-center gap-4 mt-2">
-                        <Github className="w-5 h-5 hover:text-cyan-300 cursor-pointer" />
-                        <Linkedin className="w-5 h-5 hover:text-cyan-300 cursor-pointer" />
-                        <Mail className="w-5 h-5 hover:text-cyan-300 cursor-pointer" />
+                      <p className="text-xl text-cyan-200">{section.subtitle}</p>
+                      <div className="flex justify-center gap-6 mt-4">
+                        <Github className="w-7 h-7 hover:text-cyan-300 cursor-pointer" />
+                        <Linkedin className="w-7 h-7 hover:text-cyan-300 cursor-pointer" />
+                        <Mail className="w-7 h-7 hover:text-cyan-300 cursor-pointer" />
                       </div>
                     </div>
                   ) : (
                     <div className="text-center">
-                      <div className="text-2xl mb-2">{section.icon}</div>
-                      <h2 className="text-base font-semibold">{section.text}</h2>
+                      <div className="text-4xl mb-3">{section.icon}</div>
+                      <h2 className="text-xl font-semibold">{section.text}</h2>
                     </div>
                   )}
                 </motion.div>
@@ -302,7 +302,7 @@ const EnhancedPortfolio = () => {
                   exit={{ opacity: 0, y: -20 }}
                   className="text-center"
                 >
-                  <p className="text-3xl font-bold text-cyan-400">
+                  <p className="text-4xl font-bold text-cyan-400">
                     &quot;{devopsQuotes[currentQuoteIndex].icon} {devopsQuotes[currentQuoteIndex].text}&quot;
                   </p>
                 </motion.div>
