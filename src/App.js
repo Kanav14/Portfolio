@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, Github, Linkedin, Mail } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Github, Linkedin, Mail, Terminal } from 'lucide-react';
 import AboutMe from "./AboutMe";
 import Project from "./Project";
 import Experience from "./Experience";
@@ -14,13 +14,37 @@ const EnhancedPortfolio = () => {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
   const [activeSection, setActiveSection] = useState(null);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+  const devopsQuotes = [
+    {
+      text: "Infrastructure as code: Because clicking buttons is so 2010.",
+      icon: "🚀"
+    },
+    {
+      text: "In DevOps, we don't fix problems. We prevent them from happening.",
+      icon: "🛡️"
+    },
+    {
+      text: "Automate once, deploy anywhere.",
+      icon: "⚡"
+    },
+    {
+      text: "CI/CD: Making deployments as smooth as butter.",
+      icon: "🔄"
+    },
+    {
+      text: "Monitor everything, assume nothing.",
+      icon: "📊"
+    }
+  ];
 
   const sections = [
     { id: 1, text: "About Me", icon: "👨‍💻" },
     { id: 2, text: "Experience", icon: "💼" },
     { id: 3, text: "Education", icon: "🎓" },
     { id: 4, text: "Projects", icon: "🚀" },
-    { id: 5, isHighlight: true },
+    { id: 5, text: "Kanav Sharma", isHighlight: true, subtitle: "DevOps Engineer" },
     { id: 6, text: "Certifications", icon: "📜" },
     { id: 7, text: "Skills and Knowledge Base", icon: "🛠" },
     { id: 8, text: "Extra Curricular", icon: "🎯" },
@@ -30,6 +54,13 @@ const EnhancedPortfolio = () => {
   useEffect(() => {
     const timer = setTimeout(() => setShowHelloWorld(false), 4000);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const quoteTimer = setInterval(() => {
+      setCurrentQuoteIndex((prev) => (prev + 1) % devopsQuotes.length);
+    }, 5000);
+    return () => clearInterval(quoteTimer);
   }, []);
 
   const handleClick = (section) => {
@@ -210,7 +241,7 @@ const EnhancedPortfolio = () => {
             animate="visible"
             className="container mx-auto p-4"
           >
-            <div className="grid grid-cols-3 gap-4 p-4">
+            <div className="grid grid-cols-3 gap-6 p-4">
               {sections.map((section) => (
                 <motion.div
                   key={section.id}
@@ -219,7 +250,7 @@ const EnhancedPortfolio = () => {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleClick(section)}
                   className={`
-                    p-6 rounded-xl cursor-pointer
+                    aspect-square p-6 rounded-xl cursor-pointer flex items-center justify-center
                     ${section.isHighlight 
                       ? 'bg-gradient-to-br from-cyan-500 to-blue-600' 
                       : 'bg-gray-800 hover:bg-gray-700'}
@@ -235,9 +266,9 @@ const EnhancedPortfolio = () => {
                           transition: { duration: 3, repeat: Infinity }
                         }}
                       >
-                        Kanav Sharma
+                        {section.text}
                       </motion.h1>
-                      <p className="text-xl text-cyan-200">DevOps Engineer</p>
+                      <p className="text-xl text-cyan-200">{section.subtitle}</p>
                       <div className="flex justify-center gap-4 mt-4">
                         <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
                         <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
@@ -253,6 +284,31 @@ const EnhancedPortfolio = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* DevOps Quote Section */}
+            <motion.div 
+              className="mt-8 p-6 bg-gray-800 rounded-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="flex items-center justify-center space-x-4">
+                <Terminal className="w-8 h-8 text-cyan-400" />
+                <motion.div
+                  key={currentQuoteIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="text-center"
+                >
+                  <p className="text-2xl font-semibold text-cyan-200">
+                    {devopsQuotes[currentQuoteIndex].icon} {devopsQuotes[currentQuoteIndex].text}
+                  </p>
+                </motion.div>
+                <Terminal className="w-8 h-8 text-cyan-400" />
+              </div>
+            </motion.div>
+
             <AnimatePresence>
               {renderModal()}
             </AnimatePresence>
