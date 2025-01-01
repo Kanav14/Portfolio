@@ -147,17 +147,17 @@ const EnhancedPortfolio = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className={fixed inset-0 ${isDarkTheme ? 'bg-black' : 'bg-white'} bg-opacity-50 flex justify-center items-center z-50}
+        className={`fixed inset-0 ${isDarkTheme ? 'bg-black' : 'bg-white'} bg-opacity-50 flex justify-center items-center z-50`}
         onClick={closeModal}
       >
         <motion.div
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
-          className={${isDarkTheme ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl}
+          className={`${isDarkTheme ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className={absolute top-3 right-3 ${isDarkTheme ? 'text-white' : 'text-black'} text-xl hover:text-cyan-400}
+            className={`absolute top-3 right-3 ${isDarkTheme ? 'text-white' : 'text-black'} text-xl hover:text-cyan-400`}
             onClick={closeModal}
           >
             &times;
@@ -179,7 +179,7 @@ const EnhancedPortfolio = () => {
           ) : activeSection.text === "Research and Patents" ? (
             <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : (
-            <h2 className={text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-900'}}>
+            <h2 className={`text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>
               Content for {activeSection.text} coming soon!
             </h2>
           )}
@@ -198,7 +198,7 @@ const EnhancedPortfolio = () => {
   };
 
   return (
-    <div className={h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative}>
+    <div className={`h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative`}>
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -228,7 +228,7 @@ const EnhancedPortfolio = () => {
             exit={{ opacity: 0 }}
             className="h-screen flex flex-col md:flex-row relative z-10"
           >
-            <div className={flex-1 ${isDarkTheme ? 'bg-black' : 'bg-white'} flex items-center justify-center p-4 md:p-0}>
+            <div className={`flex-1 ${isDarkTheme ? 'bg-black' : 'bg-white'} flex items-center justify-center p-4 md:p-0`}>
               <motion.div
                 animate={{
                   y: [0, -20, 0],
@@ -265,13 +265,13 @@ const EnhancedPortfolio = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => !section.isHighlight && handleClick(section)}
-                        className={
+                        className={`
                           p-4 rounded-xl cursor-pointer flex items-center justify-center
                           ${section.isHighlight 
                             ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-3' 
-                            : ${themeStyles.cardBg} hover:shadow-lg}
+                            : `${themeStyles.cardBg} hover:shadow-lg`}
                           transition-all duration-300 ease-in-out
-                        }
+                        `}
                       >
                         {section.isHighlight ? (
                           <div className="text-center">
@@ -326,7 +326,7 @@ const EnhancedPortfolio = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className={${themeStyles.cardBg} rounded-xl p-4 max-w-3xl mx-auto shadow-lg backdrop-blur-sm}
+                    className={`${themeStyles.cardBg} rounded-xl p-4 max-w-3xl mx-auto shadow-lg backdrop-blur-sm`}
                   >
                     <div className="flex items-center justify-center gap-4">
                       <motion.div
