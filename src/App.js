@@ -107,12 +107,12 @@ function App() {
 
   const renderHelloWorld = () => (
     <div className="flex h-full">
-      <div className="flex-1 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 flex justify-center items-center">
+      <div className="flex-1 bg-black flex justify-center items-center">
         <motion.h1
-          className="text-white text-6xl md:text-8xl font-extrabold"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
+          className="text-white text-4xl md:text-8xl font-extrabold animate-hanging"
+          initial={{ y: 0 }}
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
         >
           Hello World!
         </motion.h1>
@@ -129,20 +129,19 @@ function App() {
   );
 
   const renderSectionsGrid = () => (
-    <div className="grid grid-cols-3 grid-rows-3 w-full h-full gap-4 p-4">
+    <div className="grid grid-cols-3 grid-rows-3 w-full h-full gap-2 p-2">
       {sections.map((section) => (
-        <motion.div
+        <div
           key={section.id}
           className={`relative ${
             section.isHighlight
-              ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white"
+              ? "bg-black text-white shadow-highlight border border-cyan-400"
               : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
-          } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300 hover:scale-105`}
+          } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
           onClick={() => handleClick(section)}
-          whileHover={{ scale: 1.05 }}
         >
           {section.isHighlight ? (
-            <div className="text-center p-4">
+            <div className="text-center p-2">
               <motion.h1
                 className="text-2xl md:text-5xl font-extrabold"
                 initial={{ opacity: 0, y: -20 }}
@@ -152,7 +151,7 @@ function App() {
                 Kanav Sharma
               </motion.h1>
               <motion.p
-                className="text-base md:text-2xl mt-1 font-medium"
+                className="text-base md:text-2xl mt-1 font-medium text-cyan-400"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -165,17 +164,118 @@ function App() {
               </motion.p>
             </div>
           ) : (
-            <p className="text-sm md:text-2xl font-bold text-center px-2 hover:text-blue-500 transition-colors duration-300">
+            <p className="text-sm md:text-2xl font-bold text-center px-2 text-gray-800 hover:text-cyan-400 transition-colors duration-300">
               {section.text}
             </p>
           )}
-        </motion.div>
+        </div>
       ))}
     </div>
   );
 
+  const renderQuoteSection = () => (
+    <div className="h-[25%] flex items-center justify-center px-4">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentQuoteIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="bg-gray-800 rounded-xl p-6 max-w-3xl w-full shadow-lg"
+        >
+          <div className="flex items-center justify-center gap-4">
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+                transition: { duration: 20, repeat: Infinity, ease: "linear" }
+              }}
+            >
+              {devopsQuotes[currentQuoteIndex].icon}
+            </motion.div>
+            <p className="text-xl font-bold text-cyan-400">
+              {devopsQuotes[currentQuoteIndex].text}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+
+  const renderModal = () =>
+    activeSection && (
+      <div
+        className="modal-overlay"
+        onClick={closeModal}
+      >
+        <div
+          className="modal-content bg-gray-800 p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            className="modal-close-btn"
+            onClick={closeModal}
+          >
+            &times;
+          </button>
+          {activeSection.text === "About Me" ? (
+            <AboutMe 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Projects" ? (
+            <Project 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Experience" ? (
+            <Experience 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Education" ? (
+            <Education 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Certifications" ? (
+            <Certifications 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Skills and Knowledge Base" ? (
+            <SkillsAndKnowledge 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Extra Curricular" ? (
+            <ExtraCurricular 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : activeSection.text === "Research and Patents" ? (
+            <ResearchAndPatents 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
+          ) : (
+            <h2 className="text-xl font-bold text-white">
+              Content for {activeSection.text} coming soon!
+            </h2>
+          )}
+        </div>
+      </div>
+    );
+
   return (
-    <div className="relative w-full h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <div className="relative w-full h-screen bg-overall-gradient">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -197,6 +297,8 @@ function App() {
         }}
         className="absolute inset-0"
       />
+
+      {/* Theme Toggle */}
       <div className="absolute top-4 right-4 z-50">
         <Switch
           checked={isDarkTheme}
@@ -208,12 +310,15 @@ function App() {
           className="react-switch"
         />
       </div>
+
       <div className="relative w-full h-screen overflow-hidden z-10">
         {showHelloWorld ? (
           renderHelloWorld()
         ) : (
           <div className="h-full flex flex-col">
             {renderSectionsGrid()}
+            {renderQuoteSection()}
+            {renderModal()}
           </div>
         )}
       </div>
