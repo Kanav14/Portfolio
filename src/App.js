@@ -55,6 +55,29 @@ function App() {
     await loadFull(engine);
   }, []);
 
+  const particlesConfig = {
+    particles: {
+      number: { value: 30, density: { enable: true, value_area: 800 } },
+      color: { value: "#ffffff" },
+      opacity: { value: 0.1 },
+      size: { value: 1 },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#ffffff",
+        opacity: 0.1,
+        width: 1
+      },
+      move: { enable: true, speed: 1 }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: false }
+      }
+    }
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setShowHelloWorld(false), 4000);
     return () => clearTimeout(timer);
@@ -105,113 +128,6 @@ function App() {
     }
   };
 
-  const renderSectionsGrid = () => (
-    <div className="grid grid-cols-3 auto-rows-fr gap-4 h-[75vh] p-4">
-      {sections.map((section) => (
-        <div
-          key={section.id}
-          onClick={() => handleClick(section)}
-          className={`
-            relative rounded-xl cursor-pointer transition-all duration-300
-            ${section.isHighlight
-              ? 'bg-gradient-to-r from-cyan-500 to-blue-600'
-              : 'bg-[#030306] hover:bg-[#0a0a0f]'
-            }
-            flex items-center justify-center overflow-hidden
-          `}
-        >
-          {section.isHighlight ? (
-            <div className="text-center">
-              <motion.h1
-                className="text-3xl font-bold text-white mb-2"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                {section.text}
-              </motion.h1>
-              <motion.p
-                className="text-xl text-white/80 mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {section.subtitle}
-              </motion.p>
-              <div className="flex justify-center gap-4 mt-3">
-                <Github className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
-                <Linkedin className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
-                <Mail className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
-              </div>
-            </div>
-          ) : (
-            <div className="text-center p-4">
-              <div className="text-3xl mb-3">{section.icon}</div>
-              <p className="text-xl font-semibold text-white">
-                {section.text}
-              </p>
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-
-  const renderHelloWorld = () => (
-    <div className="flex h-screen">
-      <div className="flex-1 bg-[#030306] flex justify-center items-center">
-        <motion.h1
-          className="text-7xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text"
-          animate={{
-            y: [0, -20, 0],
-            transition: { duration: 2, repeat: Infinity }
-          }}
-        >
-          Hello World!
-        </motion.h1>
-      </div>
-      <div className="flex-1 bg-[#efefef] flex justify-center items-center">
-        <motion.img
-          src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-          alt="Cloud with rain"
-          className="w-3/4 h-auto max-w-md"
-          style={{ pointerEvents: "none" }}
-          animate={{
-            scale: [1, 1.05, 1],
-            transition: { duration: 2, repeat: Infinity }
-          }}
-        />
-      </div>
-    </div>
-  );
-
-  const renderQuoteSection = () => (
-    <div className="h-[25vh] flex items-center justify-center px-4">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentQuoteIndex}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="bg-[#030306] rounded-xl p-6 max-w-3xl w-full"
-        >
-          <div className="flex items-center justify-center gap-4">
-            <motion.div
-              animate={{
-                rotate: [0, 360],
-                transition: { duration: 20, repeat: Infinity, ease: "linear" }
-              }}
-            >
-              {devopsQuotes[currentQuoteIndex].icon}
-            </motion.div>
-            <p className="text-xl font-semibold text-cyan-400">
-              {devopsQuotes[currentQuoteIndex].text}
-            </p>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
-
   const renderModal = () =>
     activeSection && (
       <div
@@ -222,7 +138,7 @@ function App() {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-[#030306] p-6 rounded-xl shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl"
+          className="bg-[#1e2736] p-6 rounded-xl shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl"
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -278,32 +194,11 @@ function App() {
     );
 
   return (
-    <div className="min-h-screen bg-[#111827]">
+    <div className="min-h-screen bg-[#030306]">
       <Particles
         id="tsparticles"
         init={particlesInit}
-        options={{
-          particles: {
-            number: { value: 30, density: { enable: true, value_area: 800 } },
-            color: { value: "#ffffff" },
-            opacity: { value: 0.1 },
-            size: { value: 1 },
-            line_linked: {
-              enable: true,
-              distance: 150,
-              color: "#ffffff",
-              opacity: 0.1,
-              width: 1
-            },
-            move: { enable: true, speed: 1 }
-          },
-          interactivity: {
-            events: {
-              onhover: { enable: true, mode: "repulse" },
-              onclick: { enable: false }
-            }
-          }
-        }}
+        options={particlesConfig}
         className="absolute inset-0"
       />
 
@@ -322,19 +217,121 @@ function App() {
 
       <div className="relative z-10">
         {showHelloWorld ? (
-          renderHelloWorld()
+          <div className="flex h-screen">
+            {/* Hello World Section */}
+            <div className="flex-1 bg-[#030306] flex justify-center items-center relative">
+              <motion.h1
+                className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text z-10"
+                animate={{
+                  y: [0, -20, 0],
+                  transition: { duration: 2, repeat: Infinity }
+                }}
+              >
+                Hello World!
+              </motion.h1>
+            </div>
+
+            {/* GIF Section */}
+            <div className="flex-1 bg-[#efefef] flex justify-center items-center">
+              <motion.img
+                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+                alt="Cloud with rain"
+                className="w-3/4 h-auto max-w-md"
+                style={{ pointerEvents: "none" }}
+                animate={{
+                  scale: [1, 1.05, 1],
+                  transition: { duration: 2, repeat: Infinity }
+                }}
+              />
+            </div>
+          </div>
         ) : (
           <div className="h-screen flex flex-col">
-            {renderSectionsGrid()}
-            {renderQuoteSection()}
-            <AnimatePresence>
-              {renderModal()}
-            </AnimatePresence>
+            {/* Grid Section - 75% */}
+            <div className="grid grid-cols-3 auto-rows-fr gap-4 h-[75vh] p-4">
+              {sections.map((section) => (
+                <div
+                  key={section.id}
+                  onClick={() => handleClick(section)}
+                  className={`
+                    relative rounded-xl cursor-pointer transition-all duration-300
+                    ${section.isHighlight
+                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600'
+                      : 'bg-[#1e2736] hover:bg-[#2a3545]'
+                    }
+                    flex items-center justify-center overflow-hidden
+                  `}
+                >
+                  {section.isHighlight ? (
+                    <div className="text-center">
+                      <motion.h1
+                        className="text-3xl font-bold text-white mb-2"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        {section.text}
+                      </motion.h1>
+                      <motion.p
+                        className="text-xl text-white/80 mb-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        {section.subtitle}
+                      </motion.p>
+                      <div className="flex justify-center gap-4 mt-3">
+                        <Github className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                        <Linkedin className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                        <Mail className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-center p-4">
+                      <div className="text-3xl mb-3">{section.icon}</div>
+                      <p className="text-xl font-semibold text-white">
+                        {section.text}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Quote Section - 25% */}
+            <div className="h-[25vh] flex items-center justify-center px-4">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentQuoteIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="bg-[#1e2736] rounded-xl p-6 max-w-3xl w-full"
+                >
+                  <div className="flex items-center justify-center gap-4">
+                    <motion.div
+                      animate={{
+                        rotate: [0, 360],
+                        transition: { duration: 20, repeat: Infinity, ease: "linear" }
+                      }}
+                    >
+                      {devopsQuotes[currentQuoteIndex].icon}
+                    </motion.div>
+                    <p className="text-xl font-semibold text-cyan-400">
+                      {devopsQuotes[currentQuoteIndex].text}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         )}
+
+        <AnimatePresence>
+          {renderModal()}
+        </AnimatePresence>
       </div>
     </div>
   );
 }
 
-export default App;
+export default
