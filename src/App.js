@@ -39,17 +39,16 @@ function App() {
     }
   ];
 
-  // Sections Data - Exactly as in working version
   const sections = [
-    { id: 1, text: "About Me", icon: "👨‍💻" },
+    { id: 1, text: "About Me", icon: "🔒" },
     { id: 2, text: "Experience", icon: "💼" },
     { id: 3, text: "Education", icon: "🎓" },
     { id: 4, text: "Projects", icon: "🚀" },
-    { id: 5, isHighlight: true },
+    { id: 5, text: "Kanav Sharma", isHighlight: true, subtitle: "DevOps Engineer" },
     { id: 6, text: "Certifications", icon: "📜" },
-    { id: 7, text: "Skills and Knowledge Base", icon: "🛠" },
+    { id: 7, text: "Skills and Knowledge Base", icon: "🔧" },
     { id: 8, text: "Extra Curricular", icon: "🎯" },
-    { id: 9, text: "Research and Patents", icon: "📚" },
+    { id: 9, text: "Research and Patents", icon: "📚" }
   ];
 
   const particlesInit = useCallback(async (engine) => {
@@ -68,7 +67,6 @@ function App() {
     return () => clearInterval(quoteTimer);
   }, []);
 
-  // Click handlers exactly as in working version
   const handleClick = (section) => {
     if (!section.isHighlight) {
       setActiveSection(section);
@@ -81,7 +79,7 @@ function App() {
 
   const goToNext = () => {
     const nextIndex = (currentSectionIndex + 1) % sections.length;
-    const nextSection = sections.find((_, index) => index === nextIndex);
+    const nextSection = sections[nextIndex];
     
     if (nextSection.isHighlight) {
       const afterHighlightIndex = (nextIndex + 1) % sections.length;
@@ -95,7 +93,7 @@ function App() {
 
   const goToPrevious = () => {
     const prevIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
-    const prevSection = sections.find((_, index) => index === prevIndex);
+    const prevSection = sections[prevIndex];
     
     if (prevSection.isHighlight) {
       const beforeHighlightIndex = (prevIndex - 1 + sections.length) % sections.length;
@@ -107,145 +105,175 @@ function App() {
     }
   };
 
-  // Grid render function - Matched with working version structure
   const renderSectionsGrid = () => (
-    <div className="grid grid-cols-3 grid-rows-3 w-full h-full gap-2 p-2">
-      {sections.map((section, index) => (
+    <div className="grid grid-cols-3 grid-rows-3 w-full h-[75%] gap-4 p-4">
+      {sections.map((section) => (
         <div
           key={section.id}
-          className={`relative ${
-            section.isHighlight
-              ? "bg-black text-white shadow-highlight border border-cyan-400"
-              : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
-          } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
           onClick={() => handleClick(section)}
+          className={`
+            relative rounded-xl cursor-pointer transition-all duration-300
+            ${section.isHighlight
+              ? 'bg-gradient-to-r from-cyan-500 to-blue-600'
+              : 'bg-[#1e2736] hover:bg-[#2a3545]'
+            }
+            flex items-center justify-center overflow-hidden
+          `}
         >
           {section.isHighlight ? (
-            <div className="text-center p-2">
+            <div className="text-center">
               <motion.h1
-                className="text-2xl md:text-5xl font-extrabold"
+                className="text-3xl font-bold text-white mb-2"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: "easeOut" }}
               >
-                Kanav Sharma
+                {section.text}
               </motion.h1>
               <motion.p
-                className="text-base md:text-2xl mt-1 font-medium text-cyan-400"
+                className="text-xl text-white/80 mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 1.5,
-                  ease: "easeOut",
-                  delay: 0.3,
-                }}
+                transition={{ delay: 0.2 }}
               >
-                DevOps Engineer
+                {section.subtitle}
               </motion.p>
+              <div className="flex justify-center gap-4 mt-3">
+                <Github className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                <Linkedin className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                <Mail className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+              </div>
             </div>
           ) : (
-            <p className="text-sm md:text-2xl font-bold text-center px-2 text-gray-800 hover:text-cyan-400 transition-colors duration-300">
-              {section.text}
-            </p>
+            <div className="text-center p-4">
+              <div className="text-3xl mb-3">{section.icon}</div>
+              <p className="text-xl font-semibold text-white">
+                {section.text}
+              </p>
+            </div>
           )}
         </div>
       ))}
     </div>
   );
 
-  // Modal render function - Matched with working version
+  const renderQuoteSection = () => (
+    <div className="h-[25%] flex items-center justify-center px-4">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentQuoteIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="bg-[#1e2736] rounded-xl p-6 max-w-3xl w-full"
+        >
+          <div className="flex items-center justify-center gap-4">
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+                transition: { duration: 20, repeat: Infinity, ease: "linear" }
+              }}
+            >
+              {devopsQuotes[currentQuoteIndex].icon}
+            </motion.div>
+            <p className="text-xl font-semibold text-cyan-400">
+              {devopsQuotes[currentQuoteIndex].text}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+
   const renderModal = () =>
     activeSection && (
       <div
-        className="modal-overlay"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50"
         onClick={closeModal}
       >
-        <div
-          className="modal-content bg-gray-800 p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto"
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          className="bg-[#1e2736] p-6 rounded-xl shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl"
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className="modal-close-btn"
+            className="absolute top-4 right-4 text-gray-400 hover:text-cyan-400 text-xl"
             onClick={closeModal}
           >
             &times;
           </button>
           {activeSection.text === "About Me" ? (
-            <AboutMe 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+            <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Projects" ? (
-            <Project 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+            <Project closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Experience" ? (
-            <Experience 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+            <Experience closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Education" ? (
-            <Education 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+            <Education closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Certifications" ? (
-            <Certifications 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+            <Certifications closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Skills and Knowledge Base" ? (
-            <SkillsAndKnowledge 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+            <SkillsAndKnowledge closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Extra Curricular" ? (
-            <ExtraCurricular 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+            <ExtraCurricular closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Research and Patents" ? (
-            <ResearchAndPatents 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+            <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : (
-            <h2 className="text-xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-white">
               Content for {activeSection.text} coming soon!
             </h2>
           )}
-        </div>
+          
+          <div className="flex justify-center gap-4 mt-6">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrevious();
+              }}
+              className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
+              className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          </div>
+        </motion.div>
       </div>
     );
 
   return (
-    <div className="relative w-full h-screen bg-overall-gradient">
+    <div className="min-h-screen bg-[#111827] text-white">
       <Particles
         id="tsparticles"
         init={particlesInit}
         options={{
           particles: {
-            number: { value: 50, density: { enable: true, value_area: 800 } },
-            color: { value: isDarkTheme ? "#ffffff" : "#000000" },
-            opacity: { value: 0.5 },
-            size: { value: 3 },
+            number: { value: 30, density: { enable: true, value_area: 800 } },
+            color: { value: "#ffffff" },
+            opacity: { value: 0.1 },
+            size: { value: 1 },
             line_linked: {
               enable: true,
               distance: 150,
-              color: isDarkTheme ? "#ffffff" : "#000000",
-              opacity: 0.4,
+              color: "#ffffff",
+              opacity: 0.1,
               width: 1
             },
-            move: { enable: true, speed: 2 }
+            move: { enable: true, speed: 1 }
+          },
+          interactivity: {
+            events: {
+              onhover: { enable: true, mode: "repulse" },
+              onclick: { enable: false }
+            }
           }
         }}
         className="absolute inset-0"
@@ -264,60 +292,40 @@ function App() {
         />
       </div>
 
-      <div className="relative w-full h-screen overflow-hidden z-10">
+      <div className="relative z-10">
         {showHelloWorld ? (
-          <div className="flex h-full">
+          <div className="flex h-screen">
             <div className="flex-1 bg-black flex justify-center items-center">
               <motion.h1
-                className="text-white text-4xl md:text-8xl font-extrabold animate-hanging"
-                initial={{ y: 0 }}
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+                className="text-7xl font-bold text-white"
+                animate={{
+                  y: [0, -20, 0],
+                  transition: { duration: 2, repeat: Infinity }
+                }}
               >
                 Hello World!
               </motion.h1>
             </div>
-            <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
-              <img
+            <div className="flex-1 bg-[#efefef] flex justify-center items-center">
+              <motion.img
                 src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
                 alt="Cloud with rain"
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+                className="w-3/4 h-auto max-w-md"
                 style={{ pointerEvents: "none" }}
+                animate={{
+                  scale: [1, 1.05, 1],
+                  transition: { duration: 2, repeat: Infinity }
+                }}
               />
             </div>
           </div>
         ) : (
-          <div className="relative h-screen flex flex-col">
+          <div className="min-h-screen flex flex-col">
             {renderSectionsGrid()}
-            
-            {/* Quote Section */}
-            <div className="h-[25%] flex items-center justify-center px-4">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentQuoteIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className={`${isDarkTheme ? 'bg-gray-800' : 'bg-white'} rounded-xl p-6 max-w-3xl w-full shadow-lg`}
-                >
-                  <div className="flex items-center justify-center gap-4">
-                    <motion.div
-                      animate={{
-                        rotate: [0, 360],
-                        transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                      }}
-                    >
-                      {devopsQuotes[currentQuoteIndex].icon}
-                    </motion.div>
-                    <p className="text-xl font-bold text-cyan-400">
-                      {devopsQuotes[currentQuoteIndex].text}
-                    </p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-            
-            {renderModal()}
+            {renderQuoteSection()}
+            <AnimatePresence>
+              {renderModal()}
+            </AnimatePresence>
           </div>
         )}
       </div>
