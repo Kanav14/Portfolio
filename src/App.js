@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, Github, Linkedin, Mail, Terminal, Cloud, Server, Database, Sun, Moon } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
-import * as Tooltip from '@radix-ui/react-tooltip';
 import Switch from 'react-switch';
 import AboutMe from "./AboutMe";
 import Project from "./Project";
@@ -40,56 +39,22 @@ function App() {
     }
   ];
 
+  // Sections Data
   const sections = [
-    { id: 1, text: "About Me", icon: "👨‍💻", tooltip: "Learn more about me" },
-    { id: 2, text: "Experience", icon: "💼", tooltip: "My professional journey" },
-    { id: 3, text: "Education", icon: "🎓", tooltip: "Academic background" },
-    { id: 4, text: "Projects", icon: "🚀", tooltip: "View my projects" },
-    { id: 5, text: "Kanav Sharma", isHighlight: true, subtitle: "DevOps Engineer" },
-    { id: 6, text: "Certifications", icon: "📜", tooltip: "Professional certifications" },
-    { id: 7, text: "Skills and Knowledge Base", icon: "🛠", tooltip: "Technical expertise" },
-    { id: 8, text: "Extra Curricular", icon: "🎯", tooltip: "Beyond work activities" },
-    { id: 9, text: "Research and Patents", icon: "📚", tooltip: "Research work" }
+    { id: 1, text: "About Me" },
+    { id: 2, text: "Experience" },
+    { id: 3, text: "Education" },
+    { id: 4, text: "Projects" },
+    { id: 5, isHighlight: true },
+    { id: 6, text: "Certifications" },
+    { id: 7, text: "Skills and Knowledge Base" },
+    { id: 8, text: "Extra Curricular" },
+    { id: 9, text: "Research and Patents" }
   ];
 
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
   }, []);
-
-  const particlesConfig = {
-    particles: {
-      number: { value: 50, density: { enable: true, value_area: 800 } },
-      color: { value: isDarkTheme ? "#ffffff" : "#000000" },
-      shape: { type: "circle" },
-      opacity: { value: 0.5, random: false },
-      size: { value: 3, random: true },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: isDarkTheme ? "#ffffff" : "#000000",
-        opacity: 0.4,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: "none",
-        random: false,
-        straight: false,
-        out_mode: "out",
-        bounce: false
-      }
-    },
-    interactivity: {
-      detect_on: "canvas",
-      events: {
-        onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: true, mode: "push" },
-        resize: true
-      }
-    },
-    retina_detect: true
-  };
 
   useEffect(() => {
     const timer = setTimeout(() => setShowHelloWorld(false), 4000);
@@ -141,144 +106,127 @@ function App() {
     }
   };
 
-  const renderHelloWorld = () => (
-    <div className="flex h-full">
-      <div className={`flex-1 ${isDarkTheme ? 'bg-black' : 'bg-white'} flex items-center justify-center`}>
-        <motion.h1
-          className={`${isDarkTheme ? 'text-white' : 'text-black'} text-4xl md:text-8xl font-extrabold`}
-          initial={{ y: 0 }}
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
-        >
-          Hello World!
-        </motion.h1>
-      </div>
-      <div className="flex-1 bg-[#efefef] flex items-center justify-center">
-        <motion.img
-          src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-          alt="Cloud with rain"
-          className="w-3/4 h-auto max-w-md"
-          style={{ pointerEvents: "none" }}
-          animate={{
-            scale: [1, 1.05, 1],
-            transition: { duration: 2, repeat: Infinity }
-          }}
-        />
-      </div>
-    </div>
-  );
-
-  // Update the renderSectionsGrid function
   const renderSectionsGrid = () => (
-    <div className="grid grid-cols-3 grid-rows-3 w-full h-[75%] gap-4 p-4">
+    <div className="grid grid-cols-3 grid-rows-3 w-full h-[75%] gap-2 p-2">
       {sections.map((section) => (
         <div
           key={section.id}
           className={`relative ${
             section.isHighlight
-              ? "bg-gradient-to-br from-cyan-500 to-blue-600"
+              ? "bg-black text-white shadow-highlight border border-cyan-400"
               : isDarkTheme 
-                ? "bg-gray-800" 
-                : "bg-white"
-          } rounded-xl shadow-lg flex items-center justify-center cursor-pointer
-          hover:shadow-lg transition-transform duration-300 border border-transparent hover:border-cyan-400`}
+                ? "bg-gray-800 text-white"
+                : "bg-white text-black border border-gray-200"
+          } rounded-lg shadow-md flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
           onClick={() => handleClick(section)}
         >
           {section.isHighlight ? (
-            <div className="text-center p-4">
+            <div className="text-center p-2">
               <motion.h1
-                className="text-2xl md:text-4xl font-bold text-white mb-2"
+                className="text-2xl md:text-5xl font-extrabold"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut" }}
               >
-                {section.text}
+                Kanav Sharma
               </motion.h1>
               <motion.p
-                className="text-lg md:text-xl text-cyan-200 mb-4"
+                className="text-base md:text-2xl mt-1 font-medium text-cyan-400"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
+                transition={{
+                  duration: 1.5,
+                  ease: "easeOut",
+                  delay: 0.3,
+                }}
               >
-                {section.subtitle}
+                DevOps Engineer
               </motion.p>
-              <div className="flex justify-center gap-4">
-                <Github className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
-                <Linkedin className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
-                <Mail className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
+              <div className="flex justify-center gap-4 mt-3">
+                <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
               </div>
             </div>
           ) : (
-            <div className="text-center p-4">
-              <div className="text-3xl mb-2">{section.icon}</div>
-              <p className={`text-lg md:text-xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400`}>
-                {section.text}
-              </p>
-            </div>
+            <p className="text-sm md:text-2xl font-bold text-center px-2 hover:text-cyan-400 transition-colors duration-300">
+              {section.text}
+            </p>
           )}
         </div>
       ))}
     </div>
   );
 
-  // Update the renderModal function
   const renderModal = () =>
     activeSection && (
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+        className="modal-overlay"
         onClick={closeModal}
       >
         <div
-          className={`${isDarkTheme ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl`}
+          className="modal-content bg-gray-800 p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className={`absolute top-3 right-3 ${isDarkTheme ? 'text-white' : 'text-black'} text-xl hover:text-cyan-400`}
+            className="modal-close-btn"
             onClick={closeModal}
           >
             &times;
           </button>
           {activeSection.text === "About Me" ? (
-            <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+            <AboutMe 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Projects" ? (
-            <Project closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+            <Project 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Experience" ? (
-            <Experience closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+            <Experience 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Education" ? (
-            <Education closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+            <Education 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Certifications" ? (
-            <Certifications closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+            <Certifications 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Skills and Knowledge Base" ? (
-            <SkillsAndKnowledge closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+            <SkillsAndKnowledge 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Extra Curricular" ? (
-            <ExtraCurricular closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+            <ExtraCurricular 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : activeSection.text === "Research and Patents" ? (
-            <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+            <ResearchAndPatents 
+              closeModal={closeModal} 
+              goToNext={goToNext} 
+              goToPrevious={goToPrevious} 
+            />
           ) : (
-            <h2 className={`text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className="text-xl font-bold text-white">
               Content for {activeSection.text} coming soon!
             </h2>
           )}
-          
-          <div className="flex justify-center gap-4 mt-6">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                goToPrevious();
-              }}
-              className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6 text-white" />
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                goToNext();
-              }}
-              className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
-            >
-              <ChevronRight className="w-6 h-6 text-white" />
-            </button>
-          </div>
         </div>
       </div>
     );
@@ -288,7 +236,22 @@ function App() {
       <Particles
         id="tsparticles"
         init={particlesInit}
-        options={particlesConfig}
+        options={{
+          particles: {
+            number: { value: 50, density: { enable: true, value_area: 800 } },
+            color: { value: isDarkTheme ? "#ffffff" : "#000000" },
+            opacity: { value: 0.5 },
+            size: { value: 3 },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: isDarkTheme ? "#ffffff" : "#000000",
+              opacity: 0.4,
+              width: 1
+            },
+            move: { enable: true, speed: 2 }
+          }
+        }}
         className="absolute inset-0"
       />
 
@@ -310,7 +273,6 @@ function App() {
           renderHelloWorld()
         ) : (
           <div className="relative h-screen flex flex-col z-10">
-            {/* Grid Section */}
             {renderSectionsGrid()}
 
             {/* Quote Section */}
@@ -338,14 +300,6 @@ function App() {
                   </div>
                 </motion.div>
               </AnimatePresence>
-            </div>
-
-            {/* Geometric Patterns Background */}
-            <div className="fixed inset-0 z-0 opacity-5">
-              <div className="absolute top-0 left-0 w-24 h-24 bg-cyan-400 rounded-full blur-xl"></div>
-              <div className="absolute top-1/4 right-1/3 w-32 h-32 bg-blue-400 rounded-full blur-xl"></div>
-              <div className="absolute bottom-1/3 left-1/4 w-40 h-40 bg-purple-400 rounded-full blur-xl"></div>
-              <div className="absolute bottom-0 right-0 w-28 h-28 bg-pink-400 rounded-full blur-xl"></div>
             </div>
 
             <AnimatePresence>
