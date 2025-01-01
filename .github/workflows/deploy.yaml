@@ -21,9 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm install  # Changed from `npm ci` to `npm install`
 
-      - name: Install cursor dependencies
-        run: npm install react-custom-cursor@latest 
-
       - name: Build project
         run: npm run build
 
