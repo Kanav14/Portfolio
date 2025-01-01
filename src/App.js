@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, Terminal, Cloud, Server, Database, Sun, Moon } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Github, Linkedin, Mail, Terminal, Cloud, Server, Database, Sun, Moon } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
 import * as Tooltip from '@radix-ui/react-tooltip';
@@ -147,96 +147,237 @@ const EnhancedPortfolio = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className={`fixed inset-0 ${isDarkTheme ? 'bg-black' : 'bg-white'} bg-opacity-50 flex justify-center items-center z-50`}
+        className={fixed inset-0 ${isDarkTheme ? 'bg-black' : 'bg-white'} bg-opacity-50 flex justify-center items-center z-50}
+        onClick={closeModal}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          className={`bg-${isDarkTheme ? 'gray-800' : 'white'} p-8 rounded-lg shadow-lg max-w-md w-full`}
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          className={${isDarkTheme ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl}
+          onClick={(e) => e.stopPropagation()}
         >
-          {activeSection.text === "About Me" && <AboutMe />}
-          {activeSection.text === "Projects" && <Project />}
-          {activeSection.text === "Experience" && <Experience />}
-          {activeSection.text === "Education" && <Education />}
-          {activeSection.text === "Certifications" && <Certifications />}
-          {activeSection.text === "Research and Patents" && <ResearchAndPatents />}
-          {activeSection.text === "Skills and Knowledge Base" && <SkillsAndKnowledge />}
-          {activeSection.text === "Extra Curricular" && <ExtraCurricular />}
-          <button onClick={closeModal} className="mt-4 bg-red-600 text-white py-2 px-4 rounded">Close</button>
+          <button
+            className={absolute top-3 right-3 ${isDarkTheme ? 'text-white' : 'text-black'} text-xl hover:text-cyan-400}
+            onClick={closeModal}
+          >
+            &times;
+          </button>
+          {activeSection.text === "About Me" ? (
+            <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Projects" ? (
+            <Project closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Experience" ? (
+            <Experience closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Education" ? (
+            <Education closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Certifications" ? (
+            <Certifications closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Skills and Knowledge Base" ? (
+            <SkillsAndKnowledge closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Extra Curricular" ? (
+            <ExtraCurricular closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Research and Patents" ? (
+            <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : (
+            <h2 className={text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-900'}}>
+              Content for {activeSection.text} coming soon!
+            </h2>
+          )}
         </motion.div>
       </motion.div>
     );
 
-  return (
-    <div className={`${isDarkTheme ? 'bg-black text-white' : 'bg-white text-black'} min-h-screen relative`}>
-      {/* Hello World Section */}
-      {showHelloWorld && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="absolute inset-0 flex justify-center items-center bg-gray-800 text-white"
-        >
-          <motion.h1
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            exit={{ y: 100 }}
-            className="text-5xl font-bold"
-          >
-            Hello World!
-          </motion.h1>
-        </motion.div>
-      )}
+  const themeStyles = isDarkTheme ? {
+    background: 'from-gray-900 to-black',
+    text: 'text-white',
+    cardBg: 'bg-gray-800'
+  } : {
+    background: 'from-gray-100 to-white',
+    text: 'text-gray-900',
+    cardBg: 'bg-white'
+  };
 
-      {/* Particles Background */}
+  return (
+    <div className={h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative}>
       <Particles
         id="tsparticles"
         init={particlesInit}
         options={particlesConfig}
+        className="absolute inset-0"
       />
 
-      {/* Main Content */}
-      <div className="pt-16 px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-4xl font-bold">Welcome to My Portfolio</h2>
-        </div>
-        
-        {/* DevOps Quotes Section */}
-        <div className="mb-8 text-center">
+      {/* Theme Toggle */}
+      <div className="absolute top-4 right-4 z-50">
+        <Switch
+          checked={isDarkTheme}
+          onChange={() => setIsDarkTheme(!isDarkTheme)}
+          onColor="#86d3ff"
+          offColor="#1a1a1a"
+          uncheckedIcon={<Sun className="w-4 h-4 text-yellow-400 m-1" />}
+          checkedIcon={<Moon className="w-4 h-4 text-white m-1" />}
+          className="react-switch"
+        />
+      </div>
+
+      <AnimatePresence mode="wait">
+        {showHelloWorld ? (
           <motion.div
-            key={currentQuoteIndex}
+            key="hello"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="flex flex-col items-center"
+            className="h-screen flex flex-col md:flex-row relative z-10"
           >
-            <p className="text-lg italic mb-2">{devopsQuotes[currentQuoteIndex].text}</p>
-            <div className="text-2xl">{devopsQuotes[currentQuoteIndex].icon}</div>
+            <div className={flex-1 ${isDarkTheme ? 'bg-black' : 'bg-white'} flex items-center justify-center p-4 md:p-0}>
+              <motion.div
+                animate={{
+                  y: [0, -20, 0],
+                  transition: { duration: 2, repeat: Infinity }
+                }}
+              >
+                <h1 className="text-4xl md:text-9xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text text-center">
+                  Hello World!
+                </h1>
+              </motion.div>
+            </div>
+            <div className="flex-1 bg-[#efefef] flex items-center justify-center p-8">
+              <motion.img
+                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+                alt="Cloud with rain"
+                className="w-full h-auto object-contain max-w-md"
+                style={{ pointerEvents: "none" }}
+                animate={{
+                  scale: [1, 1.05, 1],
+                  transition: { duration: 2, repeat: Infinity }
+                }}
+              />
+            </div>
           </motion.div>
-        </div>
+        ) : (
+          <div className="h-screen flex flex-col p-4">
+            {/* Main content grid - 75% height */}
+            <div className="h-[75%] grid grid-cols-3 gap-4 mb-4">
+              {sections.map((section) => (
+                <Tooltip.Provider key={section.id}>
+                  <Tooltip.Root>
+                    <Tooltip.Trigger asChild>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => !section.isHighlight && handleClick(section)}
+                        className={
+                          p-4 rounded-xl cursor-pointer flex items-center justify-center
+                          ${section.isHighlight 
+                            ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-3' 
+                            : ${themeStyles.cardBg} hover:shadow-lg}
+                          transition-all duration-300 ease-in-out
+                        }
+                      >
+                        {section.isHighlight ? (
+                          <div className="text-center">
+                            <motion.h1 
+                              className="text-3xl font-bold mb-2"
+                              animate={{
+                                backgroundPosition: ['0%', '100%'],
+                                transition: { duration: 3, repeat: Infinity }
+                              }}
+                            >
+                              {section.text}
+                            </motion.h1>
+                            <p className="text-lg text-cyan-200">{section.subtitle}</p>
+                            <div className="flex justify-center gap-4 mt-3">
+                              <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                              <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                              <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="text-center">
+                            <div className="text-3xl mb-2">{section.icon}</div>
+                            <h2 className="text-lg font-semibold">{section.text}</h2>
+                          </div>
+                        )}
+                      </motion.div>
+                    </Tooltip.Trigger>
+                    <Tooltip.Portal>
+                      <Tooltip.Content
+                        className="rounded-md bg-gray-900 px-4 py-2 text-sm text-white shadow-md"
+                        sideOffset={5}
+                      >
+                        {section.tooltip}
+                        <Tooltip.Arrow className="fill-gray-900" />
+                      </Tooltip.Content>
+                    </Tooltip.Portal>
+                  </Tooltip.Root>
+                </Tooltip.Provider>
+              ))}
+            </div>
 
-        {/* Sections Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {sections.map((section) => (
-            <Tooltip.Root key={section.id}>
-              <Tooltip.Trigger>
-                <div
-                  className="p-4 border rounded-lg cursor-pointer hover:shadow-lg"
-                  onClick={() => handleClick(section)}
+            {/* DevOps Quote Section */}
+            <div className="py-4">
+              <motion.div 
+                className="relative z-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentQuoteIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className={${themeStyles.cardBg} rounded-xl p-4 max-w-3xl mx-auto shadow-lg backdrop-blur-sm}
+                  >
+                    <div className="flex items-center justify-center gap-4">
+                      <motion.div
+                        animate={{
+                          rotate: [0, 360],
+                          transition: { duration: 20, repeat: Infinity, ease: "linear" }
+                        }}
+                      >
+                        {devopsQuotes[currentQuoteIndex].icon}
+                      </motion.div>
+                      <p className="text-xl font-bold text-cyan-400">
+                        {devopsQuotes[currentQuoteIndex].text}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </motion.div>
+            </div>
+
+            {/* Geometric Patterns Background */}
+            <div className="fixed inset-0 z-0 opacity-5">
+              <div className="absolute top-0 left-0 w-24 h-24 bg-cyan-400 rounded-full blur-xl"></div>
+              <div className="absolute top-1/4 right-1/3 w-32 h-32 bg-blue-400 rounded-full blur-xl"></div>
+              <div className="absolute bottom-1/3 left-1/4 w-40 h-40 bg-purple-400 rounded-full blur-xl"></div>
+              <div className="absolute bottom-0 right-0 w-28 h-28 bg-pink-400 rounded-full blur-xl"></div>
+            </div>
+
+            {/* Navigation Controls */}
+            {activeSection && (
+              <div className="fixed bottom-4 right-4 flex gap-2 z-50">
+                <button
+                  onClick={goToPrevious}
+                  className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
                 >
-                  <h3 className="text-xl">{section.icon} {section.text}</h3>
-                </div>
-              </Tooltip.Trigger>
-              <Tooltip.Content>{section.tooltip}</Tooltip.Content>
-            </Tooltip.Root>
-          ))}
-        </div>
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={goToNext}
+                  className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+            )}
 
-        {/* Modal */}
-        <AnimatePresence>{renderModal()}</AnimatePresence>
-      </div>
+            <AnimatePresence>
+              {renderModal()}
+            </AnimatePresence>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
