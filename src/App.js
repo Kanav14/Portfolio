@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronLeft, Github, Linkedin, Mail, Terminal, Cloud, Server, Database, Sun, Moon } from 'lucide-react';
@@ -59,27 +58,11 @@ const EnhancedPortfolio = () => {
 
   const particlesConfig = {
     particles: {
-      number: {
-        value: 50,
-        density: {
-          enable: true,
-          value_area: 800
-        }
-      },
-      color: {
-        value: isDarkTheme ? "#ffffff" : "#000000"
-      },
-      shape: {
-        type: "circle"
-      },
-      opacity: {
-        value: 0.5,
-        random: false
-      },
-      size: {
-        value: 3,
-        random: true
-      },
+      number: { value: 50, density: { enable: true, value_area: 800 } },
+      color: { value: isDarkTheme ? "#ffffff" : "#000000" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5, random: false },
+      size: { value: 3, random: true },
       line_linked: {
         enable: true,
         distance: 150,
@@ -100,14 +83,8 @@ const EnhancedPortfolio = () => {
     interactivity: {
       detect_on: "canvas",
       events: {
-        onhover: {
-          enable: true,
-          mode: "repulse"
-        },
-        onclick: {
-          enable: true,
-          mode: "push"
-        },
+        onhover: { enable: true, mode: "repulse" },
+        onclick: { enable: true, mode: "push" },
         resize: true
       }
     },
@@ -185,12 +162,26 @@ const EnhancedPortfolio = () => {
           >
             &times;
           </button>
-          {activeSection.text === "About Me" && (
-            <AboutMe 
-              closeModal={closeModal} 
-              goToNext={goToNext} 
-              goToPrevious={goToPrevious} 
-            />
+          {activeSection.text === "About Me" ? (
+            <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Projects" ? (
+            <Project closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Experience" ? (
+            <Experience closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Education" ? (
+            <Education closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Certifications" ? (
+            <Certifications closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Skills and Knowledge Base" ? (
+            <SkillsAndKnowledge closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Extra Curricular" ? (
+            <ExtraCurricular closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Research and Patents" ? (
+            <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : (
+            <h2 className="text-2xl font-bold text-white">
+              Content for {activeSection.text} coming soon!
+            </h2>
           )}
         </motion.div>
       </motion.div>
@@ -207,7 +198,7 @@ const EnhancedPortfolio = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative`}>
+    <div className={`h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative`}>
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -263,13 +254,8 @@ const EnhancedPortfolio = () => {
             </div>
           </motion.div>
         ) : (
-          <motion.div
-            key="grid"
-            initial="hidden"
-            animate="visible"
-            className="container mx-auto px-4 py-8 md:px-6 md:py-12 relative z-10"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="h-screen flex flex-col p-4">
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-fr">
               {sections.map((section) => (
                 <Tooltip.Provider key={section.id}>
                   <Tooltip.Root>
@@ -279,17 +265,17 @@ const EnhancedPortfolio = () => {
                         whileTap={{ scale: 0.95 }}
                         onClick={() => !section.isHighlight && handleClick(section)}
                         className={`
-                          p-4 md:p-6 rounded-xl cursor-pointer flex items-center justify-center
+                          p-4 rounded-xl cursor-pointer flex items-center justify-center
                           ${section.isHighlight 
-                            ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-1 md:col-span-2 lg:col-span-3' 
+                            ? 'bg-gradient-to-br from-cyan-500 to-blue-600 md:col-span-3' 
                             : `${themeStyles.cardBg} hover:shadow-lg`}
-                          transition-all duration-300 ease-in-out h-40 md:h-52
+                          transition-all duration-300 ease-in-out
                         `}
                       >
                         {section.isHighlight ? (
                           <div className="text-center">
                             <motion.h1 
-                              className="text-3xl md:text-4xl font-bold mb-2 md:mb-3"
+                              className="text-3xl font-bold mb-2"
                               animate={{
                                 backgroundPosition: ['0%', '100%'],
                                 transition: { duration: 3, repeat: Infinity }
@@ -297,17 +283,17 @@ const EnhancedPortfolio = () => {
                             >
                               {section.text}
                             </motion.h1>
-                            <p className="text-lg md:text-xl text-cyan-200">{section.subtitle}</p>
-                            <div className="flex justify-center gap-4 md:gap-6 mt-3 md:mt-4">
-                              <Github className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer" />
-                              <Linkedin className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer" />
-                              <Mail className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer" />
+                            <p className="text-lg text-cyan-200">{section.subtitle}</p>
+                            <div className="flex justify-center gap-4 mt-3">
+                              <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                              <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                              <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
                             </div>
                           </div>
                         ) : (
                           <div className="text-center">
-                            <div className="text-3xl md:text-4xl mb-2 md:mb-3">{section.icon}</div>
-                            <h2 className="text-lg md:text-xl font-semibold">{section.text}</h2>
+                            <div className="text-3xl mb-2">{section.icon}</div>
+                            <h2 className="text-lg font-semibold">{section.text}</h2>
                           </div>
                         )}
                       </motion.div>
@@ -326,36 +312,38 @@ const EnhancedPortfolio = () => {
               ))}
             </div>
 
-            {/* Enhanced DevOps Quote Section */}
-            <motion.div 
-              className="mt-8 md:mt-16 mb-4 md:mb-8 relative z-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentQuoteIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className={`${themeStyles.cardBg} rounded-xl p-6 max-w-3xl mx-auto shadow-lg backdrop-blur-sm`}
-                >
-                  <div className="flex items-center justify-center gap-4">
-                    <motion.div
-                      animate={{
-                        rotate: [0, 360],
-                        transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                      }}
-                    >
-                      {devopsQuotes[currentQuoteIndex].icon}
-                    </motion.div>
-                    <p className="text-xl md:text-2xl font-bold text-cyan-400">
-                      {devopsQuotes[currentQuoteIndex].text}
-                    </p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </motion.div>
+            {/* DevOps Quote Section */}
+            <div className="py-4">
+              <motion.div 
+                className="relative z-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentQuoteIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className={`${themeStyles.cardBg} rounded-xl p-4 max-w-3xl mx-auto shadow-lg backdrop-blur-sm`}
+                  >
+                    <div className="flex items-center justify-center gap-4">
+                      <motion.div
+                        animate={{
+                          rotate: [0, 360],
+                          transition: { duration: 20, repeat: Infinity, ease: "linear" }
+                        }}
+                      >
+                        {devopsQuotes[currentQuoteIndex].icon}
+                      </motion.div>
+                      <p className="text-xl font-bold text-cyan-400">
+                        {devopsQuotes[currentQuoteIndex].text}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </motion.div>
+            </div>
 
             {/* Geometric Patterns Background */}
             <div className="fixed inset-0 z-0 opacity-5">
@@ -365,10 +353,28 @@ const EnhancedPortfolio = () => {
               <div className="absolute bottom-0 right-0 w-28 h-28 bg-pink-400 rounded-full blur-xl"></div>
             </div>
 
+            {/* Navigation Controls */}
+            {activeSection && (
+              <div className="fixed bottom-4 right-4 flex gap-2 z-50">
+                <button
+                  onClick={goToPrevious}
+                  className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={goToNext}
+                  className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+            )}
+
             <AnimatePresence>
               {renderModal()}
             </AnimatePresence>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>
