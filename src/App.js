@@ -115,7 +115,7 @@ const EnhancedPortfolio = () => {
 
   const goToNext = () => {
     const nextIndex = (currentSectionIndex + 1) % sections.length;
-    const nextSection = sections.find((_, index) => index === nextIndex);
+    const nextSection = sections[nextIndex];
     
     if (nextSection.isHighlight) {
       const afterHighlightIndex = (nextIndex + 1) % sections.length;
@@ -129,7 +129,7 @@ const EnhancedPortfolio = () => {
 
   const goToPrevious = () => {
     const prevIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
-    const prevSection = sections.find((_, index) => index === prevIndex);
+    const prevSection = sections[prevIndex];
     
     if (prevSection.isHighlight) {
       const beforeHighlightIndex = (prevIndex - 1 + sections.length) % sections.length;
@@ -147,17 +147,17 @@ const EnhancedPortfolio = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className={`fixed inset-0 ${isDarkTheme ? 'bg-black' : 'bg-white'} bg-opacity-50 flex justify-center items-center z-50`}
+        className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
         onClick={closeModal}
       >
         <motion.div
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
-          className={`${isDarkTheme ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl`}
+          className="bg-gray-800 p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl"
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className={`absolute top-3 right-3 ${isDarkTheme ? 'text-white' : 'text-black'} text-xl hover:text-cyan-400`}
+            className="absolute top-3 right-3 text-white text-xl hover:text-cyan-400"
             onClick={closeModal}
           >
             &times;
@@ -179,10 +179,26 @@ const EnhancedPortfolio = () => {
           ) : activeSection.text === "Research and Patents" ? (
             <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : (
-            <h2 className={`text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className="text-2xl font-bold text-white">
               Content for {activeSection.text} coming soon!
             </h2>
           )}
+          
+          {/* Navigation Controls */}
+          <div className="flex justify-center gap-4 mt-6">
+            <button
+              onClick={goToPrevious}
+              className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <button
+              onClick={goToNext}
+              className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          </div>
         </motion.div>
       </motion.div>
     );
@@ -255,68 +271,55 @@ const EnhancedPortfolio = () => {
           </motion.div>
         ) : (
           <div className="h-screen flex flex-col p-4">
-            {/* Main content grid - 75% height */}
-            <div className="h-[75%] grid grid-cols-3 gap-4 mb-4">
-              {sections.map((section) => (
-                <Tooltip.Provider key={section.id}>
-                  <Tooltip.Root>
-                    <Tooltip.Trigger asChild>
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => !section.isHighlight && handleClick(section)}
-                        className={`
-                          p-4 rounded-xl cursor-pointer flex items-center justify-center
-                          ${section.isHighlight 
-                            ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-3' 
-                            : `${themeStyles.cardBg} hover:shadow-lg`}
-                          transition-all duration-300 ease-in-out
-                        `}
-                      >
-                        {section.isHighlight ? (
-                          <div className="text-center">
-                            <motion.h1 
-                              className="text-3xl font-bold mb-2"
-                              animate={{
-                                backgroundPosition: ['0%', '100%'],
-                                transition: { duration: 3, repeat: Infinity }
-                              }}
-                            >
-                              {section.text}
-                            </motion.h1>
-                            <p className="text-lg text-cyan-200">{section.subtitle}</p>
-                            <div className="flex justify-center gap-4 mt-3">
-                              <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                              <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                              <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="text-center">
-                            <div className="text-3xl mb-2">{section.icon}</div>
-                            <h2 className="text-lg font-semibold">{section.text}</h2>
-                          </div>
-                        )}
-                      </motion.div>
-                    </Tooltip.Trigger>
-                    <Tooltip.Portal>
-                      <Tooltip.Content
-                        className="rounded-md bg-gray-900 px-4 py-2 text-sm text-white shadow-md"
-                        sideOffset={5}
-                      >
-                        {section.tooltip}
-                        <Tooltip.Arrow className="fill-gray-900" />
-                      </Tooltip.Content>
-                    </Tooltip.Portal>
-                  </Tooltip.Root>
-                </Tooltip.Provider>
-              ))}
+            <div className="h-[75%] mb-4">
+              <div className="grid grid-cols-3 gap-4 h-full">
+                {sections.map((section) => (
+                  <motion.div
+                    key={section.id}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => !section.isHighlight && handleClick(section)}
+                    className={`
+                      p-4 rounded-xl cursor-pointer flex items-center justify-center
+                      ${section.isHighlight 
+                        ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-3' 
+                        : `${themeStyles.cardBg} hover:shadow-lg`}
+                      transition-all duration-300 ease-in-out h-full
+                    `}
+                  >
+                    {section.isHighlight ? (
+                      <div className="text-center">
+                        <motion.h1 
+                          className="text-3xl font-bold mb-2"
+                          animate={{
+                            backgroundPosition: ['0%', '100%'],
+                            transition: { duration: 3, repeat: Infinity }
+                          }}
+                        >
+                          {section.text}
+                        </motion.h1>
+                        <p className="text-lg text-cyan-200">{section.subtitle}</p>
+                        <div className="flex justify-center gap-4 mt-3">
+                          <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                          <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                          <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <div className="text-3xl mb-2">{section.icon}</div>
+                        <h2 className="text-lg font-semibold">{section.text}</h2>
+                      </div>
+                   )}
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
-            {/* DevOps Quote Section */}
-            <div className="py-4">
+            {/* DevOps Quote Section - 25% height */}
+            <div className="h-[25%] flex items-center justify-center">
               <motion.div 
-                className="relative z-10"
+                className="w-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >
@@ -354,20 +357,20 @@ const EnhancedPortfolio = () => {
               <div className="absolute bottom-0 right-0 w-28 h-28 bg-pink-400 rounded-full blur-xl"></div>
             </div>
 
-            {/* Navigation Controls */}
+            {/* Navigation Controls for Modal */}
             {activeSection && (
               <div className="fixed bottom-4 right-4 flex gap-2 z-50">
                 <button
                   onClick={goToPrevious}
                   className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <ChevronLeft className="w-6 h-6 text-white" />
                 </button>
                 <button
                   onClick={goToNext}
                   className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
                 >
-                  <ChevronRight className="w-6 h-6" />
+                  <ChevronRight className="w-6 h-6 text-white" />
                 </button>
               </div>
             )}
@@ -383,3 +386,4 @@ const EnhancedPortfolio = () => {
 };
 
 export default EnhancedPortfolio;
+
