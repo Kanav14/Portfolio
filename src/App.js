@@ -141,16 +141,6 @@ const EnhancedPortfolio = () => {
     }
   };
 
-  const themeStyles = isDarkTheme ? {
-    background: 'from-gray-900 to-black',
-    text: 'text-white',
-    cardBg: 'bg-gray-800'
-  } : {
-    background: 'from-gray-100 to-white',
-    text: 'text-gray-900',
-    cardBg: 'bg-white'
-  };
-
   const renderModal = () =>
     activeSection && (
       <motion.div
@@ -212,6 +202,83 @@ const EnhancedPortfolio = () => {
       </motion.div>
     );
 
+  const renderSections = () => (
+    <div className="grid grid-cols-3 grid-rows-3 gap-4 h-full">
+      {sections.map((section) => (
+        <Tooltip.Provider key={section.id}>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <motion.div
+                onClick={() => !section.isHighlight && handleClick(section)}
+                className={`
+                  relative rounded-xl cursor-pointer
+                  ${section.isHighlight 
+                    ? 'bg-gradient-to-br from-cyan-500 to-blue-600' 
+                    : isDarkTheme ? 'bg-gray-800' : 'bg-white'}
+                  flex items-center justify-center transition-all duration-300
+                  hover:shadow-lg
+                `}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="text-center p-4">
+                  {section.isHighlight ? (
+                    <>
+                      <motion.h1 
+                        className="text-2xl md:text-3xl font-bold mb-2"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        {section.text}
+                      </motion.h1>
+                      <motion.p
+                        className="text-lg md:text-xl text-cyan-200 mb-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        {section.subtitle}
+                      </motion.p>
+                      <div className="flex justify-center gap-4">
+                        <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                        <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                        <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-3xl mb-2">{section.icon}</div>
+                      <h2 className="text-lg md:text-xl font-bold hover:text-cyan-400 transition-colors">
+                        {section.text}
+                      </h2>
+                    </>
+                  )}
+                </div>
+              </motion.div>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content
+                className="rounded-md bg-gray-900 px-4 py-2 text-sm text-white shadow-md"
+                sideOffset={5}
+              >
+                {section.tooltip}
+                <Tooltip.Arrow className="fill-gray-900" />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      ))}
+    </div>
+  );
+
+  const themeStyles = isDarkTheme ? {
+    background: 'from-gray-900 to-black',
+    text: 'text-white'
+  } : {
+    background: 'from-gray-100 to-white',
+    text: 'text-gray-900'
+  };
+
   return (
     <div className={`h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative`}>
       <Particles
@@ -269,84 +336,21 @@ const EnhancedPortfolio = () => {
             </div>
           </motion.div>
         ) : (
-          <div className="h-screen flex flex-col relative z-10">
+          <div className="h-screen flex flex-col p-4">
             {/* Grid Section - 75% height */}
-            <div className="h-[75%] p-4">
-              <div className="grid grid-cols-3 grid-rows-3 gap-4 h-full">
-                {sections.map((section) => (
-                  <Tooltip.Provider key={section.id}>
-                    <Tooltip.Root>
-                      <Tooltip.Trigger asChild>
-                        <motion.div
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          onClick={() => handleClick(section)}
-                          className={`
-                            relative flex items-center justify-center cursor-pointer rounded-xl
-                            ${section.isHighlight 
-                              ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-3' 
-                              : `${themeStyles.cardBg} hover:shadow-lg`}
-                            transition-all duration-300 ease-in-out
-                          `}
-                        >
-                          {section.isHighlight ? (
-                            <div className="text-center p-4">
-                              <motion.h1 
-                                className="text-4xl font-bold mb-2"
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1 }}
-                              >
-                                {section.text}
-                              </motion.h1>
-                              <motion.p
-                                className="text-xl text-cyan-200"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1, delay: 0.3 }}
-                              >
-                                {section.subtitle}
-                              </motion.p>
-                              <div className="flex justify-center gap-4 mt-4">
-                                <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                                <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                                <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="text-center p-4">
-                              <div className="text-3xl mb-2">{section.icon}</div>
-                              <h2 className="text-xl font-bold hover:text-cyan-400 transition-colors">
-                                {section.text}
-                              </h2>
-                            </div>
-                          )}
-                        </motion.div>
-                      </Tooltip.Trigger>
-                      <Tooltip.Portal>
-                        <Tooltip.Content
-                          className="rounded-md bg-gray-900 px-4 py-2 text-sm text-white shadow-md"
-                          sideOffset={5}
-                        >
-                          {section.tooltip}
-                          <Tooltip.Arrow className="fill-gray-900" />
-                        </Tooltip.Content>
-                      </Tooltip.Portal>
-                    </Tooltip.Root>
-                  </Tooltip.Provider>
-                ))}
-              </div>
+            <div className="h-[75%] mb-4">
+              {renderSections()}
             </div>
 
             {/* Quote Section - 25% height */}
-            <div className="h-[25%] flex items-center justify-center px-4">
+            <div className="h-[25%] flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentQuoteIndex}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className={`${themeStyles.cardBg} rounded-xl p-6 max-w-3xl w-full shadow-lg backdrop-blur-sm`}
+                  className={`${isDarkTheme ? 'bg-gray-800' : 'bg-white'} rounded-xl p-6 max-w-3xl w-full shadow-lg`}
                 >
                   <div className="flex items-center justify-center gap-4">
                     <motion.div
