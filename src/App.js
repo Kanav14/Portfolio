@@ -203,84 +203,60 @@ const EnhancedPortfolio = () => {
     );
 
   const renderSections = () => (
-    <div className="grid grid-cols-3 grid-rows-3 gap-4 h-full">
+    <div className="grid grid-cols-3 grid-rows-3 w-full h-full gap-2 p-2">
       {sections.map((section) => (
-        <Tooltip.Provider key={section.id}>
-          <Tooltip.Root>
-            <Tooltip.Trigger asChild>
-              <motion.div
-                onClick={() => !section.isHighlight && handleClick(section)}
-                className={`
-                  relative rounded-xl cursor-pointer
-                  ${section.isHighlight 
-                    ? 'bg-gradient-to-br from-cyan-500 to-blue-600' 
-                    : isDarkTheme ? 'bg-gray-800' : 'bg-white'}
-                  flex items-center justify-center transition-all duration-300
-                  hover:shadow-lg
-                `}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+        <div
+          key={section.id}
+          className={`relative ${
+            section.isHighlight
+              ? "bg-black text-white shadow-highlight border border-cyan-400"
+              : `${isDarkTheme ? 'bg-gray-800' : 'bg-white'} border border-gray-200 rounded-lg shadow-md`
+          } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
+          onClick={() => handleClick(section)}
+        >
+          {section.isHighlight ? (
+            <div className="text-center p-2">
+              <motion.h1
+                className="text-2xl md:text-5xl font-extrabold"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut" }}
               >
-                <div className="text-center p-4">
-                  {section.isHighlight ? (
-                    <>
-                      <motion.h1 
-                        className="text-2xl md:text-3xl font-bold mb-2"
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                      >
-                        {section.text}
-                      </motion.h1>
-                      <motion.p
-                        className="text-lg md:text-xl text-cyan-200 mb-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        {section.subtitle}
-                      </motion.p>
-                      <div className="flex justify-center gap-4">
-                        <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                        <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                        <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-3xl mb-2">{section.icon}</div>
-                      <h2 className="text-lg md:text-xl font-bold hover:text-cyan-400 transition-colors">
-                        {section.text}
-                      </h2>
-                    </>
-                  )}
-                </div>
-              </motion.div>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content
-                className="rounded-md bg-gray-900 px-4 py-2 text-sm text-white shadow-md"
-                sideOffset={5}
+                Kanav Sharma
+              </motion.h1>
+              <motion.p
+                className="text-base md:text-2xl mt-1 font-medium text-cyan-400"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 1.5,
+                  ease: "easeOut",
+                  delay: 0.3,
+                }}
               >
-                {section.tooltip}
-                <Tooltip.Arrow className="fill-gray-900" />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
+                DevOps Engineer
+              </motion.p>
+              <div className="flex justify-center gap-4 mt-3">
+                <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+                <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
+              </div>
+            </div>
+          ) : (
+            <div className="text-center">
+              <div className="text-3xl mb-2">{section.icon}</div>
+              <p className={`text-lg md:text-2xl font-bold px-2 ${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors duration-300`}>
+                {section.text}
+              </p>
+            </div>
+          )}
+        </div>
       ))}
     </div>
   );
 
-  const themeStyles = isDarkTheme ? {
-    background: 'from-gray-900 to-black',
-    text: 'text-white'
-  } : {
-    background: 'from-gray-100 to-white',
-    text: 'text-gray-900'
-  };
-
   return (
-    <div className={`h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative`}>
+    <div className={`h-screen bg-gradient-to-br ${themeStyles.background} overflow-hidden relative`}>
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -303,47 +279,15 @@ const EnhancedPortfolio = () => {
 
       <AnimatePresence mode="wait">
         {showHelloWorld ? (
-          <motion.div
-            key="hello"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="h-screen flex flex-col md:flex-row relative z-10"
-          >
-            <div className={`flex-1 ${isDarkTheme ? 'bg-black' : 'bg-white'} flex items-center justify-center p-4 md:p-0`}>
-              <motion.div
-                animate={{
-                  y: [0, -20, 0],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              >
-                <h1 className="text-4xl md:text-9xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text text-center">
-                  Hello World!
-                </h1>
-              </motion.div>
-            </div>
-            <div className="flex-1 bg-[#efefef] flex items-center justify-center p-8">
-              <motion.img
-                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-                alt="Cloud with rain"
-                className="w-full h-auto object-contain max-w-md"
-                style={{ pointerEvents: "none" }}
-                animate={{
-                  scale: [1, 1.05, 1],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              />
-            </div>
-          </motion.div>
+          renderHelloWorld()
         ) : (
-          <div className="h-screen flex flex-col p-4">
-            {/* Grid Section - 75% height */}
-            <div className="h-[75%] mb-4">
+          <div className="relative w-full h-screen flex flex-col">
+            <div className="flex-1">
               {renderSections()}
             </div>
 
-            {/* Quote Section - 25% height */}
-            <div className="h-[25%] flex items-center justify-center">
+            {/* Quote Section */}
+            <div className="h-[25%] flex items-center justify-center p-4">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentQuoteIndex}
@@ -369,6 +313,10 @@ const EnhancedPortfolio = () => {
               </AnimatePresence>
             </div>
 
+            <AnimatePresence>
+              {renderModal()}
+            </AnimatePresence>
+
             {/* Geometric Patterns Background */}
             <div className="fixed inset-0 z-0 opacity-5">
               <div className="absolute top-0 left-0 w-24 h-24 bg-cyan-400 rounded-full blur-xl"></div>
@@ -376,10 +324,6 @@ const EnhancedPortfolio = () => {
               <div className="absolute bottom-1/3 left-1/4 w-40 h-40 bg-purple-400 rounded-full blur-xl"></div>
               <div className="absolute bottom-0 right-0 w-28 h-28 bg-pink-400 rounded-full blur-xl"></div>
             </div>
-
-            <AnimatePresence>
-              {renderModal()}
-            </AnimatePresence>
           </div>
         )}
       </AnimatePresence>
