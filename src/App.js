@@ -115,7 +115,7 @@ function App() {
             relative rounded-xl cursor-pointer transition-all duration-300
             ${section.isHighlight
               ? 'bg-gradient-to-r from-cyan-500 to-blue-600'
-              : 'bg-[#1e2736] hover:bg-[#2a3545]'
+              : 'bg-[#030306] hover:bg-[#0a0a0f]'
             }
             flex items-center justify-center overflow-hidden
           `}
@@ -158,7 +158,7 @@ function App() {
 
   const renderHelloWorld = () => (
     <div className="flex h-screen">
-      <div className="flex-1 bg-[#111827] flex justify-center items-center">
+      <div className="flex-1 bg-[#030306] flex justify-center items-center">
         <motion.h1
           className="text-7xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text"
           animate={{
@@ -169,7 +169,7 @@ function App() {
           Hello World!
         </motion.h1>
       </div>
-      <div className="flex-1 bg-[#1e2736] flex justify-center items-center">
+      <div className="flex-1 bg-[#efefef] flex justify-center items-center">
         <motion.img
           src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
           alt="Cloud with rain"
@@ -192,7 +192,7 @@ function App() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="bg-[#1e2736] rounded-xl p-6 max-w-3xl w-full"
+          className="bg-[#030306] rounded-xl p-6 max-w-3xl w-full"
         >
           <div className="flex items-center justify-center gap-4">
             <motion.div
@@ -222,7 +222,7 @@ function App() {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-[#1e2736] p-6 rounded-xl shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl"
+          className="bg-[#030306] p-6 rounded-xl shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl"
           onClick={(e) => e.stopPropagation()}
         >
           <button
