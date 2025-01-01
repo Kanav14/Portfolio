@@ -39,7 +39,6 @@ function App() {
     }
   ];
 
-  // Sections Data
   const sections = [
     { id: 1, text: "About Me" },
     { id: 2, text: "Experience" },
@@ -106,18 +105,39 @@ function App() {
     }
   };
 
+  const renderHelloWorld = () => (
+    <div className="flex h-full">
+      <div className="flex-1 bg-black flex justify-center items-center">
+        <motion.h1
+          className="text-white text-4xl md:text-8xl font-extrabold animate-hanging"
+          initial={{ y: 0 }}
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+        >
+          Hello World!
+        </motion.h1>
+      </div>
+      <div className="flex-1 bg-[#efefef] flex justify-center items-center relative">
+        <img
+          src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+          alt="Cloud with rain"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto max-w-full"
+          style={{ pointerEvents: "none" }}
+        />
+      </div>
+    </div>
+  );
+
   const renderSectionsGrid = () => (
-    <div className="grid grid-cols-3 grid-rows-3 w-full h-[75%] gap-2 p-2">
+    <div className="grid grid-cols-3 grid-rows-3 w-full h-full gap-2 p-2">
       {sections.map((section) => (
         <div
           key={section.id}
           className={`relative ${
             section.isHighlight
               ? "bg-black text-white shadow-highlight border border-cyan-400"
-              : isDarkTheme 
-                ? "bg-gray-800 text-white"
-                : "bg-white text-black border border-gray-200"
-          } rounded-lg shadow-md flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
+              : "bg-white text-black border border-gray-200 rounded-lg shadow-md"
+          } flex justify-center items-center cursor-pointer hover:shadow-lg transition-transform duration-300`}
           onClick={() => handleClick(section)}
         >
           {section.isHighlight ? (
@@ -142,19 +162,42 @@ function App() {
               >
                 DevOps Engineer
               </motion.p>
-              <div className="flex justify-center gap-4 mt-3">
-                <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-              </div>
             </div>
           ) : (
-            <p className="text-sm md:text-2xl font-bold text-center px-2 hover:text-cyan-400 transition-colors duration-300">
+            <p className="text-sm md:text-2xl font-bold text-center px-2 text-gray-800 hover:text-cyan-400 transition-colors duration-300">
               {section.text}
             </p>
           )}
         </div>
       ))}
+    </div>
+  );
+
+  const renderQuoteSection = () => (
+    <div className="h-[25%] flex items-center justify-center px-4">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentQuoteIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="bg-gray-800 rounded-xl p-6 max-w-3xl w-full shadow-lg"
+        >
+          <div className="flex items-center justify-center gap-4">
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+                transition: { duration: 20, repeat: Infinity, ease: "linear" }
+              }}
+            >
+              {devopsQuotes[currentQuoteIndex].icon}
+            </motion.div>
+            <p className="text-xl font-bold text-cyan-400">
+              {devopsQuotes[currentQuoteIndex].text}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 
@@ -232,20 +275,20 @@ function App() {
     );
 
   return (
-    <div className={`h-screen bg-gradient-to-br ${isDarkTheme ? 'from-gray-900 to-black' : 'from-gray-100 to-white'} overflow-hidden relative`}>
+    <div className="relative w-full h-screen bg-overall-gradient">
       <Particles
         id="tsparticles"
         init={particlesInit}
         options={{
           particles: {
             number: { value: 50, density: { enable: true, value_area: 800 } },
-            color: { value: isDarkTheme ? "#ffffff" : "#000000" },
+            color: { value: "#ffffff" },
             opacity: { value: 0.5 },
             size: { value: 3 },
             line_linked: {
               enable: true,
               distance: 150,
-              color: isDarkTheme ? "#ffffff" : "#000000",
+              color: "#ffffff",
               opacity: 0.4,
               width: 1
             },
@@ -268,46 +311,17 @@ function App() {
         />
       </div>
 
-      <AnimatePresence mode="wait">
+      <div className="relative w-full h-screen overflow-hidden z-10">
         {showHelloWorld ? (
           renderHelloWorld()
         ) : (
-          <div className="relative h-screen flex flex-col z-10">
+          <div className="h-full flex flex-col">
             {renderSectionsGrid()}
-
-            {/* Quote Section */}
-            <div className="h-[25%] flex items-center justify-center px-4">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentQuoteIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className={`${isDarkTheme ? 'bg-gray-800' : 'bg-white'} rounded-xl p-6 max-w-3xl w-full shadow-lg`}
-                >
-                  <div className="flex items-center justify-center gap-4">
-                    <motion.div
-                      animate={{
-                        rotate: [0, 360],
-                        transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                      }}
-                    >
-                      {devopsQuotes[currentQuoteIndex].icon}
-                    </motion.div>
-                    <p className="text-xl font-bold text-cyan-400">
-                      {devopsQuotes[currentQuoteIndex].text}
-                    </p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <AnimatePresence>
-              {renderModal()}
-            </AnimatePresence>
+            {renderQuoteSection()}
+            {renderModal()}
           </div>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   );
 }
