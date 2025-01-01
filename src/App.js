@@ -1,7 +1,3 @@
-// First, install these packages:
-// npm install react-particles tsparticles framer-motion @radix-ui/react-tooltip react-custom-cursor
-// npm install react-switch
-
 // App.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,7 +6,6 @@ import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import Switch from 'react-switch';
-import CustomCursor from 'react-custom-cursor';
 import AboutMe from "./AboutMe";
 import Project from "./Project";
 import Experience from "./Experience";
@@ -190,7 +185,6 @@ const EnhancedPortfolio = () => {
           >
             &times;
           </button>
-          {/* Your existing modal content components */}
           {activeSection.text === "About Me" && (
             <AboutMe 
               closeModal={closeModal} 
@@ -198,7 +192,6 @@ const EnhancedPortfolio = () => {
               goToPrevious={goToPrevious} 
             />
           )}
-          {/* Add similar conditions for other components */}
         </motion.div>
       </motion.div>
     );
@@ -215,18 +208,6 @@ const EnhancedPortfolio = () => {
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative`}>
-      <CustomCursor
-        targets={['.hover-target']}
-        customClass='custom-cursor'
-        dimensions={30}
-        fill={isDarkTheme ? '#fff' : '#000'}
-        smoothness={{
-          movement: 0.2,
-          scale: 0.1,
-          opacity: 0.2,
-        }}
-      />
-      
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -298,12 +279,11 @@ const EnhancedPortfolio = () => {
                         whileTap={{ scale: 0.95 }}
                         onClick={() => !section.isHighlight && handleClick(section)}
                         className={`
-                          hover-target
-                          h-40 md:h-52 p-4 md:p-6 rounded-xl cursor-pointer flex items-center justify-center
+                          p-4 md:p-6 rounded-xl cursor-pointer flex items-center justify-center
                           ${section.isHighlight 
                             ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-1 md:col-span-2 lg:col-span-3' 
                             : `${themeStyles.cardBg} hover:shadow-lg`}
-                          transition-all duration-300 ease-in-out
+                          transition-all duration-300 ease-in-out h-40 md:h-52
                         `}
                       >
                         {section.isHighlight ? (
@@ -319,9 +299,9 @@ const EnhancedPortfolio = () => {
                             </motion.h1>
                             <p className="text-lg md:text-xl text-cyan-200">{section.subtitle}</p>
                             <div className="flex justify-center gap-4 md:gap-6 mt-3 md:mt-4">
-                              <Github className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer hover-target" />
-                              <Linkedin className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer hover-target" />
-                              <Mail className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer hover-target" />
+                              <Github className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer" />
+                              <Linkedin className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer" />
+                              <Mail className="w-6 h-6 md:w-7 md:h-7 hover:text-cyan-300 cursor-pointer" />
                             </div>
                           </div>
                         ) : (
