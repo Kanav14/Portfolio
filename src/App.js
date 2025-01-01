@@ -143,66 +143,70 @@ function App() {
 
   const renderSectionsGrid = () => (
     <div className="grid grid-cols-3 grid-rows-3 w-full h-[75%] gap-4 p-4">
-      {sections.map((section) => (
-        <Tooltip.Provider key={section.id}>
-          <Tooltip.Root>
-            <Tooltip.Trigger asChild>
+      {sections.map((section) => {
+        if (section.isHighlight) {
+          return (
+            <div
+              key={section.id}
+              className="relative bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl shadow-lg flex items-center justify-center"
+            >
+              <div className="text-center p-4">
+                <motion.h1
+                  className="text-2xl md:text-4xl font-bold text-white mb-2"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  {section.text}
+                </motion.h1>
+                <motion.p
+                  className="text-lg md:text-xl text-cyan-200 mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  {section.subtitle}
+                </motion.p>
+                <div className="flex justify-center gap-4">
+                  <Github className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
+                  <Linkedin className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
+                  <Mail className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <Tooltip.Provider key={section.id}>
+            <Tooltip.Root>
               <div
-                className={`relative ${
-                  section.isHighlight
-                    ? "bg-gradient-to-br from-cyan-500 to-blue-600"
-                    : isDarkTheme 
-                      ? "bg-gray-800" 
-                      : "bg-white"
-                } rounded-xl shadow-lg flex items-center justify-center cursor-pointer
-                hover:shadow-lg transition-transform duration-300 border border-transparent hover:border-cyan-400`}
+                className={`
+                  relative rounded-xl shadow-lg flex items-center justify-center cursor-pointer
+                  ${isDarkTheme ? 'bg-gray-800' : 'bg-white'} 
+                  hover:shadow-lg transition-all duration-300 border border-transparent hover:border-cyan-400
+                `}
                 onClick={() => handleClick(section)}
               >
-                {section.isHighlight ? (
-                  <div className="text-center p-4">
-                    <motion.h1
-                      className="text-2xl md:text-4xl font-bold text-white mb-2"
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                    >
-                      {section.text}
-                    </motion.h1>
-                    <motion.p
-                      className="text-lg md:text-xl text-cyan-200 mb-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      {section.subtitle}
-                    </motion.p>
-                    <div className="flex justify-center gap-4">
-                      <Github className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
-                      <Linkedin className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
-                      <Mail className="w-6 h-6 text-white hover:text-cyan-300 cursor-pointer" />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="text-center p-4">
-                    <div className="text-3xl mb-2">{section.icon}</div>
-                    <p className={`text-lg md:text-xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400`}>
-                      {section.text}
-                    </p>
-                  </div>
-                )}
+                <div className="text-center p-4">
+                  <div className="text-3xl mb-2">{section.icon}</div>
+                  <p className={`text-lg md:text-xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400`}>
+                    {section.text}
+                  </p>
+                </div>
+                <Tooltip.Portal>
+                  <Tooltip.Content
+                    className="rounded-md bg-gray-900 px-4 py-2 text-sm text-white shadow-md"
+                    sideOffset={5}
+                  >
+                    {section.tooltip}
+                    <Tooltip.Arrow className="fill-gray-900" />
+                  </Tooltip.Content>
+                </Tooltip.Portal>
               </div>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <Tooltip.Content
-                className="rounded-md bg-gray-900 px-4 py-2 text-sm text-white shadow-md"
-                sideOffset={5}
-              >
-                {section.tooltip}
-                <Tooltip.Arrow className="fill-gray-900" />
-              </Tooltip.Content>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
-      ))}
+            </Tooltip.Root>
+          </Tooltip.Provider>
+        );
+      })}
     </div>
   );
 
@@ -251,13 +255,19 @@ function App() {
           
           <div className="flex justify-center gap-4 mt-6">
             <button
-              onClick={goToPrevious}
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrevious();
+              }}
               className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
             >
               <ChevronLeft className="w-6 h-6 text-white" />
             </button>
             <button
-              onClick={goToNext}
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
               className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
             >
               <ChevronRight className="w-6 h-6 text-white" />
