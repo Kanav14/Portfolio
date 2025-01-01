@@ -179,7 +179,7 @@ const EnhancedPortfolio = () => {
           ) : activeSection.text === "Research and Patents" ? (
             <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : (
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className={`text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-900'}`}>
               Content for {activeSection.text} coming soon!
             </h2>
           )}
@@ -255,7 +255,8 @@ const EnhancedPortfolio = () => {
           </motion.div>
         ) : (
           <div className="h-screen flex flex-col p-4">
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-fr">
+            {/* Main content grid - 75% height */}
+            <div className="h-[75%] grid grid-cols-3 gap-4 mb-4">
               {sections.map((section) => (
                 <Tooltip.Provider key={section.id}>
                   <Tooltip.Root>
@@ -267,7 +268,7 @@ const EnhancedPortfolio = () => {
                         className={`
                           p-4 rounded-xl cursor-pointer flex items-center justify-center
                           ${section.isHighlight 
-                            ? 'bg-gradient-to-br from-cyan-500 to-blue-600 md:col-span-3' 
+                            ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-3' 
                             : `${themeStyles.cardBg} hover:shadow-lg`}
                           transition-all duration-300 ease-in-out
                         `}
