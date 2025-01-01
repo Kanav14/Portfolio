@@ -106,7 +106,7 @@ function App() {
   };
 
   const renderSectionsGrid = () => (
-    <div className="grid grid-cols-3 grid-rows-3 w-full h-[75%] gap-4 p-4">
+    <div className="grid grid-cols-3 auto-rows-fr gap-4 h-[75vh] p-4">
       {sections.map((section) => (
         <div
           key={section.id}
@@ -156,8 +156,36 @@ function App() {
     </div>
   );
 
+  const renderHelloWorld = () => (
+    <div className="flex h-screen">
+      <div className="flex-1 bg-[#111827] flex justify-center items-center">
+        <motion.h1
+          className="text-7xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text"
+          animate={{
+            y: [0, -20, 0],
+            transition: { duration: 2, repeat: Infinity }
+          }}
+        >
+          Hello World!
+        </motion.h1>
+      </div>
+      <div className="flex-1 bg-[#1e2736] flex justify-center items-center">
+        <motion.img
+          src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
+          alt="Cloud with rain"
+          className="w-3/4 h-auto max-w-md"
+          style={{ pointerEvents: "none" }}
+          animate={{
+            scale: [1, 1.05, 1],
+            transition: { duration: 2, repeat: Infinity }
+          }}
+        />
+      </div>
+    </div>
+  );
+
   const renderQuoteSection = () => (
-    <div className="h-[25%] flex items-center justify-center px-4">
+    <div className="h-[25vh] flex items-center justify-center px-4">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentQuoteIndex}
@@ -250,7 +278,7 @@ function App() {
     );
 
   return (
-    <div className="min-h-screen bg-[#111827] text-white">
+    <div className="min-h-screen bg-[#111827]">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -294,33 +322,9 @@ function App() {
 
       <div className="relative z-10">
         {showHelloWorld ? (
-          <div className="flex h-screen">
-            <div className="flex-1 bg-black flex justify-center items-center">
-              <motion.h1
-                className="text-7xl font-bold text-white"
-                animate={{
-                  y: [0, -20, 0],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              >
-                Hello World!
-              </motion.h1>
-            </div>
-            <div className="flex-1 bg-[#efefef] flex justify-center items-center">
-              <motion.img
-                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-                alt="Cloud with rain"
-                className="w-3/4 h-auto max-w-md"
-                style={{ pointerEvents: "none" }}
-                animate={{
-                  scale: [1, 1.05, 1],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              />
-            </div>
-          </div>
+          renderHelloWorld()
         ) : (
-          <div className="min-h-screen flex flex-col">
+          <div className="h-screen flex flex-col">
             {renderSectionsGrid()}
             {renderQuoteSection()}
             <AnimatePresence>
