@@ -153,7 +153,7 @@ const EnhancedPortfolio = () => {
         <motion.div
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
-          className={`${isDarkTheme ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl`}
+          className={`absolute p-6 rounded-lg shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl ${isDarkTheme ? 'bg-gray-800' : 'bg-white'}`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -199,15 +199,8 @@ const EnhancedPortfolio = () => {
 
   return (
     <div className={`h-screen bg-gradient-to-br ${themeStyles.background} ${themeStyles.text} overflow-hidden relative`}>
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={particlesConfig}
-        className="absolute inset-0"
-      />
-
       {/* Theme Toggle */}
-      <div className="absolute top-4 right-4 z-50">
+      <div className="absolute top-4 right-4">
         <Switch
           checked={isDarkTheme}
           onChange={() => setIsDarkTheme(!isDarkTheme)}
@@ -219,165 +212,57 @@ const EnhancedPortfolio = () => {
         />
       </div>
 
-      <AnimatePresence mode="wait">
-        {showHelloWorld ? (
-          <motion.div
-            key="hello"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="h-screen flex flex-col md:flex-row relative z-10"
-          >
-            <div className={`flex-1 ${isDarkTheme ? 'bg-black' : 'bg-white'} flex items-center justify-center p-4 md:p-0`}>
-              <motion.div
-                animate={{
-                  y: [0, -20, 0],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              >
-                <h1 className="text-4xl md:text-9xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text text-center">
-                  Hello World!
-                </h1>
-              </motion.div>
-            </div>
-            <div className="flex-1 bg-[#efefef] flex items-center justify-center p-8">
-              <motion.img
-                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-                alt="Cloud with rain"
-                className="w-full h-auto object-contain max-w-md"
-                style={{ pointerEvents: "none" }}
-                animate={{
-                  scale: [1, 1.05, 1],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              />
-            </div>
-          </motion.div>
-        ) : (
-          <div className="h-screen flex flex-col p-4">
-            {/* Main content grid - 75% height */}
-            <div className="h-[75%] grid grid-cols-3 gap-4 mb-4">
-              {sections.map((section) => (
-                <Tooltip.Provider key={section.id}>
-                  <Tooltip.Root>
-                    <Tooltip.Trigger asChild>
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => !section.isHighlight && handleClick(section)}
-                        className={`
-                          p-4 rounded-xl cursor-pointer flex items-center justify-center
-                          ${section.isHighlight 
-                            ? 'bg-gradient-to-br from-cyan-500 to-blue-600 col-span-3' 
-                            : `${themeStyles.cardBg} hover:shadow-lg`}
-                          transition-all duration-300 ease-in-out
-                        `}
-                      >
-                        {section.isHighlight ? (
-                          <div className="text-center">
-                            <motion.h1 
-                              className="text-3xl font-bold mb-2"
-                              animate={{
-                                backgroundPosition: ['0%', '100%'],
-                                transition: { duration: 3, repeat: Infinity }
-                              }}
-                            >
-                              {section.text}
-                            </motion.h1>
-                            <p className="text-lg text-cyan-200">{section.subtitle}</p>
-                            <div className="flex justify-center gap-4 mt-3">
-                              <Github className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                              <Linkedin className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                              <Mail className="w-6 h-6 hover:text-cyan-300 cursor-pointer" />
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="text-center">
-                            <div className="text-3xl mb-2">{section.icon}</div>
-                            <h2 className="text-lg font-semibold">{section.text}</h2>
-                          </div>
-                        )}
-                      </motion.div>
-                    </Tooltip.Trigger>
-                    <Tooltip.Portal>
-                      <Tooltip.Content
-                        className="rounded-md bg-gray-900 px-4 py-2 text-sm text-white shadow-md"
-                        sideOffset={5}
-                      >
-                        {section.tooltip}
-                        <Tooltip.Arrow className="fill-gray-900" />
-                      </Tooltip.Content>
-                    </Tooltip.Portal>
-                  </Tooltip.Root>
-                </Tooltip.Provider>
-              ))}
-            </div>
+      {/* Particles */}
+      <Particles options={particlesConfig} init={particlesInit} className="absolute top-0 left-0 w-full h-full" />
 
-            {/* DevOps Quote Section */}
-            <div className="py-4">
-              <motion.div 
-                className="relative z-10"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentQuoteIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className={`${themeStyles.cardBg} rounded-xl p-4 max-w-3xl mx-auto shadow-lg backdrop-blur-sm`}
-                  >
-                    <div className="flex items-center justify-center gap-4">
-                      <motion.div
-                        animate={{
-                          rotate: [0, 360],
-                          transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                        }}
-                      >
-                        {devopsQuotes[currentQuoteIndex].icon}
-                      </motion.div>
-                      <p className="text-xl font-bold text-cyan-400">
-                        {devopsQuotes[currentQuoteIndex].text}
-                      </p>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </motion.div>
-            </div>
-
-            {/* Geometric Patterns Background */}
-            <div className="fixed inset-0 z-0 opacity-5">
-              <div className="absolute top-0 left-0 w-24 h-24 bg-cyan-400 rounded-full blur-xl"></div>
-              <div className="absolute top-1/4 right-1/3 w-32 h-32 bg-blue-400 rounded-full blur-xl"></div>
-              <div className="absolute bottom-1/3 left-1/4 w-40 h-40 bg-purple-400 rounded-full blur-xl"></div>
-              <div className="absolute bottom-0 right-0 w-28 h-28 bg-pink-400 rounded-full blur-xl"></div>
-            </div>
-
-            {/* Navigation Controls */}
-            {activeSection && (
-              <div className="fixed bottom-4 right-4 flex gap-2 z-50">
-                <button
-                  onClick={goToPrevious}
-                  className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+      {/* Main content grid */}
+      <div className="grid grid-cols-3 gap-4 mt-16">
+        {sections.map((section) => (
+          <Tooltip.Provider key={section.id}>
+            <Tooltip.Root>
+              <Tooltip.Trigger asChild>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`p-4 rounded-xl cursor-pointer flex flex-col items-center justify-center text-center ${themeStyles.cardBg} transition-all duration-300`}
+                  style={section.isHighlight ? { gridColumn: 'span 3' } : {}}
+                  onClick={() => handleClick(section)}
                 >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={goToNext}
-                  className="p-2 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-colors"
+                  {section.isHighlight ? (
+                    <>
+                      <h1 className="text-xl font-bold">{section.text}</h1>
+                      <p className="text-sm text-cyan-300">{section.subtitle}</p>
+                      <div className="flex justify-center gap-4 mt-2">
+                        <Github className="w-5 h-5 hover:text-cyan-400 cursor-pointer" />
+                        <Linkedin className="w-5 h-5 hover:text-cyan-400 cursor-pointer" />
+                        <Mail className="w-5 h-5 hover:text-cyan-400 cursor-pointer" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-2xl mb-2">{section.icon}</div>
+                      <h2 className="text-lg font-semibold">{section.text}</h2>
+                    </>
+                  )}
+                </motion.div>
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Content
+                  className="rounded-md bg-gray-900 px-3 py-1 text-sm text-white shadow-md"
+                  sideOffset={5}
                 >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </div>
-            )}
+                  {section.tooltip}
+                  <Tooltip.Arrow className="fill-gray-900" />
+                </Tooltip.Content>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+          </Tooltip.Provider>
+        ))}
+      </div>
 
-            <AnimatePresence>
-              {renderModal()}
-            </AnimatePresence>
-          </div>
-        )}
-      </AnimatePresence>
+      {/* Modal */}
+      <AnimatePresence>{renderModal()}</AnimatePresence>
+
     </div>
   );
 };
