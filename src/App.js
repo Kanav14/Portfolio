@@ -19,7 +19,11 @@ import {
   Scroll,
   Wrench,
   Target,
-  BookOpen
+  BookOpen,
+  Code2,
+  Trophy,
+  Cpu,
+  GitBranch
 } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
@@ -42,32 +46,88 @@ function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   const cardStats = {
-    "Experience": { value: "5+", subtitle: "Years of Experience", icon: <Briefcase className="w-8 h-8" /> },
-    "Projects": { value: "50+", subtitle: "Projects Delivered", icon: <Rocket className="w-8 h-8" /> },
-    "Skills and Knowledge Base": { value: "1000+", subtitle: "Infrastructure as Code", icon: <Wrench className="w-8 h-8" /> },
-    "Certifications": { value: "8+", subtitle: "Professional Certs", icon: <Scroll className="w-8 h-8" /> },
-    "Education": { value: "2", subtitle: "Degrees", icon: <GraduationCap className="w-8 h-8" /> },
-    "Research and Patents": { value: "3", subtitle: "Publications", icon: <BookOpen className="w-8 h-8" /> },
-    "Extra Curricular": { value: "10+", subtitle: "Activities", icon: <Target className="w-8 h-8" /> },
-    "About Me": { value: "4+", subtitle: "Tech Domains", icon: <Lock className="w-8 h-8" /> }
+    "Experience": { 
+      value: "5+", 
+      subtitle: "Years of Experience", 
+      icon: <Trophy className="w-8 h-8" />,
+      color: "from-yellow-400/20 to-yellow-600/20",
+      glowColor: "yellow"
+    },
+    "Projects": { 
+      value: "50+", 
+      subtitle: "Projects Delivered", 
+      icon: <Rocket className="w-8 h-8" />,
+      color: "from-blue-400/20 to-blue-600/20",
+      glowColor: "blue"
+    },
+    "Skills and Knowledge Base": { 
+      value: "1000+", 
+      subtitle: "Infrastructure as Code", 
+      icon: <Code2 className="w-8 h-8" />,
+      color: "from-green-400/20 to-green-600/20",
+      glowColor: "green"
+    },
+    "Certifications": { 
+      value: "8+", 
+      subtitle: "Professional Certs", 
+      icon: <Scroll className="w-8 h-8" />,
+      color: "from-purple-400/20 to-purple-600/20",
+      glowColor: "purple"
+    },
+    "Education": { 
+      value: "2", 
+      subtitle: "Degrees", 
+      icon: <GraduationCap className="w-8 h-8" />,
+      color: "from-pink-400/20 to-pink-600/20",
+      glowColor: "pink"
+    },
+    "Research and Patents": { 
+      value: "3", 
+      subtitle: "Publications", 
+      icon: <BookOpen className="w-8 h-8" />,
+      color: "from-indigo-400/20 to-indigo-600/20",
+      glowColor: "indigo"
+    },
+    "Extra Curricular": { 
+      value: "10+", 
+      subtitle: "Activities", 
+      icon: <Target className="w-8 h-8" />,
+      color: "from-orange-400/20 to-orange-600/20",
+      glowColor: "orange"
+    },
+    "About Me": { 
+      value: "4+", 
+      subtitle: "Tech Domains", 
+      icon: <Cpu className="w-8 h-8" />,
+      color: "from-red-400/20 to-red-600/20",
+      glowColor: "red"
+    }
   };
 
   const devopsQuotes = [
     {
       text: "Infrastructure as code: Because clicking buttons is so 2010.",
-      icon: <Cloud className="w-8 h-8 text-cyan-400" />
+      icon: <Cloud className="w-8 h-8 text-cyan-400" />,
+      stats: "80%",
+      subtitle: "Cloud Automation"
     },
     {
       text: "In DevOps, we don't fix problems. We prevent them from happening.",
-      icon: <Server className="w-8 h-8 text-cyan-400" />
+      icon: <GitBranch className="w-8 h-8 text-green-400" />,
+      stats: "99.9%",
+      subtitle: "CI/CD Success Rate"
     },
     {
       text: "Automate once, deploy anywhere.",
-      icon: <Terminal className="w-8 h-8 text-cyan-400" />
+      icon: <Terminal className="w-8 h-8 text-purple-400" />,
+      stats: "500+",
+      subtitle: "Automation Scripts"
     },
     {
       text: "CI/CD: Making deployments as smooth as butter.",
-      icon: <Database className="w-8 h-8 text-cyan-400" />
+      icon: <Cpu className="w-8 h-8 text-blue-400" />,
+      stats: "1000+",
+      subtitle: "Daily Deployments"
     }
   ];
 
@@ -262,12 +322,13 @@ function App() {
           ) : (
             <div className="h-full flex flex-col items-center justify-center p-6 relative">
               <motion.div
-                className={`mb-4 ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-500'}`}
+                className={`mb-4 relative p-4 rounded-full bg-gradient-to-br ${cardStats[section.text].color}`}
                 animate={{ 
                   y: [0, -5, 0],
                   transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
                 }}
               >
+                <div className={`absolute inset-0 rounded-full bg-${cardStats[section.text].glowColor}-500/20 blur-xl`} />
                 {cardStats[section.text].icon}
               </motion.div>
 
@@ -276,7 +337,7 @@ function App() {
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className={`text-3xl font-bold mb-2 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}
+                className={`text-4xl font-bold mb-2 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}
               >
                 {cardStats[section.text].value}
               </motion.div>
@@ -298,8 +359,6 @@ function App() {
               
               {/* Hover Effects */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-              <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           )}
         </motion.div>
@@ -316,7 +375,7 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           className={`
-            w-full max-w-4xl relative overflow-hidden
+            w-full max-w-4xl relative overflow-hidden flex items-stretch gap-6
             ${isDarkTheme ? 'bg-[#1a1f2e]/90' : 'bg-white/90'}
             rounded-2xl p-8 backdrop-blur-xl
             border border-cyan-500/20
@@ -324,25 +383,11 @@ function App() {
             ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
           `}
         >
-          {/* Background Effects */}
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl" />
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-500/5 rounded-full blur-xl" />
-          
-          <div className="relative flex items-center justify-center gap-6">
-            <motion.div
-              animate={{
-                rotate: [0, 360],
-                transition: { duration: 20, repeat: Infinity, ease: "linear" }
-              }}
-              className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-full p-4"
-            >
-              {devopsQuotes[currentQuoteIndex].icon}
-              </motion.div>
-            
-            <div className="flex-1">
+          {/* Quote Card */}
+          <div className="flex-grow relative flex items-center">
+            <div className="relative z-10">
               <motion.p 
-                className={`text-2xl font-medium
+                className={`text-2xl font-medium mb-4
                   ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -351,6 +396,45 @@ function App() {
                 {devopsQuotes[currentQuoteIndex].text}
               </motion.p>
             </div>
+            
+            {/* Background Effects */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5" />
+          </div>
+
+          {/* Stats Card */}
+          <div className="w-64 relative">
+            <motion.div
+              className="h-full flex flex-col items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <motion.div
+                animate={{
+                  rotate: [0, 360],
+                  transition: { duration: 20, repeat: Infinity, ease: "linear" }
+                }}
+                className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-full p-4 mb-4"
+              >
+                {devopsQuotes[currentQuoteIndex].icon}
+              </motion.div>
+              
+              <motion.div 
+                className={`text-3xl font-bold mb-2 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}
+                initial={{ scale: 0.5 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                {devopsQuotes[currentQuoteIndex].stats}
+              </motion.div>
+              
+              <p className={`text-sm text-center ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
+                {devopsQuotes[currentQuoteIndex].subtitle}
+              </p>
+            </motion.div>
+            
+            {/* Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-xl" />
           </div>
           
           {/* Animated Border Effect */}
