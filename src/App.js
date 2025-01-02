@@ -44,6 +44,17 @@ function App() {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // Add resize listener
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const cardIcons = {
     "About Me": { icon: <Lock />, bgColor: "from-pink-400/20 to-pink-600/20" },
@@ -86,7 +97,6 @@ function App() {
     { id: 8, text: "Extra Curricular" },
     { id: 9, text: "Research and Patents" }
   ];
-
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkTheme);
     document.body.style.backgroundColor = isDarkTheme ? '#030306' : '#ffffff';
@@ -99,7 +109,7 @@ function App() {
   const baseParticlesConfig = {
     particles: {
       number: { 
-        value: 40,
+        value: isMobile ? 20 : 40,
         density: { enable: true, value_area: 1200 }
       },
       color: { 
@@ -118,7 +128,7 @@ function App() {
       },
       move: { 
         enable: true, 
-        speed: 1.5,
+        speed: isMobile ? 1 : 1.5,
         direction: "none",
         random: true,
         straight: false,
@@ -127,7 +137,7 @@ function App() {
     },
     interactivity: {
       events: {
-        onhover: { enable: true, mode: "repulse" },
+        onhover: { enable: !isMobile, mode: "repulse" },
         onclick: { enable: false }
       },
       modes: {
@@ -144,12 +154,12 @@ function App() {
     particles: {
       ...baseParticlesConfig.particles,
       number: {
-        value: showHelloWorld ? 25 : 40,
+        value: showHelloWorld ? (isMobile ? 15 : 25) : (isMobile ? 20 : 40),
         density: { enable: true, value_area: 1200 }
       },
       move: {
         ...baseParticlesConfig.particles.move,
-        speed: showHelloWorld ? 1 : 1.5
+        speed: showHelloWorld ? 1 : (isMobile ? 1 : 1.5)
       }
     }
   };
@@ -198,8 +208,9 @@ function App() {
       setCurrentSectionIndex(prevIndex);
     }
   };
+
   const renderGrid = () => (
-    <div className="grid grid-cols-3 auto-rows-fr gap-6 h-[75vh] p-6">
+    <div className={`grid ${isMobile ? 'grid-cols-1 gap-4 p-4' : 'grid-cols-3 gap-6 p-6'} auto-rows-fr h-[75vh] overflow-y-auto`}>
       {sections.map((section) => (
         <motion.div
           key={section.id}
@@ -217,13 +228,14 @@ function App() {
             backdrop-blur-lg border border-cyan-500/20
             shadow-lg hover:shadow-xl transition-all duration-300
             ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
+            ${isMobile ? 'min-h-[120px]' : ''}
           `}
         >
-          {section.isHighlight ? (
+        {section.isHighlight ? (
             <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
               <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
                 <motion.h1 
-                  className="text-5xl font-bold mb-4 tracking-tight"
+                  className={`font-bold mb-4 tracking-tight ${isMobile ? 'text-3xl' : 'text-5xl'}`}
                   style={{
                     background: 'linear-gradient(to right, #E0F2FE, #FFFFFF, #93C5FD)',
                     WebkitBackgroundClip: 'text',
@@ -234,7 +246,7 @@ function App() {
                   {section.text}
                 </motion.h1>
                 <motion.div 
-                  className="text-xl text-cyan-200 mb-6 font-light"
+                  className={`text-cyan-200 mb-6 font-light ${isMobile ? 'text-lg' : 'text-xl'}`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
@@ -249,7 +261,7 @@ function App() {
                       whileTap={{ scale: 0.9 }}
                       className="cursor-pointer"
                     >
-                      <Icon className="w-6 h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
+                      <Icon className={`${isMobile ? 'w-5 h-5' : 'w-6 h-6'} text-white hover:text-cyan-200 transition-colors duration-300`} />
                     </motion.div>
                   ))}
                 </div>
@@ -266,12 +278,12 @@ function App() {
                   transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
                 }}
               >
-                <div className="w-8 h-8 text-white">
+                <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} text-white`}>
                   {cardIcons[section.text].icon}
                 </div>
               </motion.div>
               
-              <h3 className={`text-xl font-semibold text-center mt-4
+              <h3 className={`${isMobile ? 'text-lg' : 'text-xl'} font-semibold text-center mt-4
                 ${isDarkTheme ? 'text-white' : 'text-gray-800'}
                 group-hover:text-cyan-400 transition-colors duration-300`}
               >
@@ -285,14 +297,14 @@ function App() {
   );
 
   const renderQuotes = () => (
-    <div className="h-[25vh] flex items-center justify-center px-8">
+    <div className={`${isMobile ? 'h-auto py-6' : 'h-[25vh]'} flex items-center justify-center px-4 md:px-8`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={devopsQuotes[currentQuoteIndex].text}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="flex items-center justify-center gap-8 max-w-4xl"
+          className={`flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-center gap-4 md:gap-8 max-w-4xl`}
         >
           <motion.div
             animate={{
@@ -305,9 +317,9 @@ function App() {
           </motion.div>
           
           <div className="relative">
-            <Quote className="absolute -left-8 -top-4 w-6 h-6 text-cyan-400/40" />
+            <Quote className={`absolute ${isMobile ? '-left-4' : '-left-8'} -top-4 ${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-cyan-400/40`} />
             <motion.p 
-              className={`text-2xl font-medium italic
+              className={`${isMobile ? 'text-lg' : 'text-2xl'} font-medium italic text-center md:text-left
                 ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -315,7 +327,7 @@ function App() {
             >
               {devopsQuotes[currentQuoteIndex].text}
             </motion.p>
-            <Quote className="absolute -right-8 -bottom-4 w-6 h-6 text-cyan-400/40 rotate-180" />
+            <Quote className={`absolute ${isMobile ? '-right-4' : '-right-8'} -bottom-4 ${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-cyan-400/40 rotate-180`} />
           </div>
         </motion.div>
       </AnimatePresence>
@@ -324,18 +336,23 @@ function App() {
 const renderModal = () =>
     activeSection && (
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4"
         onClick={closeModal}
       >
         <motion.div
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-white'} p-8 rounded-xl shadow-2xl relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl`}
+          className={`
+            ${isDarkTheme ? 'bg-[#1e2736]' : 'bg-white'} 
+            ${isMobile ? 'p-4' : 'p-8'} 
+            rounded-xl shadow-2xl relative max-h-[90vh] overflow-y-auto 
+            w-full md:w-3/4 lg:max-w-5xl
+          `}
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className="absolute top-4 right-4 text-gray-400 hover:text-cyan-400 transition-colors text-xl"
+            className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-400 hover:text-cyan-400 transition-colors text-xl"
             onClick={closeModal}
           >
             ×
@@ -357,7 +374,7 @@ const renderModal = () =>
           ) : activeSection.text === "Research and Patents" ? (
             <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : (
-            <h2 className={`text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
+            <h2 className={`text-xl md:text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
               Content for {activeSection.text} coming soon!
             </h2>
           )}
@@ -372,7 +389,7 @@ const renderModal = () =>
               }}
               className="p-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
             >
-              <ChevronLeft className="w-6 h-6 text-white" />
+              <ChevronLeft className={`${isMobile ? 'w-5 h-5' : 'w-6 h-6'} text-white`} />
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -383,7 +400,7 @@ const renderModal = () =>
               }}
               className="p-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
             >
-              <ChevronRight className="w-6 h-6 text-white" />
+              <ChevronRight className={`${isMobile ? 'w-5 h-5' : 'w-6 h-6'} text-white`} />
             </motion.button>
           </div>
         </motion.div>
@@ -399,7 +416,7 @@ const renderModal = () =>
         className="absolute inset-0 z-0 transition-opacity duration-500 ease-in-out"
       />
 
-      <div className="absolute top-4 right-4 z-50 transition-opacity duration-300">
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 transition-opacity duration-300">
         <Switch
           checked={isDarkTheme}
           onChange={setIsDarkTheme}
@@ -438,6 +455,7 @@ const renderModal = () =>
                   setShowHelloWorld(false);
                 }} 
                 isDarkTheme={isDarkTheme} 
+                isMobile={isMobile}
               />
             </motion.div>
           ) : (
