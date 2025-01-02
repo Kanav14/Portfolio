@@ -366,30 +366,30 @@ function App() {
               </div>
 
               <div className="h-[25vh] flex items-center justify-center px-4">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentQuoteIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-gray-100'} rounded-xl p-6 max-w-3xl w-full`}
-                  >
-                    <div className="flex items-center justify-center gap-4">
-                      <motion.div
-                        animate={{
-                          rotate: [0, 360],
-                          transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                        }}
-                      >
-                        {devopsQuotes[currentQuoteIndex].icon}
-                      </motion.div>
-                      <p className={`text-xl font-semibold ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}>
-                        {devopsQuotes[currentQuoteIndex].text}
-                      </p>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+  <AnimatePresence mode="wait">
+    <motion.div
+      key={currentQuoteIndex}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-gray-100'} rounded-xl p-6 max-w-3xl w-full`}
+    >
+      <div className="flex items-center justify-center gap-4">
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+            transition: { duration: 20, repeat: Infinity, ease: "linear" }
+          }}
+        >
+          {devopsQuotes[currentQuoteIndex].icon}
+        </motion.div>
+        <p className={`text-xl font-semibold ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}>
+          {devopsQuotes[currentQuoteIndex].text}
+        </p>
+      </div>
+    </motion.div>
+  </AnimatePresence>
+</div>
             </motion.div>
           )}
         </AnimatePresence>
