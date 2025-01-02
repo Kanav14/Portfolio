@@ -296,14 +296,14 @@ function App() {
   );
 
   const renderQuotes = () => (
-    <div className={`${isMobile ? 'h-auto py-4' : 'h-[25vh]'} flex items-center justify-center px-4 md:px-8 relative z-20 mt-auto`}>
+    <div className="absolute bottom-2 left-0 right-0 flex justify-center px-4 z-10">
       <AnimatePresence mode="wait">
         <motion.div
           key={devopsQuotes[currentQuoteIndex].text}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className={`flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-center gap-4 md:gap-8 max-w-4xl bg-[#1a1f2e]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl`}
+          className="flex items-center justify-center gap-2 md:gap-4"
         >
           <motion.div
             animate={{
@@ -316,9 +316,9 @@ function App() {
           </motion.div>
           
           <div className="relative">
-            <Quote className={`absolute ${isMobile ? '-left-4' : '-left-8'} -top-4 ${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-cyan-400/40`} />
+            <Quote className="absolute -left-2 -top-2 w-3 h-3 text-cyan-400/40" />
             <motion.p 
-              className={`${isMobile ? 'text-sm' : 'text-2xl'} font-medium italic text-center md:text-left
+              className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium italic text-center
                 ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
