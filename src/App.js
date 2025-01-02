@@ -210,7 +210,7 @@ function App() {
   };
 
   const renderGrid = () => (
-    <div className="grid grid-cols-3 auto-rows-fr gap-4 md:gap-6 h-[75vh] p-4 md:p-6">
+    <div className="grid grid-cols-3 gap-2 md:gap-6 h-[75vh] p-2 md:p-6">
       {sections.map((section) => (
         <motion.div
           key={section.id}
@@ -218,7 +218,7 @@ function App() {
           whileHover={{ y: -5, scale: 1.02 }}
           transition={{ duration: 0.2 }}
           className={`
-            relative rounded-2xl cursor-pointer overflow-hidden group
+            relative rounded-xl cursor-pointer overflow-hidden group
             ${section.isHighlight 
               ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700'
               : isDarkTheme
@@ -228,14 +228,14 @@ function App() {
             backdrop-blur-lg border border-cyan-500/20
             shadow-lg hover:shadow-xl transition-all duration-300
             ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
-            aspect-[1.6/1] md:aspect-auto
+            flex flex-col items-center justify-center
           `}
         >
           {section.isHighlight ? (
-            <div className="relative h-full flex flex-col items-center justify-center p-3 md:p-6 text-center">
+            <div className="relative h-full w-full flex flex-col items-center justify-center p-2 md:p-6 text-center">
               <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
                 <motion.h1 
-                  className="text-2xl md:text-5xl font-bold mb-2 md:mb-4 tracking-tight"
+                  className="text-lg md:text-5xl font-bold mb-1 md:mb-4 tracking-tight"
                   style={{
                     background: 'linear-gradient(to right, #E0F2FE, #FFFFFF, #93C5FD)',
                     WebkitBackgroundClip: 'text',
@@ -246,14 +246,14 @@ function App() {
                   {section.text}
                 </motion.h1>
                 <motion.div 
-                  className="text-sm md:text-xl text-cyan-200 mb-3 md:mb-6 font-light"
+                  className="text-xs md:text-xl text-cyan-200 mb-2 md:mb-6 font-light"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
                   {section.subtitle}
                 </motion.div>
-                <div className="flex justify-center gap-4 md:gap-6">
+                <div className="flex justify-center gap-2 md:gap-6">
                   {[Github, Linkedin, Mail].map((Icon, index) => (
                     <motion.div
                       key={index}
@@ -261,35 +261,33 @@ function App() {
                       whileTap={{ scale: 0.9 }}
                       className="cursor-pointer"
                     >
-                      <Icon className="w-4 h-4 md:w-6 md:h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
+                      <Icon className="w-3 h-3 md:w-6 md:h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
                     </motion.div>
                   ))}
                 </div>
               </motion.div>
-              <div className="absolute top-0 right-0 w-16 md:w-32 h-16 md:h-32 bg-white/5 rounded-full blur-2xl" />
-              <div className="absolute bottom-0 left-0 w-12 md:w-24 h-12 md:h-24 bg-cyan-500/10 rounded-full blur-xl" />
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center p-3 md:p-6 relative">
+            <>
               <motion.div
-                className={`relative p-3 md:p-4 rounded-full bg-gradient-to-br ${cardIcons[section.text].bgColor}`}
+                className={`relative p-2 md:p-4 rounded-full bg-gradient-to-br ${cardIcons[section.text].bgColor}`}
                 animate={{ 
                   y: [0, -5, 0],
                   transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
                 }}
               >
-                <div className="w-5 h-5 md:w-8 md:h-8 text-white">
+                <div className="w-4 h-4 md:w-8 md:h-8 text-white">
                   {cardIcons[section.text].icon}
                 </div>
               </motion.div>
               
-              <h3 className="text-sm md:text-xl font-semibold text-center mt-2 md:mt-4
+              <h3 className="text-xs md:text-xl font-semibold text-center mt-1 md:mt-4
                 ${isDarkTheme ? 'text-white' : 'text-gray-800'}
                 group-hover:text-cyan-400 transition-colors duration-300"
               >
                 {section.text}
               </h3>
-            </div>
+            </>
           )}
         </motion.div>
       ))}
@@ -297,39 +295,37 @@ function App() {
   );
 
   const renderQuotes = () => (
-    <div className="h-[25vh] flex items-center justify-center px-4 md:px-8">
+    <div className={`${isMobile ? 'h-auto py-6' : 'h-[25vh]'} flex items-center justify-center px-4 md:px-8`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={devopsQuotes[currentQuoteIndex].text}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="flex items-center justify-center gap-4 md:gap-8 w-full max-w-4xl"
+          className={`flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-center gap-4 md:gap-8 max-w-4xl`}
         >
           <motion.div
             animate={{
               rotate: [0, 360],
               transition: { duration: 20, repeat: Infinity, ease: "linear" }
             }}
-            className="rounded-full"
+            className="rounded-full p-4"
           >
-            <div className="w-6 h-6 md:w-8 md:h-8">
-              {devopsQuotes[currentQuoteIndex].icon}
-            </div>
+            {devopsQuotes[currentQuoteIndex].icon}
           </motion.div>
           
-          <div className="relative flex-1">
-            <Quote className="absolute -left-4 md:-left-8 -top-2 md:-top-4 w-4 h-4 md:w-6 md:h-6 text-cyan-400/40" />
+          <div className="relative">
+            <Quote className={`absolute ${isMobile ? '-left-4' : '-left-8'} -top-4 ${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-cyan-400/40`} />
             <motion.p 
-              className="text-sm md:text-2xl font-medium italic
-                ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}"
+              className={`${isMobile ? 'text-lg' : 'text-2xl'} font-medium italic text-center md:text-left
+                ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
               {devopsQuotes[currentQuoteIndex].text}
             </motion.p>
-            <Quote className="absolute -right-4 md:-right-8 -bottom-2 md:-bottom-4 w-4 h-4 md:w-6 md:h-6 text-cyan-400/40 rotate-180" />
+            <Quote className={`absolute ${isMobile ? '-right-4' : '-right-8'} -bottom-4 ${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-cyan-400/40 rotate-180`} />
           </div>
         </motion.div>
       </AnimatePresence>
