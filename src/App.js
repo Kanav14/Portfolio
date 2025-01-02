@@ -12,7 +12,7 @@ import {
   Database,
   Sun,
   Moon,
-  LockKeyhole,
+  Lock,
   Briefcase,
   GraduationCap,
   Rocket,
@@ -73,18 +73,18 @@ function App() {
   ];
 
   const getIcon = (text) => {
-    const icons = {
-      "About Me": <LockKeyhole className="w-8 h-8" />,
-      "Experience": <Briefcase className="w-8 h-8" />,
-      "Education": <GraduationCap className="w-8 h-8" />,
-      "Projects": <Rocket className="w-8 h-8" />,
-      "Certifications": <Scroll className="w-8 h-8" />,
-      "Skills and Knowledge Base": <Wrench className="w-8 h-8" />,
-      "Extra Curricular": <Target className="w-8 h-8" />,
-      "Research and Patents": <BookOpen className="w-8 h-8" />
-    };
-    return icons[text];
+  const icons = {
+    "About Me": <Lock className="w-8 h-8" />,  // Changed from LockKeyhole to Lock
+    "Experience": <Briefcase className="w-8 h-8" />,
+    "Education": <GraduationCap className="w-8 h-8" />,
+    "Projects": <Rocket className="w-8 h-8" />,
+    "Certifications": <Scroll className="w-8 h-8" />,
+    "Skills and Knowledge Base": <Wrench className="w-8 h-8" />,
+    "Extra Curricular": <Target className="w-8 h-8" />,
+    "Research and Patents": <BookOpen className="w-8 h-8" />
   };
+  return icons[text];
+};
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkTheme);
