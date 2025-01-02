@@ -51,29 +51,49 @@ function App() {
     { id: 9, text: "Research and Patents", icon: "📚" }
   ];
 
+  // Theme toggling effect
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDarkTheme);
+    document.body.style.backgroundColor = isDarkTheme ? '#030306' : '#ffffff';
+  }, [isDarkTheme]);
+
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
   }, []);
 
   const particlesConfig = {
     particles: {
-      number: { value: 30, density: { enable: true, value_area: 800 } },
-      color: { value: "#ffffff" },
-      opacity: { value: 0.1 },
-      size: { value: 1 },
+      number: { 
+        value: 80,
+        density: { enable: true, value_area: 800 } 
+      },
+      color: { 
+        value: isDarkTheme ? "#ffffff" : "#000000"
+      },
+      opacity: { 
+        value: isDarkTheme ? 0.3 : 0.15
+      },
+      size: { value: 2 },
       line_linked: {
         enable: true,
         distance: 150,
-        color: "#ffffff",
-        opacity: 0.1,
-        width: 1
+        color: isDarkTheme ? "#ffffff" : "#000000",
+        opacity: isDarkTheme ? 0.3 : 0.15,
+        width: 1.5
       },
-      move: { enable: true, speed: 1 }
+      move: { 
+        enable: true, 
+        speed: 2,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "bounce"
+      }
     },
     interactivity: {
       events: {
         onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: false }
+        onclick: { enable: true, mode: "push" }
       }
     }
   };
@@ -138,7 +158,7 @@ function App() {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-[#1e2736] p-6 rounded-xl shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl"
+          className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-white'} p-6 rounded-xl shadow-lg relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -194,23 +214,30 @@ function App() {
     );
 
   return (
-    <div className="min-h-screen bg-[#030306]">
+    <div className={`min-h-screen ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'}`}>
       <Particles
         id="tsparticles"
         init={particlesInit}
         options={particlesConfig}
-        className="absolute inset-0"
+        className="absolute inset-0 z-0"
       />
 
-      {/* Theme Toggle */}
       <div className="absolute top-4 right-4 z-50">
         <Switch
           checked={isDarkTheme}
-          onChange={() => setIsDarkTheme(!isDarkTheme)}
+          onChange={setIsDarkTheme}
           onColor="#86d3ff"
           offColor="#1a1a1a"
-          uncheckedIcon={<Sun className="w-4 h-4 text-yellow-400 m-1" />}
-          checkedIcon={<Moon className="w-4 h-4 text-white m-1" />}
+          uncheckedIcon={
+            <div className="flex items-center justify-center h-full">
+              <Sun className="w-4 h-4 text-yellow-400" />
+            </div>
+          }
+          checkedIcon={
+            <div className="flex items-center justify-center h-full">
+              <Moon className="w-4 h-4 text-white" />
+            </div>
+          }
           className="react-switch"
         />
       </div>
@@ -218,36 +245,29 @@ function App() {
       <div className="relative z-10">
         {showHelloWorld ? (
           <div className="flex h-screen">
-            {/* Hello World Section */}
-            <div className="flex-1 bg-[#030306] flex justify-center items-center relative">
-              <motion.h1
-                className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text z-10"
-                animate={{
-                  y: [0, -20, 0],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              >
-                Hello World!
-              </motion.h1>
-            </div>
-
-            {/* GIF Section */}
-            <div className="flex-1 bg-[#efefef] flex justify-center items-center">
-              <motion.img
-                src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG1sbzZyM3FjbTF5ZXpmMXlscG9oMnQ3bWVycDBkZnY3amEwOHI1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WtTnAfZn6aVJfBzlN3/giphy.gif"
-                alt="Cloud with rain"
-                className="w-3/4 h-auto max-w-md"
-                style={{ pointerEvents: "none" }}
-                animate={{
-                  scale: [1, 1.05, 1],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              />
+            <div className="flex-1 bg-transparent flex justify-center items-center relative">
+              <div className="text-center">
+                <motion.h1
+                  className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text"
+                  initial={{ opacity: 0, y: -50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1 }}
+                >
+                  Hello
+                </motion.h1>
+                <motion.h1
+                  className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 text-transparent bg-clip-text"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                >
+                  World
+                </motion.h1>
+              </div>
             </div>
           </div>
         ) : (
           <div className="h-screen flex flex-col">
-            {/* Grid Section - 75% */}
             <div className="grid grid-cols-3 auto-rows-fr gap-4 h-[75vh] p-4">
               {sections.map((section) => (
                 <div
@@ -257,7 +277,9 @@ function App() {
                     relative rounded-xl cursor-pointer transition-all duration-300
                     ${section.isHighlight
                       ? 'bg-gradient-to-r from-cyan-500 to-blue-600'
-                      : 'bg-[#1e2736] hover:bg-[#2a3545]'
+                      : isDarkTheme 
+                        ? 'bg-[#1e2736] hover:bg-[#2a3545]'
+                        : 'bg-gray-100 hover:bg-gray-200'
                     }
                     flex items-center justify-center overflow-hidden
                   `}
@@ -288,7 +310,7 @@ function App() {
                   ) : (
                     <div className="text-center p-4">
                       <div className="text-3xl mb-3">{section.icon}</div>
-                      <p className="text-xl font-semibold text-white">
+                      <p className={`text-xl font-semibold ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
                         {section.text}
                       </p>
                     </div>
@@ -297,7 +319,6 @@ function App() {
               ))}
             </div>
 
-            {/* Quote Section - 25% */}
             <div className="h-[25vh] flex items-center justify-center px-4">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -305,7 +326,7 @@ function App() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
-                  className="bg-[#1e2736] rounded-xl p-6 max-w-3xl w-full"
+                  className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-gray-100'} rounded-xl p-6 max-w-3xl w-full`}
                 >
                   <div className="flex items-center justify-center gap-4">
                     <motion.div
@@ -317,7 +338,7 @@ function App() {
                       {devopsQuotes[currentQuoteIndex].icon}
                     </motion.div>
                     <p className="text-xl font-semibold text-cyan-400">
-                      {devopsQuotes[currentQuoteIndex].text}
+                      {devopsQuotes[currentQuotes[currentQuoteIndex].text}
                     </p>
                   </div>
                 </motion.div>
