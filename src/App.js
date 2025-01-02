@@ -1,6 +1,3 @@
-Let me provide the complete App.js code directly in the chat for better readability:
-
-```javascript
 import React, { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
