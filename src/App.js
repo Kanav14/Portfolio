@@ -210,7 +210,7 @@ function App() {
   };
 
   const renderGrid = () => (
-    <div className="grid grid-cols-3 gap-2 md:gap-6 h-[75vh] p-2 md:p-6">
+    <div className="grid grid-cols-3 gap-2 md:gap-6 h-[75vh] p-2 md:p-6 relative z-10">
       {sections.map((section) => (
         <motion.div
           key={section.id}
@@ -271,13 +271,13 @@ function App() {
           ) : (
             <>
               <motion.div
-                className={`relative p-2 md:p-4 rounded-full bg-gradient-to-br ${cardIcons[section.text].bgColor}`}
+                className={`relative flex items-center justify-center w-8 h-8 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${cardIcons[section.text].bgColor}`}
                 animate={{ 
                   y: [0, -5, 0],
                   transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
                 }}
               >
-                <div className="w-4 h-4 md:w-8 md:h-8 text-white">
+                <div className="w-4 h-4 md:w-8 md:h-8 text-white flex items-center justify-center">
                   {cardIcons[section.text].icon}
                 </div>
               </motion.div>
@@ -296,14 +296,14 @@ function App() {
   );
 
   const renderQuotes = () => (
-    <div className={`${isMobile ? 'h-auto py-4' : 'h-[25vh]'} flex items-center justify-center px-4 md:px-8`}>
+    <div className={`${isMobile ? 'h-auto py-4' : 'h-[25vh]'} flex items-center justify-center px-4 md:px-8 relative z-20 mt-auto`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={devopsQuotes[currentQuoteIndex].text}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className={`flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-center gap-4 md:gap-8 max-w-4xl`}
+          className={`flex ${isMobile ? 'flex-col' : 'flex-row'} items-center justify-center gap-4 md:gap-8 max-w-4xl bg-[#1a1f2e]/80 backdrop-blur-sm p-4 md:p-6 rounded-xl`}
         >
           <motion.div
             animate={{
