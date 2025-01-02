@@ -306,32 +306,18 @@ function App() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="flex items-center justify-center px-4"
         >
-          <motion.div
-            className="flex items-center justify-center gap-2 md:gap-4 relative"
-            style={{ height: "2rem" }}
-          >
-            <motion.div
-              animate={{
-                rotate: [0, 360],
-                transition: { duration: 20, repeat: Infinity, ease: "linear" }
-              }}
-              className="w-4 h-4 md:w-5 md:h-5 text-cyan-400"
+          <div className="flex items-center justify-center gap-2 md:gap-4 relative" style={{ height: "2rem" }}>
+            {devopsQuotes[currentQuoteIndex].icon}
+            <motion.p 
+              className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium italic text-center whitespace-nowrap
+                ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
             >
-              {devopsQuotes[currentQuoteIndex].icon}
-            </motion.div>
-            
-            <div className="relative">
-              <motion.p 
-                className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium italic text-center whitespace-nowrap
-                  ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                {devopsQuotes[currentQuoteIndex].text}
-              </motion.p>
-            </div>
-          </motion.div>
+              {devopsQuotes[currentQuoteIndex].text}
+            </motion.p>
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>
