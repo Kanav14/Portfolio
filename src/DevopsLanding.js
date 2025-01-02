@@ -21,7 +21,7 @@ const TypewriterText = ({ text, onComplete }) => {
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 150);
+      }, 50);
       return () => clearTimeout(timeout);
     } else {
       onComplete?.();
@@ -41,7 +41,7 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
-const DevopsLanding = ({ onAnimationComplete }) => {
+const DevopsLanding = ({ onAnimationComplete, isDarkTheme }) => {
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
 
