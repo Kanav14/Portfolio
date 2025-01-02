@@ -9,19 +9,34 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "tailwindcss": "^3.0.0",
-    "react-scripts": "^5.0.0",
-    "framer-motion": "^7.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.0",
+    "react-scripts": "5.0.1",
+    "framer-motion": "^10.16.0",
     "lucide-react": "^0.263.1",
     "react-particles": "^2.12.2",
     "tsparticles": "^2.12.0",
     "@radix-ui/react-tooltip": "^1.0.7",
-    "react-switch": "^7.0.0"
+    "react-switch": "^7.0.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
   "devDependencies": {
-    "postcss": "^8.0.0"
+    "postcss": "^8.4.31",
+    "autoprefixer": "^10.4.15",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   },
-  "homepage": "https://kanav14.github.io/Portfolio"
+  "homepage": "https://kanav14.github.io/Portfolio",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
