@@ -46,7 +46,6 @@ function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  // Add resize listener
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -89,14 +88,15 @@ function App() {
   const sections = [
     { id: 1, text: "About Me" },
     { id: 2, text: "Experience" },
-    { id: 3, text: "Education" },
-    { id: 4, text: "Projects" },
+    { id: 3, text: "Projects" },
+    { id: 4, text: "Education" },
     { id: 5, text: "Kanav Sharma", isHighlight: true, subtitle: "DevOps Engineer" },
     { id: 6, text: "Certifications" },
     { id: 7, text: "Skills and Knowledge Base" },
     { id: 8, text: "Extra Curricular" },
     { id: 9, text: "Research and Patents" }
   ];
+
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkTheme);
     document.body.style.backgroundColor = isDarkTheme ? '#030306' : '#ffffff';
@@ -220,7 +220,7 @@ function App() {
           className={`
             relative rounded-xl cursor-pointer overflow-hidden group
             ${section.isHighlight 
-              ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700'
+              ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700 col-span-1'
               : isDarkTheme
                 ? 'bg-[#1a1f2e]/80 hover:bg-[#1e2436]'
                 : 'bg-white/90 hover:bg-white'
@@ -229,13 +229,14 @@ function App() {
             shadow-lg hover:shadow-xl transition-all duration-300
             ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
             flex flex-col items-center justify-center
+            min-h-[120px] md:min-h-[200px]
           `}
         >
           {section.isHighlight ? (
             <div className="relative h-full w-full flex flex-col items-center justify-center p-2 md:p-6 text-center">
               <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
                 <motion.h1 
-                  className="text-lg md:text-5xl font-bold mb-1 md:mb-4 tracking-tight"
+                  className="text-base md:text-5xl font-bold mb-1 md:mb-4 tracking-tight"
                   style={{
                     background: 'linear-gradient(to right, #E0F2FE, #FFFFFF, #93C5FD)',
                     WebkitBackgroundClip: 'text',
@@ -281,9 +282,9 @@ function App() {
                 </div>
               </motion.div>
               
-              <h3 className="text-xs md:text-xl font-semibold text-center mt-1 md:mt-4
+              <h3 className={`text-xs md:text-xl font-semibold text-center mt-1 md:mt-4
                 ${isDarkTheme ? 'text-white' : 'text-gray-800'}
-                group-hover:text-cyan-400 transition-colors duration-300"
+                group-hover:text-cyan-400 transition-colors duration-300`}
               >
                 {section.text}
               </h3>
@@ -295,7 +296,7 @@ function App() {
   );
 
   const renderQuotes = () => (
-    <div className={`${isMobile ? 'h-auto py-6' : 'h-[25vh]'} flex items-center justify-center px-4 md:px-8`}>
+    <div className={`${isMobile ? 'h-auto py-4' : 'h-[25vh]'} flex items-center justify-center px-4 md:px-8`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={devopsQuotes[currentQuoteIndex].text}
@@ -317,7 +318,7 @@ function App() {
           <div className="relative">
             <Quote className={`absolute ${isMobile ? '-left-4' : '-left-8'} -top-4 ${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-cyan-400/40`} />
             <motion.p 
-              className={`${isMobile ? 'text-lg' : 'text-2xl'} font-medium italic text-center md:text-left
+              className={`${isMobile ? 'text-sm' : 'text-2xl'} font-medium italic text-center md:text-left
                 ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -331,7 +332,8 @@ function App() {
       </AnimatePresence>
     </div>
   );
-const renderModal = () =>
+
+  const renderModal = () =>
     activeSection && (
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4"
