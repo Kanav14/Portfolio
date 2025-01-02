@@ -210,7 +210,11 @@ function App() {
   };
 
   const renderGrid = () => (
-    <div className={`grid ${isMobile ? 'grid-cols-1 gap-4 p-4' : 'grid-cols-3 gap-6 p-6'} auto-rows-fr h-[75vh] overflow-y-auto`}>
+    <div className={`
+      grid gap-4 p-4 auto-rows-auto overflow-y-auto
+      ${isMobile ? 'grid-cols-2' : 'grid-cols-3 gap-6 p-6'}
+      ${isMobile ? 'h-[78vh]' : 'h-[75vh]'}
+    `}>
       {sections.map((section) => (
         <motion.div
           key={section.id}
@@ -220,7 +224,7 @@ function App() {
           className={`
             relative rounded-2xl cursor-pointer overflow-hidden group
             ${section.isHighlight 
-              ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700'
+              ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700 col-span-2'
               : isDarkTheme
                 ? 'bg-[#1a1f2e]/80 hover:bg-[#1e2436]'
                 : 'bg-white/90 hover:bg-white'
@@ -228,7 +232,7 @@ function App() {
             backdrop-blur-lg border border-cyan-500/20
             shadow-lg hover:shadow-xl transition-all duration-300
             ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
-            ${isMobile ? 'min-h-[120px]' : ''}
+            ${isMobile ? `min-h-[140px] ${section.isHighlight ? 'py-8' : 'py-4'}` : ''}
           `}
         >
         {section.isHighlight ? (
