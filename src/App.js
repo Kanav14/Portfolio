@@ -338,7 +338,7 @@ function App() {
                       {devopsQuotes[currentQuoteIndex].icon}
                     </motion.div>
                     <p className="text-xl font-semibold text-cyan-400">
-                      {devopsQuotes[currentQuotes[currentQuoteIndex].text}
+                      {devopsQuotes[currentQuoteIndex].text}
                     </p>
                   </div>
                 </motion.div>
