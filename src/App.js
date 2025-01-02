@@ -296,32 +296,40 @@ function App() {
   );
 
   const renderQuotes = () => (
-    <div className="absolute bottom-2 left-0 right-0 h-8 md:h-10 overflow-hidden">
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={devopsQuotes[currentQuoteIndex].text}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="flex items-center justify-center px-4"
-        >
-          <div className="flex items-center justify-center gap-2 md:gap-4 relative" style={{ height: "2rem" }}>
+  <div className={`
+    absolute 
+    ${isMobile ? 'bottom-16' : 'bottom-2'} 
+    left-0 right-0 
+    ${isMobile ? 'h-12' : 'h-10'} 
+    overflow-hidden
+  `}>
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={devopsQuotes[currentQuoteIndex].text}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="flex items-center justify-center px-4"
+      >
+        <div className="flex items-center justify-center gap-3 relative bg-[#1a1f2e]/60 backdrop-blur-sm py-2 px-4 rounded-full">
+          <div className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-cyan-400`}>
             {devopsQuotes[currentQuoteIndex].icon}
-            <motion.p 
-              className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium italic text-center whitespace-nowrap
-                ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              {devopsQuotes[currentQuoteIndex].text}
-            </motion.p>
           </div>
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
+          <motion.p 
+            className={`text-sm font-medium italic text-center whitespace-nowrap
+              ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            {devopsQuotes[currentQuoteIndex].text}
+          </motion.p>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  </div>
+);
 
   const renderModal = () =>
     activeSection && (
