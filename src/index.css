@@ -158,27 +158,39 @@ body {
   animation: scale-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Quote Card Animation */
-.quote-card-enter {
-  opacity: 0;
+/* Quote Animation Styles */
+.quote-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.quote-slide-enter {
   transform: translateY(20px);
-}
-
-.quote-card-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms, transform 300ms;
-}
-
-.quote-card-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.quote-card-exit-active {
   opacity: 0;
+}
+
+.quote-slide-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+.quote-slide-exit {
+  transform: translateY(0);
+  opacity: 1;
+  position: absolute;
+  width: 100%;
+}
+
+.quote-slide-exit-active {
   transform: translateY(-20px);
-  transition: opacity 300ms, transform 300ms;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Prevent scrollbar flash */
+html {
+  scrollbar-gutter: stable;
 }
 
 /* Mobile Optimizations */
