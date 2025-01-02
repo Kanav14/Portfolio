@@ -41,6 +41,17 @@ function App() {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
+  const cardStats = {
+    "Experience": { value: "5+", subtitle: "Years of Experience", icon: <Briefcase className="w-8 h-8" /> },
+    "Projects": { value: "50+", subtitle: "Projects Delivered", icon: <Rocket className="w-8 h-8" /> },
+    "Skills and Knowledge Base": { value: "1000+", subtitle: "Infrastructure as Code", icon: <Wrench className="w-8 h-8" /> },
+    "Certifications": { value: "8+", subtitle: "Professional Certs", icon: <Scroll className="w-8 h-8" /> },
+    "Education": { value: "2", subtitle: "Degrees", icon: <GraduationCap className="w-8 h-8" /> },
+    "Research and Patents": { value: "3", subtitle: "Publications", icon: <BookOpen className="w-8 h-8" /> },
+    "Extra Curricular": { value: "10+", subtitle: "Activities", icon: <Target className="w-8 h-8" /> },
+    "About Me": { value: "4+", subtitle: "Tech Domains", icon: <Lock className="w-8 h-8" /> }
+  };
+
   const devopsQuotes = [
     {
       text: "Infrastructure as code: Because clicking buttons is so 2010.",
@@ -71,20 +82,6 @@ function App() {
     { id: 8, text: "Extra Curricular", icon: "🎯" },
     { id: 9, text: "Research and Patents", icon: "📚" }
   ];
-
-  const getIcon = (text) => {
-  const icons = {
-    "About Me": <Lock className="w-8 h-8" />,  // Changed from LockKeyhole to Lock
-    "Experience": <Briefcase className="w-8 h-8" />,
-    "Education": <GraduationCap className="w-8 h-8" />,
-    "Projects": <Rocket className="w-8 h-8" />,
-    "Certifications": <Scroll className="w-8 h-8" />,
-    "Skills and Knowledge Base": <Wrench className="w-8 h-8" />,
-    "Extra Curricular": <Target className="w-8 h-8" />,
-    "Research and Patents": <BookOpen className="w-8 h-8" />
-  };
-  return icons[text];
-};
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkTheme);
@@ -271,14 +268,33 @@ function App() {
                   transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
                 }}
               >
-                {getIcon(section.text)}
+                {cardStats[section.text].icon}
               </motion.div>
-              <h3 className={`text-xl font-semibold text-center
+
+              {/* Value with larger font */}
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.1 }}
+                className={`text-3xl font-bold mb-2 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}
+              >
+                {cardStats[section.text].value}
+              </motion.div>
+
+              {/* Card Title */}
+              <h3 className={`text-xl font-semibold text-center mb-2
                 ${isDarkTheme ? 'text-white' : 'text-gray-800'}
                 group-hover:text-cyan-400 transition-colors duration-300`}
               >
                 {section.text}
               </h3>
+
+              {/* Subtitle */}
+              <p className={`text-sm text-center
+                ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}
+              >
+                {cardStats[section.text].subtitle}
+              </p>
               
               {/* Hover Effects */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-all duration-500" />
@@ -322,7 +338,7 @@ function App() {
               className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-full p-4"
             >
               {devopsQuotes[currentQuoteIndex].icon}
-            </motion.div>
+              </motion.div>
             
             <div className="flex-1">
               <motion.p 
