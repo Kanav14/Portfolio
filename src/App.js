@@ -1,6 +1,18 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft, Github, Linkedin, Mail, Terminal, Cloud, Server, Database, Sun, Moon } from 'lucide-react';
+import { 
+  ChevronRight, 
+  ChevronLeft, 
+  Github, 
+  Linkedin, 
+  Mail, 
+  Terminal, 
+  Cloud, 
+  Server, 
+  Database, 
+  Sun, 
+  Moon 
+} from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
 import Switch from 'react-switch';
@@ -64,26 +76,26 @@ function App() {
   const particlesConfig = {
     particles: {
       number: { 
-        value: 80,
-        density: { enable: true, value_area: 800 } 
+        value: 40,  // Reduced number of particles
+        density: { enable: true, value_area: 1000 } 
       },
       color: { 
         value: isDarkTheme ? "#ffffff" : "#000000"
       },
       opacity: { 
-        value: isDarkTheme ? 0.3 : 0.15
+        value: isDarkTheme ? 0.2 : 0.1
       },
-      size: { value: 2 },
+      size: { value: 1.5 },  // Smaller particles
       line_linked: {
         enable: true,
         distance: 150,
         color: isDarkTheme ? "#ffffff" : "#000000",
-        opacity: isDarkTheme ? 0.3 : 0.15,
-        width: 1.5
+        opacity: isDarkTheme ? 0.2 : 0.1,
+        width: 1
       },
       move: { 
         enable: true, 
-        speed: 2,
+        speed: 1.5,  // Slower movement
         direction: "none",
         random: true,
         straight: false,
@@ -93,7 +105,13 @@ function App() {
     interactivity: {
       events: {
         onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: true, mode: "push" }
+        onclick: { enable: false }  // Disabled click effects
+      },
+      modes: {
+        repulse: {
+          distance: 100,
+          duration: 0.4
+        }
       }
     }
   };
@@ -239,7 +257,7 @@ function App() {
 
       <div className="relative z-10">
         {showHelloWorld ? (
-          <DevopsLanding onAnimationComplete={() => setShowHelloWorld(false)} />
+          <DevopsLanding onAnimationComplete={() => setShowHelloWorld(false)} isDarkTheme={isDarkTheme} />
         ) : (
           <div className="h-screen flex flex-col">
             <div className="grid grid-cols-3 auto-rows-fr gap-4 h-[75vh] p-4">
