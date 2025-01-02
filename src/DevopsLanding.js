@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Cloud, 
   Server, 
-  Git, 
+  Github, 
   Terminal, 
   Database, 
   Code2, 
@@ -59,7 +59,7 @@ const DevopsLanding = ({ onAnimationComplete }) => {
     { icon: <Cloud size={24} />, name: 'Cloud', color: 'text-blue-400' },
     { icon: <Container size={24} />, name: 'Docker', color: 'text-cyan-400' },
     { icon: <Cpu size={24} />, name: 'Kubernetes', color: 'text-purple-400' },
-    { icon: <Git size={24} />, name: 'CI/CD', color: 'text-orange-400' },
+    { icon: <Github size={24} />, name: 'CI/CD', color: 'text-orange-400' },
     { icon: <Database size={24} />, name: 'Database', color: 'text-green-400' },
     { icon: <Lock size={24} />, name: 'Security', color: 'text-red-400' },
     { icon: <Code2 size={24} />, name: 'Infrastructure as Code', color: 'text-yellow-400' },
