@@ -73,29 +73,29 @@ function App() {
     await loadFull(engine);
   }, []);
 
-  const particlesConfig = {
+  const baseParticlesConfig = {
     particles: {
       number: { 
-        value: 40,  // Reduced number of particles
-        density: { enable: true, value_area: 1000 } 
+        value: 40,
+        density: { enable: true, value_area: 1200 }
       },
       color: { 
         value: isDarkTheme ? "#ffffff" : "#000000"
       },
-      opacity: { 
-        value: isDarkTheme ? 0.2 : 0.1
+      opacity: {
+        value: isDarkTheme ? 0.15 : 0.08
       },
-      size: { value: 1.5 },  // Smaller particles
+      size: { value: 1.5 },
       line_linked: {
         enable: true,
         distance: 150,
         color: isDarkTheme ? "#ffffff" : "#000000",
-        opacity: isDarkTheme ? 0.2 : 0.1,
+        opacity: isDarkTheme ? 0.15 : 0.08,
         width: 1
       },
       move: { 
         enable: true, 
-        speed: 1.5,  // Slower movement
+        speed: 1.5,
         direction: "none",
         random: true,
         straight: false,
@@ -105,13 +105,28 @@ function App() {
     interactivity: {
       events: {
         onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: false }  // Disabled click effects
+        onclick: { enable: false }
       },
       modes: {
         repulse: {
           distance: 100,
           duration: 0.4
         }
+      }
+    }
+  };
+
+  const particlesConfig = {
+    ...baseParticlesConfig,
+    particles: {
+      ...baseParticlesConfig.particles,
+      number: {
+        value: showHelloWorld ? 25 : 40,
+        density: { enable: true, value_area: 1200 }
+      },
+      move: {
+        ...baseParticlesConfig.particles.move,
+        speed: showHelloWorld ? 1 : 1.5
       }
     }
   };
@@ -197,7 +212,7 @@ function App() {
           ) : activeSection.text === "Research and Patents" ? (
             <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : (
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className={`text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
               Content for {activeSection.text} coming soon!
             </h2>
           )}
@@ -227,15 +242,28 @@ function App() {
     );
 
   return (
-    <div className={`min-h-screen ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'}`}>
+    <div className={`min-h-screen ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out`}>
       <Particles
         id="tsparticles"
         init={particlesInit}
-        options={particlesConfig}
-        className="absolute inset-0 z-0"
+        options={{
+          ...particlesConfig,
+          particles: {
+            ...particlesConfig.particles,
+            number: {
+              value: showHelloWorld ? 25 : 40,
+              density: { enable: true, value_area: 1200 }
+            },
+            move: {
+              ...particlesConfig.particles.move,
+              speed: showHelloWorld ? 1 : 1.5
+            }
+          }
+        }}
+        className="absolute inset-0 z-0 transition-opacity duration-500 ease-in-out"
       />
 
-      <div className="absolute top-4 right-4 z-50">
+      <div className="absolute top-4 right-4 z-50 transition-opacity duration-300">
         <Switch
           checked={isDarkTheme}
           onChange={setIsDarkTheme}
@@ -255,96 +283,162 @@ function App() {
         />
       </div>
 
-      <div className="relative z-10">
-        {showHelloWorld ? (
-          <DevopsLanding onAnimationComplete={() => setShowHelloWorld(false)} isDarkTheme={isDarkTheme} />
-        ) : (
-          <div className="h-screen flex flex-col">
-            <div className="grid grid-cols-3 auto-rows-fr gap-4 h-[75vh] p-4">
-              {sections.map((section) => (
-                <div
-                  key={section.id}
-                  onClick={() => handleClick(section)}
-                  className={`
-                    relative rounded-xl cursor-pointer transition-all duration-300
-                    ${section.isHighlight
-                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600'
-                      : isDarkTheme 
-                        ? 'bg-[#1e2736] hover:bg-[#2a3545]'
-                        : 'bg-gray-100 hover:bg-gray-200'
-                    }
-                    flex items-center justify-center overflow-hidden
-                  `}
-                >
-                  {section.isHighlight ? (
-                    <div className="text-center">
-                      <motion.h1
-                        className="text-3xl font-bold text-white mb-2"
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
+      <motion.div 
+        className="relative z-10"
+        initial={false}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <AnimatePresence mode="wait">
+          {showHelloWorld ? (
+            <motion.div
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-full h-full"
+            >
+              <DevopsLanding 
+                onAnimationComplete={() => {
+                  </div>
+                ))}
+              </div>
+
+              <div className="h-[25vh] flex items-center justify-center px-4">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentQuoteIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-gray-100'} rounded-xl p-6 max-w-3xl w-full`}
+                  >
+                    <div className="flex items-center justify-center gap-4">
+                      <motion.div
+                        animate={{
+                          rotate: [0, 360],
+                          transition: { duration: 20, repeat: Infinity, ease: "linear" }
+                        }}
                       >
-                        {section.text}
-                      </motion.h1>
-                      <motion.p
-                        className="text-xl text-white/80 mb-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        {section.subtitle}
-                      </motion.p>
-                      <div className="flex justify-center gap-4 mt-3">
-                        <Github className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
-                        <Linkedin className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
-                        <Mail className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="text-center p-4">
-                      <div className="text-3xl mb-3">{section.icon}</div>
-                      <p className={`text-xl font-semibold ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
-                        {section.text}
+                        {devopsQuotes[currentQuoteIndex].icon}
+                      </motion.div>
+                      <p className={`text-xl font-semibold ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}>
+                        {devopsQuotes[currentQuoteIndex].text}
                       </p>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="h-[25vh] flex items-center justify-center px-4">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentQuoteIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-gray-100'} rounded-xl p-6 max-w-3xl w-full`}
-                >
-                  <div className="flex items-center justify-center gap-4">
-                    <motion.div
-                      animate={{
-                        rotate: [0, 360],
-                        transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                      }}
-                    >
-                      {devopsQuotes[currentQuoteIndex].icon}
-                    </motion.div>
-                    <p className="text-xl font-semibold text-cyan-400">
-                      {devopsQuotes[currentQuoteIndex].text}
-                    </p>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <AnimatePresence>
           {renderModal()}
         </AnimatePresence>
-      </div>
+      </motion.div>
+    </div>
+  );
+}
+
+export default App;setShowHelloWorld(false);
+                }} 
+                isDarkTheme={isDarkTheme} 
+              />
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="h-screen flex flex-col"
+            >
+              <div className="grid grid-cols-3 auto-rows-fr gap-4 h-[75vh] p-4">
+                {sections.map((section) => (
+                  <div
+                    key={section.id}
+                    onClick={() => handleClick(section)}
+                    className={`
+                      relative rounded-xl cursor-pointer transition-all duration-300
+                      ${section.isHighlight
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600'
+                        : isDarkTheme 
+                          ? 'bg-[#1e2736] hover:bg-[#2a3545]'
+                          : 'bg-gray-100 hover:bg-gray-200'
+                      }
+                      flex items-center justify-center overflow-hidden
+                    `}
+                  >
+                    {section.isHighlight ? (
+                      <div className="text-center">
+                        <motion.h1
+                          className="text-3xl font-bold text-white mb-2"
+                          initial={{ opacity: 0, y: -20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                        >
+                          {section.text}
+                        </motion.h1>
+                        <motion.p
+                          className="text-xl text-white/80 mb-4"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          {section.subtitle}
+                        </motion.p>
+                        <div className="flex justify-center gap-4 mt-3">
+                          <Github className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                          <Linkedin className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                          <Mail className="w-6 h-6 text-white hover:text-cyan-200 cursor-pointer" />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center p-4">
+                        <div className="text-3xl mb-3">{section.icon}</div>
+                        <p className={`text-xl font-semibold ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
+                          {section.text}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="h-[25vh] flex items-center justify-center px-4">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentQuoteIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-gray-100'} rounded-xl p-6 max-w-3xl w-full`}
+                  >
+                    <div className="flex items-center justify-center gap-4">
+                      <motion.div
+                        animate={{
+                          rotate: [0, 360],
+                          transition: { duration: 20, repeat: Infinity, ease: "linear" }
+                        }}
+                      >
+                        {devopsQuotes[currentQuoteIndex].icon}
+                      </motion.div>
+                      <p className={`text-xl font-semibold ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}>
+                        {devopsQuotes[currentQuoteIndex].text}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {renderModal()}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 }
 
 export default App;
+                  
