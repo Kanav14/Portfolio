@@ -21,7 +21,7 @@ const TypewriterText = ({ text, onComplete }) => {
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 100);
+      }, 150);
       return () => clearTimeout(timeout);
     } else {
       onComplete?.();
@@ -47,11 +47,10 @@ const DevopsLanding = ({ onAnimationComplete }) => {
 
   const commands = [
     '$ whoami',
-    '> Kanav Sharma | DevOps Engineer',
-    '$ cat skills.txt',
-    '> AWS, Kubernetes, CI/CD, Infrastructure as Code',
-    '$ ./initialize_portfolio.sh',
-    '> Welcome to my DevOps Journey_'
+    '> Kanav Sharma',
+    '$ role',
+    '> DevOps Engineer',
+    '$ ./portfolio.sh'
   ];
 
   const quickStats = [
@@ -86,19 +85,19 @@ const DevopsLanding = ({ onAnimationComplete }) => {
       setCurrentCommandIndex(prev => prev + 1);
     } else {
       setShowContent(true);
-      setTimeout(onAnimationComplete, 4000);
+      setTimeout(onAnimationComplete, 5000);
     }
   };
 
   return (
-    <div className="flex-1 bg-gradient-to-b from-gray-900 to-black flex flex-col justify-center items-center relative p-8">
+    <div className="h-screen bg-gradient-to-b from-gray-900 to-black flex flex-col justify-center items-center relative p-8 overflow-hidden">
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-[0.2]"></div>
       
-      <div className="w-full max-w-4xl relative z-10">
+      <div className="w-full max-w-4xl relative z-10 flex flex-col h-full justify-center">
         {/* Terminal Section */}
         <motion.div 
-          className="bg-gray-900/95 rounded-xl p-6 font-mono text-sm mb-12 shadow-2xl border border-cyan-500/30 backdrop-blur-xl"
+          className="bg-gray-900/95 rounded-xl p-4 font-mono text-sm mb-8 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
@@ -130,7 +129,7 @@ const DevopsLanding = ({ onAnimationComplete }) => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-center mb-12"
+                className="text-center mb-8"
               >
                 <motion.div
                   className="mb-8 inline-block"
