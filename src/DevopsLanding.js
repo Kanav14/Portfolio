@@ -1,4 +1,3 @@
-// DevopsLanding.js
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -11,7 +10,9 @@ import {
   Container, 
   Cpu,
   Settings,
-  Lock
+  Lock,
+  Workflow,
+  GitBranch
 } from 'lucide-react';
 
 const TypewriterText = ({ text, onComplete }) => {
@@ -31,7 +32,7 @@ const TypewriterText = ({ text, onComplete }) => {
   }, [currentIndex, text]);
 
   return (
-    <span className="text-green-400">
+    <span className="text-green-400 font-mono">
       {displayedText}
       <motion.span
         animate={{ opacity: [0, 1] }}
@@ -49,21 +50,22 @@ const DevopsLanding = ({ onAnimationComplete }) => {
 
   const commands = [
     '$ initializing system...',
-    '$ checking infrastructure status...',
+    '$ scanning infrastructure components...',
     '$ validating security protocols...',
-    '$ preparing deployment pipeline...',
-    '$ system ready > Welcome to DevOps Dashboard'
+    '$ configuring CI/CD pipelines...',
+    '$ establishing cloud connections...',
+    '$ system ready > Welcome to DevOps Command Center_'
   ];
 
   const techStack = [
-    { icon: <Cloud size={24} />, name: 'Cloud', color: 'text-blue-400' },
-    { icon: <Container size={24} />, name: 'Docker', color: 'text-cyan-400' },
-    { icon: <Cpu size={24} />, name: 'Kubernetes', color: 'text-purple-400' },
-    { icon: <Github size={24} />, name: 'CI/CD', color: 'text-orange-400' },
-    { icon: <Database size={24} />, name: 'Database', color: 'text-green-400' },
-    { icon: <Lock size={24} />, name: 'Security', color: 'text-red-400' },
-    { icon: <Code2 size={24} />, name: 'Infrastructure as Code', color: 'text-yellow-400' },
-    { icon: <Settings size={24} />, name: 'Automation', color: 'text-indigo-400' }
+    { icon: <Cloud size={28} />, name: 'Cloud Infrastructure', color: 'text-blue-400', description: 'AWS, Azure, GCP' },
+    { icon: <Container size={28} />, name: 'Containerization', color: 'text-cyan-400', description: 'Docker, Podman' },
+    { icon: <Cpu size={28} />, name: 'Orchestration', color: 'text-purple-400', description: 'Kubernetes, ECS' },
+    { icon: <GitBranch size={28} />, name: 'Version Control', color: 'text-orange-400', description: 'Git, GitHub' },
+    { icon: <Database size={28} />, name: 'Databases', color: 'text-green-400', description: 'SQL, NoSQL' },
+    { icon: <Lock size={28} />, name: 'Security', color: 'text-red-400', description: 'DevSecOps' },
+    { icon: <Workflow size={28} />, name: 'CI/CD', color: 'text-yellow-400', description: 'Jenkins, GitLab' },
+    { icon: <Code2 size={28} />, name: 'IaC', color: 'text-pink-400', description: 'Terraform, Ansible' }
   ];
 
   const handleCommandComplete = () => {
@@ -71,21 +73,30 @@ const DevopsLanding = ({ onAnimationComplete }) => {
       setCurrentCommandIndex(prev => prev + 1);
     } else {
       setShowInfrastructure(true);
-      setTimeout(onAnimationComplete, 3000);
+      setTimeout(onAnimationComplete, 4000);
     }
   };
 
   return (
-    <div className="flex-1 bg-transparent flex justify-center items-center relative p-8">
-      <div className="w-full max-w-4xl">
+    <div className="flex-1 bg-gradient-to-b from-gray-900 to-black flex flex-col justify-center items-center relative p-8">
+      {/* Animated Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-[0.2]"></div>
+      
+      <div className="w-full max-w-5xl relative z-10">
         {/* Terminal Section */}
         <motion.div 
-          className="bg-gray-900/90 rounded-lg p-6 font-mono text-sm mb-8 shadow-xl border border-cyan-500/20"
+          className="bg-gray-900/95 rounded-xl p-6 font-mono text-sm mb-12 shadow-2xl border border-cyan-500/30 backdrop-blur-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
+          <div className="flex items-center gap-2 mb-4 border-b border-gray-700 pb-2">
+            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <span className="text-gray-400 text-xs ml-2">DevOps Terminal</span>
+          </div>
           {commands.slice(0, currentCommandIndex + 1).map((command, index) => (
-            <div key={index} className="mb-2">
+            <div key={index} className="mb-3">
               {index === currentCommandIndex ? (
                 <TypewriterText 
                   text={command} 
@@ -106,19 +117,19 @@ const DevopsLanding = ({ onAnimationComplete }) => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-center mb-12"
+                className="text-center mb-16"
               >
-                <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 text-transparent bg-clip-text mb-4">
+                <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text mb-6">
                   DevOps Infrastructure
                 </h1>
-                <p className="text-xl text-cyan-400 font-mono">
+                <p className="text-xl md:text-2xl text-cyan-400 font-mono">
                   Orchestrating Seamless Deployments
                 </p>
               </motion.div>
 
-              {/* Tech Stack Orbit */}
+              {/* Tech Stack Grid */}
               <motion.div 
-                className="relative h-64 w-full"
+                className="grid grid-cols-2 md:grid-cols-4 gap-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
@@ -126,50 +137,29 @@ const DevopsLanding = ({ onAnimationComplete }) => {
                 {techStack.map((tech, i) => (
                   <motion.div
                     key={i}
-                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center ${tech.color}`}
-                    animate={{
-                      rotate: [0, 360],
-                      transition: {
-                        duration: 20,
-                        repeat: Infinity,
-                        delay: i * 0.5,
-                        ease: "linear"
-                      }
-                    }}
-                    style={{
-                      transformOrigin: "50% 50%",
-                      transform: `rotate(${i * (360 / techStack.length)}deg) translateY(-100px)`
+                    className="relative group"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ 
+                      opacity: 1, 
+                      y: 0,
+                      transition: { delay: i * 0.1 }
                     }}
                   >
-                    <motion.div
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        transition: {
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: i * 0.2
-                        }
-                      }}
-                      className="bg-gray-900/80 p-3 rounded-full shadow-lg"
-                    >
-                      {tech.icon}
-                    </motion.div>
-                    <span className="text-xs mt-2 whitespace-nowrap bg-gray-900/80 px-2 py-1 rounded">
-                      {tech.name}
-                    </span>
+                    <div className={`bg-gray-800/80 backdrop-blur-xl p-6 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-cyan-500/20 ${tech.color}`}>
+                      <motion.div
+                        className="mb-4"
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          transition: { duration: 2, repeat: Infinity }
+                        }}
+                      >
+                        {tech.icon}
+                      </motion.div>
+                      <h3 className="font-semibold mb-2 text-lg">{tech.name}</h3>
+                      <p className="text-sm text-gray-400">{tech.description}</p>
+                    </div>
                   </motion.div>
                 ))}
-
-                {/* Central Hub */}
-                <motion.div
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    transition: { duration: 2, repeat: Infinity }
-                  }}
-                >
-                  <Server className="w-12 h-12 text-cyan-400" />
-                </motion.div>
               </motion.div>
             </>
           )}
