@@ -4,6 +4,7 @@ import { ChevronRight, ChevronLeft, Github, Linkedin, Mail, Terminal, Cloud, Ser
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
 import Switch from 'react-switch';
+import DevopsLanding from './DevopsLanding';
 import AboutMe from "./AboutMe";
 import Project from "./Project";
 import Experience from "./Experience";
@@ -51,7 +52,6 @@ function App() {
     { id: 9, text: "Research and Patents", icon: "📚" }
   ];
 
-  // Theme toggling effect
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkTheme);
     document.body.style.backgroundColor = isDarkTheme ? '#030306' : '#ffffff';
@@ -97,11 +97,6 @@ function App() {
       }
     }
   };
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowHelloWorld(false), 4000);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const quoteTimer = setInterval(() => {
@@ -244,28 +239,7 @@ function App() {
 
       <div className="relative z-10">
         {showHelloWorld ? (
-          <div className="flex h-screen">
-            <div className="flex-1 bg-transparent flex justify-center items-center relative">
-              <div className="text-center">
-                <motion.h1
-                  className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text"
-                  initial={{ opacity: 0, y: -50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1 }}
-                >
-                  Hello
-                </motion.h1>
-                <motion.h1
-                  className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 text-transparent bg-clip-text"
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                >
-                  World
-                </motion.h1>
-              </div>
-            </div>
-          </div>
+          <DevopsLanding onAnimationComplete={() => setShowHelloWorld(false)} />
         ) : (
           <div className="h-screen flex flex-col">
             <div className="grid grid-cols-3 auto-rows-fr gap-4 h-[75vh] p-4">
