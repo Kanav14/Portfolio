@@ -322,33 +322,6 @@ function App() {
       </AnimatePresence>
     </div>
   );
-          <motion.div
-            animate={{
-              rotate: [0, 360],
-              transition: { duration: 20, repeat: Infinity, ease: "linear" }
-            }}
-            className="rounded-full p-4"
-          >
-            {devopsQuotes[currentQuoteIndex].icon}
-          </motion.div>
-          
-          <div className="relative">
-            <Quote className="absolute -left-2 -top-2 w-3 h-3 text-cyan-400/40" />
-            <motion.p 
-              className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium italic text-center
-                ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              {devopsQuotes[currentQuoteIndex].text}
-            </motion.p>
-            <Quote className={`absolute ${isMobile ? '-right-4' : '-right-8'} -bottom-4 ${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-cyan-400/40 rotate-180`} />
-          </div>
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
 
   const renderModal = () =>
     activeSection && (
@@ -480,7 +453,7 @@ function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="h-screen flex flex-col"
+              className="h-screen flex flex-col relative"
             >
               {renderGrid()}
               {renderQuotes()}
