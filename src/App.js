@@ -296,40 +296,62 @@ function App() {
   );
 
   const renderQuotes = () => (
-  <div className={`
-    absolute 
-    ${isMobile ? 'bottom-16' : 'bottom-2'} 
-    left-0 right-0 
-    ${isMobile ? 'h-12' : 'h-10'} 
-    overflow-hidden
-  `}>
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={devopsQuotes[currentQuoteIndex].text}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="flex items-center justify-center px-4"
-      >
-        <div className="flex items-center justify-center gap-3 relative bg-[#1a1f2e]/60 backdrop-blur-sm py-2 px-4 rounded-full">
-          <div className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'} text-cyan-400`}>
-            {devopsQuotes[currentQuoteIndex].icon}
-          </div>
-          <motion.p 
-            className={`text-sm font-medium italic text-center whitespace-nowrap
-              ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+    <div className="fixed bottom-0 left-0 right-0 flex justify-center px-4 py-6 bg-gradient-to-t from-[#030306]/80 via-[#030306]/50 to-transparent">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={devopsQuotes[currentQuoteIndex].text}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="flex items-center space-x-3"
+        >
+          <motion.div
+            animate={{
+              rotate: [0, 360],
+              transition: { duration: 20, repeat: Infinity, ease: "linear" }
+            }}
           >
+            <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} text-cyan-400 flex items-center justify-center`}>
+              {devopsQuotes[currentQuoteIndex].icon}
+            </div>
+          </motion.div>
+          
+          <p className={`${isMobile ? 'text-sm' : 'text-base'} font-medium italic text-cyan-400`}>
             {devopsQuotes[currentQuoteIndex].text}
-          </motion.p>
-        </div>
-      </motion.div>
-    </AnimatePresence>
-  </div>
-);
+          </p>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+  );
+          <motion.div
+            animate={{
+              rotate: [0, 360],
+              transition: { duration: 20, repeat: Infinity, ease: "linear" }
+            }}
+            className="rounded-full p-4"
+          >
+            {devopsQuotes[currentQuoteIndex].icon}
+          </motion.div>
+          
+          <div className="relative">
+            <Quote className="absolute -left-2 -top-2 w-3 h-3 text-cyan-400/40" />
+            <motion.p 
+              className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium italic text-center
+                ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {devopsQuotes[currentQuoteIndex].text}
+            </motion.p>
+            <Quote className={`absolute ${isMobile ? '-right-4' : '-right-8'} -bottom-4 ${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-cyan-400/40 rotate-180`} />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
 
   const renderModal = () =>
     activeSection && (
@@ -461,7 +483,7 @@ function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="h-screen flex flex-col relative"
+              className="h-screen flex flex-col"
             >
               {renderGrid()}
               {renderQuotes()}
