@@ -12,7 +12,7 @@ import {
   Database,
   Sun,
   Moon,
-  Lock,
+  LockKeyhole,
   Briefcase,
   GraduationCap,
   Rocket,
@@ -33,20 +33,6 @@ import Certifications from "./Certifications";
 import ResearchAndPatents from "./ResearchAndPatents";
 import SkillsAndKnowledge from "./SkillsAndKnowledge";
 import ExtraCurricular from "./ExtraCurricular";
-
-const getIcon = (text) => {
-  switch(text) {
-    case "About Me": return <Lock className="w-8 h-8" />;
-    case "Experience": return <Briefcase className="w-8 h-8" />;
-    case "Education": return <GraduationCap className="w-8 h-8" />;
-    case "Projects": return <Rocket className="w-8 h-8" />;
-    case "Certifications": return <Scroll className="w-8 h-8" />;
-    case "Skills and Knowledge Base": return <Wrench className="w-8 h-8" />;
-    case "Extra Curricular": return <Target className="w-8 h-8" />;
-    case "Research and Patents": return <BookOpen className="w-8 h-8" />;
-    default: return null;
-  }
-};
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -85,6 +71,20 @@ function App() {
     { id: 8, text: "Extra Curricular", icon: "🎯" },
     { id: 9, text: "Research and Patents", icon: "📚" }
   ];
+
+  const getIcon = (text) => {
+    const icons = {
+      "About Me": <LockKeyhole className="w-8 h-8" />,
+      "Experience": <Briefcase className="w-8 h-8" />,
+      "Education": <GraduationCap className="w-8 h-8" />,
+      "Projects": <Rocket className="w-8 h-8" />,
+      "Certifications": <Scroll className="w-8 h-8" />,
+      "Skills and Knowledge Base": <Wrench className="w-8 h-8" />,
+      "Extra Curricular": <Target className="w-8 h-8" />,
+      "Research and Patents": <BookOpen className="w-8 h-8" />
+    };
+    return icons[text];
+  };
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkTheme);
@@ -198,6 +198,157 @@ function App() {
     }
   };
 
+  const renderGrid = () => (
+    <div className="grid grid-cols-3 auto-rows-fr gap-6 h-[75vh] p-6">
+      {sections.map((section) => (
+        <motion.div
+          key={section.id}
+          onClick={() => handleClick(section)}
+          whileHover={{ y: -5, scale: 1.02 }}
+          transition={{ duration: 0.2 }}
+          className={`
+            relative rounded-2xl cursor-pointer overflow-hidden group
+            ${section.isHighlight 
+              ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700'
+              : isDarkTheme
+                ? 'bg-[#1a1f2e]/80 hover:bg-[#1e2436]'
+                : 'bg-white/90 hover:bg-white'
+            }
+            backdrop-blur-lg border border-cyan-500/20
+            shadow-lg hover:shadow-xl transition-all duration-300
+            ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
+          `}
+        >
+          {/* Glass Effect Background */}
+          <div className="absolute inset-0 bg-grid-white opacity-[0.02] mix-blend-overlay" />
+          
+          {section.isHighlight ? (
+            <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
+              <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+                <motion.h1 
+                  className="text-5xl font-bold mb-4 tracking-tight"
+                  style={{
+                    background: 'linear-gradient(to right, #E0F2FE, #FFFFFF, #93C5FD)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  {section.text}
+                </motion.h1>
+                <motion.div 
+                  className="text-xl text-cyan-200 mb-6 font-light"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  {section.subtitle}
+                </motion.div>
+                <div className="flex justify-center gap-6">
+                  {[Github, Linkedin, Mail].map((Icon, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="cursor-pointer"
+                    >
+                      <Icon className="w-6 h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Decorative Elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl" />
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl" />
+            </div>
+          ) : (
+            <div className="h-full flex flex-col items-center justify-center p-6 relative">
+              <motion.div
+                className={`mb-4 ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-500'}`}
+                animate={{ 
+                  y: [0, -5, 0],
+                  transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
+                }}
+              >
+                {getIcon(section.text)}
+              </motion.div>
+              <h3 className={`text-xl font-semibold text-center
+                ${isDarkTheme ? 'text-white' : 'text-gray-800'}
+                group-hover:text-cyan-400 transition-colors duration-300`}
+              >
+                {section.text}
+              </h3>
+              
+              {/* Hover Effects */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+              <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+          )}
+        </motion.div>
+      ))}
+    </div>
+  );
+
+  const renderQuotes = () => (
+    <div className="h-[25vh] flex items-center justify-center px-8">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={devopsQuotes[currentQuoteIndex].text}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className={`
+            w-full max-w-4xl relative overflow-hidden
+            ${isDarkTheme ? 'bg-[#1a1f2e]/90' : 'bg-white/90'}
+            rounded-2xl p-8 backdrop-blur-xl
+            border border-cyan-500/20
+            shadow-lg hover:shadow-xl transition-all duration-300
+            ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
+          `}
+        >
+          {/* Background Effects */}
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-500/5 rounded-full blur-xl" />
+          
+          <div className="relative flex items-center justify-center gap-6">
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+                transition: { duration: 20, repeat: Infinity, ease: "linear" }
+              }}
+              className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-full p-4"
+            >
+              {devopsQuotes[currentQuoteIndex].icon}
+            </motion.div>
+            
+            <div className="flex-1">
+              <motion.p 
+                className={`text-2xl font-medium
+                  ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                {devopsQuotes[currentQuoteIndex].text}
+              </motion.p>
+            </div>
+          </div>
+          
+          {/* Animated Border Effect */}
+          <motion.div
+            className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 5, repeat: Infinity }}
+          />
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+
   const renderModal = () =>
     activeSection && (
       <div
@@ -208,7 +359,7 @@ function App() {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-white'} p-8 rounded-xl shadow-2xl relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl modal-content`}
+          className={`${isDarkTheme ? 'bg-[#1e2736]' : 'bg-white'} p-8 rounded-xl shadow-2xl relative max-h-[80vh] overflow-y-auto w-11/12 md:w-3/4 lg:max-w-5xl`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -266,84 +417,6 @@ function App() {
         </motion.div>
       </div>
     );
-
-  const renderGrid = () => (
-    <div className="grid grid-cols-3 auto-rows-fr gap-6 h-[75vh] p-6">
-      {sections.map((section, index) => (
-        <motion.div
-          key={section.id}
-          onClick={() => handleClick(section)}
-          whileHover={{ 
-            y: -5,
-            scale: 1.02,
-            transition: { duration: 0.2 }
-          }}
-          className={`
-            relative rounded-xl cursor-pointer overflow-hidden
-            ${section.isHighlight 
-              ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-600'
-              : isDarkTheme
-                ? 'bg-[#1a1f2e] hover:bg-[#232838]'
-                : 'bg-white hover:bg-gray-50'
-            }
-            group transition-all duration-300 ease-in-out
-            border border-transparent hover:border-cyan-500/30
-            ${isDarkTheme ? 'shadow-lg shadow-cyan-500/5' : 'shadow-xl shadow-gray-200/50'}
-          `}
-        >
-          <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-          
-          {section.isHighlight ? (
-            <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
-              <motion.div
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <motion.h1
-                  className="text-4xl font-bold text-white mb-3 gradient-text"
-                >
-                  {section.text}
-                </motion.h1>
-                <p className="text-xl text-cyan-200 mb-6">{section.subtitle}</p>
-                <div className="flex justify-center gap-6">
-                  <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                    <Github className="w-6 h-6 text-white hover:text-cyan-200 transition-colors" />
-                  </motion.div>
-                  <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                    <Linkedin className="w-6 h-6 text-white hover:text-cyan-200 transition-colors" />
-                  </motion.div>
-                  <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                    <Mail className="w-6 h-6 text-white hover:text-cyan-200 transition-colors" />
-                  </motion.div>
-                </div>
-              </motion.div>
-            </div>
-          ) : (
-            <div className="h-full flex flex-col items-center justify-center p-6 relative">
-              <motion.div
-                className={`mb-4 ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
-                animate={{ 
-                  y: [0, -5, 0],
-                  transition: { duration: 2, repeat: Infinity }
-                }}
-              >
-                {getIcon(section.text)}
-              </motion.div>
-              <h3 className={`text-xl font-semibold text-center
-                ${isDarkTheme ? 'text-white' : 'text-gray-800'}
-                group-hover:text-cyan-400 transition-colors`}
-              >
-                {section.text}
-              </h3>
-              
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-          )}
-        </motion.div>
-      ))}
-    </div>
-  );
 
   return (
     <div className={`min-h-screen ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out`}>
@@ -403,32 +476,7 @@ function App() {
               className="h-screen flex flex-col"
             >
               {renderGrid()}
-
-              <div className="h-[25vh] flex items-center justify-center px-4">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentQuoteIndex}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className={`${isDarkTheme ? 'bg-[#1a1f2e]' : 'bg-gray-100'} rounded-xl p-6 max-w-3xl w-full shadow-lg backdrop-blur-sm border border-cyan-500/20`}
-                  >
-                    <div className="flex items-center justify-center gap-4">
-                      <motion.div
-                        animate={{
-                          rotate: [0, 360],
-                          transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                        }}
-                      >
-                        {devopsQuotes[currentQuoteIndex].icon}
-                      </motion.div>
-                      <p className={`text-xl font-semibold ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}>
-                        {devopsQuotes[currentQuoteIndex].text}
-                      </p>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+              {renderQuotes()}
             </motion.div>
           )}
         </AnimatePresence>
