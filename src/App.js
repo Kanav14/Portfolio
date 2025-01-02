@@ -296,15 +296,46 @@ function App() {
   );
 
   const renderQuotes = () => (
-    <div className="absolute bottom-2 left-0 right-0 flex justify-center px-4 z-10">
-      <AnimatePresence mode="wait">
+    <div className="absolute bottom-2 left-0 right-0 h-8 md:h-10 overflow-hidden">
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={devopsQuotes[currentQuoteIndex].text}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="flex items-center justify-center gap-2 md:gap-4"
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="flex items-center justify-center px-4"
         >
+          <motion.div
+            className="flex items-center justify-center gap-2 md:gap-4 relative"
+            style={{ height: "2rem" }}
+          >
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+                transition: { duration: 20, repeat: Infinity, ease: "linear" }
+              }}
+              className="w-4 h-4 md:w-5 md:h-5 text-cyan-400"
+            >
+              {devopsQuotes[currentQuoteIndex].icon}
+            </motion.div>
+            
+            <div className="relative">
+              <motion.p 
+                className={`${isMobile ? 'text-xs' : 'text-sm'} font-medium italic text-center whitespace-nowrap
+                  ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                {devopsQuotes[currentQuoteIndex].text}
+              </motion.p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
           <motion.div
             animate={{
               rotate: [0, 360],
