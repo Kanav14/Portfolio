@@ -23,7 +23,7 @@ const TypewriterText = ({ text, onComplete }) => {
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 50);
+      }, 100);
       return () => clearTimeout(timeout);
     } else {
       onComplete?.();
@@ -71,7 +71,7 @@ const DevopsLanding = ({ onAnimationComplete }) => {
       setCurrentCommandIndex(prev => prev + 1);
     } else {
       setShowInfrastructure(true);
-      setTimeout(onAnimationComplete, 1000);
+      setTimeout(onAnimationComplete, 3000);
     }
   };
 
