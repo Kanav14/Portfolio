@@ -21,9 +21,9 @@ import {
   Target,
   BookOpen,
   Code2,
-  Trophy,
-  Cpu,
-  GitBranch
+  GitBranch,
+  Quote,
+  Trophy
 } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
@@ -45,102 +45,46 @@ function App() {
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
-  const cardStats = {
-    "Experience": { 
-      value: "5+", 
-      subtitle: "Years of Experience", 
-      icon: <Trophy className="w-8 h-8" />,
-      color: "from-yellow-400/20 to-yellow-600/20",
-      glowColor: "yellow"
-    },
-    "Projects": { 
-      value: "50+", 
-      subtitle: "Projects Delivered", 
-      icon: <Rocket className="w-8 h-8" />,
-      color: "from-blue-400/20 to-blue-600/20",
-      glowColor: "blue"
-    },
-    "Skills and Knowledge Base": { 
-      value: "1000+", 
-      subtitle: "Infrastructure as Code", 
-      icon: <Code2 className="w-8 h-8" />,
-      color: "from-green-400/20 to-green-600/20",
-      glowColor: "green"
-    },
-    "Certifications": { 
-      value: "8+", 
-      subtitle: "Professional Certs", 
-      icon: <Scroll className="w-8 h-8" />,
-      color: "from-purple-400/20 to-purple-600/20",
-      glowColor: "purple"
-    },
-    "Education": { 
-      value: "2", 
-      subtitle: "Degrees", 
-      icon: <GraduationCap className="w-8 h-8" />,
-      color: "from-pink-400/20 to-pink-600/20",
-      glowColor: "pink"
-    },
-    "Research and Patents": { 
-      value: "3", 
-      subtitle: "Publications", 
-      icon: <BookOpen className="w-8 h-8" />,
-      color: "from-indigo-400/20 to-indigo-600/20",
-      glowColor: "indigo"
-    },
-    "Extra Curricular": { 
-      value: "10+", 
-      subtitle: "Activities", 
-      icon: <Target className="w-8 h-8" />,
-      color: "from-orange-400/20 to-orange-600/20",
-      glowColor: "orange"
-    },
-    "About Me": { 
-      value: "4+", 
-      subtitle: "Tech Domains", 
-      icon: <Cpu className="w-8 h-8" />,
-      color: "from-red-400/20 to-red-600/20",
-      glowColor: "red"
-    }
+  const cardIcons = {
+    "About Me": { icon: <Lock />, bgColor: "from-pink-400/20 to-pink-600/20" },
+    "Experience": { icon: <Trophy />, bgColor: "from-yellow-400/20 to-yellow-600/20" },
+    "Projects": { icon: <Rocket />, bgColor: "from-blue-400/20 to-blue-600/20" },
+    "Education": { icon: <GraduationCap />, bgColor: "from-green-400/20 to-green-600/20" },
+    "Certifications": { icon: <Scroll />, bgColor: "from-purple-400/20 to-purple-600/20" },
+    "Skills and Knowledge Base": { icon: <Code2 />, bgColor: "from-indigo-400/20 to-indigo-600/20" },
+    "Extra Curricular": { icon: <Target />, bgColor: "from-orange-400/20 to-orange-600/20" },
+    "Research and Patents": { icon: <BookOpen />, bgColor: "from-cyan-400/20 to-cyan-600/20" }
   };
 
   const devopsQuotes = [
     {
       text: "Infrastructure as code: Because clicking buttons is so 2010.",
-      icon: <Cloud className="w-8 h-8 text-cyan-400" />,
-      stats: "80%",
-      subtitle: "Cloud Automation"
+      icon: <Cloud className="w-8 h-8 text-cyan-400" />
     },
     {
       text: "In DevOps, we don't fix problems. We prevent them from happening.",
-      icon: <GitBranch className="w-8 h-8 text-green-400" />,
-      stats: "99.9%",
-      subtitle: "CI/CD Success Rate"
+      icon: <GitBranch className="w-8 h-8 text-green-400" />
     },
     {
       text: "Automate once, deploy anywhere.",
-      icon: <Terminal className="w-8 h-8 text-purple-400" />,
-      stats: "500+",
-      subtitle: "Automation Scripts"
+      icon: <Terminal className="w-8 h-8 text-purple-400" />
     },
     {
       text: "CI/CD: Making deployments as smooth as butter.",
-      icon: <Cpu className="w-8 h-8 text-blue-400" />,
-      stats: "1000+",
-      subtitle: "Daily Deployments"
+      icon: <Server className="w-8 h-8 text-blue-400" />
     }
   ];
 
   const sections = [
-    { id: 1, text: "About Me", icon: "🔒" },
-    { id: 2, text: "Experience", icon: "💼" },
-    { id: 3, text: "Education", icon: "🎓" },
-    { id: 4, text: "Projects", icon: "🚀" },
+    { id: 1, text: "About Me" },
+    { id: 2, text: "Experience" },
+    { id: 3, text: "Education" },
+    { id: 4, text: "Projects" },
     { id: 5, text: "Kanav Sharma", isHighlight: true, subtitle: "DevOps Engineer" },
-    { id: 6, text: "Certifications", icon: "📜" },
-    { id: 7, text: "Skills and Knowledge Base", icon: "🔧" },
-    { id: 8, text: "Extra Curricular", icon: "🎯" },
-    { id: 9, text: "Research and Patents", icon: "📚" }
+    { id: 6, text: "Certifications" },
+    { id: 7, text: "Skills and Knowledge Base" },
+    { id: 8, text: "Extra Curricular" },
+    { id: 9, text: "Research and Patents" }
   ];
 
   useEffect(() => {
@@ -254,7 +198,6 @@ function App() {
       setCurrentSectionIndex(prevIndex);
     }
   };
-
   const renderGrid = () => (
     <div className="grid grid-cols-3 auto-rows-fr gap-6 h-[75vh] p-6">
       {sections.map((section) => (
@@ -276,9 +219,6 @@ function App() {
             ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
           `}
         >
-          {/* Glass Effect Background */}
-          <div className="absolute inset-0 bg-grid-white opacity-[0.02] mix-blend-overlay" />
-          
           {section.isHighlight ? (
             <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
               <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
@@ -314,51 +254,29 @@ function App() {
                   ))}
                 </div>
               </motion.div>
-
-              {/* Decorative Elements */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl" />
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl" />
             </div>
           ) : (
             <div className="h-full flex flex-col items-center justify-center p-6 relative">
               <motion.div
-                className={`mb-4 relative p-4 rounded-full bg-gradient-to-br ${cardStats[section.text].color}`}
+                className={`relative p-4 rounded-full bg-gradient-to-br ${cardIcons[section.text].bgColor}`}
                 animate={{ 
                   y: [0, -5, 0],
                   transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
                 }}
               >
-                <div className={`absolute inset-0 rounded-full bg-${cardStats[section.text].glowColor}-500/20 blur-xl`} />
-                {cardStats[section.text].icon}
+                <div className="w-8 h-8 text-white">
+                  {cardIcons[section.text].icon}
+                </div>
               </motion.div>
-
-              {/* Value with larger font */}
-              <motion.div
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.1 }}
-                className={`text-4xl font-bold mb-2 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}
-              >
-                {cardStats[section.text].value}
-              </motion.div>
-
-              {/* Card Title */}
-              <h3 className={`text-xl font-semibold text-center mb-2
+              
+              <h3 className={`text-xl font-semibold text-center mt-4
                 ${isDarkTheme ? 'text-white' : 'text-gray-800'}
                 group-hover:text-cyan-400 transition-colors duration-300`}
               >
                 {section.text}
               </h3>
-
-              {/* Subtitle */}
-              <p className={`text-sm text-center
-                ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}
-              >
-                {cardStats[section.text].subtitle}
-              </p>
-              
-              {/* Hover Effects */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-all duration-500" />
             </div>
           )}
         </motion.div>
@@ -374,82 +292,36 @@ function App() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className={`
-            w-full max-w-4xl relative overflow-hidden flex items-stretch gap-6
-            ${isDarkTheme ? 'bg-[#1a1f2e]/90' : 'bg-white/90'}
-            rounded-2xl p-8 backdrop-blur-xl
-            border border-cyan-500/20
-            shadow-lg hover:shadow-xl transition-all duration-300
-            ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
-          `}
+          className="flex items-center justify-center gap-8 max-w-4xl"
         >
-          {/* Quote Card */}
-          <div className="flex-grow relative flex items-center">
-            <div className="relative z-10">
-              <motion.p 
-                className={`text-2xl font-medium mb-4
-                  ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {devopsQuotes[currentQuoteIndex].text}
-              </motion.p>
-            </div>
-            
-            {/* Background Effects */}
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5" />
-          </div>
-
-          {/* Stats Card */}
-          <div className="w-64 relative">
-            <motion.div
-              className="h-full flex flex-col items-center justify-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <motion.div
-                animate={{
-                  rotate: [0, 360],
-                  transition: { duration: 20, repeat: Infinity, ease: "linear" }
-                }}
-                className="bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-full p-4 mb-4"
-              >
-                {devopsQuotes[currentQuoteIndex].icon}
-              </motion.div>
-              
-              <motion.div 
-                className={`text-3xl font-bold mb-2 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}
-                initial={{ scale: 0.5 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                {devopsQuotes[currentQuoteIndex].stats}
-              </motion.div>
-              
-              <p className={`text-sm text-center ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
-                {devopsQuotes[currentQuoteIndex].subtitle}
-              </p>
-            </motion.div>
-            
-            {/* Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-xl" />
-          </div>
-          
-          {/* Animated Border Effect */}
           <motion.div
-            className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 5, repeat: Infinity }}
-          />
+            animate={{
+              rotate: [0, 360],
+              transition: { duration: 20, repeat: Infinity, ease: "linear" }
+            }}
+            className="rounded-full p-4"
+          >
+            {devopsQuotes[currentQuoteIndex].icon}
+          </motion.div>
+          
+          <div className="relative">
+            <Quote className="absolute -left-8 -top-4 w-6 h-6 text-cyan-400/40" />
+            <motion.p 
+              className={`text-2xl font-medium italic
+                ${isDarkTheme ? 'text-cyan-400' : 'text-cyan-600'}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {devopsQuotes[currentQuoteIndex].text}
+            </motion.p>
+            <Quote className="absolute -right-8 -bottom-4 w-6 h-6 text-cyan-400/40 rotate-180" />
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>
   );
-
-  const renderModal = () =>
+const renderModal = () =>
     activeSection && (
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50"
