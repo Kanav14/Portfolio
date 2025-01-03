@@ -1,18 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { LinkedinIcon, Mail } from "lucide-react";
-
-const ModalButton = ({ onClick, children }) => (
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="bg-gradient-to-r from-cyan-400 to-cyan-500 text-gray-900 px-4 py-2 rounded-md 
-    text-sm md:text-base font-bold transition-all shadow-lg hover:shadow-cyan-400/20"
-    onClick={onClick}
-  >
-    {children}
-  </motion.button>
-);
+import { LinkedinIcon, Mail, GithubIcon } from "lucide-react";
+import { ModalContainer, StyledButton, SectionTitle } from "./ModalContainer";
 
 const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
   const stats = [
@@ -22,56 +11,66 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
   ];
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="container bg-gray-900 text-white p-6 rounded-lg shadow-lg"
-    >
-      <motion.h1 
-        className="text-2xl md:text-4xl font-extrabold mb-6 text-center bg-gradient-to-r from-cyan-400 to-blue-500 text-transparent bg-clip-text"
-        animate={{ 
-          backgroundPosition: ['0%', '100%', '0%'],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      >
-        About Me
-      </motion.h1>
+    <ModalContainer className="p-6">
+      <SectionTitle>About Me</SectionTitle>
 
       <div className="flex flex-col md:flex-row items-center mb-6">
-        <motion.img
+        <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          src="https://avatars.githubusercontent.com/u/your-avatar-url"
-          alt="Kanav Sharma"
-          className="w-32 h-32 rounded-full mb-4 md:mb-0 md:mr-6 border-4 border-cyan-400 shadow-lg shadow-cyan-400/20"
-        />
+          className="relative w-32 h-32 md:w-40 md:h-40 mb-4 md:mb-0 md:mr-6"
+        >
+          <img
+            src="/path/to/your/photo.jpg" // Add your photo path
+            alt="Kanav Sharma"
+            className="rounded-full w-full h-full object-cover border-4 border-cyan-400 
+              shadow-lg shadow-cyan-400/20 hover:shadow-cyan-400/40 transition-all 
+              duration-300 hover:scale-105"
+          />
+          <motion.div 
+            className="absolute inset-0 rounded-full border-4 border-cyan-400/50"
+            animate={{ 
+              scale: [1, 1.1, 1],
+              opacity: [0.5, 0.2, 0.5]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          />
+        </motion.div>
+
         <div className="text-center md:text-left">
-          <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+          <motion.h1 
+            className="text-3xl font-bold mb-2"
+            style={{
+              background: 'linear-gradient(to right, #22d3ee, #3b82f6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
             Kanav Sharma
-          </h1>
-          <p className="text-xl text-gray-300">DevOps Engineer</p>
-          <div className="flex justify-center md:justify-start space-x-4 mt-4">
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              href="https://www.linkedin.com/in/kanav-sharma"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors"
-            >
-              <LinkedinIcon className="w-5 h-5 mr-2" /> LinkedIn
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              href="mailto:kanav.sharma@example.com"
-              className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors"
-            >
-              <Mail className="w-5 h-5 mr-2" /> Email
-            </motion.a>
+          </motion.h1>
+          <p className="text-xl text-cyan-400 font-mono mb-4">DevOps Engineer</p>
+          <div className="flex justify-center md:justify-start space-x-4">
+            {[
+              { Icon: GithubIcon, href: "https://github.com/yourusername" },
+              { Icon: LinkedinIcon, href: "https://linkedin.com/in/yourusername" },
+              { Icon: Mail, href: "mailto:your.email@example.com" }
+            ].map(({ Icon, href }, index) => (
+              <motion.a
+                key={index}
+                whileHover={{ scale: 1.1, y: -2 }}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-400 hover:text-cyan-300 transition-colors"
+              >
+                <Icon className="w-6 h-6" />
+              </motion.a>
+            ))}
           </div>
         </div>
       </div>
@@ -87,34 +86,39 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
         pipelines, Azure and AWS DevOps, and innovative AI-driven projects.
       </motion.p>
 
-      <div className="grid grid-cols-3 gap-4 mt-6">
+      <motion.div 
+        className="grid grid-cols-3 gap-4 mb-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
         {stats.map((stat, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-gray-800 p-4 rounded-lg text-center shadow-lg border border-gray-700"
+            whileHover={{ y: -5 }}
+            className="bg-[#1e2436] p-4 rounded-xl border border-cyan-500/20 
+              text-center shadow-lg hover:shadow-cyan-400/20 transition-all duration-300"
           >
-            <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+            <div className="text-3xl font-bold text-transparent bg-clip-text 
+              bg-gradient-to-r from-cyan-400 to-blue-500">
               {stat.value}
             </div>
             <div className="text-sm text-gray-300">{stat.label}</div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <motion.div 
-        className="flex justify-between mt-8"
+        className="flex justify-between"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <ModalButton onClick={goToPrevious}>Back</ModalButton>
-        <ModalButton onClick={closeModal}>Main Menu</ModalButton>
-        <ModalButton onClick={goToNext}>Next</ModalButton>
+        <StyledButton onClick={goToPrevious}>Back</StyledButton>
+        <StyledButton onClick={closeModal}>Main Menu</StyledButton>
+        <StyledButton onClick={goToNext}>Next</StyledButton>
       </motion.div>
-    </motion.div>
+    </ModalContainer>
   );
 };
 
