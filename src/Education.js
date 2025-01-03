@@ -1,15 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap } from 'lucide-react';
-
-const ModalButton = ({ onClick, children }) => (
-  <button
-    className="bg-cyan-400 text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-cyan-500 transition-all shadow-lg hover:shadow-cyan-400/50"
-    onClick={onClick}
-  >
-    {children}
-  </button>
-);
+import { ModalContainer, StyledButton, SectionTitle } from './ModalContainer';
 
 function Education({ closeModal, goToNext, goToPrevious }) {
   const educationDetails = [
@@ -18,7 +10,7 @@ function Education({ closeModal, goToNext, goToPrevious }) {
       institution: "DePaul University",
       location: "Chicago, IL",
       graduation: "Expected Graduation: June 2026",
-      logo: "https://via.placeholder.com/150/36cfc1/000000?text=DePaul",
+      logo: "/path/to/depaul-logo.png", // Add university logo
       highlights: [
         "Pursuing advanced studies in Information Systems",
         "Focusing on cutting-edge technologies and digital transformation",
@@ -30,7 +22,7 @@ function Education({ closeModal, goToNext, goToPrevious }) {
       institution: "Chandigarh Group of Colleges",
       location: "India",
       graduation: "Graduated: June 2019",
-      logo: "https://via.placeholder.com/150/36cfc1/000000?text=CGC",
+      logo: "/path/to/cgc-logo.png", // Add university logo
       highlights: [
         "Comprehensive education in Computer Science and Software Engineering",
         "Strong foundation in programming, algorithms, and software development",
@@ -39,63 +31,113 @@ function Education({ closeModal, goToNext, goToPrevious }) {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { x: -20, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
   return (
-    <div className="container bg-gray-900 text-white p-4 md:p-6 h-full overflow-y-auto">
+    <ModalContainer className="p-4 md:p-6">
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="flex items-center justify-center mb-6"
       >
-        <GraduationCap className="w-8 h-8 text-cyan-400 mr-2" />
-        <h1 className="text-3xl md:text-4xl font-extrabold text-center text-cyan-400">
-          Educational Journey
-        </h1>
+        <GraduationCap className="w-6 h-6 md:w-8 md:h-8 text-cyan-400 mr-2" />
+        <SectionTitle>Educational Journey</SectionTitle>
       </motion.div>
 
-      <div className="space-y-6 md:space-y-8">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="space-y-4 md:space-y-6"
+      >
         {educationDetails.map((edu, index) => (
           <motion.div
             key={index}
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: index * 0.2 }}
-            className="bg-gray-800 p-4 md:p-6 rounded-md shadow-md flex flex-col md:flex-row items-center"
+            variants={itemVariants}
+            className="bg-[#1e2436] p-4 md:p-6 rounded-xl border border-cyan-500/20 
+              shadow-lg hover:shadow-cyan-400/20 transition-all duration-300
+              hover:border-cyan-500/40"
           >
-            <div className="w-24 md:w-32 mb-4 md:mb-0 md:mr-6">
-              <img
-                src={edu.logo}
-                alt={`${edu.institution} Logo`}
-                className="w-full h-24 md:h-32 rounded-full object-cover border-4 border-cyan-400 hover:border-cyan-300 transition-colors"
-              />
-            </div>
-            <div className="flex-1 text-center md:text-left">
-              <h2 className="text-xl md:text-2xl font-bold text-cyan-300">{edu.degree}</h2>
-              <p className="mt-2 text-base md:text-lg">
-                <strong>{edu.institution}</strong> | {edu.location}
-              </p>
-              <p className="mt-2 text-sm md:text-md">{edu.graduation}</p>
-              <ul className="list-disc pl-5 mt-4 space-y-2">
-                {edu.highlights.map((item, idx) => (
-                  <li key={idx} className="text-sm md:text-base text-left">{item}</li>
-                ))}
-              </ul>
+            <div className="flex flex-col md:flex-row items-center">
+              <motion.div 
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                className="w-24 md:w-32 mb-4 md:mb-0 md:mr-6"
+              >
+                <img
+                  src={edu.logo}
+                  alt={`${edu.institution} Logo`}
+                  className="w-full h-24 md:h-32 rounded-full object-cover 
+                    border-4 border-cyan-400/20 hover:border-cyan-400/40 
+                    transition-colors duration-300 bg-[#151922] p-2"
+                />
+              </motion.div>
+
+              <div className="flex-1 space-y-3">
+                <div className="text-center md:text-left">
+                  <h2 className="text-xl md:text-2xl font-bold text-transparent 
+                    bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                    {edu.degree}
+                  </h2>
+                  <div className="mt-2 space-y-1">
+                    <p className="text-base md:text-lg font-semibold text-cyan-300">
+                      {edu.institution} | {edu.location}
+                    </p>
+                    <p className="text-sm text-cyan-400">{edu.graduation}</p>
+                  </div>
+                </div>
+
+                <motion.ul 
+                  className="list-disc pl-5 mt-4 space-y-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  {edu.highlights.map((item, idx) => (
+                    <li key={idx} className="text-sm md:text-base text-gray-300">
+                      {item}
+                    </li>
+                  ))}
+                </motion.ul>
+              </div>
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <motion.div 
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        className="flex justify-between mt-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="flex justify-between mt-6 md:mt-8 space-x-2"
       >
-        <ModalButton onClick={goToPrevious}>Back</ModalButton>
-        <ModalButton onClick={closeModal}>Main Menu</ModalButton>
-        <ModalButton onClick={goToNext}>Next</ModalButton>
+        <StyledButton onClick={goToPrevious}>Back</StyledButton>
+        <StyledButton onClick={closeModal}>Main Menu</StyledButton>
+        <StyledButton onClick={goToNext}>Next</StyledButton>
       </motion.div>
-    </div>
+    </ModalContainer>
   );
 }
 
