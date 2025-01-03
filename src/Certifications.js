@@ -1,96 +1,145 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award } from 'lucide-react';
-
-const ModalButton = ({ onClick, children }) => (
-  <button
-    className="bg-cyan-400 text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-cyan-500 transition-all shadow-lg hover:shadow-cyan-400/50"
-    onClick={onClick}
-  >
-    {children}
-  </button>
-);
+import { ModalContainer, StyledButton, SectionTitle } from './ModalContainer';
 
 function Certifications({ closeModal, goToNext, goToPrevious }) {
   const certifications = [
     {
       title: "Azure DevOps Engineer Expert",
       provider: "Microsoft Certification",
-      imageUrl: "https://via.placeholder.com/150/36cfc1/000000?text=Azure+Cert",
+      imageUrl: "/path/to/azure-cert.png", // Add certification logo
       description: [
         "Advanced certification demonstrating expertise in DevOps practices",
         "Validated skills in implementing DevOps processes using Azure technologies",
         "Comprehensive understanding of continuous integration and deployment strategies",
       ],
+      date: "2023",
+      badgeColor: "from-blue-400 to-blue-600"
     },
     {
       title: "AWS DevOps Engineer Professional",
       provider: "Amazon Web Services Certification",
-      imageUrl: "https://via.placeholder.com/150/36cfc1/000000?text=AWS+Cert",
+      imageUrl: "/path/to/aws-cert.png", // Add certification logo
       description: [
         "Professional-level certification in AWS cloud infrastructure and DevOps",
         "Proven expertise in provisioning, operating, and managing distributed applications",
         "In-depth knowledge of AWS services and best practices",
       ],
+      date: "2022",
+      badgeColor: "from-orange-400 to-orange-600"
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
   return (
-    <div className="container bg-gray-900 text-white p-4 md:p-6 h-full overflow-y-auto">
+    <ModalContainer className="p-4 md:p-6">
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex items-center justify-center mb-6"
+        className="flex items-center justify-center mb-6 gap-2"
       >
-        <Award className="w-8 h-8 text-cyan-400 mr-2" />
-        <h1 className="text-3xl md:text-4xl font-extrabold text-center text-cyan-400">
-          Professional Certifications
-        </h1>
+        <Award className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
+        <SectionTitle>Professional Certifications</SectionTitle>
       </motion.div>
       
-      <div className="space-y-6 md:space-y-8">
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="space-y-4 md:space-y-6"
+      >
         {certifications.map((cert, index) => (
           <motion.div
             key={index}
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: index * 0.2 }}
-            className="bg-gray-800 p-4 md:p-6 rounded-md shadow-md flex flex-col md:flex-row items-center"
+            variants={itemVariants}
+            whileHover={{ y: -5 }}
+            className="bg-[#1e2436] p-4 md:p-6 rounded-xl border border-cyan-500/20 
+              shadow-lg hover:shadow-cyan-400/20 transition-all duration-300
+              hover:border-cyan-500/40 relative overflow-hidden"
           >
-            <div className="w-full md:w-48 mb-4 md:mb-0 md:mr-6">
-              <img
-                src={cert.imageUrl}
-                alt={`${cert.title} Logo`}
-                className="w-full h-32 rounded-lg object-cover border-2 border-cyan-400 hover:border-cyan-300 transition-colors"
-              />
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 relative z-10">
+              <motion.div 
+                className="w-full md:w-48 shrink-0"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+              >
+                <div className={`rounded-lg overflow-hidden bg-gradient-to-br ${cert.badgeColor} p-0.5`}>
+                  <div className="bg-[#151922] p-4 rounded-[7px]">
+                    <img
+                      src={cert.imageUrl}
+                      alt={`${cert.title} Logo`}
+                      className="w-full h-32 object-contain"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+              
+              <div className="flex-1 min-w-0">
+                <div className="space-y-3">
+                  <h2 className="text-xl md:text-2xl font-bold text-transparent 
+                    bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 
+                    text-center md:text-left">
+                    {cert.title}
+                  </h2>
+                  <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-1">
+                    <p className="text-base md:text-lg font-medium text-cyan-300">
+                      {cert.provider}
+                    </p>
+                    <p className="text-sm text-cyan-400/80">
+                      Achieved: {cert.date}
+                    </p>
+                  </div>
+                  <ul className="list-disc pl-5 space-y-2 text-gray-300">
+                    {cert.description.map((item, idx) => (
+                      <li key={idx} className="text-sm md:text-base">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div className="flex-1">
-              <h2 className="text-xl md:text-2xl font-bold text-cyan-300">{cert.title}</h2>
-              <p className="mt-2 text-base md:text-lg">
-                <strong>{cert.provider}</strong>
-              </p>
-              <ul className="list-disc pl-5 mt-4 space-y-2">
-                {cert.description.map((item, idx) => (
-                  <li key={idx} className="text-sm md:text-base">{item}</li>
-                ))}
-              </ul>
+            {/* Background pattern */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 transform rotate-12 translate-y-1/2" />
             </div>
           </motion.div>
         ))}
-      </div>
-      
-      <motion.div 
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="flex justify-between mt-6 md:mt-8 space-x-2"
-      >
-        <ModalButton onClick={goToPrevious}>Back</ModalButton>
-        <ModalButton onClick={closeModal}>Main Menu</ModalButton>
-        <ModalButton onClick={goToNext}>Next</ModalButton>
       </motion.div>
-    </div>
+
+      <motion.div 
+        className="flex justify-between mt-6 gap-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        <StyledButton onClick={goToPrevious}>Back</StyledButton>
+        <StyledButton onClick={closeModal}>Main Menu</StyledButton>
+        <StyledButton onClick={goToNext}>Next</StyledButton>
+      </motion.div>
+    </ModalContainer>
   );
 }
 
