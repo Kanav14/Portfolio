@@ -71,14 +71,16 @@ function Experience({ closeModal, goToNext, goToPrevious }) {
     <ModalContainer className="p-4 md:p-6">
       <div className="flex flex-col">
         <motion.div 
-          className="flex items-center justify-center gap-3 mb-6"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Trophy className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
-          <SectionTitle>Professional Experience</SectionTitle>
-        </motion.div>
+  className="flex items-center justify-center text-center mb-6"
+  initial={{ y: -20, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.5 }}
+>
+  <div className="inline-flex items-center gap-3">
+    <Trophy className="w-8 h-8 text-cyan-400 flex-shrink-0" />
+    <SectionTitle>Professional Experience</SectionTitle>
+  </div>
+</motion.div>
 
         <motion.div
           variants={containerVariants}
