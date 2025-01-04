@@ -58,12 +58,12 @@ const CountdownButton = ({ seconds, onClick }) => {
 
   return (
     <motion.button
-      onClick={onClick}
-      className="fixed bottom-8 left-1/2 transform -translate-x-1/2 
+      onClick={() => onClick()}
+      className="fixed bottom-8 right-8 z-50
         bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
         text-white px-6 py-3 rounded-full font-bold text-lg
         shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-        border border-cyan-400/20"
+        border border-cyan-400/20 cursor-pointer"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, y: 50 }}
@@ -150,6 +150,11 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
       setShowContent(true);
       setTimeout(onAnimationComplete, 5000);
     }
+  };
+
+  const handleSkip = () => {
+    setShowContent(true);
+    onAnimationComplete();
   };
 
   return (
@@ -266,8 +271,8 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
         </div>
       </div>
 
-      {/* Add the countdown button */}
-      <CountdownButton seconds={10} onClick={onAnimationComplete} />
+      {/* Countdown Button */}
+      <CountdownButton seconds={10} onClick={handleSkip} />
     </div>
   );
 };
