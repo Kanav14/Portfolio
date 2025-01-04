@@ -15,8 +15,147 @@ import {
   ArrowRight
 } from 'lucide-react';
 
-// Previous Terminal, TimerButton, and Command components remain the same
+// TypewriterText Component
+const TypewriterText = ({ text, onComplete }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
 
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 50);
+      return () => clearTimeout(timeout);
+    } else {
+      onComplete?.();
+    }
+  }, [currentIndex, text, onComplete]);
+
+  return (
+    <span className="text-green-400">
+      {displayedText}
+      <motion.span
+        animate={{ opacity: [0, 1] }}
+        transition={{ duration: 0.5, repeat: Infinity }}
+      >
+        _
+      </motion.span>
+    </span>
+  );
+};
+
+// TimerButton Component
+const TimerButton = ({ timeLeft, onSkip, isDarkTheme }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const circumference = 2 * Math.PI * 45;
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={onSkip}
+      className={`
+        fixed top-4 right-4 z-50 flex items-center justify-center
+        w-16 h-16 rounded-full bg-gray-900/80 backdrop-blur-sm
+        border border-cyan-500/30 group hover:bg-gray-900/90
+        transition-all duration-300
+      `}
+    >
+      <svg className="absolute w-full h-full -rotate-90">
+        <circle
+          cx="32"
+          cy="32"
+          r="30"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          className="text-gray-700"
+        />
+        <motion.circle
+          cx="32"
+          cy="32"
+          r="30"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          className="text-cyan-400"
+          strokeDasharray={circumference}
+          strokeDashoffset={circumference * (1 - timeLeft / 10)}
+          strokeLinecap="round"
+          initial={{ strokeDashoffset: circumference }}
+          animate={{ strokeDashoffset: circumference * (1 - timeLeft / 10) }}
+          transition={{ duration: 1, ease: "linear" }}
+        />
+      </svg>
+
+      <motion.div
+        className="relative z-10 flex items-center gap-1"
+        initial={{ scale: 1 }}
+        animate={{ 
+          scale: timeLeft <= 3 ? [1, 1.2, 1] : 1
+        }}
+        transition={{ 
+          duration: 1,
+          repeat: timeLeft <= 3 ? Infinity : 0
+        }}
+      >
+        {isHovered ? (
+          <span className="text-sm font-medium text-cyan-400">Skip</span>
+        ) : (
+          <span className="text-sm font-medium text-cyan-400">{timeLeft}s</span>
+        )}
+      </motion.div>
+
+      {/* Hover glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100
+          bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-md transition-opacity duration-300"
+      />
+    </motion.button>
+  );
+};
+
+// Terminal Component
+const Terminal = ({ commands, currentCommandIndex, onCommandComplete }) => {
+  return (
+    <motion.div 
+      className="bg-gray-900/95 rounded-xl border border-cyan-500/30 overflow-hidden backdrop-blur-xl w-full max-w-2xl mx-auto"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <div className="flex items-center gap-2 p-3 bg-gray-800/50 border-b border-gray-700">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <span className="text-gray-400 text-xs ml-2">portfolio.sh</span>
+      </div>
+      
+      <div className="p-4 font-mono text-sm">
+        {commands.slice(0, currentCommandIndex + 1).map((command, index) => (
+          <div key={index} className="mb-2">
+            {index === currentCommandIndex ? (
+              <TypewriterText 
+                text={command} 
+                onComplete={onCommandComplete}
+              />
+            ) : (
+              <span className="text-green-400">{command}</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+// Main DevopsLanding Component
 const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
@@ -86,7 +225,8 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
   return (
     <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} 
-      transition-colors duration-500 ease-in-out overflow-hidden`}>
+      transition-colors duration-500 ease-in-out overflow-hidden`}
+    >
       {/* Grid Pattern Background */}
       <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] 
         bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] 
@@ -102,12 +242,11 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
       
       <div className="relative z-10 h-full flex flex-col justify-center items-center p-4 md:p-8">
         <div className="w-full max-w-4xl">
-          {/* Enhanced Terminal Section */}
+          {/* Terminal Section */}
           <Terminal 
             commands={commands} 
             currentCommandIndex={currentCommandIndex}
             onCommandComplete={handleCommandComplete}
-            className="mb-8"
           />
 
           {/* Main Content */}
@@ -118,7 +257,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center mb-4 md:mb-6"
+                  className="text-center mb-4 md:mb-6 mt-8"
                 >
                   <motion.div
                     className="mb-3 md:mb-6 inline-block"
@@ -130,24 +269,32 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     <Cpu className="w-10 h-10 md:w-16 md:h-16 text-cyan-400 mx-auto" />
                   </motion.div>
                   <h1 className="text-3xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 
-                    text-transparent bg-clip-text mb-2 md:mb-4">
+                    text-transparent bg-clip-text mb-2 md:mb-4"
+                  >
                     Kanav Sharma
                   </h1>
                   <p className="text-lg md:text-2xl text-cyan-400 font-mono mb-2 md:mb-4">
                     DevOps Engineer & Cloud Architect
                   </p>
                   <p className={`text-sm md:text-lg max-w-2xl mx-auto mb-4 md:mb-6 
-                    ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
+                    ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}
+                  >
                     Specializing in building scalable infrastructure, automating deployments, 
                     and optimizing cloud-native solutions with a focus on security and efficiency.
                   </p>
                   
                   {/* Social Links */}
                   <div className="flex justify-center gap-4 md:gap-6">
-                    {[Github, Linkedin, Mail].map((Icon, index) => (
+                    {[
+                      { Icon: Github, link: "https://github.com/yourusername" },
+                      { Icon: Linkedin, link: "https://linkedin.com/in/yourusername" },
+                      { Icon: Mail, link: "mailto:your.email@example.com" }
+                    ].map(({ Icon, link }, index) => (
                       <motion.a
                         key={index}
-                        href="#"
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.1, y: -2 }}
                         className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} 
                           hover:text-cyan-400 transition-colors`}
