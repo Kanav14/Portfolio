@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  ChevronRight, 
-  ChevronLeft, 
   Github, 
   Linkedin, 
   Mail, 
@@ -22,8 +20,7 @@ import {
   BookOpen,
   Code2,
   GitBranch,
-  Quote,
-  Trophy
+  Quote
 } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
@@ -54,7 +51,6 @@ function App() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   const cardIcons = {
     "About Me": { icon: <Lock />, bgColor: "from-pink-400/20 to-pink-600/20" },
     "Experience": { icon: <Trophy />, bgColor: "from-yellow-400/20 to-yellow-600/20" },
@@ -97,7 +93,78 @@ function App() {
     { id: 9, text: "Research and Patents" }
   ];
 
-  // ... [Previous useEffect and particle configurations remain the same]
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDarkTheme);
+    document.body.style.backgroundColor = isDarkTheme ? '#030306' : '#ffffff';
+  }, [isDarkTheme]);
+
+  const particlesInit = useCallback(async (engine) => {
+    await loadFull(engine);
+  }, []);
+
+  const baseParticlesConfig = {
+    particles: {
+      number: { 
+        value: isMobile ? 20 : 40,
+        density: { enable: true, value_area: 1200 }
+      },
+      color: { 
+        value: isDarkTheme ? "#ffffff" : "#000000"
+      },
+      opacity: {
+        value: isDarkTheme ? 0.15 : 0.08
+      },
+      size: { value: 1.5 },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: isDarkTheme ? "#ffffff" : "#000000",
+        opacity: isDarkTheme ? 0.15 : 0.08,
+        width: 1
+      },
+      move: { 
+        enable: true, 
+        speed: isMobile ? 1 : 1.5,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "bounce"
+      }
+    },
+    interactivity: {
+      events: {
+        onhover: { enable: !isMobile, mode: "repulse" },
+        onclick: { enable: false }
+      },
+      modes: {
+        repulse: {
+          distance: 100,
+          duration: 0.4
+        }
+      }
+    }
+  };
+
+  const particlesConfig = {
+    ...baseParticlesConfig,
+    particles: {
+      ...baseParticlesConfig.particles,
+      number: {
+        value: showHelloWorld ? (isMobile ? 15 : 25) : (isMobile ? 20 : 40),
+        density: { enable: true, value_area: 1200 }
+      },
+      move: {
+        ...baseParticlesConfig.particles.move,
+        speed: showHelloWorld ? 1 : (isMobile ? 1 : 1.5)
+      }
+    }
+  };
+  useEffect(() => {
+    const quoteTimer = setInterval(() => {
+      setCurrentQuoteIndex((prev) => (prev + 1) % devopsQuotes.length);
+    }, 5000);
+    return () => clearInterval(quoteTimer);
+  }, []);
 
   const handleClick = (section) => {
     if (!section.isHighlight) {
@@ -137,9 +204,126 @@ function App() {
     }
   };
 
-  // ... [Grid and quotes rendering remain the same]
+  const renderGrid = () => (
+    <div className="grid grid-cols-3 gap-2 md:gap-6 h-[75vh] p-2 md:p-6 relative z-10">
+      {sections.map((section) => (
+        <motion.div
+          key={section.id}
+          onClick={() => handleClick(section)}
+          whileHover={{ y: -5, scale: 1.02 }}
+          transition={{ duration: 0.2 }}
+          className={`
+            relative rounded-xl cursor-pointer overflow-hidden group
+            ${section.isHighlight 
+              ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700 col-span-1'
+              : isDarkTheme
+                ? 'bg-[#1a1f2e]/80 hover:bg-[#1e2436]'
+                : 'bg-white/90 hover:bg-white'
+            }
+            backdrop-blur-lg border border-cyan-500/20
+            shadow-lg hover:shadow-xl transition-all duration-300
+            ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
+            flex flex-col items-center justify-center
+            min-h-[120px] md:min-h-[200px]
+          `}
+        >
+{section.isHighlight ? (
+            <div className="relative h-full w-full flex flex-col items-center justify-center p-2 md:p-6 text-center">
+              <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+                <motion.h1 
+                  className="text-base md:text-5xl font-bold mb-1 md:mb-4 tracking-tight"
+                  style={{
+                    background: 'linear-gradient(to right, #E0F2FE, #FFFFFF, #93C5FD)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  {section.text}
+                </motion.h1>
+                <motion.div 
+                  className="text-xs md:text-xl text-cyan-200 mb-2 md:mb-6 font-light"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  {section.subtitle}
+                </motion.div>
+                <div className="flex justify-center gap-2 md:gap-6">
+                  {[Github, Linkedin, Mail].map((Icon, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="cursor-pointer"
+                    >
+                      <Icon className="w-3 h-3 md:w-6 md:h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          ) : (
+            <>
+              <motion.div
+                className={`relative flex items-center justify-center w-8 h-8 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${cardIcons[section.text].bgColor}`}
+                animate={{ 
+                  y: [0, -5, 0],
+                  transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
+                }}
+              >
+                <div className="w-4 h-4 md:w-8 md:h-8 text-white flex items-center justify-center">
+                  {cardIcons[section.text].icon}
+                </div>
+              </motion.div>
+              
+              <h3 className={`text-xs md:text-xl font-semibold text-center mt-1 md:mt-4
+                ${isDarkTheme ? 'text-white' : 'text-gray-800'}
+                group-hover:text-cyan-400 transition-colors duration-300`}
+              >
+                {section.text}
+              </h3>
+            </>
+          )}
+        </motion.div>
+      ))}
+    </div>
+  );
 
-  const renderModal = () =>
+  const renderQuotes = () => {
+    const QuoteContainer = () => (
+      <div className="fixed bottom-0 left-0 right-0 flex justify-center px-4 py-6 bg-gradient-to-t from-[#030306]/80 via-[#030306]/50 to-transparent">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={devopsQuotes[currentQuoteIndex].text}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="flex items-center space-x-3"
+          >
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+                transition: { duration: 20, repeat: Infinity, ease: "linear" }
+              }}
+            >
+              <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} text-cyan-400 flex items-center justify-center`}>
+                {devopsQuotes[currentQuoteIndex].icon}
+              </div>
+            </motion.div>
+            
+            <p className={`${isMobile ? 'text-sm' : 'text-base'} font-medium italic text-cyan-400`}>
+              {devopsQuotes[currentQuoteIndex].text}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    );
+
+    return <QuoteContainer />;
+  };
+const renderModal = () =>
     activeSection && (
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4"
