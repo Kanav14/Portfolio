@@ -42,26 +42,35 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
-const CountdownButton = ({ seconds, onClick }) => {
+const CountdownButton = ({ seconds, onClick, show }) => {
   const [timeLeft, setTimeLeft] = useState(seconds);
+  const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
-    if (timeLeft > 0) {
+    if (show && !hasStarted) {
+      setHasStarted(true);
+    }
+  }, [show, hasStarted]);
+
+  useEffect(() => {
+    if (hasStarted && timeLeft > 0) {
       const timer = setTimeout(() => {
         setTimeLeft(prev => prev - 1);
       }, 1000);
       return () => clearTimeout(timer);
-    } else {
+    } else if (hasStarted && timeLeft === 0) {
       onClick();
     }
-  }, [timeLeft, onClick]);
+  }, [timeLeft, onClick, hasStarted]);
+
+  if (!show) return null;
 
   return (
     <motion.button
       onClick={() => onClick()}
-      className="fixed bottom-8 right-8 z-50
+      className="fixed md:bottom-8 md:right-8 bottom-20 right-4 z-50
         bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-        text-white px-6 py-3 rounded-full font-bold text-lg
+        text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-base md:text-lg
         shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
         border border-cyan-400/20 cursor-pointer"
       whileHover={{ scale: 1.05 }}
@@ -70,7 +79,7 @@ const CountdownButton = ({ seconds, onClick }) => {
       animate={{ 
         opacity: 1, 
         y: 0,
-        transition: { delay: 1 }
+        transition: { delay: 0.5 }
       }}
     >
       <motion.div 
@@ -85,9 +94,9 @@ const CountdownButton = ({ seconds, onClick }) => {
         }}
       />
       <div className="flex items-center gap-2 relative z-10">
-        <span>Skip Intro</span>
-        <ChevronRight className="w-5 h-5" />
-        <span className="ml-2 opacity-80">({timeLeft}s)</span>
+        <span className="text-sm md:text-base">Skip Intro</span>
+        <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+        <span className="ml-1 md:ml-2 opacity-80 text-sm md:text-base">({timeLeft}s)</span>
       </div>
       <motion.div 
         className="absolute inset-0 rounded-full"
@@ -107,6 +116,7 @@ const CountdownButton = ({ seconds, onClick }) => {
 const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   const commands = [
     '$ whoami',
@@ -148,7 +158,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
       setCurrentCommandIndex(prev => prev + 1);
     } else {
       setShowContent(true);
-      setTimeout(onAnimationComplete, 5000);
+      setShowButton(true);
     }
   };
 
@@ -272,7 +282,11 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
       </div>
 
       {/* Countdown Button */}
-      <CountdownButton seconds={10} onClick={handleSkip} />
+      <CountdownButton 
+        seconds={10} 
+        onClick={handleSkip} 
+        show={showButton}
+      />
     </div>
   );
 };
