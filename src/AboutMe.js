@@ -54,7 +54,7 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
             className="relative w-32 h-32 md:w-40 md:h-40 mb-4 md:mb-0 md:mr-6"
           >
             <img
-              src="/path/to/your/photo.jpg"
+              src="images/kanav.png"
               alt="Kanav Sharma"
               className="rounded-full w-full h-full object-cover border-4 border-cyan-400 
                 shadow-lg shadow-cyan-400/20 hover:shadow-cyan-400/40 transition-all 
@@ -88,9 +88,9 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
             <p className="text-xl text-cyan-400 font-mono mb-4">DevOps Engineer</p>
             <div className="flex justify-center md:justify-start space-x-4">
               {[
-                { Icon: Github, href: "https://github.com/yourusername" },
-                { Icon: Linkedin, href: "https://linkedin.com/in/yourusername" },
-                { Icon: Mail, href: "mailto:your.email@example.com" }
+                { Icon: Github, href: "https://github.com/Kanav14" },
+                { Icon: Linkedin, href: "www.linkedin.com/in/kanav-sharma-engineer" },
+                { Icon: Mail, href: "kanavsharma30@gmail.com" }
               ].map(({ Icon, href }, index) => (
                 <motion.a
                   key={index}
