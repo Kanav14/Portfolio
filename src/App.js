@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
+  ChevronRight, 
+  ChevronLeft, 
   Github, 
   Linkedin, 
   Mail, 
@@ -20,7 +22,8 @@ import {
   BookOpen,
   Code2,
   GitBranch,
-  Quote
+  Quote,
+  Trophy
 } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
@@ -51,6 +54,7 @@ function App() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   const cardIcons = {
     "About Me": { icon: <Lock />, bgColor: "from-pink-400/20 to-pink-600/20" },
     "Experience": { icon: <Trophy />, bgColor: "from-yellow-400/20 to-yellow-600/20" },
@@ -159,6 +163,7 @@ function App() {
       }
     }
   };
+
   useEffect(() => {
     const quoteTimer = setInterval(() => {
       setCurrentQuoteIndex((prev) => (prev + 1) % devopsQuotes.length);
@@ -227,7 +232,7 @@ function App() {
             min-h-[120px] md:min-h-[200px]
           `}
         >
-{section.isHighlight ? (
+          {section.isHighlight ? (
             <div className="relative h-full w-full flex flex-col items-center justify-center p-2 md:p-6 text-center">
               <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
                 <motion.h1 
@@ -323,7 +328,8 @@ function App() {
 
     return <QuoteContainer />;
   };
-const renderModal = () =>
+
+  const renderModal = () =>
     activeSection && (
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4"
@@ -341,8 +347,35 @@ const renderModal = () =>
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Navigation buttons at the top */}
-          <div className="absolute top-2 left-2 right-2 flex justify-between items-center z-10">
+          <button
+            className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-400 hover:text-cyan-400 transition-colors text-xl"
+            onClick={closeModal}
+          >
+            ×
+          </button>
+          {activeSection.text === "About Me" ? (
+            <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Projects" ? (
+            <Project closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Experience" ? (
+            <Experience closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Education" ? (
+            <Education closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Certifications" ? (
+            <Certifications closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Skills and Knowledge Base" ? (
+            <SkillsAndKnowledge closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Extra Curricular" ? (
+            <ExtraCurricular closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : activeSection.text === "Research and Patents" ? (
+            <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
+          ) : (
+            <h2 className={`text-xl md:text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
+              Content for {activeSection.text} coming soon!
+            </h2>
+          )}
+          
+          <div className="flex justify-center gap-4 mt-6">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -350,20 +383,10 @@ const renderModal = () =>
                 e.stopPropagation();
                 goToPrevious();
               }}
-              className="p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300"
+              className="p-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
             >
-              Back
+              <ChevronLeft className={`${isMobile ? 'w-5 h-5' : 'w-6 h-6'} text-white`} />
             </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={closeModal}
-              className="p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300"
-            >
-              Main Menu
-            </motion.button>
-
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -371,34 +394,10 @@ const renderModal = () =>
                 e.stopPropagation();
                 goToNext();
               }}
-              className="p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300"
+              className="p-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
             >
-              Next
+              <ChevronRight className={`${isMobile ? 'w-5 h-5' : 'w-6 h-6'} text-white`} />
             </motion.button>
-          </div>
-
-          <div className="mt-16"> {/* Add padding to account for the navigation buttons */}
-            {activeSection.text === "About Me" ? (
-              <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
-            ) : activeSection.text === "Projects" ? (
-              <Project closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
-            ) : activeSection.text === "Experience" ? (
-              <Experience closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
-            ) : activeSection.text === "Education" ? (
-              <Education closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
-            ) : activeSection.text === "Certifications" ? (
-              <Certifications closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
-            ) : activeSection.text === "Skills and Knowledge Base" ? (
-              <SkillsAndKnowledge closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
-            ) : activeSection.text === "Extra Curricular" ? (
-              <ExtraCurricular closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
-            ) : activeSection.text === "Research and Patents" ? (
-              <ResearchAndPatents closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
-            ) : (
-              <h2 className={`text-xl md:text-2xl font-bold ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
-                Content for {activeSection.text} coming soon!
-              </h2>
-            )}
           </div>
         </motion.div>
       </div>
