@@ -30,7 +30,7 @@ export const StyledButton = ({ onClick, children, className = "" }) => (
 
 export const SectionTitle = ({ children }) => (
   <motion.h1 
-    className="text-2xl md:text-4xl font-extrabold mb-6 text-center"
+    className="text-2xl md:text-4xl font-extrabold inline-flex items-center"
     style={{
       background: 'linear-gradient(to right, #22d3ee, #3b82f6)',
       WebkitBackgroundClip: 'text',
