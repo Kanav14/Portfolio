@@ -24,7 +24,7 @@ function Experience({ closeModal, goToNext, goToPrevious }) {
   const experiences = [
     {
       company: "Amdocs",
-      logo: "/path/to/amdocs-logo.png",
+      logo: "https://storage.googleapis.com/clean-finder-353810/$fMT2c6Qs4nCyWdgDFuHrFEOvj5nvCmYlZ0HFAdfdq4JxOYnmcrQPKb",
       roles: [
         {
           title: "DevOps Engineer (Experienced)",
@@ -48,7 +48,7 @@ function Experience({ closeModal, goToNext, goToPrevious }) {
     },
     {
       company: "Nihilent Ltd",
-      logo: "/path/to/nihilent-logo.png",
+      logo: "https://www.nihilent.com/wp-content/uploads/2022/02/logo.png",
       roles: [
         {
           title: "Software Engineer",
