@@ -10,7 +10,7 @@ function Education({ closeModal, goToNext, goToPrevious }) {
       institution: "DePaul University",
       location: "Chicago, IL",
       graduation: "Expected Graduation: June 2026",
-      logo: "https://resources.depaul.edu/brand/PublishingImages/2021/ath-primary-registered.jpeg", // Add university logo
+      logo: "https://sportslogohistory.com/wp-content/uploads/2021/12/depaul_blue_demons_2021-pres.png", // Add university logo
       highlights: [
         "Pursuing advanced studies in Information Systems",
         "Focusing on cutting-edge technologies and digital transformation",
@@ -22,7 +22,7 @@ function Education({ closeModal, goToNext, goToPrevious }) {
       institution: "Chandigarh Group of Colleges",
       location: "India",
       graduation: "Graduated: June 2019",
-      logo: "https://cgclerp.in/Images/DEFAULT_BG/default_logo1.png", // Add university logo
+      logo: "https://play-lh.googleusercontent.com/wqq5zEjDcLdiPOn3j7o_wXCOnB5FEvm6w3_YnUGth7_RXuzR5NSWK0rK-C2ERJ3BsBA=w600-h300-pc0xffffff-pd", // Add university logo
       highlights: [
         "Comprehensive education in Computer Science and Software Engineering",
         "Strong foundation in programming, algorithms, and software development",
