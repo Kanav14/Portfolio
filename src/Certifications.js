@@ -8,7 +8,7 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
     {
       title: "Azure DevOps Engineer Expert",
       provider: "Microsoft Certification",
-      imageUrl: "/path/to/azure-cert.png", // Add certification logo
+      imageUrl: "https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Azure_DevOps.jpg", // Add certification logo
       description: [
         "Advanced certification demonstrating expertise in DevOps practices",
         "Validated skills in implementing DevOps processes using Azure technologies",
@@ -20,7 +20,7 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
     {
       title: "AWS DevOps Engineer Professional",
       provider: "Amazon Web Services Certification",
-      imageUrl: "/path/to/aws-cert.png", // Add certification logo
+      imageUrl: "https://media.licdn.com/dms/image/v2/C4D22AQEbwcdeIq1wiA/feedshare-shrink_800/feedshare-shrink_800/0/1653450991804?e=1738800000&v=beta&t=WLG1kLwsitKR1QatwWuGCSpYY81APfhZonGWzSZ82TU", // Add certification logo
       description: [
         "Professional-level certification in AWS cloud infrastructure and DevOps",
         "Proven expertise in provisioning, operating, and managing distributed applications",
@@ -29,6 +29,19 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
       date: "2022",
       badgeColor: "from-orange-400 to-orange-600"
     },
+   {
+    title: "AWS Certified Developer - Associate",
+    provider: "Amazon Web Services (AWS)",
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4D22AQHuWHB6S8YoJw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1652932560778?e=1738800000&v=beta&t=Ff_S2SJ_SrgC4EiakL-MQ8wA9zMYfcHvFd4ZWHhy2lk", 
+    description: [
+        "Demonstrates expertise in developing, deploying, and debugging cloud-based applications on AWS.",
+        "Validates proficiency with core AWS services, architecture best practices, and CI/CD pipelines.",
+        "Focuses on serverless applications, microservices, and security implementations using AWS technologies."
+    ],
+    date: "2023",
+    badgeColor: "from-blue-400 to-blue-600"
+},
+
   ];
 
   const containerVariants = {
