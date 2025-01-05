@@ -399,18 +399,36 @@ function App() {
 
       {/* Resume Download FAB */}
       <motion.button
-        className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-3 rounded-full font-medium shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+        className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 flex items-center gap-2 
+          bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+          text-white px-4 py-3 rounded-full font-medium 
+          shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+          border border-cyan-400/20 cursor-pointer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         onClick={() => window.open('/resume.pdf', '_blank')}
       >
-        <FileDown size={isMobile ? 16 : 20} />
-        <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <div className="flex items-center gap-2 relative z-10">
+          <FileDown size={isMobile ? 16 : 20} />
+          <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
+        </div>
       </motion.button>
 
-      <div className="absolute top-2 right-2 md:top-4 md:left-4 z-50 transition-opacity duration-300">
+      {/* Theme Toggle Switch - Keep on right side */}
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 transition-opacity duration-300">
         <Switch
           checked={isDarkTheme}
           onChange={setIsDarkTheme}
@@ -428,7 +446,6 @@ function App() {
           }
           className="react-switch"
         />
-      </div>
 
       <motion.div 
         className="relative z-10"
