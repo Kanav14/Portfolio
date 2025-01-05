@@ -21,7 +21,8 @@ import {
   Code2,
   GitBranch,
   Quote,
-  Trophy
+  Trophy,
+  FileDown
 } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
@@ -63,7 +64,8 @@ function App() {
     "Extra Curricular": { icon: <Target />, bgColor: "from-orange-400/20 to-orange-600/20" },
     "Research and Patents": { icon: <BookOpen />, bgColor: "from-cyan-400/20 to-cyan-600/20" }
   };
-const devopsQuotes = [
+
+  const devopsQuotes = [
     {
       text: "Infrastructure as code: Because clicking buttons is so 2010.",
       icon: <Cloud className="w-8 h-8 text-cyan-400" />
@@ -251,17 +253,28 @@ const devopsQuotes = [
                 >
                   {section.subtitle}
                 </motion.div>
-                <div className="flex justify-center gap-2 md:gap-6">
-                  {[Github, Linkedin, Mail].map((Icon, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.2, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="cursor-pointer"
-                    >
-                      <Icon className="w-3 h-3 md:w-6 md:h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
-                    </motion.div>
-                  ))}
+                <div className="flex flex-col items-center gap-4">
+                  <div className="flex justify-center gap-4 md:gap-6">
+                    {[Github, Linkedin, Mail].map((Icon, index) => (
+                      <motion.div
+                        key={index}
+                        whileHover={{ scale: 1.2, rotate: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="cursor-pointer"
+                      >
+                        <Icon className="w-3 h-3 md:w-6 md:h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
+                      </motion.div>
+                    ))}
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full font-medium shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+                    onClick={() => window.open('/resume.pdf', '_blank')}
+                  >
+                    <FileDown size={isMobile ? 16 : 20} />
+                    <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
+                  </motion.button>
                 </div>
               </motion.div>
             </div>
@@ -383,6 +396,19 @@ const devopsQuotes = [
         options={particlesConfig}
         className="absolute inset-0 z-0 transition-opacity duration-500 ease-in-out"
       />
+
+      {/* Resume Download FAB */}
+      <motion.button
+        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-3 rounded-full font-medium shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        onClick={() => window.open('/resume.pdf', '_blank')}
+      >
+        <FileDown size={isMobile ? 16 : 20} />
+        <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
+      </motion.button>
 
       <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 transition-opacity duration-300">
         <Switch
