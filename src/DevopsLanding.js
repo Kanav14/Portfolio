@@ -12,6 +12,7 @@ import {
   Book,
   ChevronRight
 } from 'lucide-react';
+import DownloadButton from './DownloadButton';
 
 const TypewriterText = ({ text, onComplete }) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -68,11 +69,10 @@ const CountdownButton = ({ seconds, onClick, show }) => {
   return (
     <motion.button
       onClick={() => onClick()}
-      className="fixed md:bottom-8 md:right-8 bottom-20 right-4 z-50
-        bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+      className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
         text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-base md:text-lg
         shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-        border border-cyan-400/20 cursor-pointer"
+        border border-cyan-400/20 cursor-pointer w-full md:w-auto"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, y: 50 }}
@@ -93,7 +93,7 @@ const CountdownButton = ({ seconds, onClick, show }) => {
           ease: "easeInOut"
         }}
       />
-      <div className="flex items-center gap-2 relative z-10">
+      <div className="flex items-center justify-center gap-2 relative z-10">
         <span className="text-sm md:text-base">Skip Intro</span>
         <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
         <span className="ml-1 md:ml-2 opacity-80 text-sm md:text-base">({timeLeft}s)</span>
@@ -270,12 +270,17 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
         </div>
       </div>
 
-      {/* Countdown Button */}
-      <CountdownButton 
-        seconds={10} 
-        onClick={handleSkip} 
-        show={showButton}
-      />
+      {/* Buttons Container */}
+      <div className="fixed bottom-0 left-0 right-0 flex flex-col items-center gap-4 p-4 md:p-0">
+        <CountdownButton 
+          seconds={10} 
+          onClick={handleSkip} 
+          show={showButton}
+        />
+        {isMobile && showContent && (
+          <DownloadButton isMobile={true} className="w-full" />
+        )}
+      </div>
     </div>
   );
 };
