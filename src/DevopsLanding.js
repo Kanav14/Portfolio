@@ -47,6 +47,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(10);
 
   const commands = [
     '$ whoami',
@@ -82,6 +83,17 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
       color: "text-purple-400" 
     }
   ];
+
+  useEffect(() => {
+    if (showButton && timeLeft > 0) {
+      const timer = setTimeout(() => {
+        setTimeLeft(prev => prev - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else if (timeLeft === 0) {
+      handleSkip();
+    }
+  }, [timeLeft, showButton]);
 
   const handleCommandComplete = () => {
     if (currentCommandIndex < commands.length - 1) {
@@ -175,7 +187,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
                 {/* Quick Stats */}
                 <motion.div 
-                  className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 mb-20 md:mb-0"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
@@ -205,43 +217,51 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     </motion.div>
                   ))}
                 </motion.div>
-
-                {/* Buttons Container */}
-                <div className="fixed left-0 right-0 bottom-4 flex justify-center gap-4 mt-8">
-                  <motion.button
-                    onClick={() => window.open('/resume.pdf', '_blank')}
-                    className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                      text-white px-6 py-2.5 rounded-full font-medium text-sm
-                      shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                      border border-cyan-400/20 cursor-pointer flex items-center gap-2"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Download className="w-4 h-4" />
-                    <span>Download Resume</span>
-                  </motion.button>
-
-                  {showButton && (
-                    <motion.button
-                      onClick={handleSkip}
-                      className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                        text-white px-6 py-2.5 rounded-full font-medium text-sm
-                        shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                        border border-cyan-400/20 cursor-pointer flex items-center gap-2"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <span>Skip Intro</span>
-                      <ChevronRight className="w-4 h-4" />
-                      <span className="opacity-80">(10s)</span>
-                    </motion.button>
-                  )}
-                </div>
               </>
             )}
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Action Buttons */}
+      {showContent && (
+        <div className="fixed bottom-4 left-0 right-0 md:bottom-8 px-4 md:px-8">
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between gap-2 md:gap-6">
+            <motion.button
+              onClick={() => window.open('/resume.pdf', '_blank')}
+              className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                text-white px-6 py-2.5 rounded-full font-medium text-sm w-full md:w-auto
+                shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+                border border-cyan-400/20 cursor-pointer flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <Download className="w-4 h-4" />
+              <span>Download Resume</span>
+            </motion.button>
+
+            {showButton && (
+              <motion.button
+                onClick={handleSkip}
+                className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                  text-white px-6 py-2.5 rounded-full font-medium text-sm w-full md:w-auto
+                  shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+                  border border-cyan-400/20 cursor-pointer flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <span>Skip Intro</span>
+                <ChevronRight className="w-4 h-4" />
+                <span className="opacity-80">({timeLeft}s)</span>
+              </motion.button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
