@@ -110,158 +110,160 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   };
 
   return (
-    <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out`}>
+    <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-x-hidden`}>
       {/* Grid Pattern Background */}
       <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'}`}></div>
       
-      <div className="relative z-10 h-full flex flex-col justify-center items-center p-4 md:p-8">
-        <div className="w-full max-w-4xl">
-          {/* Terminal Section */}
-          <motion.div 
-            className="bg-gray-900/95 rounded-xl p-3 md:p-4 font-mono text-xs md:text-sm mb-4 md:mb-8 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="flex items-center gap-2 mb-2 md:mb-4 border-b border-gray-700 pb-2">
-              <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-500"></div>
-              <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500"></div>
-              <span className="text-gray-400 text-xs ml-2">portfolio.sh</span>
-            </div>
-            {commands.slice(0, currentCommandIndex + 1).map((command, index) => (
-              <div key={index} className="mb-2">
-                {index === currentCommandIndex ? (
-                  <TypewriterText 
-                    text={command} 
-                    onComplete={handleCommandComplete}
-                  />
-                ) : (
-                  <span className="text-green-400">{command}</span>
-                )}
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Main Content */}
-          <AnimatePresence>
-            {showContent && (
-              <>
-                {/* Personal Introduction */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-center mb-4 md:mb-6"
-                >
-                  <motion.div
-                    className="mb-3 md:mb-6 inline-block"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      transition: { duration: 2, repeat: Infinity }
-                    }}
-                  >
-                    <Cpu className="w-10 h-10 md:w-16 md:h-16 text-cyan-400 mx-auto" />
-                  </motion.div>
-                  <h1 className={`text-3xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text mb-2 md:mb-4`}>
-                    Kanav Sharma
-                  </h1>
-                  <p className="text-lg md:text-2xl text-cyan-400 font-mono mb-2 md:mb-4">
-                    DevOps Engineer & Cloud Architect
-                  </p>
-                  <p className={`text-sm md:text-lg max-w-2xl mx-auto mb-4 md:mb-6 ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Specializing in building scalable infrastructure, automating deployments, 
-                    and optimizing cloud-native solutions with a focus on security and efficiency.
-                  </p>
-                  <div className="flex justify-center gap-4 md:gap-6">
-                    {[Github, Linkedin, Mail].map((Icon, index) => (
-                      <motion.a 
-                        key={index}
-                        href="#"
-                        whileHover={{ scale: 1.1 }}
-                        className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
-                      >
-                        <Icon size={isMobile ? 20 : 28} />
-                      </motion.a>
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Quick Stats */}
-                <motion.div 
-                  className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 mb-20 md:mb-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  {quickStats.map((stat, i) => (
-                    <motion.div
-                      key={i}
-                      className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-6 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ 
-                        opacity: 1, 
-                        y: 0,
-                        transition: { delay: i * 0.1 }
-                      }}
-                    >
-                      <motion.div
-                        className={`mb-2 md:mb-4 ${stat.color}`}
-                        animate={{
-                          scale: [1, 1.1, 1],
-                          transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
-                        }}
-                      >
-                        {stat.icon}
-                      </motion.div>
-                      <h3 className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{stat.value}</h3>
-                      <p className="text-xs md:text-sm text-gray-400">{stat.title}</p>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Action Buttons */}
-      {showContent && (
-        <div className="fixed bottom-4 left-0 right-0 md:bottom-8 px-4 md:px-8">
-          <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between gap-2 md:gap-6">
-            <motion.button
-              onClick={() => window.open('/resume.pdf', '_blank')}
-              className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                text-white px-6 py-2.5 rounded-full font-medium text-sm w-full md:w-auto
-                shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                border border-cyan-400/20 cursor-pointer flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+      {/* Main Content Container */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Content Wrapper */}
+        <div className="flex-1 flex flex-col justify-center items-center p-4 md:p-8">
+          <div className="w-full max-w-4xl">
+            {/* Terminal Section */}
+            <motion.div 
+              className="bg-gray-900/95 rounded-xl p-3 md:p-4 font-mono text-xs md:text-sm mb-4 md:mb-8 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <Download className="w-4 h-4" />
-              <span>Download Resume</span>
-            </motion.button>
+              <div className="flex items-center gap-2 mb-2 md:mb-4 border-b border-gray-700 pb-2">
+                <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-500"></div>
+                <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500"></div>
+                <span className="text-gray-400 text-xs ml-2">portfolio.sh</span>
+              </div>
+              {commands.slice(0, currentCommandIndex + 1).map((command, index) => (
+                <div key={index} className="mb-2">
+                  {index === currentCommandIndex ? (
+                    <TypewriterText 
+                      text={command} 
+                      onComplete={handleCommandComplete}
+                    />
+                  ) : (
+                    <span className="text-green-400">{command}</span>
+                  )}
+                </div>
+              ))}
+            </motion.div>
 
-            {showButton && (
-              <motion.button
-                onClick={handleSkip}
-                className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                  text-white px-6 py-2.5 rounded-full font-medium text-sm w-full md:w-auto
-                  shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                  border border-cyan-400/20 cursor-pointer flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <span>Skip Intro</span>
-                <ChevronRight className="w-4 h-4" />
-                <span className="opacity-80">({timeLeft}s)</span>
-              </motion.button>
-            )}
+            {/* Main Content */}
+            <AnimatePresence>
+              {showContent && (
+                <>
+                  {/* Personal Introduction */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center mb-4 md:mb-6"
+                  >
+                    <motion.div
+                      className="mb-3 md:mb-6 inline-block"
+                      animate={{
+                        scale: [1, 1.1, 1],
+                        transition: { duration: 2, repeat: Infinity }
+                      }}
+                    >
+                      <Cpu className="w-10 h-10 md:w-16 md:h-16 text-cyan-400 mx-auto" />
+                    </motion.div>
+                    <h1 className={`text-3xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text mb-2 md:mb-4`}>
+                      Kanav Sharma
+                    </h1>
+                    <p className="text-lg md:text-2xl text-cyan-400 font-mono mb-2 md:mb-4">
+                      DevOps Engineer & Cloud Architect
+                    </p>
+                    <p className={`text-sm md:text-lg max-w-2xl mx-auto mb-4 md:mb-6 ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
+                      Specializing in building scalable infrastructure, automating deployments, 
+                      and optimizing cloud-native solutions with a focus on security and efficiency.
+                    </p>
+                    <div className="flex justify-center gap-4 md:gap-6">
+                      {[Github, Linkedin, Mail].map((Icon, index) => (
+                        <motion.a 
+                          key={index}
+                          href="#"
+                          whileHover={{ scale: 1.1 }}
+                          className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
+                        >
+                          <Icon size={isMobile ? 20 : 28} />
+                        </motion.a>
+                      ))}
+                    </div>
+                  </motion.div>
+
+                  {/* Quick Stats */}
+                  <motion.div 
+                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 mb-24 md:mb-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    {quickStats.map((stat, i) => (
+                      <motion.div
+                        key={i}
+                        className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-6 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ 
+                          opacity: 1, 
+                          y: 0,
+                          transition: { delay: i * 0.1 }
+                        }}
+                      >
+                        <motion.div
+                          className={`mb-2 md:mb-4 ${stat.color}`}
+                          animate={{
+                            scale: [1, 1.1, 1],
+                            transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
+                          }}
+                        >
+                          {stat.icon}
+                        </motion.div>
+                        <h3 className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{stat.value}</h3>
+                        <p className="text-xs md:text-sm text-gray-400">{stat.title}</p>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </div>
         </div>
-      )}
+
+        {/* Buttons Container */}
+        {showContent && (
+          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:justify-between gap-2">
+              <motion.button
+                onClick={() => window.open('/resume.pdf', '_blank')}
+                className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                  text-white px-6 py-2.5 rounded-full font-medium text-sm
+                  shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+                  border border-cyan-400/20 cursor-pointer w-full md:w-auto
+                  flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Download className="w-4 h-4" />
+                <span>Download Resume</span>
+              </motion.button>
+
+              {showButton && (
+                <motion.button
+                  onClick={handleSkip}
+                  className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                    text-white px-6 py-2.5 rounded-full font-medium text-sm
+                    shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+                    border border-cyan-400/20 cursor-pointer w-full md:w-auto
+                    flex items-center justify-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span>Skip Intro</span>
+                  <ChevronRight className="w-4 h-4" />
+                  <span className="opacity-80">({timeLeft}s)</span>
+                </motion.button>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
