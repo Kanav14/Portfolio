@@ -59,25 +59,25 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
   const quickStats = [
     { 
-      icon: <Trophy size={isMobile ? 20 : 24} />, 
+      icon: <Trophy size={isMobile ? 18 : 22} />, 
       title: "Years of Experience", 
       value: "5+",
       color: "text-yellow-400" 
     },
     { 
-      icon: <Rocket size={isMobile ? 20 : 24} />, 
+      icon: <Rocket size={isMobile ? 18 : 22} />, 
       title: "Projects Delivered", 
       value: "50+",
       color: "text-blue-400" 
     },
     { 
-      icon: <Code2 size={isMobile ? 20 : 24} />, 
+      icon: <Code2 size={isMobile ? 18 : 22} />, 
       title: "Infrastructure as Code", 
       value: "1000+",
       color: "text-green-400" 
     },
     { 
-      icon: <Book size={isMobile ? 20 : 24} />, 
+      icon: <Book size={isMobile ? 18 : 22} />, 
       title: "Certifications", 
       value: "8+",
       color: "text-purple-400" 
@@ -110,18 +110,18 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   };
 
   return (
-    <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-x-hidden`}>
+    <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-hidden`}>
       {/* Grid Pattern Background */}
       <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'}`}></div>
       
       {/* Main Content Container */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Content Wrapper */}
-        <div className="flex-1 flex flex-col justify-center items-center p-4 md:p-8">
+        <div className="flex-1 flex flex-col justify-center items-center p-4 md:p-6">
           <div className="w-full max-w-4xl">
             {/* Terminal Section */}
             <motion.div 
-              className="bg-gray-900/95 rounded-xl p-3 md:p-4 font-mono text-xs md:text-sm mb-4 md:mb-8 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
+              className="bg-gray-900/95 rounded-xl p-3 md:p-4 font-mono text-xs md:text-sm mb-4 md:mb-6 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -156,25 +156,25 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     className="text-center mb-4 md:mb-6"
                   >
                     <motion.div
-                      className="mb-3 md:mb-6 inline-block"
+                      className="mb-2 md:mb-4 inline-block"
                       animate={{
                         scale: [1, 1.1, 1],
                         transition: { duration: 2, repeat: Infinity }
                       }}
                     >
-                      <Cpu className="w-10 h-10 md:w-16 md:h-16 text-cyan-400 mx-auto" />
+                      <Cpu className="w-8 h-8 md:w-12 md:h-12 text-cyan-400 mx-auto" />
                     </motion.div>
-                    <h1 className={`text-3xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text mb-2 md:mb-4`}>
+                    <h1 className={`text-2xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-transparent bg-clip-text mb-2 md:mb-3`}>
                       Kanav Sharma
                     </h1>
-                    <p className="text-lg md:text-2xl text-cyan-400 font-mono mb-2 md:mb-4">
+                    <p className="text-base md:text-xl text-cyan-400 font-mono mb-2 md:mb-3">
                       DevOps Engineer & Cloud Architect
                     </p>
-                    <p className={`text-sm md:text-lg max-w-2xl mx-auto mb-4 md:mb-6 ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
+                    <p className={`text-sm md:text-base max-w-2xl mx-auto mb-3 md:mb-4 ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
                       Specializing in building scalable infrastructure, automating deployments, 
                       and optimizing cloud-native solutions with a focus on security and efficiency.
                     </p>
-                    <div className="flex justify-center gap-4 md:gap-6">
+                    <div className="flex justify-center gap-4">
                       {[Github, Linkedin, Mail].map((Icon, index) => (
                         <motion.a 
                           key={index}
@@ -182,7 +182,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                           whileHover={{ scale: 1.1 }}
                           className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
                         >
-                          <Icon size={isMobile ? 20 : 28} />
+                          <Icon size={isMobile ? 18 : 24} />
                         </motion.a>
                       ))}
                     </div>
@@ -190,7 +190,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
                   {/* Quick Stats */}
                   <motion.div 
-                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6 mb-24 md:mb-0"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-20 md:mb-0"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
@@ -198,7 +198,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     {quickStats.map((stat, i) => (
                       <motion.div
                         key={i}
-                        className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-6 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
+                        className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-4 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ 
                           opacity: 1, 
@@ -207,7 +207,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                         }}
                       >
                         <motion.div
-                          className={`mb-2 md:mb-4 ${stat.color}`}
+                          className={`mb-2 md:mb-3 ${stat.color}`}
                           animate={{
                             scale: [1, 1.1, 1],
                             transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
@@ -215,8 +215,8 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                         >
                           {stat.icon}
                         </motion.div>
-                        <h3 className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{stat.value}</h3>
-                        <p className="text-xs md:text-sm text-gray-400">{stat.title}</p>
+                        <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</h3>
+                        <p className="text-xs text-gray-400">{stat.title}</p>
                       </motion.div>
                     ))}
                   </motion.div>
@@ -228,8 +228,8 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
         {/* Buttons Container */}
         {showContent && (
-          <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:justify-between gap-2">
+          <div className="absolute bottom-0 left-0 right-0 p-4 md:px-12">
+            <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row items-center md:justify-between gap-2">
               <motion.button
                 onClick={() => window.open('/resume.pdf', '_blank')}
                 className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
@@ -239,9 +239,24 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
               >
-                <Download className="w-4 h-4" />
-                <span>Download Resume</span>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                <div className="relative z-10 flex items-center gap-2">
+                  <Download className="w-4 h-4" />
+                  <span>Download Resume</span>
+                </div>
               </motion.button>
 
               {showButton && (
@@ -254,10 +269,25 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                 >
-                  <span>Skip Intro</span>
-                  <ChevronRight className="w-4 h-4" />
-                  <span className="opacity-80">({timeLeft}s)</span>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <div className="relative z-10 flex items-center gap-2">
+                    <span>Skip Intro</span>
+                    <ChevronRight className="w-4 h-4" />
+                    <span className="opacity-80">({timeLeft}s)</span>
+                  </div>
                 </motion.button>
               )}
             </div>
