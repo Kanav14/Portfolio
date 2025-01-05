@@ -43,73 +43,13 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
-const CountdownButton = ({ seconds, onClick, show }) => {
-  const [timeLeft, setTimeLeft] = useState(seconds);
-  const [hasStarted, setHasStarted] = useState(false);
-
-  useEffect(() => {
-    if (show && !hasStarted) {
-      setHasStarted(true);
-    }
-  }, [show, hasStarted]);
-
-  useEffect(() => {
-    if (hasStarted && timeLeft > 0) {
-      const timer = setTimeout(() => {
-        setTimeLeft(prev => prev - 1);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else if (hasStarted && timeLeft === 0) {
-      onClick();
-    }
-  }, [timeLeft, onClick, hasStarted]);
-
-  if (!show) return null;
-
-  return (
-    <motion.button
-      onClick={() => onClick()}
-      className="fixed right-4 bottom-4 md:right-8 md:bottom-8 
-        bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-        text-white px-6 py-2.5 rounded-full font-medium text-sm
-        shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-        border border-cyan-400/20 cursor-pointer z-50"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: 1, 
-        y: 0,
-        transition: { delay: 0.5 }
-      }}
-    >
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
-        animate={{
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <div className="flex items-center gap-2 relative z-10">
-        <span>Skip Intro</span>
-        <ChevronRight className="w-4 h-4" />
-        <span className="opacity-80">({timeLeft}s)</span>
-      </div>
-    </motion.button>
-  );
-};
-
-const DownloadResumeButton = () => (
+const ActionButton = ({ children, onClick, className = "" }) => (
   <motion.button
-    className="fixed left-4 bottom-4 md:left-8 md:bottom-8 
-      bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+    onClick={onClick}
+    className={`bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
       text-white px-6 py-2.5 rounded-full font-medium text-sm
       shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-      border border-cyan-400/20 cursor-pointer z-50"
+      border border-cyan-400/20 cursor-pointer ${className}`}
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     initial={{ opacity: 0, y: 20 }}
@@ -118,7 +58,6 @@ const DownloadResumeButton = () => (
       y: 0,
       transition: { delay: 0.5 }
     }}
-    onClick={() => window.open('/resume.pdf', '_blank')}
   >
     <motion.div 
       className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
@@ -132,8 +71,7 @@ const DownloadResumeButton = () => (
       }}
     />
     <div className="flex items-center gap-2 relative z-10">
-      <Download className="w-4 h-4" />
-      <span>Download Resume</span>
+      {children}
     </div>
   </motion.button>
 );
@@ -306,18 +244,22 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
         </div>
       </div>
 
-      {/* Fixed position buttons */}
-      {showContent && (
-        <>
-          <DownloadResumeButton />
-          {showButton && (
-            <CountdownButton 
-              seconds={10} 
-              onClick={handleSkip} 
-              show={true}
-            />
-          )}
-        </>
+      {/* Action Buttons */}
+      {showContent && showButton && (
+        <div className="fixed bottom-4 left-0 right-0 px-4 md:px-8 flex justify-between">
+          <ActionButton
+            onClick={() => window.open('/resume.pdf', '_blank')}
+          >
+            <Download className="w-4 h-4" />
+            <span>Download Resume</span>
+          </ActionButton>
+
+          <ActionButton onClick={handleSkip}>
+            <span>Skip Intro</span>
+            <ChevronRight className="w-4 h-4" />
+            <span className="opacity-80">(10s)</span>
+          </ActionButton>
+        </div>
       )}
     </div>
   );
