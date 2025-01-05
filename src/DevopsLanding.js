@@ -239,24 +239,9 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
               >
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <div className="relative z-10 flex items-center gap-2">
-                  <Download className="w-4 h-4" />
-                  <span>Download Resume</span>
-                </div>
+                <Download className="w-4 h-4" />
+                <span>Download Resume</span>
               </motion.button>
 
               {showButton && (
@@ -269,25 +254,24 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { delay: 0.5 }
+                  }}
                 >
+                  <span>Skip Intro</span>
+                  <ChevronRight className="w-4 h-4" />
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
-                    animate={{
-                      scale: [1, 1.2, 1],
+                    className="opacity-80 ml-1"
+                    animate={{ 
+                      opacity: [1, 0.5, 1],
+                      transition: { duration: 1, repeat: Infinity }
                     }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                  <div className="relative z-10 flex items-center gap-2">
-                    <span>Skip Intro</span>
-                    <ChevronRight className="w-4 h-4" />
-                    <span className="opacity-80">({timeLeft}s)</span>
-                  </div>
+                  >
+                    ({timeLeft}s)
+                  </motion.div>
                 </motion.button>
               )}
             </div>
