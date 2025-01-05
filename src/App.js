@@ -399,7 +399,7 @@ function App() {
 
       {/* Resume Download FAB */}
       <motion.button
-        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-3 rounded-full font-medium shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+        className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-3 rounded-full font-medium shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, y: 20 }}
@@ -410,7 +410,7 @@ function App() {
         <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
       </motion.button>
 
-      <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 transition-opacity duration-300">
+      <div className="absolute top-2 right-2 md:top-4 md:left-4 z-50 transition-opacity duration-300">
         <Switch
           checked={isDarkTheme}
           onChange={setIsDarkTheme}
