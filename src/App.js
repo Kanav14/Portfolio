@@ -22,6 +22,7 @@ import {
   GitBranch,
   Quote,
   Trophy,
+  FileDown
 } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
@@ -35,7 +36,6 @@ import Certifications from "./Certifications";
 import ResearchAndPatents from "./ResearchAndPatents";
 import SkillsAndKnowledge from "./SkillsAndKnowledge";
 import ExtraCurricular from "./ExtraCurricular";
-import DownloadButton from './DownloadButton';
 
 function App() {
   const [showHelloWorld, setShowHelloWorld] = useState(true);
@@ -296,10 +296,7 @@ function App() {
 
   const renderQuotes = () => {
     const QuoteContainer = () => (
-      <div className="fixed bottom-0 left-0 right-0 flex flex-col gap-4 px-4 py-6 bg-gradient-to-t from-[#030306]/80 via-[#030306]/50 to-transparent">
-        {isMobile && (
-          <DownloadButton isMobile={true} className="w-full" />
-        )}
+      <div className="fixed bottom-0 left-0 right-0 flex justify-center px-4 py-6 bg-gradient-to-t from-[#030306]/80 via-[#030306]/50 to-transparent">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={devopsQuotes[currentQuoteIndex].text}
@@ -307,7 +304,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="flex items-center justify-center space-x-3"
+            className="flex items-center space-x-3"
           >
             <motion.div
               animate={{
@@ -349,12 +346,12 @@ function App() {
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          <button
+      <button
             className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-400 hover:text-cyan-400 transition-colors text-xl"
             onClick={closeModal}
           >
             ×
-         </button>
+          </button>
           {activeSection.text === "About Me" ? (
             <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Projects" ? (
@@ -389,12 +386,35 @@ function App() {
         className="absolute inset-0 z-0 transition-opacity duration-500 ease-in-out"
       />
 
-      {/* Desktop Download Button */}
-      {!showHelloWorld && !isMobile && (
-        <div className="fixed bottom-8 left-8 z-50">
-          <DownloadButton isMobile={false} />
+      {/* Resume Download FAB */}
+      <motion.button
+        className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 flex items-center gap-2 
+          bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+          text-white px-4 py-3 rounded-full font-medium 
+          shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+          border border-cyan-400/20 cursor-pointer"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        onClick={() => window.open('/resume.pdf', '_blank')}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <div className="flex items-center gap-2 relative z-10">
+          <FileDown size={isMobile ? 16 : 20} />
+          <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
         </div>
-      )}
+      </motion.button>
 
       {/* Theme Toggle Switch */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 transition-opacity duration-300">
