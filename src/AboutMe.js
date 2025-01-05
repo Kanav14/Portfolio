@@ -46,12 +46,12 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
           </div>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row items-center mb-6">
+        <div className="flex flex-col md:flex-row items-center mb-6 bg-[#1e2436] rounded-xl p-4 md:p-6">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="relative w-32 h-32 md:w-40 md:h-40 mb-4 md:mb-0 md:mr-6"
+            className="relative w-32 h-32 md:w-40 md:h-40 mb-4 md:mb-0 md:mr-6 flex-shrink-0"
           >
             <img
               src="https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Image.jpeg"
@@ -74,7 +74,7 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
             />
           </motion.div>
 
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left flex-1">
             <motion.h1 
               className="text-3xl font-bold mb-2"
               style={{
@@ -110,7 +110,7 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="mb-6 text-lg leading-relaxed text-gray-300"
+          className="mb-6 text-lg leading-relaxed text-gray-300 bg-[#1e2436] p-4 md:p-6 rounded-xl"
         >
           I am a passionate DevOps Engineer with 5+ years of experience automating
           and managing cloud-native solutions using cutting-edge technologies
@@ -141,7 +141,7 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
         </motion.div>
 
         <motion.div 
-          className="flex justify-between"
+          className="flex justify-between mt-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
