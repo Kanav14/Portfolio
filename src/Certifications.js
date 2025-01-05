@@ -107,16 +107,16 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 relative z-10">
               <motion.div 
-                className="w-full md:w-48 shrink-0"
+                className="w-full md:w-64 shrink-0"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
               >
                 <div className={`rounded-lg overflow-hidden bg-gradient-to-br ${cert.badgeColor} p-0.5`}>
-                  <div className="bg-[#151922] p-4 rounded-[7px]">
+                  <div className="bg-[#151922] p-2 rounded-[7px]">
                     <img
                       src={cert.imageUrl}
                       alt={`${cert.title} Logo`}
-                      className="w-full h-32 object-contain"
+                      className="w-full h-40 object-contain"
                     />
                   </div>
                 </div>
