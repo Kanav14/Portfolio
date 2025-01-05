@@ -10,8 +10,7 @@ import {
   Rocket,
   Trophy,
   Book,
-  ChevronRight,
-  FileDown
+  ChevronRight
 } from 'lucide-react';
 
 const TypewriterText = ({ text, onComplete }) => {
@@ -219,28 +218,17 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     Specializing in building scalable infrastructure, automating deployments, 
                     and optimizing cloud-native solutions with a focus on security and efficiency.
                   </p>
-                  <div className="flex flex-col items-center gap-4">
-                    <div className="flex justify-center gap-4 md:gap-6">
-                      {[Github, Linkedin, Mail].map((Icon, index) => (
-                        <motion.a 
-                          key={index}
-                          href="#"
-                          whileHover={{ scale: 1.1 }}
-                          className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
-                        >
-                          <Icon size={isMobile ? 20 : 28} />
-                        </motion.a>
-                      ))}
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full font-medium shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
-                      onClick={() => window.open('/resume.pdf', '_blank')}
-                    >
-                      <FileDown size={isMobile ? 16 : 20} />
-                      <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
-                    </motion.button>
+                  <div className="flex justify-center gap-4 md:gap-6">
+                    {[Github, Linkedin, Mail].map((Icon, index) => (
+                      <motion.a 
+                        key={index}
+                        href="#"
+                        whileHover={{ scale: 1.1 }}
+                        className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
+                      >
+                        <Icon size={isMobile ? 20 : 28} />
+                      </motion.a>
+                    ))}
                   </div>
                 </motion.div>
 
