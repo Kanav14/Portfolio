@@ -253,28 +253,17 @@ function App() {
                 >
                   {section.subtitle}
                 </motion.div>
-                <div className="flex flex-col items-center gap-4">
-                  <div className="flex justify-center gap-4 md:gap-6">
-                    {[Github, Linkedin, Mail].map((Icon, index) => (
-                      <motion.div
-                        key={index}
-                        whileHover={{ scale: 1.2, rotate: 5 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="cursor-pointer"
-                      >
-                        <Icon className="w-3 h-3 md:w-6 md:h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
-                      </motion.div>
-                    ))}
-                  </div>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full font-medium shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
-                    onClick={() => window.open('/resume.pdf', '_blank')}
-                  >
-                    <FileDown size={isMobile ? 16 : 20} />
-                    <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
-                  </motion.button>
+                <div className="flex justify-center gap-4 md:gap-6">
+                  {[Github, Linkedin, Mail].map((Icon, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="cursor-pointer"
+                    >
+                      <Icon className="w-3 h-3 md:w-6 md:h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
             </div>
@@ -357,7 +346,7 @@ function App() {
           `}
           onClick={(e) => e.stopPropagation()}
         >
-          <button
+      <button
             className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-400 hover:text-cyan-400 transition-colors text-xl"
             onClick={closeModal}
           >
@@ -427,7 +416,7 @@ function App() {
         </div>
       </motion.button>
 
-      {/* Theme Toggle Switch - Keep on right side */}
+      {/* Theme Toggle Switch */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 transition-opacity duration-300">
         <Switch
           checked={isDarkTheme}
@@ -446,6 +435,7 @@ function App() {
           }
           className="react-switch"
         />
+      </div>
 
       <motion.div 
         className="relative z-10"
