@@ -346,12 +346,13 @@ function App() {
           `}
           onClick={(e) => e.stopPropagation()}
         >
-      <button
+          <button
             className="absolute top-2 right-2 md:top-4 md:right-4 text-gray-400 hover:text-cyan-400 transition-colors text-xl"
             onClick={closeModal}
           >
             ×
           </button>
+          // Continuing App.js...
           {activeSection.text === "About Me" ? (
             <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Projects" ? (
@@ -385,36 +386,6 @@ function App() {
         options={particlesConfig}
         className="absolute inset-0 z-0 transition-opacity duration-500 ease-in-out"
       />
-
-      {/* Resume Download FAB */}
-      <motion.button
-        className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 flex items-center gap-2 
-          bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-          text-white px-4 py-3 rounded-full font-medium 
-          shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-          border border-cyan-400/20 cursor-pointer"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        onClick={() => window.open('/resume.pdf', '_blank')}
-      >
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <div className="flex items-center gap-2 relative z-10">
-          <FileDown size={isMobile ? 16 : 20} />
-          <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
-        </div>
-      </motion.button>
 
       {/* Theme Toggle Switch */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 transition-opacity duration-300">
@@ -476,6 +447,38 @@ function App() {
           {renderModal()}
         </AnimatePresence>
       </motion.div>
+
+      {/* Resume Download FAB - Only show when not in intro mode */}
+      {!showHelloWorld && (
+        <motion.button
+          className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 flex items-center gap-2 
+            bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+            text-white px-4 py-3 rounded-full font-medium 
+            shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+            border border-cyan-400/20 cursor-pointer"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          onClick={() => window.open('/resume.pdf', '_blank')}
+        >
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+            animate={{
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <div className="flex items-center gap-2 relative z-10">
+            <FileDown size={isMobile ? 16 : 20} />
+            <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
+          </div>
+        </motion.button>
+      )}
     </div>
   );
 }
