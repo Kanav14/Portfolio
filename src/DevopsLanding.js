@@ -44,36 +44,20 @@ const TypewriterText = ({ text, onComplete }) => {
 };
 
 const ActionButton = ({ children, onClick, className = "" }) => (
-  <motion.button
+  <button
     onClick={onClick}
     className={`bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
       text-white px-6 py-2.5 rounded-full font-medium text-sm
-      shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-      border border-cyan-400/20 cursor-pointer ${className}`}
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ 
-      opacity: 1, 
-      y: 0,
-      transition: { delay: 0.5 }
+      shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 transition-all duration-200
+      border border-cyan-400/20 cursor-pointer w-full md:w-auto ${className}`}
+    style={{
+      WebkitTapHighlightColor: 'transparent'
     }}
   >
-    <motion.div 
-      className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
-      animate={{
-        scale: [1, 1.2, 1],
-      }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-    />
-    <div className="flex items-center gap-2 relative z-10">
+    <div className="flex items-center justify-center gap-2">
       {children}
     </div>
-  </motion.button>
+  </button>
 );
 
 const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
@@ -133,10 +117,11 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   return (
     <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out`}>
       {/* Grid Pattern Background */}
-      <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'}`}></div>
+      <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-[0.05]`}></div>
       
-      <div className="relative z-10 h-full flex flex-col justify-center items-center p-4 md:p-8">
-        <div className="w-full max-w-4xl">
+      <div className="relative z-10 min-h-screen flex flex-col p-4 md:p-8">
+        {/* Main Content Container */}
+        <div className="flex-1 flex flex-col justify-center">
           {/* Terminal Section */}
           <motion.div 
             className="bg-gray-900/95 rounded-xl p-3 md:p-4 font-mono text-xs md:text-sm mb-4 md:mb-8 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
@@ -166,7 +151,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
           {/* Main Content */}
           <AnimatePresence>
             {showContent && (
-              <>
+              <div className="space-y-4 md:space-y-6 max-w-4xl mx-auto w-full">
                 {/* Personal Introduction */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -238,29 +223,29 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     </motion.div>
                   ))}
                 </motion.div>
-              </>
+              </div>
             )}
           </AnimatePresence>
         </div>
+
+        {/* Action Buttons Container */}
+        {showContent && showButton && (
+          <div className="mt-6 space-y-2 md:space-y-0 md:flex md:justify-between md:space-x-4 max-w-4xl mx-auto w-full">
+            <ActionButton
+              onClick={() => window.open('/resume.pdf', '_blank')}
+            >
+              <Download className="w-4 h-4" />
+              <span>Download Resume</span>
+            </ActionButton>
+
+            <ActionButton onClick={handleSkip}>
+              <span>Skip Intro</span>
+              <ChevronRight className="w-4 h-4" />
+              <span className="opacity-80">(10s)</span>
+            </ActionButton>
+          </div>
+        )}
       </div>
-
-      {/* Action Buttons */}
-      {showContent && showButton && (
-        <div className="fixed bottom-4 left-0 right-0 px-4 md:px-8 flex justify-between">
-          <ActionButton
-            onClick={() => window.open('/resume.pdf', '_blank')}
-          >
-            <Download className="w-4 h-4" />
-            <span>Download Resume</span>
-          </ActionButton>
-
-          <ActionButton onClick={handleSkip}>
-            <span>Skip Intro</span>
-            <ChevronRight className="w-4 h-4" />
-            <span className="opacity-80">(10s)</span>
-          </ActionButton>
-        </div>
-      )}
     </div>
   );
 };
