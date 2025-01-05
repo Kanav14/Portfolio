@@ -7,19 +7,19 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
   const certifications = [
     {
       title: "Azure DevOps Engineer Expert",
-      provider: "Microsoft Certification",
+      provider: "Microsoft",
       imageUrl: "https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Azure_DevOps.jpg", // Add certification logo
       description: [
         "Advanced certification demonstrating expertise in DevOps practices",
         "Validated skills in implementing DevOps processes using Azure technologies",
         "Comprehensive understanding of continuous integration and deployment strategies",
       ],
-      date: "2023",
+      date: "2021",
       badgeColor: "from-blue-400 to-blue-600"
     },
     {
       title: "AWS DevOps Engineer Professional",
-      provider: "Amazon Web Services Certification",
+      provider: "Amazon Web Services (AWS)",
       imageUrl: "https://media.licdn.com/dms/image/v2/C4D22AQEbwcdeIq1wiA/feedshare-shrink_800/feedshare-shrink_800/0/1653450991804?e=1738800000&v=beta&t=WLG1kLwsitKR1QatwWuGCSpYY81APfhZonGWzSZ82TU", // Add certification logo
       description: [
         "Professional-level certification in AWS cloud infrastructure and DevOps",
@@ -38,9 +38,22 @@ function Certifications({ closeModal, goToNext, goToPrevious }) {
         "Validates proficiency with core AWS services, architecture best practices, and CI/CD pipelines.",
         "Focuses on serverless applications, microservices, and security implementations using AWS technologies."
     ],
-    date: "2023",
+    date: "2022",
     badgeColor: "from-blue-400 to-blue-600"
 },
+{
+    title: "Microsoft Certified: Azure Administrator Associate",
+    provider: "Microsoft",
+    imageUrl: "https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Azure_Associate.jpg", 
+    description: [
+        "Validates expertise in managing Azure cloud services including storage, security, networking, and compute resources.",
+        "Demonstrates proficiency in monitoring and managing Azure identities, governance, and hybrid environments.",
+        "Covers implementing, managing, and monitoring Azure resources with a focus on automation and scalability."
+    ],
+    date: "2021",
+    badgeColor: "from-blue-500 to-blue-700"
+},
+
 
   ];
 
