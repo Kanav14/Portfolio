@@ -14,7 +14,6 @@ import {
   Download
 } from 'lucide-react';
 
-// TypewriterText component remains the same
 const TypewriterText = ({ text, onComplete }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,7 +43,7 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
-// Modified CountdownButton to handle mobile positioning
+// Modified CountdownButton with fixed positioning
 const CountdownButton = ({ seconds, onClick, show }) => {
   const [timeLeft, setTimeLeft] = useState(seconds);
   const [hasStarted, setHasStarted] = useState(false);
@@ -71,11 +70,11 @@ const CountdownButton = ({ seconds, onClick, show }) => {
   return (
     <motion.button
       onClick={() => onClick()}
-      className="md:fixed relative md:bottom-8 md:right-8 w-full md:w-auto
+      className="fixed right-4 bottom-4 md:right-8 md:bottom-8 
         bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-        text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-base md:text-lg
+        text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-base md:text-lg
         shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-        border border-cyan-400/20 cursor-pointer mt-4 md:mt-0"
+        border border-cyan-400/20 cursor-pointer z-50"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, y: 20 }}
@@ -96,7 +95,7 @@ const CountdownButton = ({ seconds, onClick, show }) => {
           ease: "easeInOut"
         }}
       />
-      <div className="flex items-center justify-center gap-2 relative z-10">
+      <div className="flex items-center gap-2 relative z-10">
         <span className="text-sm md:text-base">Skip Intro</span>
         <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
         <span className="ml-1 md:ml-2 opacity-80 text-sm md:text-base">({timeLeft}s)</span>
@@ -195,7 +194,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
           {/* Main Content */}
           <AnimatePresence>
             {showContent && (
-              <div className="space-y-4 md:space-y-6">
+              <>
                 {/* Personal Introduction */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -267,67 +266,20 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     </motion.div>
                   ))}
                 </motion.div>
-
-                {/* Mobile-only buttons container */}
-                <div className="md:hidden space-y-2">
-                  <motion.button
-                    className="w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                      text-white px-4 py-2 rounded-full font-bold text-base
-                      shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                      border border-cyan-400/20 cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <div className="flex items-center justify-center gap-2">
-                      <Download size={20} />
-                      <span>Download Resume</span>
-                    </div>
-                  </motion.button>
-                  
-                  {showButton && (
-                    <CountdownButton 
-                      seconds={10} 
-                      onClick={handleSkip} 
-                      show={true}
-                    />
-                  )}
-                </div>
-              </div>
+              </>
             )}
           </AnimatePresence>
         </div>
       </div>
 
-      {/* Desktop-only position fixed buttons */}
-      <div className="hidden md:block">
-        <motion.button
-          className="fixed bottom-8 left-8 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-            text-white px-6 py-3 rounded-full font-bold text-lg
-            shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-            border border-cyan-400/20 cursor-pointer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ 
-            opacity: 1, 
-            y: 0,
-            transition: { delay: 0.5 }
-          }}
-        >
-          <div className="flex items-center gap-2">
-            <Download size={24} />
-            <span>Download Resume</span>
-          </div>
-        </motion.button>
-
-        {showButton && (
-          <CountdownButton 
-            seconds={10} 
-            onClick={handleSkip} 
-            show={true}
-          />
-        )}
-      </div>
+      {/* Skip Intro Button */}
+      {showButton && (
+        <CountdownButton 
+          seconds={10} 
+          onClick={handleSkip} 
+          show={true}
+        />
+      )}
     </div>
   );
 };
