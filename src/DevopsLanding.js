@@ -10,7 +10,8 @@ import {
   Rocket,
   Trophy,
   Book,
-  ChevronRight
+  ChevronRight,
+  FileDown
 } from 'lucide-react';
 
 const TypewriterText = ({ text, onComplete }) => {
@@ -98,17 +99,6 @@ const CountdownButton = ({ seconds, onClick, show }) => {
         <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
         <span className="ml-1 md:ml-2 opacity-80 text-sm md:text-base">({timeLeft}s)</span>
       </div>
-      <motion.div 
-        className="absolute inset-0 rounded-full"
-        initial={{ background: 'conic-gradient(from 0deg, transparent 100%, transparent 0%)' }}
-        animate={{
-          background: [
-            'conic-gradient(from 0deg, transparent 100%, transparent 0%)',
-            'conic-gradient(from 360deg, transparent 0%, transparent 100%)',
-          ],
-        }}
-        transition={{ duration: seconds, ease: 'linear' }}
-      />
     </motion.button>
   );
 };
@@ -229,17 +219,28 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     Specializing in building scalable infrastructure, automating deployments, 
                     and optimizing cloud-native solutions with a focus on security and efficiency.
                   </p>
-                  <div className="flex justify-center gap-4 md:gap-6">
-                    {[Github, Linkedin, Mail].map((Icon, index) => (
-                      <motion.a 
-                        key={index}
-                        href="#"
-                        whileHover={{ scale: 1.1 }}
-                        className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
-                      >
-                        <Icon size={isMobile ? 20 : 28} />
-                      </motion.a>
-                    ))}
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="flex justify-center gap-4 md:gap-6">
+                      {[Github, Linkedin, Mail].map((Icon, index) => (
+                        <motion.a 
+                          key={index}
+                          href="#"
+                          whileHover={{ scale: 1.1 }}
+                          className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
+                        >
+                          <Icon size={isMobile ? 20 : 28} />
+                        </motion.a>
+                      ))}
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full font-medium shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+                      onClick={() => window.open('/resume.pdf', '_blank')}
+                    >
+                      <FileDown size={isMobile ? 16 : 20} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
+                    </motion.button>
                   </div>
                 </motion.div>
 
