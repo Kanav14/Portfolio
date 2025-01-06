@@ -228,15 +228,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
         {/* Buttons Container */}
         {showContent && (
-          <motion.div 
-            className="md:absolute relative bottom-0 left-0 right-0 p-4 md:px-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ 
-              opacity: 1, 
-              y: 0,
-              transition: { delay: 0.6 }
-            }}
-          >
+          <div className="relative md:absolute bottom-0 left-0 right-0 p-4 md:px-12">
             <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row items-center md:justify-between gap-2">
               <motion.button
                 onClick={() => window.open('/resume.pdf', '_blank')}
@@ -247,12 +239,6 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ 
-                  opacity: 1, 
-                  y: 0,
-                  transition: { delay: 0.7 }
-                }}
               >
                 <Download className="w-4 h-4" />
                 <span>Download Resume</span>
@@ -268,12 +254,6 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ 
-                    opacity: 1, 
-                    y: 0,
-                    transition: { delay: 0.8 }
-                  }}
                 >
                   <span>Skip Intro</span>
                   <ChevronRight className="w-4 h-4" />
@@ -289,7 +269,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                 </motion.button>
               )}
             </div>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>
