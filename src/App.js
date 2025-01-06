@@ -267,7 +267,7 @@ function App() {
     <div className="grid grid-cols-3 gap-2 md:gap-6 h-[75vh] p-2 md:p-6 relative z-10">
       {/* Circuit Board Pattern Background */}
       <div className="absolute inset-0 -z-10">
-        <div className={`w-full h-full bg-[url('/circuit-pattern.svg')] opacity-[0.03] ${isDarkTheme ? 'invert' : ''}`} />
+        <div className={`w-full h-full bg-[url('circuit-pattern.svg')] opacity-[0.03] ${isDarkTheme ? 'invert' : ''}`} />
       </div>
 
       {sections.map((section) => (
