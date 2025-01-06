@@ -109,7 +109,6 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     onAnimationComplete();
   };
 
-  // Enhanced Button Component with matching App.js styles
   const GlowingButton = ({ children, onClick, className = "" }) => (
     <motion.button
       onClick={onClick}
@@ -119,20 +118,36 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      {/* Glow effect */}
+      {/* Pulsing glow effect - multiple layers for depth */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full blur-lg group-hover:opacity-75 transition-opacity"
+        className="absolute inset-0 bg-gradient-to-r from-cyan-500/50 via-blue-500/50 to-purple-500/50 rounded-full blur-lg"
         animate={{
-          scale: [1, 1.2, 1],
+          scale: [1, 1.05, 1.1, 1.05, 1],
+          opacity: [0.3, 0.4, 0.2, 0.4, 0.3],
         }}
         transition={{
-          duration: 2,
+          duration: 3,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
       />
 
-      {/* Button content with gradient background */}
+      {/* Additional pulsing layer for color variation */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-cyan-500/40 rounded-full blur-lg"
+        animate={{
+          scale: [1.05, 1, 1.1, 1, 1.05],
+          opacity: [0.2, 0.3, 0.1, 0.3, 0.2],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.3,
+        }}
+      />
+
+      {/* Base button with gradient */}
       <div className="relative bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
         text-white px-6 py-2.5 rounded-full font-medium text-sm
         shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
