@@ -115,24 +115,47 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
       className={`relative group bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
         text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
         shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-        border border-cyan-400/20 cursor-pointer ${className}`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+        border border-cyan-400/20 cursor-pointer overflow-hidden ${className}`}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
+      {/* Fixed glowing effect */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+        className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 blur-lg rounded-full"
         animate={{
-          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
+          times: [0, 0.5, 1]
         }}
       />
-      <div className="flex items-center gap-1 md:gap-2 relative z-10">
+      
+      {/* Static gradient background */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full" 
+      />
+
+      {/* Moving gradient overlay */}
+      <motion.div 
+        className="absolute inset-0 w-[200%] translate-x-[-50%] h-full mix-blend-overlay opacity-50
+          bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)]"
+        animate={{
+          translateX: ["0%", "100%"]
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+
+      {/* Button content */}
+      <div className="relative z-10 flex items-center gap-1 md:gap-2">
         {children}
       </div>
     </motion.button>
