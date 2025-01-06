@@ -109,6 +109,32 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     onAnimationComplete();
   };
 
+  // Enhanced Button Component
+  const GlowingButton = ({ children, onClick, className = "" }) => (
+    <motion.button
+      onClick={onClick}
+      className={`relative group ${className}`}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      {/* Gradient background with glow effect */}
+      <div className="absolute top-0 left-0 w-full h-full rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-75 blur-lg group-hover:opacity-100 transition-opacity duration-300" />
+      
+      {/* Button content */}
+      <div className="relative bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 text-white 
+        px-6 py-2.5 rounded-full font-medium text-sm
+        shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+        border border-cyan-400/20 cursor-pointer
+        flex items-center justify-center gap-2 overflow-hidden">
+        {/* Moving gradient overlay */}
+        <div className="absolute inset-0 w-[200%] translate-x-[-50%] h-full mix-blend-overlay opacity-50
+          bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent)]
+          group-hover:translate-x-[50%] transition-transform duration-1000" />
+        {children}
+      </div>
+    </motion.button>
+  );
+
   return (
     <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-y-auto`}>
       {/* Grid Pattern Background */}
@@ -224,35 +250,23 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   {/* Buttons - Mobile: Normal scroll, Desktop: Fixed position */}
                   <div className="md:fixed md:bottom-0 md:left-0 md:right-0 md:p-8 mt-8 md:mt-0">
                     <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row items-center md:justify-between gap-2">
-                      <motion.button
+                      <GlowingButton
                         onClick={() => window.open('/resume.pdf', '_blank')}
-                        className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                          text-white px-6 py-2.5 rounded-full font-medium text-sm
-                          shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                          border border-cyan-400/20 cursor-pointer w-full md:w-auto
-                          flex items-center justify-center gap-2"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="w-full md:w-auto"
                       >
                         <Download className="w-4 h-4" />
                         <span>Download Resume</span>
-                      </motion.button>
+                      </GlowingButton>
 
                       {showButton && (
-                        <motion.button
+                        <GlowingButton
                           onClick={handleSkip}
-                          className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                            text-white px-6 py-2.5 rounded-full font-medium text-sm
-                            shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                            border border-cyan-400/20 cursor-pointer w-full md:w-auto
-                            flex items-center justify-center gap-2"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          className="w-full md:w-auto"
                         >
                           <span>Skip Intro</span>
                           <ChevronRight className="w-4 h-4" />
                           <span className="opacity-80">({timeLeft}s)</span>
-                        </motion.button>
+                        </GlowingButton>
                       )}
                     </div>
                   </div>
