@@ -48,6 +48,29 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+/* Button Glow Animation */
+@keyframes pulse-glow {
+  0% { transform: scale(1); opacity: 0.3; }
+  25% { transform: scale(1.05); opacity: 0.4; }
+  50% { transform: scale(1.1); opacity: 0.2; }
+  75% { transform: scale(1.05); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 0.3; }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+/* Moving Gradient Animation */
+@keyframes move-gradient {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(50%); }
+}
+
+.moving-gradient {
+  animation: move-gradient 2s linear infinite;
+}
+
 /* Modal Styles */
 .modal-content {
   backdrop-filter: blur(12px);
@@ -224,4 +247,22 @@ html {
   .modal-nav-button {
     padding: 0.75rem;
   }
+}
+
+/* Scrollbar Thin Style */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.2);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.4);
 }
