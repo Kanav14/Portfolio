@@ -110,14 +110,14 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   };
 
   return (
-    <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-hidden`}>
+    <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-y-auto`}>
       {/* Grid Pattern Background */}
-      <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'}`}></div>
+      <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'} pointer-events-none`}></div>
       
       {/* Main Content Container */}
-      <div className="relative z-10 min-h-screen flex flex-col">
+      <div className="relative z-10">
         {/* Content Wrapper */}
-        <div className="flex-1 flex flex-col justify-center items-center p-4 md:p-6">
+        <div className="flex flex-col justify-center items-center min-h-screen p-4 md:p-6">
           <div className="w-full max-w-4xl">
             {/* Terminal Section */}
             <motion.div 
@@ -190,7 +190,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
                   {/* Quick Stats */}
                   <motion.div 
-                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-20 md:mb-0"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
@@ -220,57 +220,47 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                       </motion.div>
                     ))}
                   </motion.div>
+
+                  {/* Buttons - Mobile: Normal scroll, Desktop: Fixed position */}
+                  <div className="md:fixed md:bottom-0 md:left-0 md:right-0 md:p-8 mt-8 md:mt-0">
+                    <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row items-center md:justify-between gap-2">
+                      <motion.button
+                        onClick={() => window.open('/resume.pdf', '_blank')}
+                        className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                          text-white px-6 py-2.5 rounded-full font-medium text-sm
+                          shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+                          border border-cyan-400/20 cursor-pointer w-full md:w-auto
+                          flex items-center justify-center gap-2"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Download className="w-4 h-4" />
+                        <span>Download Resume</span>
+                      </motion.button>
+
+                      {showButton && (
+                        <motion.button
+                          onClick={handleSkip}
+                          className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+                            text-white px-6 py-2.5 rounded-full font-medium text-sm
+                            shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+                            border border-cyan-400/20 cursor-pointer w-full md:w-auto
+                            flex items-center justify-center gap-2"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <span>Skip Intro</span>
+                          <ChevronRight className="w-4 h-4" />
+                          <span className="opacity-80">({timeLeft}s)</span>
+                        </motion.button>
+                      )}
+                    </div>
+                  </div>
                 </>
               )}
             </AnimatePresence>
           </div>
         </div>
-
-        {/* Buttons Container */}
-        {showContent && (
-          <div className="relative md:absolute bottom-0 left-0 right-0 p-4 md:px-12">
-            <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row items-center md:justify-between gap-2">
-              <motion.button
-                onClick={() => window.open('/resume.pdf', '_blank')}
-                className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                  text-white px-6 py-2.5 rounded-full font-medium text-sm
-                  shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                  border border-cyan-400/20 cursor-pointer w-full md:w-auto
-                  flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Download className="w-4 h-4" />
-                <span>Download Resume</span>
-              </motion.button>
-
-              {showButton && (
-                <motion.button
-                  onClick={handleSkip}
-                  className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-                    text-white px-6 py-2.5 rounded-full font-medium text-sm
-                    shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-                    border border-cyan-400/20 cursor-pointer w-full md:w-auto
-                    flex items-center justify-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span>Skip Intro</span>
-                  <ChevronRight className="w-4 h-4" />
-                  <motion.div 
-                    className="opacity-80 ml-1"
-                    animate={{ 
-                      opacity: [1, 0.5, 1],
-                      transition: { duration: 1, repeat: Infinity }
-                    }}
-                  >
-                    ({timeLeft}s)
-                  </motion.div>
-                </motion.button>
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
