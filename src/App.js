@@ -22,7 +22,10 @@ import {
   GitBranch,
   Quote,
   Trophy,
-  FileDown
+  FileDown,
+  Cpu,
+  Box,
+  Layers
 } from 'lucide-react';
 import Particles from 'react-particles';
 import { loadFull } from 'tsparticles';
@@ -108,67 +111,119 @@ function App() {
   const baseParticlesConfig = {
     particles: {
       number: { 
-        value: isMobile ? 20 : 40,
-        density: { enable: true, value_area: 1200 }
+        value: isMobile ? 30 : 60,
+        density: { enable: true, value_area: 1500 }
       },
       color: { 
-        value: isDarkTheme ? "#ffffff" : "#000000"
+        value: isDarkTheme ? "#4fd1c5" : "#0891b2"
       },
       opacity: {
-        value: isDarkTheme ? 0.15 : 0.08
+        value: isDarkTheme ? 0.2 : 0.15,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false
+        }
       },
-      size: { value: 1.5 },
+      size: { 
+        value: 2,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 2,
+          size_min: 0.1,
+          sync: false
+        }
+      },
       line_linked: {
         enable: true,
         distance: 150,
-        color: isDarkTheme ? "#ffffff" : "#000000",
-        opacity: isDarkTheme ? 0.15 : 0.08,
+        color: isDarkTheme ? "#4fd1c5" : "#0891b2",
+        opacity: isDarkTheme ? 0.2 : 0.15,
         width: 1
       },
       move: { 
         enable: true, 
-        speed: isMobile ? 1 : 1.5,
+        speed: isMobile ? 1.5 : 2,
         direction: "none",
         random: true,
         straight: false,
-        out_mode: "bounce"
+        out_mode: "bounce",
+        attract: {
+          enable: true,
+          rotateX: 600,
+          rotateY: 1200
+        }
       }
     },
     interactivity: {
+      detect_on: "canvas",
       events: {
-        onhover: { enable: !isMobile, mode: "repulse" },
-        onclick: { enable: false }
+        onhover: { 
+          enable: !isMobile,
+          mode: ["grab", "bubble"]
+        },
+        onclick: { 
+          enable: true,
+          mode: "push"
+        },
+        resize: true
       },
       modes: {
-        repulse: {
-          distance: 100,
-          duration: 0.4
-        }
+        grab: {
+          distance: 140,
+          line_linked: { opacity: 0.5 }
+        },
+        bubble: {
+          distance: 200,
+          size: 4,
+          duration: 2,
+          opacity: 0.8,
+          speed: 3
+        },
+        push: { particles_nb: 3 }
       }
-    }
+    },
+    retina_detect: true
   };
 
-  const particlesConfig = {
-    ...baseParticlesConfig,
-    particles: {
-      ...baseParticlesConfig.particles,
-      number: {
-        value: showHelloWorld ? (isMobile ? 15 : 25) : (isMobile ? 20 : 40),
-        density: { enable: true, value_area: 1200 }
-      },
-      move: {
-        ...baseParticlesConfig.particles.move,
-        speed: showHelloWorld ? 1 : (isMobile ? 1 : 1.5)
-      }
-    }
-  };
+  const generateFloatingIcons = (sectionType) => {
+    const iconsBySection = {
+      "About Me": [<Lock size={16} />, <Briefcase size={16} />],
+      "Projects": [<Code2 size={16} />, <GitBranch size={16} />, <Terminal size={16} />],
+      "Experience": [<Trophy size={16} />, <Rocket size={16} />],
+      "Education": [<GraduationCap size={16} />, <BookOpen size={16} />],
+      "Certifications": [<Scroll size={16} />, <Trophy size={16} />],
+      "Skills and Knowledge Base": [<Cloud size={16} />, <Database size={16} />, <Server size={16} />],
+      "Extra Curricular": [<Target size={16} />, <Wrench size={16} />],
+      "Research and Patents": [<BookOpen size={16} />, <Cpu size={16} />]
+    };
 
-  useEffect(() => {
-    const quoteTimer = setInterval(() => {
-      setCurrentQuoteIndex((prev) => (prev + 1) % devopsQuotes.length);
-    }, 5000);
-    return () => clearInterval(quoteTimer);
-  }, []);
+    return iconsBySection[sectionType]?.map((icon, index) => (
+      <motion.div
+        key={index}
+        className="absolute"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }}
+        animate={{
+          y: [0, -10, 0],
+          opacity: [0.2, 0.5, 0.2],
+          scale: [0.8, 1, 0.8],
+        }}
+        transition={{
+          duration: 3,
+          delay: index * 0.2,
+          repeat: Infinity,
+        }}
+      >
+        {icon}
+      </motion.div>
+    ));
+  };
 
   const handleClick = (section) => {
     if (!section.isHighlight) {
@@ -210,22 +265,36 @@ function App() {
 
   const renderGrid = () => (
     <div className="grid grid-cols-3 gap-2 md:gap-6 h-[75vh] p-2 md:p-6 relative z-10">
+      {/* Circuit Board Pattern Background */}
+      <div className="absolute inset-0 -z-10">
+        <div className={`w-full h-full bg-[url('/circuit-pattern.svg')] opacity-[0.03] ${isDarkTheme ? 'invert' : ''}`} />
+      </div>
+
       {sections.map((section) => (
         <motion.div
           key={section.id}
           onClick={() => handleClick(section)}
-          whileHover={{ y: -5, scale: 1.02 }}
-          transition={{ duration: 0.2 }}
+          whileHover={{ 
+            y: -8,
+            scale: 1.02,
+            rotateX: 5,
+            transition: { duration: 0.2 }
+          }}
           className={`
             relative rounded-xl cursor-pointer overflow-hidden group
             ${section.isHighlight 
               ? 'bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700 col-span-1'
               : isDarkTheme
-                ? 'bg-[#1a1f2e]/80 hover:bg-[#1e2436]'
+                ? 'bg-gradient-to-br from-[#1a1f2e]/80 to-[#252b3d]/80 hover:from-[#1e2436] hover:to-[#2a3149]'
                 : 'bg-white/90 hover:bg-white'
             }
-            backdrop-blur-lg border border-cyan-500/20
-            shadow-lg hover:shadow-xl transition-all duration-300
+            backdrop-blur-lg
+            before:absolute before:inset-0 before:rounded-xl before:p-[1px]
+            before:bg-gradient-to-r before:from-transparent before:via-cyan-500/40 before:to-transparent
+            before:opacity-0 hover:before:opacity-100 before:transition-opacity
+            shadow-[0_0_15px_rgba(34,211,238,0.1)] 
+            hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]
+            transition-all duration-300 ease-out
             ${isDarkTheme ? 'hover:shadow-cyan-500/20' : 'hover:shadow-cyan-200/50'}
             flex flex-col items-center justify-center
             min-h-[120px] md:min-h-[200px]
@@ -233,7 +302,11 @@ function App() {
         >
           {section.isHighlight ? (
             <div className="relative h-full w-full flex flex-col items-center justify-center p-2 md:p-6 text-center">
-              <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }} 
+                animate={{ scale: 1, opacity: 1 }}
+                className="relative"
+              >
                 <motion.h1 
                   className="text-base md:text-5xl font-bold mb-1 md:mb-4 tracking-tight"
                   style={{
@@ -259,9 +332,19 @@ function App() {
                       key={index}
                       whileHover={{ scale: 1.2, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
-                      className="cursor-pointer"
+                      className="cursor-pointer relative group"
                     >
                       <Icon className="w-3 h-3 md:w-6 md:h-6 text-white hover:text-cyan-200 transition-colors duration-300" />
+                      <motion.div
+                        className="absolute inset-0 bg-white rounded-full blur-lg opacity-20 group-hover:opacity-40 transition-opacity"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                        }}
+                      />
                     </motion.div>
                   ))}
                 </div>
@@ -270,23 +353,36 @@ function App() {
           ) : (
             <>
               <motion.div
-                className={`relative flex items-center justify-center w-8 h-8 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${cardIcons[section.text].bgColor}`}
+                className={`relative flex items-center justify-center w-12 h-12 md:w-20 md:h-20 rounded-full 
+                  bg-gradient-to-br ${cardIcons[section.text].bgColor}
+                  before:absolute before:inset-0 before:rounded-full before:blur-xl
+                  before:bg-inherit before:opacity-40`}
                 animate={{ 
                   y: [0, -5, 0],
+                  scale: [1, 1.05, 1],
                   transition: { duration: 2, repeat: Infinity, repeatType: "reverse" }
                 }}
               >
-                <div className="w-4 h-4 md:w-8 md:h-8 text-white flex items-center justify-center">
+                <div className="w-6 h-6 md:w-10 md:h-10 text-white flex items-center justify-center
+                  group-hover:scale-110 transition-transform duration-300">
                   {cardIcons[section.text].icon}
                 </div>
               </motion.div>
               
-              <h3 className={`text-xs md:text-xl font-semibold text-center mt-1 md:mt-4
+              <h3 className={`text-sm md:text-xl font-semibold text-center mt-3 md:mt-4
                 ${isDarkTheme ? 'text-white' : 'text-gray-800'}
-                group-hover:text-cyan-400 transition-colors duration-300`}
+                group-hover:text-cyan-400 transition-colors duration-300
+                relative before:absolute before:bottom-0 before:left-0 before:w-full
+                before:h-0.5 before:bg-cyan-400 before:scale-x-0 
+                group-hover:before:scale-x-100 before:transition-transform
+                before:origin-left`}
               >
                 {section.text}
               </h3>
+
+              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-20 transition-opacity">
+                {generateFloatingIcons(section.text)}
+              </div>
             </>
           )}
         </motion.div>
@@ -352,7 +448,7 @@ function App() {
           >
             ×
           </button>
-          // Continuing App.js...
+          
           {activeSection.text === "About Me" ? (
             <AboutMe closeModal={closeModal} goToNext={goToNext} goToPrevious={goToPrevious} />
           ) : activeSection.text === "Projects" ? (
@@ -378,12 +474,19 @@ function App() {
       </div>
     );
 
+  useEffect(() => {
+    const quoteTimer = setInterval(() => {
+      setCurrentQuoteIndex((prev) => (prev + 1) % devopsQuotes.length);
+    }, 5000);
+    return () => clearInterval(quoteTimer);
+  }, []);
+
   return (
     <div className={`min-h-screen ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out`}>
       <Particles
         id="tsparticles"
         init={particlesInit}
-        options={particlesConfig}
+        options={baseParticlesConfig}
         className="absolute inset-0 z-0 transition-opacity duration-500 ease-in-out"
       />
 
@@ -448,37 +551,37 @@ function App() {
         </AnimatePresence>
       </motion.div>
 
-      {/* Resume Download FAB - Only show when not in intro mode */}
+      {/* Resume Download FAB */}
       {!showHelloWorld && (
-    <motion.button
-      className="fixed bottom-14 md:bottom-8 left-4 md:left-8 z-50 flex items-center gap-2 
-        bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-        text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
-        shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-        border border-cyan-400/20 cursor-pointer"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      onClick={() => window.open('/resume.pdf', '_blank')}
-    >
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
-        animate={{
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <div className="flex items-center gap-1 md:gap-2 relative z-10">
-        <FileDown size={isMobile ? 14 : 20} />
-        <span>Download Resume</span>
-      </div>
-    </motion.button>
-  )}
+        <motion.button
+          className="fixed bottom-14 md:bottom-8 left-4 md:left-8 z-50 flex items-center gap-2 
+            bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+            text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
+            shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+            border border-cyan-400/20 cursor-pointer"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          onClick={() => window.open('/resume.pdf', '_blank')}
+        >
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+            animate={{
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <div className="flex items-center gap-1 md:gap-2 relative z-10">
+            <FileDown size={isMobile ? 14 : 20} />
+            <span>Download Resume</span>
+          </div>
+        </motion.button>
+      )}
     </div>
   );
 }
