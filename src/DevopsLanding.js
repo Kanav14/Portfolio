@@ -110,14 +110,14 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   };
 
   return (
-    <div className={`min-h-screen ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out relative md:fixed md:inset-0`}>
+    <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-hidden`}>
       {/* Grid Pattern Background */}
       <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'}`}></div>
       
       {/* Main Content Container */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Content Wrapper */}
-        <div className="flex-1 flex flex-col justify-center items-center p-4 md:p-6 pb-32 md:pb-6">
+        <div className="flex-1 flex flex-col justify-center items-center p-4 md:p-6">
           <div className="w-full max-w-4xl">
             {/* Terminal Section */}
             <motion.div 
@@ -228,7 +228,15 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
         {/* Buttons Container */}
         {showContent && (
-          <div className="fixed bottom-0 left-0 right-0 p-4 md:px-12 bg-gradient-to-t from-[#030306] via-[#030306]/80 to-transparent">
+          <motion.div 
+            className="md:absolute relative bottom-0 left-0 right-0 p-4 md:px-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              transition: { delay: 0.6 }
+            }}
+          >
             <div className="max-w-[90rem] mx-auto flex flex-col md:flex-row items-center md:justify-between gap-2">
               <motion.button
                 onClick={() => window.open('/resume.pdf', '_blank')}
@@ -239,6 +247,12 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { delay: 0.7 }
+                }}
               >
                 <Download className="w-4 h-4" />
                 <span>Download Resume</span>
@@ -254,11 +268,11 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ 
                     opacity: 1, 
                     y: 0,
-                    transition: { delay: 0.5 }
+                    transition: { delay: 0.8 }
                   }}
                 >
                   <span>Skip Intro</span>
@@ -275,7 +289,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                 </motion.button>
               )}
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
     </div>
