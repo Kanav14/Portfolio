@@ -296,7 +296,7 @@ function App() {
 
   const renderQuotes = () => {
     const QuoteContainer = () => (
-      <div className="fixed bottom-0 left-0 right-0 flex justify-center px-4 py-6 bg-gradient-to-t from-[#030306]/80 via-[#030306]/50 to-transparent">
+      <div className="fixed bottom-0 left-0 right-0 flex justify-center px-4 py-2 md:py-6 bg-gradient-to-t from-[#030306]/80 via-[#030306]/50 to-transparent">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={devopsQuotes[currentQuoteIndex].text}
@@ -304,7 +304,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="flex items-center space-x-3"
+            className="flex items-center space-x-3 max-w-full"
           >
             <motion.div
               animate={{
@@ -312,12 +312,12 @@ function App() {
                 transition: { duration: 20, repeat: Infinity, ease: "linear" }
               }}
             >
-              <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} text-cyan-400 flex items-center justify-center`}>
+              <div className="w-4 h-4 md:w-8 md:h-8 text-cyan-400 flex items-center justify-center">
                 {devopsQuotes[currentQuoteIndex].icon}
               </div>
             </motion.div>
             
-            <p className={`${isMobile ? 'text-sm' : 'text-base'} font-medium italic text-cyan-400`}>
+            <p className="text-xs md:text-base font-medium italic text-cyan-400 truncate">
               {devopsQuotes[currentQuoteIndex].text}
             </p>
           </motion.div>
@@ -450,35 +450,35 @@ function App() {
 
       {/* Resume Download FAB - Only show when not in intro mode */}
       {!showHelloWorld && (
-        <motion.button
-          className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-50 flex items-center gap-2 
-            bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-            text-white px-4 py-3 rounded-full font-medium 
-            shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-            border border-cyan-400/20 cursor-pointer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          onClick={() => window.open('/resume.pdf', '_blank')}
-        >
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
-            animate={{
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <div className="flex items-center gap-2 relative z-10">
-            <FileDown size={isMobile ? 16 : 20} />
-            <span className={`${isMobile ? 'text-sm' : 'text-base'}`}>Download Resume</span>
-          </div>
-        </motion.button>
-      )}
+    <motion.button
+      className="fixed bottom-14 md:bottom-8 left-4 md:left-8 z-50 flex items-center gap-2 
+        bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
+        text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
+        shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
+        border border-cyan-400/20 cursor-pointer"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      onClick={() => window.open('/resume.pdf', '_blank')}
+    >
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+        animate={{
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <div className="flex items-center gap-1 md:gap-2 relative z-10">
+        <FileDown size={isMobile ? 14 : 20} />
+        <span>Download Resume</span>
+      </div>
+    </motion.button>
+  )}
     </div>
   );
 }
