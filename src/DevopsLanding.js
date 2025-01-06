@@ -127,9 +127,10 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
         scale: [1, 1.2, 1],
       }}
       transition={{
-        duration: 2,
+        duration: 3,  // Changed from 2 to 3
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: "easeInOut",
+        repeatDelay: 0.2  // Added small delay between repeats
       }}
     />
     <div className="flex items-center gap-1 md:gap-2 relative z-10">
