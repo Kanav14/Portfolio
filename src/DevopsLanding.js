@@ -122,14 +122,16 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     animate={{ opacity: 1 }}
   >
     <motion.div 
-      className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+      className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full blur-lg"
       animate={{
-        scale: [1, 1.2, 1],
+        scale: [1, 1.1, 1],
       }}
       transition={{
-        duration: 2,
+        duration: 3,
         repeat: Infinity,
-        ease: "easeInOut"
+        repeatType: "reverse",
+        ease: "easeInOut",
+        times: [0, 0.5, 1]
       }}
     />
     <div className="flex items-center gap-1 md:gap-2 relative z-10">
