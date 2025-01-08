@@ -96,20 +96,20 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     },
     { 
       icon: <Rocket size={isMobile ? 18 : 22} />, 
-      title: "Projects Delivered", 
-      value: "50+",
+      title: "DevOps Tools", 
+      value: "20+",
       color: "text-blue-400" 
     },
     { 
       icon: <Code2 size={isMobile ? 18 : 22} />, 
-      title: "Infrastructure as Code", 
-      value: "1000+",
+      title: "Projects", 
+      value: "15+",
       color: "text-green-400" 
     },
     { 
       icon: <Book size={isMobile ? 18 : 22} />, 
       title: "Certifications", 
-      value: "8+",
+      value: "4+",
       color: "text-purple-400" 
     }
   ];
@@ -253,7 +253,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
                   {/* Resume Download Button */}
                   <AnimatedButton
-                    onClick={() => window.open('/resume.pdf', '_blank')}
+                    onClick={() => window.open('/images/Kanav_Sharma_Resume.pdf', '_blank')}
                     className="bottom-14 md:bottom-8 left-4 md:left-8"
                   >
                     <Download size={isMobile ? 14 : 20} />
