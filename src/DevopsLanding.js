@@ -122,12 +122,12 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     },
     { 
       Icon: Linkedin, 
-      url: "www.linkedin.com/in/kanav-sharma-engineer",
+      url: "https://www.linkedin.com/in/kanav-sharma-engineer",
       ariaLabel: "LinkedIn Profile"
     },
     { 
       Icon: Mail, 
-      url: "mailto:kanavsharma30@gmail.com",
+      url: "mailto:kanavsharma2000@gmail.com",
       ariaLabel: "Send Email"
     }
   ];
