@@ -253,7 +253,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
                   {/* Resume Download Button */}
                   <AnimatedButton
-                    onClick={() => window.open('./images/Kanav_Sharma_Resume.pdf', '_blank')}
+                    onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
                     className="bottom-14 md:bottom-8 left-4 md:left-8"
                   >
                     <Download size={isMobile ? 14 : 20} />
