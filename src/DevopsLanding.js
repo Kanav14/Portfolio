@@ -114,6 +114,24 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     }
   ];
 
+  const socialLinks = [
+    { 
+      Icon: Github, 
+      url: "https://github.com/Kanav14",
+      ariaLabel: "GitHub Profile"
+    },
+    { 
+      Icon: Linkedin, 
+      url: "www.linkedin.com/in/kanav-sharma-engineer",
+      ariaLabel: "LinkedIn Profile"
+    },
+    { 
+      Icon: Mail, 
+      url: "mailto:kanavsharma30@gmail.com",
+      ariaLabel: "Send Email"
+    }
+  ];
+
   useEffect(() => {
     if (showButton && timeLeft > 0) {
       const timer = setTimeout(() => {
@@ -205,10 +223,13 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                       and optimizing cloud-native solutions with a focus on security and efficiency.
                     </p>
                     <div className="flex justify-center gap-4">
-                      {[Github, Linkedin, Mail].map((Icon, index) => (
+                      {socialLinks.map(({ Icon, url, ariaLabel }, index) => (
                         <motion.a 
                           key={index}
-                          href="#"
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={ariaLabel}
                           whileHover={{ scale: 1.1 }}
                           className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
                         >
