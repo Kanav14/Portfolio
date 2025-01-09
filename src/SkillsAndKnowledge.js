@@ -9,7 +9,7 @@ function SkillsAndKnowledge({ closeModal, goToNext, goToPrevious }) {
       category: "Programming Languages",
       icon: <Code2 className="w-5 h-5" />,
       color: "from-blue-400 to-blue-600",
-      skills: ["Python", "PowerShell", "Groovy", "YAML", "Java"],
+      skills: ["Python", "PowerShell", "Groovy", "YAML"],
     },
     {
       category: "DevOps Tools",
