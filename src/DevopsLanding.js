@@ -251,7 +251,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     ))}
                   </motion.div>
 
-                  {/* Buttons Container - Mobile shows below content, Desktop shows fixed */}
+                  {/* Mobile Buttons */}
                   <div className="flex flex-col md:hidden gap-4 w-full mb-8">
                     <AnimatedButton
                       onClick={() => window.open('/resume.pdf', '_blank')}
@@ -274,26 +274,28 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   </div>
 
                   {/* Desktop Fixed Buttons */}
-                  <div className="hidden md:block">
-                    <AnimatedButton
-                      onClick={() => window.open('/resume.pdf', '_blank')}
-                      className="fixed bottom-8 left-8 z-50"
-                    >
-                      <Download size={20} />
-                      <span>Download Resume</span>
-                    </AnimatedButton>
-
-                    {showButton && (
+                  {showContent && (
+                    <>
                       <AnimatedButton
-                        onClick={handleSkip}
-                        className="fixed bottom-8 right-8 z-50"
+                        onClick={() => window.open('/resume.pdf', '_blank')}
+                        className="fixed bottom-14 md:bottom-8 left-4 md:left-8 z-50 hidden md:flex"
                       >
-                        <span>Skip Intro</span>
-                        <ChevronRight className="w-4 h-4" />
-                        <span className="opacity-80">({timeLeft}s)</span>
+                        <Download size={20} />
+                        <span>Download Resume</span>
                       </AnimatedButton>
-                    )}
-                  </div>
+
+                      {showButton && (
+                        <AnimatedButton
+                          onClick={handleSkip}
+                          className="fixed bottom-14 md:bottom-8 right-4 md:right-8 z-50 hidden md:flex"
+                        >
+                          <span>Skip Intro</span>
+                          <ChevronRight className="w-4 h-4" />
+                          <span className="opacity-80">({timeLeft}s)</span>
+                        </AnimatedButton>
+                      )}
+                    </>
+                  )}
                 </>
               )}
             </AnimatePresence>
