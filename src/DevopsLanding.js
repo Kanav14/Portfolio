@@ -1,3 +1,4 @@
+// First part - Component imports and TypewriterText remain the same as your original code
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -43,6 +44,7 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
+// Updated AnimatedButton component
 const AnimatedButton = ({ onClick, children, className = "" }) => (
   <motion.button
     onClick={onClick}
@@ -73,12 +75,14 @@ const AnimatedButton = ({ onClick, children, className = "" }) => (
   </motion.button>
 );
 
+// Main DevopsLanding component
 const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10);
 
+  // States and useEffect remain the same
   const commands = [
     '$ whoami',
     '> Kanav Sharma',
@@ -273,29 +277,27 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     )}
                   </div>
 
-                  {/* Desktop Fixed Buttons */}
-                  {showContent && (
-                    <>
-                      <AnimatedButton
-                        onClick={() => window.open('/resume.pdf', '_blank')}
-                        className="fixed bottom-14 md:bottom-8 left-4 md:left-8 z-50 hidden md:flex"
-                      >
-                        <Download size={20} />
-                        <span>Download Resume</span>
-                      </AnimatedButton>
+                  {/* Desktop Buttons */}
+                  <div className="hidden md:block">
+                    <AnimatedButton
+                      onClick={() => window.open('/resume.pdf', '_blank')}
+                      className="fixed bottom-8 left-8 z-50"
+                    >
+                      <Download size={20} />
+                      <span>Download Resume</span>
+                    </AnimatedButton>
 
-                      {showButton && (
-                        <AnimatedButton
-                          onClick={handleSkip}
-                          className="fixed bottom-14 md:bottom-8 right-4 md:right-8 z-50 hidden md:flex"
-                        >
-                          <span>Skip Intro</span>
-                          <ChevronRight className="w-4 h-4" />
-                          <span className="opacity-80">({timeLeft}s)</span>
-                        </AnimatedButton>
-                      )}
-                    </>
-                  )}
+                    {showButton && (
+                      <AnimatedButton
+                        onClick={handleSkip}
+                        className="fixed bottom-8 right-8 z-50"
+                      >
+                        <span>Skip Intro</span>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="opacity-80">({timeLeft}s)</span>
+                      </AnimatedButton>
+                    )}
+                  </div>
                 </>
               )}
             </AnimatePresence>
