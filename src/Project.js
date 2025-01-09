@@ -6,28 +6,28 @@ import { ModalContainer, StyledButton, SectionTitle } from './ModalContainer';
 function Projects({ closeModal, goToNext, goToPrevious }) {
   const projects = [
     {
-      title: "AI-Driven Infrastructure Optimization with AWS",
-      icon: "🤖",
+      title: "WeatherFlow - Open Source Data Engineering Project",
+      icon: "🌤️",
       overview:
-        "Developed an AI-powered tool using PyTorch to optimize AWS resources, improving infrastructure efficiency and reducing costs.",
+        "Built a comprehensive weather data collection and processing system using Python and PostgreSQL.",
       problem:
-        "Many organizations struggle with optimizing AWS resources, leading to unnecessary costs and underutilization of resources.",
+        "Need for efficient processing and storage of large-scale weather data with high reliability and scalability.",
       solution:
-        "Built an AI model to analyze AWS resource usage, automatically scaling EC2 instances with Lambda and monitoring using CloudWatch.",
-      impact: "Reduced AWS costs by 25% and improved resource allocation by 40%.",
-      technologies: ["PyTorch", "AWS Lambda", "CloudWatch", "SageMaker", "Python"],
+        "Implemented a recursive data collection system with containerized deployment using Docker and Kubernetes.",
+      impact: "Successfully processes 50K+ API calls daily with 65% reduction in deployment time.",
+      technologies: ["Python", "PostgreSQL", "Docker", "Kubernetes", "Helm", "Prometheus", "Grafana", "GitHub Actions"],
     },
     {
-      title: "Kubernetes-based CI/CD Pipeline",
-      icon: "⚙️",
+      title: "DocuHub - Documentation Platform",
+      icon: "📚",
       overview:
-        "Created a CI/CD pipeline for web applications using Kubernetes and AWS EKS, automating build, test, and deployment processes.",
+        "Created a robust documentation platform using ArgoCD and GitHub Pages with high security standards.",
       problem:
-        "Traditional deployment methods were slow and error-prone, affecting development cycles and time-to-market.",
+        "Managing documentation across multiple environments while ensuring security and automation.",
       solution:
-        "Leveraged Kubernetes, Helm, and Jenkins to build a fully automated pipeline, ensuring seamless scaling and faster delivery.",
-      impact: "Reduced deployment times by 40% and improved scalability.",
-      technologies: ["Kubernetes", "Helm", "Jenkins", "AWS EKS", "Terraform", "GitHub Actions"],
+        "Developed an automated platform with comprehensive security scanning and server configuration management.",
+      impact: "Achieved 95% vulnerability detection rate and 99% uptime across environments.",
+      technologies: ["ArgoCD", "GitHub Pages", "Ansible", "Shell", "Python", "GitHub Actions"],
     },
   ];
 
