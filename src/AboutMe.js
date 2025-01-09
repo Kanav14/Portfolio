@@ -72,7 +72,7 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
             className="relative w-32 h-32 md:w-40 md:h-40 mb-4 md:mb-0 md:mr-6 flex-shrink-0"
           >
             <img
-              src="https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Image.jpeg"
+              src="https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav.png"
               alt="Kanav Sharma"
               className="rounded-full w-full h-full object-cover border-4 border-cyan-400 
                 shadow-lg shadow-cyan-400/20 hover:shadow-cyan-400/40 transition-all 
