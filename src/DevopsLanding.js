@@ -46,7 +46,7 @@ const TypewriterText = ({ text, onComplete }) => {
 const AnimatedButton = ({ onClick, children, className = "" }) => (
   <motion.button
     onClick={onClick}
-    className={`flex items-center gap-2 
+    className={`relative flex items-center gap-2 
       bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
       text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
       shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
@@ -57,7 +57,7 @@ const AnimatedButton = ({ onClick, children, className = "" }) => (
     animate={{ opacity: 1, y: 0 }}
   >
     <motion.div 
-      className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
+      className="absolute inset-0 rounded-full overflow-hidden bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50"
       animate={{
         scale: [1, 1.2, 1],
       }}
