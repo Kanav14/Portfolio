@@ -48,7 +48,7 @@ const AnimatedButton = ({ onClick, children, className = "", isFixed = true }) =
     onClick={onClick}
     className={`flex items-center gap-2 
       bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
-      text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
+      text-white px-4 py-3 rounded-full text-sm font-medium 
       shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
       border border-cyan-400/20 cursor-pointer 
       ${isFixed ? 'fixed z-50' : ''} 
@@ -235,62 +235,60 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     </div>
                   </motion.div>
 
-                  <div className="mb-24 md:mb-0">
-                    <motion.div 
-                      className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-4"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      {quickStats.map((stat, i) => (
+                  <motion.div 
+                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    {quickStats.map((stat, i) => (
+                      <motion.div
+                        key={i}
+                        className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-4 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ 
+                          opacity: 1, 
+                          y: 0,
+                          transition: { delay: i * 0.1 }
+                        }}
+                      >
                         <motion.div
-                          key={i}
-                          className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-4 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ 
-                            opacity: 1, 
-                            y: 0,
-                            transition: { delay: i * 0.1 }
+                          className={`mb-2 md:mb-3 ${stat.color}`}
+                          animate={{
+                            scale: [1, 1.1, 1],
+                            transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
                           }}
                         >
-                          <motion.div
-                            className={`mb-2 md:mb-3 ${stat.color}`}
-                            animate={{
-                              scale: [1, 1.1, 1],
-                              transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
-                            }}
-                          >
-                            {stat.icon}
-                          </motion.div>
-                          <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</h3>
-                          <p className="text-xs text-gray-400">{stat.title}</p>
+                          {stat.icon}
                         </motion.div>
-                      ))}
-                    </motion.div>
-                    
-                    {/* Mobile Buttons Container */}
-                    <div className="flex justify-between mt-8 md:hidden">
-                      <AnimatedButton
-                        onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
-                        isFixed={false}
-                        className="w-[48%]"
-                      >
-                        <Download size={isMobile ? 14 : 20} />
-                        <span>Download Resume</span>
-                      </AnimatedButton>
+                        <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</h3>
+                        <p className="text-xs text-gray-400">{stat.title}</p>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                  
+                  {/* Mobile Buttons Container */}
+                  <div className="flex justify-between gap-2 mt-4 md:hidden px-2">
+                    <AnimatedButton
+                      onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
+                      isFixed={false}
+                      className="flex-1 justify-center"
+                    >
+                      <Download size={isMobile ? 14 : 20} />
+                      <span>Download Resume</span>
+                    </AnimatedButton>
 
-                      {showButton && (
-                        <AnimatedButton
-                          onClick={handleSkip}
-                          isFixed={false}
-                          className="w-[48%]"
-                        >
-                          <span>Skip Intro</span>
-                          <ChevronRight className="w-4 h-4" />
-                          <span className="opacity-80">({timeLeft}s)</span>
-                        </AnimatedButton>
-                      )}
-                    </div>
+                    {showButton && (
+                      <AnimatedButton
+                        onClick={handleSkip}
+                        isFixed={false}
+                        className="flex-1 justify-center"
+                      >
+                        <span>Skip Intro</span>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="opacity-80">({timeLeft}s)</span>
+                      </AnimatedButton>
+                    )}
                   </div>
 
                   {/* Desktop Buttons */}
