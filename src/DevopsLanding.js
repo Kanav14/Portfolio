@@ -96,21 +96,39 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     },
     { 
       icon: <Rocket size={isMobile ? 18 : 22} />, 
-      title: "Projects Delivered", 
-      value: "50+",
+      title: "DevOps Tools", 
+      value: "20+",
       color: "text-blue-400" 
     },
     { 
       icon: <Code2 size={isMobile ? 18 : 22} />, 
-      title: "Infrastructure as Code", 
-      value: "1000+",
+      title: "Projects", 
+      value: "15+",
       color: "text-green-400" 
     },
     { 
       icon: <Book size={isMobile ? 18 : 22} />, 
       title: "Certifications", 
-      value: "8+",
+      value: "4+",
       color: "text-purple-400" 
+    }
+  ];
+
+  const socialLinks = [
+    { 
+      Icon: Github, 
+      url: "https://github.com/Kanav14",
+      ariaLabel: "GitHub Profile"
+    },
+    { 
+      Icon: Linkedin, 
+      url: "https://www.linkedin.com/in/kanav-sharma-engineer",
+      ariaLabel: "LinkedIn Profile"
+    },
+    { 
+      Icon: Mail, 
+      url: "mailto:kanavsharma2000@gmail.com",
+      ariaLabel: "Send Email"
     }
   ];
 
@@ -205,10 +223,13 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                       and optimizing cloud-native solutions with a focus on security and efficiency.
                     </p>
                     <div className="flex justify-center gap-4">
-                      {[Github, Linkedin, Mail].map((Icon, index) => (
+                      {socialLinks.map(({ Icon, url, ariaLabel }, index) => (
                         <motion.a 
                           key={index}
-                          href="#"
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={ariaLabel}
                           whileHover={{ scale: 1.1 }}
                           className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
                         >
@@ -253,7 +274,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
                   {/* Resume Download Button */}
                   <AnimatedButton
-                    onClick={() => window.open('/resume.pdf', '_blank')}
+                    onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
                     className="bottom-14 md:bottom-8 left-4 md:left-8"
                   >
                     <Download size={isMobile ? 14 : 20} />
