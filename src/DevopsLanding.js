@@ -14,6 +14,7 @@ import {
   Download
 } from 'lucide-react';
 
+// TypewriterText component remains unchanged
 const TypewriterText = ({ text, onComplete }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,6 +44,7 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
+// Updated AnimatedButton component with modified positioning classes
 const AnimatedButton = ({ onClick, children, className = "" }) => (
   <motion.button
     onClick={onClick}
@@ -74,11 +76,13 @@ const AnimatedButton = ({ onClick, children, className = "" }) => (
 );
 
 const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
+  // State declarations remain unchanged
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10);
 
+  // Constants remain unchanged
   const commands = [
     '$ whoami',
     '> Kanav Sharma',
@@ -164,7 +168,6 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
       
       {/* Main Content Container */}
       <div className="relative z-10">
-        {/* Content Wrapper */}
         <div className="flex flex-col justify-center items-center min-h-screen p-4 md:p-6">
           <div className="w-full max-w-4xl">
             {/* Terminal Section */}
@@ -272,20 +275,20 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     ))}
                   </motion.div>
 
-                  {/* Resume Download Button */}
+                  {/* Resume Download Button - Updated positioning for mobile */}
                   <AnimatedButton
                     onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
-                    className="bottom-14 md:bottom-8 left-4 md:left-8"
+                    className="bottom-24 left-4 md:bottom-8 md:left-8"
                   >
                     <Download size={isMobile ? 14 : 20} />
                     <span>Download Resume</span>
                   </AnimatedButton>
 
-                  {/* Skip Intro Button */}
+                  {/* Skip Intro Button - Updated positioning for mobile */}
                   {showButton && (
                     <AnimatedButton
                       onClick={handleSkip}
-                      className="bottom-14 md:bottom-8 right-4 md:right-8"
+                      className="bottom-24 right-4 md:bottom-8 md:right-8"
                     >
                       <span>Skip Intro</span>
                       <ChevronRight className="w-4 h-4" />
