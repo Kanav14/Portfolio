@@ -43,14 +43,16 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
-const AnimatedButton = ({ onClick, children, className = "" }) => (
+const AnimatedButton = ({ onClick, children, className = "", isFixed = true }) => (
   <motion.button
     onClick={onClick}
-    className={`fixed z-50 flex items-center gap-2 
+    className={`flex items-center gap-2 
       bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
       text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
       shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-      border border-cyan-400/20 cursor-pointer ${className}`}
+      border border-cyan-400/20 cursor-pointer 
+      ${isFixed ? 'fixed z-50' : ''} 
+      ${className}`}
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     initial={{ opacity: 0, y: 20 }}
@@ -235,7 +237,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
                   <div className="mb-24 md:mb-0">
                     <motion.div 
-                      className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4"
+                      className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-4"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.5 }}
@@ -265,26 +267,53 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                         </motion.div>
                       ))}
                     </motion.div>
+                    
+                    {/* Mobile Buttons Container */}
+                    <div className="flex justify-between mt-8 md:hidden">
+                      <AnimatedButton
+                        onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
+                        isFixed={false}
+                        className="w-[48%]"
+                      >
+                        <Download size={isMobile ? 14 : 20} />
+                        <span>Download Resume</span>
+                      </AnimatedButton>
+
+                      {showButton && (
+                        <AnimatedButton
+                          onClick={handleSkip}
+                          isFixed={false}
+                          className="w-[48%]"
+                        >
+                          <span>Skip Intro</span>
+                          <ChevronRight className="w-4 h-4" />
+                          <span className="opacity-80">({timeLeft}s)</span>
+                        </AnimatedButton>
+                      )}
+                    </div>
                   </div>
 
-                  <AnimatedButton
-                    onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
-                    className="bottom-4 left-4 md:bottom-8 md:left-8"
-                  >
-                    <Download size={isMobile ? 14 : 20} />
-                    <span>Download Resume</span>
-                  </AnimatedButton>
-
-                  {showButton && (
+                  {/* Desktop Buttons */}
+                  <div className="hidden md:block">
                     <AnimatedButton
-                      onClick={handleSkip}
-                      className="bottom-4 right-4 md:bottom-8 md:right-8"
+                      onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
+                      className="bottom-8 left-8"
                     >
-                      <span>Skip Intro</span>
-                      <ChevronRight className="w-4 h-4" />
-                      <span className="opacity-80">({timeLeft}s)</span>
+                      <Download size={20} />
+                      <span>Download Resume</span>
                     </AnimatedButton>
-                  )}
+
+                    {showButton && (
+                      <AnimatedButton
+                        onClick={handleSkip}
+                        className="bottom-8 right-8"
+                      >
+                        <span>Skip Intro</span>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="opacity-80">({timeLeft}s)</span>
+                      </AnimatedButton>
+                    )}
+                  </div>
                 </>
               )}
             </AnimatePresence>
