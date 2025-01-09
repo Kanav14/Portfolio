@@ -288,24 +288,26 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   </div>
 
                   {/* Desktop Buttons */}
-                  <div className="hidden md:block fixed bottom-0 left-0 right-0 p-8 z-50">
-                    <AnimatedButton
-                      onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
-                      className="absolute bottom-8 left-8"
-                    >
-                      <Download size={20} />
-                      <span>Download Resume</span>
-                    </AnimatedButton>
+                  <div className="hidden md:block">
+                    <div className="fixed bottom-8 left-8 z-50">
+                      <AnimatedButton
+                        onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
+                      >
+                        <Download size={20} />
+                        <span>Download Resume</span>
+                      </AnimatedButton>
+                    </div>
 
                     {showButton && (
-                      <AnimatedButton
-                        onClick={handleSkip}
-                        className="absolute bottom-8 right-8"
-                      >
-                        <span>Skip Intro</span>
-                        <ChevronRight className="w-4 h-4" />
-                        <span className="opacity-80">({timeLeft}s)</span>
-                      </AnimatedButton>
+                      <div className="fixed bottom-8 right-8 z-50">
+                        <AnimatedButton
+                          onClick={handleSkip}
+                        >
+                          <span>Skip Intro</span>
+                          <ChevronRight className="w-4 h-4" />
+                          <span className="opacity-80">({timeLeft}s)</span>
+                        </AnimatedButton>
+                      </div>
                     )}
                   </div>
                 </>
