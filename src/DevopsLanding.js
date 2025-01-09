@@ -46,7 +46,7 @@ const TypewriterText = ({ text, onComplete }) => {
 const AnimatedButton = ({ onClick, children, className = "" }) => (
   <motion.button
     onClick={onClick}
-    className={`fixed z-50 flex items-center gap-2 
+    className={`flex items-center gap-2 
       bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
       text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
       shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
@@ -220,7 +220,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
                   {/* Quick Stats */}
                   <motion.div 
-                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-8"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
@@ -251,26 +251,49 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     ))}
                   </motion.div>
 
-                  {/* Resume Download Button */}
-                  <AnimatedButton
-                    onClick={() => window.open('/resume.pdf', '_blank')}
-                    className="bottom-14 md:bottom-8 left-4 md:left-8"
-                  >
-                    <Download size={isMobile ? 14 : 20} />
-                    <span>Download Resume</span>
-                  </AnimatedButton>
-
-                  {/* Skip Intro Button */}
-                  {showButton && (
+                  {/* Buttons Container - Mobile shows below content, Desktop shows fixed */}
+                  <div className="flex flex-col md:hidden gap-4 w-full mb-8">
                     <AnimatedButton
-                      onClick={handleSkip}
-                      className="bottom-14 md:bottom-8 right-4 md:right-8"
+                      onClick={() => window.open('/resume.pdf', '_blank')}
+                      className="w-full"
                     >
-                      <span>Skip Intro</span>
-                      <ChevronRight className="w-4 h-4" />
-                      <span className="opacity-80">({timeLeft}s)</span>
+                      <Download size={14} />
+                      <span>Download Resume</span>
                     </AnimatedButton>
-                  )}
+
+                    {showButton && (
+                      <AnimatedButton
+                        onClick={handleSkip}
+                        className="w-full"
+                      >
+                        <span>Skip Intro</span>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="opacity-80">({timeLeft}s)</span>
+                      </AnimatedButton>
+                    )}
+                  </div>
+
+                  {/* Desktop Fixed Buttons */}
+                  <div className="hidden md:block">
+                    <AnimatedButton
+                      onClick={() => window.open('/resume.pdf', '_blank')}
+                      className="fixed bottom-8 left-8 z-50"
+                    >
+                      <Download size={20} />
+                      <span>Download Resume</span>
+                    </AnimatedButton>
+
+                    {showButton && (
+                      <AnimatedButton
+                        onClick={handleSkip}
+                        className="fixed bottom-8 right-8 z-50"
+                      >
+                        <span>Skip Intro</span>
+                        <ChevronRight className="w-4 h-4" />
+                        <span className="opacity-80">({timeLeft}s)</span>
+                      </AnimatedButton>
+                    )}
+                  </div>
                 </>
               )}
             </AnimatePresence>
