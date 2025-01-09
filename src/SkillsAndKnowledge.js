@@ -36,8 +36,6 @@ function SkillsAndKnowledge({ closeModal, goToNext, goToPrevious }) {
         "Prometheus",
         "Grafana",
         "ELK Stack",
-        "PowerBI",
-        "ServiceNow",
       ],
     },
     {
