@@ -25,6 +25,24 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
     { label: "Certifications", value: "5+" },
   ];
 
+  const socialLinks = [
+    { 
+      Icon: Github, 
+      href: "https://github.com/Kanav14",
+      ariaLabel: "GitHub Profile"
+    },
+    { 
+      Icon: Linkedin, 
+      href: "https://www.linkedin.com/in/kanav-sharma-engineer",
+      ariaLabel: "LinkedIn Profile"
+    },
+    { 
+      Icon: Mail, 
+      href: "mailto:kanavsharma30@gmail.com",
+      ariaLabel: "Send Email"
+    }
+  ];
+
   return (
     <ModalContainer className="p-4 md:p-6">
       <motion.div
@@ -87,17 +105,14 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
             </motion.h1>
             <p className="text-xl text-cyan-400 font-mono mb-4">DevOps Engineer</p>
             <div className="flex justify-center md:justify-start space-x-4">
-              {[
-                { Icon: Github, href: "https://github.com/Kanav14" },
-                { Icon: Linkedin, href: "www.linkedin.com/in/kanav-sharma-engineer" },
-                { Icon: Mail, href: "kanavsharma30@gmail.com" }
-              ].map(({ Icon, href }, index) => (
+              {socialLinks.map(({ Icon, href, ariaLabel }, index) => (
                 <motion.a
                   key={index}
                   whileHover={{ scale: 1.1, y: -2 }}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={ariaLabel}
                   className="text-cyan-400 hover:text-cyan-300 transition-colors"
                 >
                   <Icon className="w-6 h-6" />
