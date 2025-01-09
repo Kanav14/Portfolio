@@ -48,6 +48,24 @@ function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  const socialLinks = [
+    { 
+      Icon: Github, 
+      url: "https://github.com/Kanav14",
+      ariaLabel: "GitHub Profile"
+    },
+    { 
+      Icon: Linkedin, 
+      url: "https://www.linkedin.com/in/kanav-sharma-engineer",
+      ariaLabel: "LinkedIn Profile"
+    },
+    { 
+      Icon: Mail, 
+      url: "mailto:kanavsharma30@gmail.com",
+      ariaLabel: "Send Email"
+    }
+  ];
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -265,7 +283,6 @@ function App() {
 
   const renderGrid = () => (
     <div className="grid grid-cols-3 gap-2 md:gap-6 h-[75vh] p-2 md:p-6 relative z-10">
-      {/* Circuit Board Pattern Background */}
       <div className="absolute inset-0 -z-10">
         <div className={`w-full h-full bg-[url('circuit-pattern.svg')] opacity-[0.03] ${isDarkTheme ? 'invert' : ''}`} />
       </div>
@@ -327,9 +344,13 @@ function App() {
                   {section.subtitle}
                 </motion.div>
                 <div className="flex justify-center gap-4 md:gap-6">
-                  {[Github, Linkedin, Mail].map((Icon, index) => (
-                    <motion.div
+                  {socialLinks.map(({ Icon, url, ariaLabel }, index) => (
+                    <motion.a
                       key={index}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={ariaLabel}
                       whileHover={{ scale: 1.2, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                       className="cursor-pointer relative group"
@@ -345,7 +366,7 @@ function App() {
                           repeat: Infinity,
                         }}
                       />
-                    </motion.div>
+                    </motion.a>
                   ))}
                 </div>
               </motion.div>
@@ -563,7 +584,7 @@ function App() {
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          onClick={() => window.open('/resume.pdf', '_blank')}
+          onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
         >
           <motion.div 
             className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-50 rounded-full"
