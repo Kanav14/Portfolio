@@ -275,20 +275,22 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     ))}
                   </motion.div>
 
-                  {/* Resume Download Button - Updated positioning for mobile */}
-                  <AnimatedButton
-                    onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
-                    className="bottom-24 left-4 md:bottom-8 md:left-8"
-                  >
-                    <Download size={isMobile ? 14 : 20} />
-                    <span>Download Resume</span>
-                  </AnimatedButton>
-
-                  {/* Skip Intro Button - Updated positioning for mobile */}
-                  {showButton && (
+                  {/* Quick Stats Container with margin bottom for mobile */}
+                  <div className="mb-24 md:mb-0">
+                    {/* Resume Download Button - Updated positioning for mobile */}
                     <AnimatedButton
-                      onClick={handleSkip}
-                      className="bottom-24 right-4 md:bottom-8 md:right-8"
+                      onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
+                      className="bottom-4 left-4 md:bottom-8 md:left-8"
+                    >
+                      <Download size={isMobile ? 14 : 20} />
+                      <span>Download Resume</span>
+                    </AnimatedButton>
+
+                    {/* Skip Intro Button - Updated positioning for mobile */}
+                    {showButton && (
+                      <AnimatedButton
+                        onClick={handleSkip}
+                        className="bottom-4 right-4 md:bottom-8 md:right-8"
                     >
                       <span>Skip Intro</span>
                       <ChevronRight className="w-4 h-4" />
