@@ -43,16 +43,14 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
-const AnimatedButton = ({ onClick, children, className = "", isFixed = true }) => (
+const AnimatedButton = ({ onClick, children, className = "" }) => (
   <motion.button
     onClick={onClick}
-    className={`flex items-center gap-2 
+    className={`fixed z-50 flex items-center gap-2 
       bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 
       text-white px-3 py-2 md:px-4 md:py-3 rounded-full text-xs md:text-sm font-medium 
       shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40
-      border border-cyan-400/20 cursor-pointer 
-      ${isFixed ? 'fixed z-50' : ''} 
-      ${className}`}
+      border border-cyan-400/20 cursor-pointer ${className}`}
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     initial={{ opacity: 0, y: 20 }}
@@ -98,39 +96,21 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     },
     { 
       icon: <Rocket size={isMobile ? 18 : 22} />, 
-      title: "DevOps Tools", 
-      value: "20+",
+      title: "Projects Delivered", 
+      value: "50+",
       color: "text-blue-400" 
     },
     { 
       icon: <Code2 size={isMobile ? 18 : 22} />, 
-      title: "Projects", 
-      value: "15+",
+      title: "Infrastructure as Code", 
+      value: "1000+",
       color: "text-green-400" 
     },
     { 
       icon: <Book size={isMobile ? 18 : 22} />, 
       title: "Certifications", 
-      value: "4+",
+      value: "8+",
       color: "text-purple-400" 
-    }
-  ];
-
-  const socialLinks = [
-    { 
-      Icon: Github, 
-      url: "https://github.com/Kanav14",
-      ariaLabel: "GitHub Profile"
-    },
-    { 
-      Icon: Linkedin, 
-      url: "https://www.linkedin.com/in/kanav-sharma-engineer",
-      ariaLabel: "LinkedIn Profile"
-    },
-    { 
-      Icon: Mail, 
-      url: "mailto:kanavsharma2000@gmail.com",
-      ariaLabel: "Send Email"
     }
   ];
 
@@ -160,12 +140,16 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   };
 
   return (
-    <div className={`min-h-screen w-full ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-x-hidden`}>
+    <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-y-auto`}>
+      {/* Grid Pattern Background */}
       <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'} pointer-events-none`}></div>
       
+      {/* Main Content Container */}
       <div className="relative z-10">
-        <div className="flex flex-col justify-center items-center min-h-screen p-4 md:p-6 overflow-hidden">
-          <div className="w-full max-w-4xl mx-auto">
+        {/* Content Wrapper */}
+        <div className="flex flex-col justify-center items-center min-h-screen p-4 md:p-6">
+          <div className="w-full max-w-4xl">
+            {/* Terminal Section */}
             <motion.div 
               className="bg-gray-900/95 rounded-xl p-3 md:p-4 font-mono text-xs md:text-sm mb-4 md:mb-6 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -191,9 +175,11 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
               ))}
             </motion.div>
 
+            {/* Main Content */}
             <AnimatePresence>
               {showContent && (
                 <>
+                  {/* Personal Introduction */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -219,13 +205,10 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                       and optimizing cloud-native solutions with a focus on security and efficiency.
                     </p>
                     <div className="flex justify-center gap-4">
-                      {socialLinks.map(({ Icon, url, ariaLabel }, index) => (
+                      {[Github, Linkedin, Mail].map((Icon, index) => (
                         <motion.a 
                           key={index}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={ariaLabel}
+                          href="#"
                           whileHover={{ scale: 1.1 }}
                           className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
                         >
@@ -235,85 +218,59 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     </div>
                   </motion.div>
 
-                  <div className="mb-24 md:mb-0">
-                    <motion.div 
-                      className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-4"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      {quickStats.map((stat, i) => (
+                  {/* Quick Stats */}
+                  <motion.div 
+                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    {quickStats.map((stat, i) => (
+                      <motion.div
+                        key={i}
+                        className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-4 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ 
+                          opacity: 1, 
+                          y: 0,
+                          transition: { delay: i * 0.1 }
+                        }}
+                      >
                         <motion.div
-                          key={i}
-                          className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-4 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ 
-                            opacity: 1, 
-                            y: 0,
-                            transition: { delay: i * 0.1 }
+                          className={`mb-2 md:mb-3 ${stat.color}`}
+                          animate={{
+                            scale: [1, 1.1, 1],
+                            transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
                           }}
                         >
-                          <motion.div
-                            className={`mb-2 md:mb-3 ${stat.color}`}
-                            animate={{
-                              scale: [1, 1.1, 1],
-                              transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
-                            }}
-                          >
-                            {stat.icon}
-                          </motion.div>
-                          <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</h3>
-                          <p className="text-xs text-gray-400">{stat.title}</p>
+                          {stat.icon}
                         </motion.div>
-                      ))}
-                    </motion.div>
-                    
-                    {/* Mobile Buttons Container */}
-                    <div className="flex justify-between gap-4 mt-8 md:hidden px-4">
-                      <AnimatedButton
-                        onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
-                        isFixed={false}
-                        className="flex-1 justify-center"
-                      >
-                        <Download size={isMobile ? 14 : 20} />
-                        <span>Download Resume</span>
-                      </AnimatedButton>
+                        <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</h3>
+                        <p className="text-xs text-gray-400">{stat.title}</p>
+                      </motion.div>
+                    ))}
+                  </motion.div>
 
-                      {showButton && (
-                        <AnimatedButton
-                          onClick={handleSkip}
-                          isFixed={false}
-                          className="flex-1 justify-center"
-                        >
-                          <span>Skip Intro</span>
-                          <ChevronRight className="w-4 h-4" />
-                          <span className="opacity-80">({timeLeft}s)</span>
-                        </AnimatedButton>
-                      )}
-                    </div>
-                  </div>
+                  {/* Resume Download Button */}
+                  <AnimatedButton
+                    onClick={() => window.open('/resume.pdf', '_blank')}
+                    className="bottom-14 md:bottom-8 left-4 md:left-8"
+                  >
+                    <Download size={isMobile ? 14 : 20} />
+                    <span>Download Resume</span>
+                  </AnimatedButton>
 
-                  {/* Desktop Buttons */}
-                  <div className="hidden md:block">
+                  {/* Skip Intro Button */}
+                  {showButton && (
                     <AnimatedButton
-                      onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
-                      className="bottom-8 left-8"
+                      onClick={handleSkip}
+                      className="bottom-14 md:bottom-8 right-4 md:right-8"
                     >
-                      <Download size={20} />
-                      <span>Download Resume</span>
+                      <span>Skip Intro</span>
+                      <ChevronRight className="w-4 h-4" />
+                      <span className="opacity-80">({timeLeft}s)</span>
                     </AnimatedButton>
-
-                    {showButton && (
-                      <AnimatedButton
-                        onClick={handleSkip}
-                        className="bottom-8 right-8"
-                      >
-                        <span>Skip Intro</span>
-                        <ChevronRight className="w-4 h-4" />
-                        <span className="opacity-80">({timeLeft}s)</span>
-                      </AnimatedButton>
-                    )}
-                  </div>
+                  )}
                 </>
               )}
             </AnimatePresence>
