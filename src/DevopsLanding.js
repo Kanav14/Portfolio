@@ -1,4 +1,3 @@
-// First part - Component imports and TypewriterText remain the same as your original code
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -44,7 +43,6 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
-// Updated AnimatedButton component
 const AnimatedButton = ({ onClick, children, className = "" }) => (
   <motion.button
     onClick={onClick}
@@ -75,14 +73,12 @@ const AnimatedButton = ({ onClick, children, className = "" }) => (
   </motion.button>
 );
 
-// Main DevopsLanding component
 const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10);
 
-  // States and useEffect remain the same
   const commands = [
     '$ whoami',
     '> Kanav Sharma',
@@ -118,6 +114,24 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     }
   ];
 
+  const socialLinks = [
+    { 
+      Icon: Github, 
+      url: "https://github.com/Kanav14",
+      ariaLabel: "GitHub Profile"
+    },
+    { 
+      Icon: Linkedin, 
+      url: "https://www.linkedin.com/in/kanav-sharma-engineer",
+      ariaLabel: "LinkedIn Profile"
+    },
+    { 
+      Icon: Mail, 
+      url: "mailto:kanavsharma2000@gmail.com",
+      ariaLabel: "Send Email"
+    }
+  ];
+
   useEffect(() => {
     if (showButton && timeLeft > 0) {
       const timer = setTimeout(() => {
@@ -145,15 +159,11 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
   return (
     <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-y-auto`}>
-      {/* Grid Pattern Background */}
       <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'} pointer-events-none`}></div>
       
-      {/* Main Content Container */}
       <div className="relative z-10">
-        {/* Content Wrapper */}
         <div className="flex flex-col justify-center items-center min-h-screen p-4 md:p-6">
           <div className="w-full max-w-4xl">
-            {/* Terminal Section */}
             <motion.div 
               className="bg-gray-900/95 rounded-xl p-3 md:p-4 font-mono text-xs md:text-sm mb-4 md:mb-6 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -179,11 +189,9 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
               ))}
             </motion.div>
 
-            {/* Main Content */}
             <AnimatePresence>
               {showContent && (
                 <>
-                  {/* Personal Introduction */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -209,10 +217,13 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                       and optimizing cloud-native solutions with a focus on security and efficiency.
                     </p>
                     <div className="flex justify-center gap-4">
-                      {[Github, Linkedin, Mail].map((Icon, index) => (
+                      {socialLinks.map(({ Icon, url, ariaLabel }, index) => (
                         <motion.a 
                           key={index}
-                          href="#"
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={ariaLabel}
                           whileHover={{ scale: 1.1 }}
                           className={`${isDarkTheme ? 'text-white' : 'text-gray-800'} hover:text-cyan-400 transition-colors`}
                         >
@@ -222,7 +233,6 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     </div>
                   </motion.div>
 
-                  {/* Quick Stats */}
                   <motion.div 
                     className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mb-8"
                     initial={{ opacity: 0 }}
@@ -258,7 +268,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   {/* Mobile Buttons */}
                   <div className="flex flex-col md:hidden gap-4 w-full mb-8">
                     <AnimatedButton
-                      onClick={() => window.open('/resume.pdf', '_blank')}
+                      onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
                       className="w-full"
                     >
                       <Download size={14} />
@@ -278,10 +288,10 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                   </div>
 
                   {/* Desktop Buttons */}
-                  <div className="hidden md:block">
+                  <div className="hidden md:block fixed bottom-0 left-0 right-0 p-8 z-50">
                     <AnimatedButton
-                      onClick={() => window.open('/resume.pdf', '_blank')}
-                      className="fixed bottom-8 left-8 z-50"
+                      onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
+                      className="absolute bottom-8 left-8"
                     >
                       <Download size={20} />
                       <span>Download Resume</span>
@@ -290,7 +300,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     {showButton && (
                       <AnimatedButton
                         onClick={handleSkip}
-                        className="fixed bottom-8 right-8 z-50"
+                        className="absolute bottom-8 right-8"
                       >
                         <span>Skip Intro</span>
                         <ChevronRight className="w-4 h-4" />
