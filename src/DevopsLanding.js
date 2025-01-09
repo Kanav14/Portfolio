@@ -14,7 +14,6 @@ import {
   Download
 } from 'lucide-react';
 
-// TypewriterText component remains unchanged
 const TypewriterText = ({ text, onComplete }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,7 +43,6 @@ const TypewriterText = ({ text, onComplete }) => {
   );
 };
 
-// Updated AnimatedButton component with modified positioning classes
 const AnimatedButton = ({ onClick, children, className = "" }) => (
   <motion.button
     onClick={onClick}
@@ -76,13 +74,11 @@ const AnimatedButton = ({ onClick, children, className = "" }) => (
 );
 
 const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
-  // State declarations remain unchanged
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10);
 
-  // Constants remain unchanged
   const commands = [
     '$ whoami',
     '> Kanav Sharma',
@@ -163,14 +159,11 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
 
   return (
     <div className={`fixed inset-0 ${isDarkTheme ? 'bg-[#030306]' : 'bg-white'} transition-colors duration-500 ease-in-out overflow-y-auto`}>
-      {/* Grid Pattern Background */}
       <div className={`absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6_1px,transparent_1px),linear-gradient(to_bottom,#8B5CF6_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] ${isDarkTheme ? 'opacity-[0.2]' : 'opacity-[0.1]'} pointer-events-none`}></div>
       
-      {/* Main Content Container */}
       <div className="relative z-10">
         <div className="flex flex-col justify-center items-center min-h-screen p-4 md:p-6">
           <div className="w-full max-w-4xl">
-            {/* Terminal Section */}
             <motion.div 
               className="bg-gray-900/95 rounded-xl p-3 md:p-4 font-mono text-xs md:text-sm mb-4 md:mb-6 shadow-2xl border border-cyan-500/30 backdrop-blur-xl w-full max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -196,11 +189,9 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
               ))}
             </motion.div>
 
-            {/* Main Content */}
             <AnimatePresence>
               {showContent && (
                 <>
-                  {/* Personal Introduction */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -242,55 +233,52 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                     </div>
                   </motion.div>
 
-                  {/* Quick Stats */}
-                  <motion.div 
-                    className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    {quickStats.map((stat, i) => (
-                      <motion.div
-                        key={i}
-                        className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-4 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ 
-                          opacity: 1, 
-                          y: 0,
-                          transition: { delay: i * 0.1 }
-                        }}
-                      >
+                  <div className="mb-24 md:mb-0">
+                    <motion.div 
+                      className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      {quickStats.map((stat, i) => (
                         <motion.div
-                          className={`mb-2 md:mb-3 ${stat.color}`}
-                          animate={{
-                            scale: [1, 1.1, 1],
-                            transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
+                          key={i}
+                          className="bg-gray-800/80 backdrop-blur-xl p-3 md:p-4 rounded-xl border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ 
+                            opacity: 1, 
+                            y: 0,
+                            transition: { delay: i * 0.1 }
                           }}
                         >
-                          {stat.icon}
+                          <motion.div
+                            className={`mb-2 md:mb-3 ${stat.color}`}
+                            animate={{
+                              scale: [1, 1.1, 1],
+                              transition: { duration: 2, repeat: Infinity, delay: i * 0.2 }
+                            }}
+                          >
+                            {stat.icon}
+                          </motion.div>
+                          <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</h3>
+                          <p className="text-xs text-gray-400">{stat.title}</p>
                         </motion.div>
-                        <h3 className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</h3>
-                        <p className="text-xs text-gray-400">{stat.title}</p>
-                      </motion.div>
-                    ))}
-                  </motion.div>
+                      ))}
+                    </motion.div>
+                  </div>
 
-                  {/* Quick Stats Container with margin bottom for mobile */}
-                  <div className="mb-24 md:mb-0">
-                    {/* Resume Download Button - Updated positioning for mobile */}
+                  <AnimatedButton
+                    onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
+                    className="bottom-4 left-4 md:bottom-8 md:left-8"
+                  >
+                    <Download size={isMobile ? 14 : 20} />
+                    <span>Download Resume</span>
+                  </AnimatedButton>
+
+                  {showButton && (
                     <AnimatedButton
-                      onClick={() => window.open('https://raw.githubusercontent.com/Kanav14/Portfolio/refs/heads/main/images/Kanav_Sharma_Resume.pdf', '_blank')}
-                      className="bottom-4 left-4 md:bottom-8 md:left-8"
-                    >
-                      <Download size={isMobile ? 14 : 20} />
-                      <span>Download Resume</span>
-                    </AnimatedButton>
-
-                    {/* Skip Intro Button - Updated positioning for mobile */}
-                    {showButton && (
-                      <AnimatedButton
-                        onClick={handleSkip}
-                        className="bottom-4 right-4 md:bottom-8 md:right-8"
+                      onClick={handleSkip}
+                      className="bottom-4 right-4 md:bottom-8 md:right-8"
                     >
                       <span>Skip Intro</span>
                       <ChevronRight className="w-4 h-4" />
