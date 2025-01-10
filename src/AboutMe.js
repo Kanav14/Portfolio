@@ -16,9 +16,9 @@ const AboutMe = ({ closeModal, goToNext }) => {
   };
 
   const stats = [
-    { label: "DevOps Tools", value: "10+" },
+    { label: "DevOps Tools", value: "15+" },
     { label: "Cloud Platforms", value: "3+" },
-    { label: "Certifications", value: "5+" },
+    { label: "Certifications", value: "4+" },
   ];
 
   const socialLinks = [
