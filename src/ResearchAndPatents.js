@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { BookOpen, Lightbulb, Microscope } from 'lucide-react';
 import { ModalContainer, StyledButton, SectionTitle } from './ModalContainer';
 
-function ResearchAndPatents({ closeModal, goToNext, goToPrevious }) {
+function ResearchAndPatents({ closeModal, goToPrevious }) {
   const patents = [
     {
       title: "Cricket Monitoring System",
@@ -167,7 +167,7 @@ function ResearchAndPatents({ closeModal, goToNext, goToPrevious }) {
       >
         <StyledButton onClick={goToPrevious}>Back</StyledButton>
         <StyledButton onClick={closeModal}>Main Menu</StyledButton>
-        <StyledButton onClick={goToNext}>Next</StyledButton>
+        <StyledButton className="invisible">Next</StyledButton>
       </motion.div>
     </ModalContainer>
   );
