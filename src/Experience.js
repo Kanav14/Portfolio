@@ -27,20 +27,20 @@ function Experience({ closeModal, goToNext, goToPrevious }) {
       logo: "https://storage.googleapis.com/clean-finder-353810/$fMT2c6Qs4nCyWdgDFuHrFEOvj5nvCmYlZ0HFAdfdq4JxOYnmcrQPKb",
       roles: [
         {
-          title: "DevOps Engineer (Experienced)",
-          period: "July 2022 - Present",
+          title: "DevOps Engineer (Advanced)",
+          period: "January 2023 - August 2024",
           details: [
-            "Lead DevOps initiatives for complex cloud infrastructure projects",
-            "Architect and implement scalable CI/CD pipelines using Jenkins, GitHub Actions",
+            "Led Digital R&D Team to automate artifact management in Nexus, reducing manual effort by 40%",
+            "Implemented a vault automation tool, transferring 500+ secrets monthly and eliminating manual intervention",
             "Optimize cloud resources and implement infrastructure as code with Terraform",
           ],
         },
         {
-          title: "DevOps Engineer (Advanced)",
-          period: "January 2021 - June 2022",
+          title: "DevOps Engineer (Experienced)",
+          period: "August 2021 - December 2023",
           details: [
-            "Developed and maintained robust CI/CD workflows",
-            "Implemented containerization strategies using Docker and Kubernetes",
+            "Developed automation scripts using Shell, Groovy, and Python, achieving a 30% faster release cycle",
+            "Managed helm deployments with CI/CD pipeline, making deployment faster by 30%",
             "Automated infrastructure provisioning and configuration management",
           ],
         },
@@ -52,11 +52,11 @@ function Experience({ closeModal, goToNext, goToPrevious }) {
       roles: [
         {
           title: "Software Engineer",
-          period: "July 2019 - December 2020",
+          period: "August 2019 - July 2021",
           details: [
-            "Supported cloud migration and DevOps transformation initiatives",
-            "Implemented monitoring and logging solutions using ELK stack",
-            "Collaborated with cross-functional teams to improve deployment processes",
+            "Streamlined deployments on client Linux VMs, which increased overall productivity by 30%",
+            "Configured HAProxy for optimized load balancing",
+            "Automated deployment using Ansible playbooks",
           ],
         },
       ],
