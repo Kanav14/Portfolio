@@ -97,19 +97,19 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     { 
       icon: <Rocket size={isMobile ? 18 : 22} />, 
       title: "Projects Delivered", 
-      value: "50+",
+      value: "15+",
       color: "text-blue-400" 
     },
     { 
       icon: <Code2 size={isMobile ? 18 : 22} />, 
-      title: "Infrastructure as Code", 
-      value: "1000+",
+      title: "DevOps Tools", 
+      value: "25+",
       color: "text-green-400" 
     },
     { 
       icon: <Book size={isMobile ? 18 : 22} />, 
       title: "Certifications", 
-      value: "8+",
+      value: "4+",
       color: "text-purple-400" 
     }
   ];
@@ -210,7 +210,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
                       Kanav Sharma
                     </h1>
                     <p className="text-base md:text-xl text-cyan-400 font-mono mb-2 md:mb-3">
-                      DevOps Engineer & Cloud Architect
+                      DevOps Engineer & Cloud Enthusiast
                     </p>
                     <p className={`text-sm md:text-base max-w-2xl mx-auto mb-3 md:mb-4 ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'}`}>
                       Specializing in building scalable infrastructure, automating deployments, 
