@@ -97,7 +97,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     { 
       icon: <Rocket size={isMobile ? 18 : 22} />, 
       title: "Projects Delivered", 
-      value: "15+",
+      value: "10+",
       color: "text-blue-400" 
     },
     { 
