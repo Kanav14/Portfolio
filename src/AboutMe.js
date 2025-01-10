@@ -3,26 +3,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { User, Github, Linkedin, Mail } from 'lucide-react';
 import { ModalContainer, StyledButton, SectionTitle, scrollToTop } from './ModalContainer';
 
-const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
+const AboutMe = ({ closeModal, goToNext }) => {
   useEffect(() => {
     scrollToTop();
   }, []);
 
-  const handleNavigation = (direction) => {
+  const handleNavigation = () => {
     setTimeout(() => {
       scrollToTop();
-      if (direction === 'next') {
-        goToNext();
-      } else {
-        goToPrevious();
-      }
+      goToNext();
     }, 200);
   };
 
   const stats = [
-    { label: "DevOps Tools", value: "10+" },
+    { label: "DevOps Tools", value: "15+" },
     { label: "Cloud Platforms", value: "3+" },
-    { label: "Certifications", value: "5+" },
+    { label: "Certifications", value: "4+" },
   ];
 
   const socialLinks = [
@@ -161,9 +157,9 @@ const AboutMe = ({ closeModal, goToNext, goToPrevious }) => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <StyledButton onClick={() => handleNavigation('prev')}>Back</StyledButton>
+          <div className="flex-1" />
           <StyledButton onClick={closeModal}>Main Menu</StyledButton>
-          <StyledButton onClick={() => handleNavigation('next')}>Next</StyledButton>
+          <StyledButton onClick={handleNavigation}>Next</StyledButton>
         </motion.div>
       </motion.div>
     </ModalContainer>
