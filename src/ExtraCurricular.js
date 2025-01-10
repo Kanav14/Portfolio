@@ -12,7 +12,6 @@ function ExtraCurricular({ closeModal, goToNext, goToPrevious }) {
       points: [
         "Regular participant in DevOps and Cloud Computing conferences",
         "Speaker at local tech meetups on AI and DevOps innovations",
-        "Active contributor to open-source projects on GitHub",
       ],
     },
     {
@@ -21,8 +20,8 @@ function ExtraCurricular({ closeModal, goToNext, goToPrevious }) {
       color: "from-green-400 to-green-600",
       points: [
         "Technical mentor for coding bootcamps and student workshops",
-        "Volunteer at STEM education initiatives",
-        "Participated in hackathons and innovation challenges",
+        "Volunteer at AI Hackathons as a mentor",
+        "Participated and won multiple hackathons and innovation challenges",
       ],
     },
     {
