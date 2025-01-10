@@ -103,7 +103,7 @@ const DevopsLanding = ({ onAnimationComplete, isDarkTheme, isMobile }) => {
     { 
       icon: <Code2 size={isMobile ? 18 : 22} />, 
       title: "DevOps Tools", 
-      value: "25+",
+      value: "15+",
       color: "text-green-400" 
     },
     { 
